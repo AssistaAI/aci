@@ -1,0 +1,20 @@
+{
+  "token": "verification_token_123",
+  "team_id": "T1234567890",
+  "api_app_id": "A1234567890",
+  "event": {
+    "type": "message",
+    "channel": "C1234567890",
+    "user": "U1234567890",
+    "text": "Hello from Slack!",
+    "ts": "1234567890.123456",
+    "event_ts": "1234567890.123456",
+    "channel_type": "channel"
+  },
+  "type": "event_callback",
+  "event_id": "Ev1234567890",
+  "event_time": 1234567890,
+  "authed_users": [
+    "U1234567890"
+  ]
+}

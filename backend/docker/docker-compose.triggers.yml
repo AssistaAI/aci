@@ -1,0 +1,148 @@
+version: '3.8'
+
+services:
+  # FastAPI API server
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile.server
+    ports:
+      - "8000:8000"
+    environment:
+      - SERVER_ENVIRONMENT=local
+      - SERVER_DB_SCHEME=postgresql+psycopg
+      - SERVER_DB_USER=postgres
+      - SERVER_DB_PASSWORD=postgres
+      - SERVER_DB_HOST=db
+      - SERVER_DB_PORT=5432
+      - SERVER_DB_NAME=aci_triggers
+      - TRIGGERS_SLACK_SIGNING_SECRET=your_slack_signing_secret_here
+      - TRIGGERS_HUBSPOT_APP_SECRET=your_hubspot_app_secret_here
+      - TRIGGERS_PUBSUB_OIDC_AUDIENCE=https://yourdomain.com/webhooks/gmail/pubsub
+      - TRIGGERS_GOOGLE_ISSUER=https://accounts.google.com
+      - TRIGGERS_REDIS_URL=redis://redis:6379/0
+      - TRIGGERS_DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/aci_triggers
+      - SERVER_OPENAI_API_KEY=your_openai_api_key_here
+      - SERVER_OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+      - SERVER_OPENAI_EMBEDDING_DIMENSION=1536
+      - SERVER_SIGNING_KEY=your_signing_key_here
+      - SERVER_JWT_ALGORITHM=HS256
+      - SERVER_JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - SERVER_REDIRECT_URI_BASE=http://localhost:8000
+      - SERVER_PROPELAUTH_AUTH_URL=https://your-propelauth.com
+      - SERVER_PROPELAUTH_API_KEY=your_propelauth_api_key_here
+      - SERVER_SVIX_SIGNING_SECRET=your_svix_secret_here
+      - SERVER_RATE_LIMIT_IP_PER_SECOND=10
+      - SERVER_RATE_LIMIT_IP_PER_DAY=1000
+      - SERVER_PROJECT_DAILY_QUOTA=100
+      - SERVER_MAX_AGENTS_PER_PROJECT=5
+      - SERVER_APPLICATION_LOAD_BALANCER_DNS=localhost
+      - COMMON_AWS_REGION=us-east-1
+      - COMMON_AWS_ENDPOINT_URL=http://localhost:4566
+      - COMMON_KEY_ENCRYPTION_KEY_ARN=arn:aws:kms:us-east-1:000000000000:key/test
+      - COMMON_API_KEY_HASHING_SECRET=your_api_key_hashing_secret_here
+    depends_on:
+      - db
+      - redis
+    networks:
+      - triggers-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/webhooks/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # RQ Worker for background job processing
+  worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile.server
+    command: python -m aci.triggers.worker
+    environment:
+      - SERVER_ENVIRONMENT=local
+      - SERVER_DB_SCHEME=postgresql+psycopg
+      - SERVER_DB_USER=postgres
+      - SERVER_DB_PASSWORD=postgres
+      - SERVER_DB_HOST=db
+      - SERVER_DB_PORT=5432
+      - SERVER_DB_NAME=aci_triggers
+      - TRIGGERS_SLACK_SIGNING_SECRET=your_slack_signing_secret_here
+      - TRIGGERS_HUBSPOT_APP_SECRET=your_hubspot_app_secret_here
+      - TRIGGERS_PUBSUB_OIDC_AUDIENCE=https://yourdomain.com/webhooks/gmail/pubsub
+      - TRIGGERS_GOOGLE_ISSUER=https://accounts.google.com
+      - TRIGGERS_REDIS_URL=redis://redis:6379/0
+      - TRIGGERS_DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/aci_triggers
+      - SERVER_OPENAI_API_KEY=your_openai_api_key_here
+      - SERVER_OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+      - SERVER_OPENAI_EMBEDDING_DIMENSION=1536
+    depends_on:
+      - db
+      - redis
+    networks:
+      - triggers-network
+    deploy:
+      replicas: 2  # Run 2 worker instances
+    healthcheck:
+      test: ["CMD", "python", "-c", "import redis; r = redis.from_url('redis://redis:6379/0'); r.ping()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for RQ job queue
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - triggers-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL database
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=aci_triggers
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - triggers-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aci_triggers"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # RQ Dashboard (optional - for monitoring jobs)
+  rq-dashboard:
+    image: eoranged/rq-dashboard
+    ports:
+      - "9181:9181"
+    environment:
+      - RQ_DASHBOARD_REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - triggers-network
+    profiles:
+      - dashboard  # Only start with --profile dashboard
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  triggers-network:
+    driver: bridge

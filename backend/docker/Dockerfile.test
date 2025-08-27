@@ -1,0 +1,22 @@
+FROM python:3.12-slim-bullseye
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+WORKDIR /workdir
+
+COPY ./pyproject.toml ./uv.lock /workdir/
+RUN uv sync --no-install-project
+
+ENV PATH="/workdir/.venv/bin:$PATH"
+ENV PYTHONPATH=/workdir
+
+# Copy all necessary ACI modules for testing
+COPY ./aci/__init__.py /workdir/aci/__init__.py
+COPY ./aci/common /workdir/aci/common
+COPY ./aci/server /workdir/aci/server
+COPY ./aci/triggers /workdir/aci/triggers
+
+# Copy Alembic configuration for database migrations
+COPY ./alembic.ini /workdir/
+COPY ./aci/alembic /workdir/aci/alembic
+
+CMD ["pytest", "aci/triggers/tests/", "-v"]

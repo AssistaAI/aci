@@ -1,0 +1,13 @@
+{
+  "eventId": "12345678901",
+  "subscriptionId": "98765",
+  "portalId": "123456",
+  "occurredAt": 1234567890000,
+  "subscriptionType": "contact.propertyChange",
+  "objectId": "987654321",
+  "propertyName": "email",
+  "propertyValue": "new-email@example.com",
+  "changeSource": "INTEGRATION",
+  "sourceId": "source123",
+  "attemptNumber": 0
+}

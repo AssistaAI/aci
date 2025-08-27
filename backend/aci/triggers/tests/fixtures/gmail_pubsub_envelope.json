@@ -1,0 +1,10 @@
+{
+  "message": {
+    "data": "eyJlbWFpbEFkZHJlc3MiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaGlzdG9yeUlkIjoiMTIzNDU2NzgifQ==",
+    "messageId": "2070443601311540",
+    "message_id": "2070443601311540",
+    "publishTime": "2023-01-01T12:00:00.000Z",
+    "publish_time": "2023-01-01T12:00:00.000Z"
+  },
+  "subscription": "projects/my-project/subscriptions/gmail-push"
+}
