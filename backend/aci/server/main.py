@@ -33,6 +33,7 @@ from aci.server.routes import (
     projects,
     webhooks,
 )
+from aci.triggers.api import router as triggers_router
 from aci.server.sentry import setup_sentry
 
 check_dependencies()
@@ -178,6 +179,13 @@ app.include_router(
     webhooks.router,
     prefix=config.ROUTER_PREFIX_WEBHOOKS,
     tags=[config.ROUTER_PREFIX_WEBHOOKS.split("/")[-1]],
+)
+
+# Include triggers router for inbound webhooks (Slack, HubSpot, Gmail)
+app.include_router(
+    triggers_router,
+    prefix=config.ROUTER_PREFIX_WEBHOOKS,
+    tags=["triggers"],
 )
 
 app.include_router(

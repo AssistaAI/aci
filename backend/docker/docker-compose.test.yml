@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  # Test runner - runs tests against test database
+  test-runner:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    command: >
+      sh -c "
+        echo 'Installing dependencies...' &&
+        uv sync --group dev &&
+        echo 'Running isolated tests (no external dependencies)...' &&
+        uv run pytest aci/triggers/tests/test_isolated_verification.py -v --tb=short &&
+        echo 'Running model tests...' &&
+        uv run pytest aci/triggers/tests/test_models.py -v --tb=short
+      "
+    environment:
+      # Test-specific environment variables
+      - SERVER_ENVIRONMENT=test
+      - SERVER_DB_SCHEME=postgresql+psycopg
+      - SERVER_DB_USER=postgres
+      - SERVER_DB_PASSWORD=postgres
+      - SERVER_DB_HOST=test-db
+      - SERVER_DB_PORT=5432
+      - SERVER_DB_NAME=aci_triggers_test
+      - TRIGGERS_SLACK_SIGNING_SECRET=test_slack_secret_123
+      - TRIGGERS_HUBSPOT_APP_SECRET=test_hubspot_secret_456
+      - TRIGGERS_PUBSUB_OIDC_AUDIENCE=https://test.example.com/webhooks/gmail/pubsub
+      - TRIGGERS_GOOGLE_ISSUER=https://accounts.google.com
+      - TRIGGERS_GITHUB_WEBHOOK_SECRET=test_github_secret_789
+      - TRIGGERS_STRIPE_WEBHOOK_SECRET=test_stripe_secret_abc
+      - TRIGGERS_LINEAR_WEBHOOK_SECRET=test_linear_secret_def
+      - TRIGGERS_DISCORD_PUBLIC_KEY=test_discord_key_ghi
+      - TRIGGERS_SHOPIFY_WEBHOOK_SECRET=test_shopify_secret_jkl
+      - TRIGGERS_TWILIO_AUTH_TOKEN=test_twilio_token_mno
+      - TRIGGERS_REDIS_URL=redis://test-redis:6379/0
+      - TRIGGERS_DATABASE_URL=postgresql+psycopg://postgres:postgres@test-db:5432/aci_triggers_test
+      - TRIGGERS_MAX_TIMESTAMP_AGE_SECONDS=300
+      # Other required ACI environment variables (minimal test values)
+      - SERVER_OPENAI_API_KEY=test_key
+      - SERVER_OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+      - SERVER_OPENAI_EMBEDDING_DIMENSION=1536
+      - SERVER_SIGNING_KEY=test_signing_key_123
+      - SERVER_JWT_ALGORITHM=HS256
+      - SERVER_JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - SERVER_REDIRECT_URI_BASE=http://localhost:8000
+      - SERVER_PROPELAUTH_AUTH_URL=https://test-propelauth.com
+      - SERVER_PROPELAUTH_API_KEY=test_propelauth_key
+      - SERVER_SVIX_SIGNING_SECRET=test_svix_secret
+      - SERVER_RATE_LIMIT_IP_PER_SECOND=10
+      - SERVER_RATE_LIMIT_IP_PER_DAY=1000
+      - SERVER_PROJECT_DAILY_QUOTA=100
+      - SERVER_MAX_AGENTS_PER_PROJECT=5
+      - SERVER_APPLICATION_LOAD_BALANCER_DNS=localhost
+      - SERVER_DEV_PORTAL_URL=http://localhost:3000
+      - SERVER_LOGFIRE_WRITE_TOKEN=test_token
+      - SERVER_LOGFIRE_READ_TOKEN=test_token
+      - SERVER_STRIPE_SECRET_KEY=test_stripe_key
+      - SERVER_STRIPE_WEBHOOK_SECRET=test_stripe_webhook
+      - COMMON_AWS_REGION=us-east-1
+      - COMMON_AWS_ENDPOINT_URL=http://localhost:4566
+      - COMMON_KEY_ENCRYPTION_KEY_ARN=arn:aws:kms:us-east-1:000000000000:key/test
+      - COMMON_API_KEY_HASHING_SECRET=test_api_key_secret
+    depends_on:
+      test-db:
+        condition: service_healthy
+      test-redis:
+        condition: service_healthy
+    networks:
+      - test-network
+
+  # Test database - isolated from main development
+  test-db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=aci_triggers_test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    tmpfs:
+      - /var/lib/postgresql/data  # Use tmpfs for faster test database
+    networks:
+      - test-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aci_triggers_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Test Redis - isolated from main development  
+  test-redis:
+    image: redis:7-alpine
+    command: redis-server --save ""  # Disable persistence for tests
+    networks:
+      - test-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  test-network:
+    driver: bridge

@@ -1,0 +1,39 @@
+[
+  {
+    "eventId": "12345678901",
+    "subscriptionId": "98765",
+    "portalId": "123456",
+    "occurredAt": 1234567890000,
+    "subscriptionType": "contact.propertyChange",
+    "objectId": "987654321",
+    "propertyName": "email",
+    "propertyValue": "contact1@example.com",
+    "changeSource": "INTEGRATION",
+    "sourceId": "source123",
+    "attemptNumber": 0
+  },
+  {
+    "eventId": "12345678902",
+    "subscriptionId": "98765",
+    "portalId": "123456", 
+    "occurredAt": 1234567890001,
+    "subscriptionType": "contact.propertyChange",
+    "objectId": "987654322",
+    "propertyName": "firstname",
+    "propertyValue": "John",
+    "changeSource": "CRM_UI",
+    "sourceId": "source124",
+    "attemptNumber": 0
+  },
+  {
+    "eventId": "12345678903",
+    "subscriptionId": "98765",
+    "portalId": "123456",
+    "occurredAt": 1234567890002,
+    "subscriptionType": "contact.creation",
+    "objectId": "987654323",
+    "changeSource": "INTEGRATION",
+    "sourceId": "source125",
+    "attemptNumber": 0
+  }
+]
