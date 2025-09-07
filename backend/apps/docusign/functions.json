@@ -2,7 +2,12 @@
   {
     "name": "DOCUSIGN__CREATE_ENVELOPE",
     "description": "Create a new envelope with documents and recipients for electronic signature collection.",
-    "tags": ["envelope", "create", "signature", "documents"],
+    "tags": [
+      "envelope",
+      "create",
+      "signature",
+      "documents"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,8 +27,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -34,9 +43,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -51,7 +63,10 @@
             },
             "status": {
               "type": "string",
-              "enum": ["draft", "sent"],
+              "enum": [
+                "draft",
+                "sent"
+              ],
               "default": "sent",
               "description": "Initial status of the envelope"
             },
@@ -77,8 +92,18 @@
                     "description": "Unique identifier for the document"
                   }
                 },
-                "required": ["documentBase64", "name", "documentId"],
-                "visible": ["documentBase64", "name", "fileExtension", "documentId"]
+                "required": [
+                  "documentBase64",
+                  "name",
+                  "documentId"
+                ],
+                "visible": [
+                  "documentBase64",
+                  "name",
+                  "fileExtension",
+                  "documentId"
+                ],
+                "additionalProperties": false
               },
               "description": "Array of documents to include in the envelope"
             },
@@ -109,31 +134,66 @@
                         "description": "Order in which recipient should sign"
                       }
                     },
-                    "required": ["email", "name", "recipientId"],
-                    "visible": ["email", "name", "recipientId", "routingOrder"]
+                    "required": [
+                      "email",
+                      "name",
+                      "recipientId"
+                    ],
+                    "visible": [
+                      "email",
+                      "name",
+                      "recipientId",
+                      "routingOrder"
+                    ],
+                    "additionalProperties": false
                   },
                   "description": "Array of signers for the envelope"
                 }
               },
-              "required": ["signers"],
-              "visible": ["signers"],
+              "required": [
+                "signers"
+              ],
+              "visible": [
+                "signers"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["emailSubject", "documents", "recipients"],
-          "visible": ["emailSubject", "emailMessage", "status", "documents", "recipients"],
+          "required": [
+            "emailSubject",
+            "documents",
+            "recipients"
+          ],
+          "visible": [
+            "emailSubject",
+            "emailMessage",
+            "status",
+            "documents",
+            "recipients"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_ENVELOPE_STATUS",
+    "name": "DOCUSIGN__ENVELOPE_STATUS",
     "description": "Retrieve the current status and details of an envelope including recipient information and document status.",
-    "tags": ["envelope", "status", "tracking"],
+    "tags": [
+      "envelope",
+      "status",
+      "tracking"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -157,20 +217,34 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__LIST_ENVELOPES",
     "description": "Retrieve a list of envelopes for the account with filtering options by status, date, and other criteria.",
-    "tags": ["envelopes", "list", "filter"],
+    "tags": [
+      "envelopes",
+      "list",
+      "filter"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -190,8 +264,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -199,7 +277,15 @@
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["completed", "created", "declined", "delivered", "sent", "signed", "voided"],
+              "enum": [
+                "completed",
+                "created",
+                "declined",
+                "delivered",
+                "sent",
+                "signed",
+                "voided"
+              ],
               "description": "Filter by envelope status"
             },
             "from_date": {
@@ -225,19 +311,34 @@
             }
           },
           "required": [],
-          "visible": ["status", "from_date", "to_date", "count", "start_position"],
+          "visible": [
+            "status",
+            "from_date",
+            "to_date",
+            "count",
+            "start_position"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_ENVELOPE_RECIPIENTS",
+    "name": "DOCUSIGN__ENVELOPE_RECIPIENTS",
     "description": "Retrieve information about all recipients of an envelope including their signature status and details.",
-    "tags": ["envelope", "recipients", "status"],
+    "tags": [
+      "envelope",
+      "recipients",
+      "status"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -261,20 +362,34 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__ADD_RECIPIENT",
     "description": "Add one or more recipients to an existing envelope for signature collection.",
-    "tags": ["envelope", "recipients", "add"],
+    "tags": [
+      "envelope",
+      "recipients",
+      "add"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -298,8 +413,14 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -310,9 +431,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -341,26 +465,51 @@
                     "description": "Order in which recipient should sign"
                   }
                 },
-                "required": ["email", "name", "recipientId"],
-                "visible": ["email", "name", "recipientId", "routingOrder"]
+                "required": [
+                  "email",
+                  "name",
+                  "recipientId"
+                ],
+                "visible": [
+                  "email",
+                  "name",
+                  "recipientId",
+                  "routingOrder"
+                ],
+                "additionalProperties": false
               },
               "description": "Array of signers to add to the envelope"
             }
           },
-          "required": ["signers"],
-          "visible": ["signers"],
+          "required": [
+            "signers"
+          ],
+          "visible": [
+            "signers"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_DOCUMENT",
+    "name": "DOCUSIGN__DOCUMENT",
     "description": "Download a document from a completed envelope, useful for retrieving signed documents.",
-    "tags": ["document", "download", "signed"],
+    "tags": [
+      "document",
+      "download",
+      "signed"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -388,8 +537,16 @@
               "description": "Unique identifier for the document"
             }
           },
-          "required": ["account_id", "envelope_id", "document_id"],
-          "visible": ["account_id", "envelope_id", "document_id"],
+          "required": [
+            "account_id",
+            "envelope_id",
+            "document_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id",
+            "document_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -402,19 +559,30 @@
             }
           },
           "required": [],
-          "visible": ["certificate"],
+          "visible": [
+            "certificate"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__CREATE_TEMPLATE",
     "description": "Create a reusable template with predefined documents, recipients, and signature fields for streamlined envelope creation.",
-    "tags": ["template", "create", "reusable"],
+    "tags": [
+      "template",
+      "create",
+      "reusable"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -434,8 +602,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -446,9 +618,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -487,26 +662,54 @@
                     "description": "Unique identifier for the document"
                   }
                 },
-                "required": ["documentBase64", "name", "documentId"],
-                "visible": ["documentBase64", "name", "fileExtension", "documentId"]
+                "required": [
+                  "documentBase64",
+                  "name",
+                  "documentId"
+                ],
+                "visible": [
+                  "documentBase64",
+                  "name",
+                  "fileExtension",
+                  "documentId"
+                ],
+                "additionalProperties": false
               },
               "description": "Array of documents to include in the template"
             }
           },
-          "required": ["name", "emailSubject"],
-          "visible": ["name", "description", "emailSubject", "documents"],
+          "required": [
+            "name",
+            "emailSubject"
+          ],
+          "visible": [
+            "name",
+            "description",
+            "emailSubject",
+            "documents"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__LIST_TEMPLATES",
     "description": "Retrieve a list of all templates available in the account for creating envelopes.",
-    "tags": ["templates", "list"],
+    "tags": [
+      "templates",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -526,8 +729,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -546,19 +753,31 @@
             }
           },
           "required": [],
-          "visible": ["count", "start_position"],
+          "visible": [
+            "count",
+            "start_position"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__CREATE_ENVELOPE_FROM_TEMPLATE",
     "description": "Create an envelope using an existing template, allowing for quick document creation with predefined settings.",
-    "tags": ["envelope", "template", "create"],
+    "tags": [
+      "envelope",
+      "template",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -578,8 +797,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -590,9 +813,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -620,14 +846,26 @@
                     "description": "Role name as defined in the template"
                   }
                 },
-                "required": ["email", "name", "roleName"],
-                "visible": ["email", "name", "roleName"]
+                "required": [
+                  "email",
+                  "name",
+                  "roleName"
+                ],
+                "visible": [
+                  "email",
+                  "name",
+                  "roleName"
+                ],
+                "additionalProperties": false
               },
               "description": "Recipients mapped to template roles"
             },
             "status": {
               "type": "string",
-              "enum": ["draft", "sent"],
+              "enum": [
+                "draft",
+                "sent"
+              ],
               "default": "sent",
               "description": "Initial status of the envelope"
             },
@@ -636,20 +874,39 @@
               "description": "Override the template's default email subject"
             }
           },
-          "required": ["templateId", "templateRoles"],
-          "visible": ["templateId", "templateRoles", "status", "emailSubject"],
+          "required": [
+            "templateId",
+            "templateRoles"
+          ],
+          "visible": [
+            "templateId",
+            "templateRoles",
+            "status",
+            "emailSubject"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__VOID_ENVELOPE",
     "description": "Void an envelope to cancel the signature process and prevent further action on the documents.",
-    "tags": ["envelope", "void", "cancel"],
+    "tags": [
+      "envelope",
+      "void",
+      "cancel"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -673,8 +930,14 @@
               "description": "Unique identifier for the envelope to void"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -685,16 +948,21 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["voided"],
+              "enum": [
+                "voided"
+              ],
               "default": "voided",
               "description": "Status to set the envelope to"
             },
@@ -703,20 +971,36 @@
               "description": "Reason for voiding the envelope"
             }
           },
-          "required": ["status"],
-          "visible": ["status", "voidedReason"],
+          "required": [
+            "status"
+          ],
+          "visible": [
+            "status",
+            "voidedReason"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_TEMPLATE",
+    "name": "DOCUSIGN__TEMPLATE_GET_TEMPLATES",
     "description": "Get detailed information about a specific DocuSign template including documents, recipients, and signature fields configuration.",
-    "tags": ["template", "details", "configuration"],
+    "tags": [
+      "template",
+      "details",
+      "configuration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -740,8 +1024,14 @@
               "description": "Unique identifier for the template"
             }
           },
-          "required": ["account_id", "template_id"],
-          "visible": ["account_id", "template_id"],
+          "required": [
+            "account_id",
+            "template_id"
+          ],
+          "visible": [
+            "account_id",
+            "template_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -753,19 +1043,30 @@
             }
           },
           "required": [],
-          "visible": ["include"],
+          "visible": [
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__UPDATE_TEMPLATE",
     "description": "Update an existing DocuSign template properties such as name, description, and email subject.",
-    "tags": ["template", "update", "edit"],
+    "tags": [
+      "template",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -789,8 +1090,14 @@
               "description": "Unique identifier for the template to update"
             }
           },
-          "required": ["account_id", "template_id"],
-          "visible": ["account_id", "template_id"],
+          "required": [
+            "account_id",
+            "template_id"
+          ],
+          "visible": [
+            "account_id",
+            "template_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -801,9 +1108,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -822,19 +1132,33 @@
             }
           },
           "required": [],
-          "visible": ["name", "description", "emailSubject"],
+          "visible": [
+            "name",
+            "description",
+            "emailSubject"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__DELETE_TEMPLATE",
+    "name": "DOCUSIGN__TEMPLATE_DELETE_TEMPLATES",
     "description": "Delete a DocuSign template. This permanently removes the template from the account.",
-    "tags": ["template", "delete"],
+    "tags": [
+      "template",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -858,20 +1182,34 @@
               "description": "Unique identifier for the template to delete"
             }
           },
-          "required": ["account_id", "template_id"],
-          "visible": ["account_id", "template_id"],
+          "required": [
+            "account_id",
+            "template_id"
+          ],
+          "visible": [
+            "account_id",
+            "template_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_ACCOUNT_INFO",
+    "name": "DOCUSIGN__ACCOUNT_INFO",
     "description": "Get information about the DocuSign account including plan details, settings, and capabilities.",
-    "tags": ["account", "info", "settings"],
+    "tags": [
+      "account",
+      "info",
+      "settings"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -891,20 +1229,32 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__LIST_FOLDERS",
     "description": "List folders in the DocuSign account for organizing envelopes and templates. This helps with document management and organization.",
-    "tags": ["folders", "organization", "list"],
+    "tags": [
+      "folders",
+      "organization",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -924,8 +1274,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -951,19 +1305,33 @@
             }
           },
           "required": [],
-          "visible": ["include", "include_items", "start_position", "template"],
+          "visible": [
+            "include",
+            "include_items",
+            "start_position",
+            "template"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_FOLDER_ITEMS",
+    "name": "DOCUSIGN__FOLDER_ITEMS",
     "description": "Get envelopes and items within a specific DocuSign folder. This allows browsing organized document collections.",
-    "tags": ["folders", "items", "envelopes"],
+    "tags": [
+      "folders",
+      "items",
+      "envelopes"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -987,8 +1355,14 @@
               "description": "Unique identifier for the folder"
             }
           },
-          "required": ["account_id", "folder_id"],
-          "visible": ["account_id", "folder_id"],
+          "required": [
+            "account_id",
+            "folder_id"
+          ],
+          "visible": [
+            "account_id",
+            "folder_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1011,19 +1385,32 @@
             }
           },
           "required": [],
-          "visible": ["count", "start_position", "include_items"],
+          "visible": [
+            "count",
+            "start_position",
+            "include_items"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__SEND_REMINDER",
     "description": "Send a reminder email to recipients who have not yet completed their action on an envelope.",
-    "tags": ["envelope", "reminder", "notification"],
+    "tags": [
+      "envelope",
+      "reminder",
+      "notification"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1047,8 +1434,14 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1059,9 +1452,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1085,7 +1481,11 @@
                 }
               },
               "required": [],
-              "visible": ["expireEnabled", "expireAfter", "expireWarn"],
+              "visible": [
+                "expireEnabled",
+                "expireAfter",
+                "expireWarn"
+              ],
               "additionalProperties": false
             },
             "reminders": {
@@ -1109,24 +1509,43 @@
                 }
               },
               "required": [],
-              "visible": ["reminderEnabled", "reminderDelay", "reminderFrequency"],
+              "visible": [
+                "reminderEnabled",
+                "reminderDelay",
+                "reminderFrequency"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["expirations", "reminders"],
+          "visible": [
+            "expirations",
+            "reminders"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_ENVELOPE_AUDIT_EVENTS",
+    "name": "DOCUSIGN__ENVELOPE_AUDIT_EVENTS",
     "description": "Get audit events and timeline for an envelope showing all actions taken on the document including signatures, views, and status changes.",
-    "tags": ["envelope", "audit", "timeline", "events"],
+    "tags": [
+      "envelope",
+      "audit",
+      "timeline",
+      "events"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1150,20 +1569,34 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__UPDATE_RECIPIENT",
     "description": "Update recipient information for an envelope including email, name, and routing order before the envelope is completed.",
-    "tags": ["envelope", "recipient", "update"],
+    "tags": [
+      "envelope",
+      "recipient",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1187,8 +1620,14 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1199,9 +1638,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1229,26 +1671,49 @@
                     "description": "Updated routing order"
                   }
                 },
-                "required": ["recipientId"],
-                "visible": ["recipientId", "email", "name", "routingOrder"]
+                "required": [
+                  "recipientId"
+                ],
+                "visible": [
+                  "recipientId",
+                  "email",
+                  "name",
+                  "routingOrder"
+                ],
+                "additionalProperties": false
               },
               "description": "Array of recipients to update"
             }
           },
-          "required": ["signers"],
-          "visible": ["signers"],
+          "required": [
+            "signers"
+          ],
+          "visible": [
+            "signers"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__RESEND_ENVELOPE",
     "description": "Resend an envelope to recipients who have not completed their signing action. This helps ensure document completion.",
-    "tags": ["envelope", "resend", "notification"],
+    "tags": [
+      "envelope",
+      "resend",
+      "notification"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1272,8 +1737,14 @@
               "description": "Unique identifier for the envelope to resend"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1286,19 +1757,30 @@
             }
           },
           "required": [],
-          "visible": ["resend_envelope"],
+          "visible": [
+            "resend_envelope"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_ENVELOPE_DOCUMENTS",
+    "name": "DOCUSIGN__ENVELOPE_DOCUMENTS",
     "description": "List all documents within an envelope including document IDs, names, and types for download or management purposes.",
-    "tags": ["envelope", "documents", "list"],
+    "tags": [
+      "envelope",
+      "documents",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1322,20 +1804,35 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_SIGNING_URL",
+    "name": "DOCUSIGN__SIGNING_URL",
     "description": "Generate an embedded signing URL for a recipient to sign documents within your application instead of via email.",
-    "tags": ["signing", "url", "embedded", "integration"],
+    "tags": [
+      "signing",
+      "url",
+      "embedded",
+      "integration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1359,8 +1856,14 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1371,9 +1874,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1398,25 +1904,52 @@
             },
             "authenticationMethod": {
               "type": "string",
-              "enum": ["none", "email", "password"],
+              "enum": [
+                "none",
+                "email",
+                "password"
+              ],
               "default": "none",
               "description": "Authentication method for the signing session"
             }
           },
-          "required": ["recipientId", "email", "userName", "returnUrl"],
-          "visible": ["recipientId", "email", "userName", "returnUrl", "authenticationMethod"],
+          "required": [
+            "recipientId",
+            "email",
+            "userName",
+            "returnUrl"
+          ],
+          "visible": [
+            "recipientId",
+            "email",
+            "userName",
+            "returnUrl",
+            "authenticationMethod"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__DOWNLOAD_COMBINED_DOCUMENT",
     "description": "Download all documents from an envelope as a single combined PDF file. This provides a complete signed document package.",
-    "tags": ["documents", "download", "combined", "pdf"],
+    "tags": [
+      "documents",
+      "download",
+      "combined",
+      "pdf"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1440,8 +1973,14 @@
               "description": "Unique identifier for the envelope"
             }
           },
-          "required": ["account_id", "envelope_id"],
-          "visible": ["account_id", "envelope_id"],
+          "required": [
+            "account_id",
+            "envelope_id"
+          ],
+          "visible": [
+            "account_id",
+            "envelope_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1459,19 +1998,32 @@
             }
           },
           "required": [],
-          "visible": ["certificate", "watermark"],
+          "visible": [
+            "certificate",
+            "watermark"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__CREATE_WEBHOOK",
     "description": "Create a Connect webhook configuration to receive real-time notifications about envelope status changes and events.",
-    "tags": ["webhook", "connect", "notifications", "events"],
+    "tags": [
+      "webhook",
+      "connect",
+      "notifications",
+      "events"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1491,8 +2043,12 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1503,16 +2059,21 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
           "properties": {
             "configurationType": {
               "type": "string",
-              "enum": ["custom"],
+              "enum": [
+                "custom"
+              ],
               "default": "custom",
               "description": "Type of Connect configuration"
             },
@@ -1556,7 +2117,9 @@
               "properties": {
                 "version": {
                   "type": "string",
-                  "enum": ["restv2.1"],
+                  "enum": [
+                    "restv2.1"
+                  ],
                   "default": "restv2.1",
                   "description": "API version for event data"
                 },
@@ -1564,30 +2127,67 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "enum": ["recipients", "tabs", "extensions", "folders"]
+                    "enum": [
+                      "recipients",
+                      "tabs",
+                      "extensions",
+                      "folders"
+                    ]
                   },
                   "description": "Additional data to include in webhook events"
                 }
               },
-              "required": ["version"],
-              "visible": ["version", "includeData"],
+              "required": [
+                "version"
+              ],
+              "visible": [
+                "version",
+                "includeData"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["configurationType", "name", "urlToPublishTo", "eventData"],
-          "visible": ["configurationType", "name", "urlToPublishTo", "enableLog", "includeDocumentFields", "includeSenderAccountasCustomField", "includeEnvelopeVoidReason", "includeTimeZoneInformation", "eventData"],
+          "required": [
+            "configurationType",
+            "name",
+            "urlToPublishTo",
+            "eventData"
+          ],
+          "visible": [
+            "configurationType",
+            "name",
+            "urlToPublishTo",
+            "enableLog",
+            "includeDocumentFields",
+            "includeSenderAccountasCustomField",
+            "includeEnvelopeVoidReason",
+            "includeTimeZoneInformation",
+            "eventData"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__LIST_WEBHOOKS",
     "description": "List all Connect webhook configurations for the account to manage notification settings and endpoints.",
-    "tags": ["webhook", "connect", "list", "configurations"],
+    "tags": [
+      "webhook",
+      "connect",
+      "list",
+      "configurations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1607,20 +2207,32 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__UPDATE_WEBHOOK",
     "description": "Update an existing Connect webhook configuration including URL, settings, and event data preferences.",
-    "tags": ["webhook", "connect", "update"],
+    "tags": [
+      "webhook",
+      "connect",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1644,8 +2256,14 @@
               "description": "Unique identifier for the Connect configuration"
             }
           },
-          "required": ["account_id", "connect_id"],
-          "visible": ["account_id", "connect_id"],
+          "required": [
+            "account_id",
+            "connect_id"
+          ],
+          "visible": [
+            "account_id",
+            "connect_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1656,9 +2274,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1682,19 +2303,35 @@
             }
           },
           "required": [],
-          "visible": ["name", "urlToPublishTo", "enableLog", "includeDocumentFields"],
+          "visible": [
+            "name",
+            "urlToPublishTo",
+            "enableLog",
+            "includeDocumentFields"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__DELETE_WEBHOOK",
+    "name": "DOCUSIGN__WEBHOOK",
     "description": "Delete a Connect webhook configuration to stop receiving notifications from DocuSign.",
-    "tags": ["webhook", "connect", "delete"],
+    "tags": [
+      "webhook",
+      "connect",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1718,20 +2355,34 @@
               "description": "Unique identifier for the Connect configuration to delete"
             }
           },
-          "required": ["account_id", "connect_id"],
-          "visible": ["account_id", "connect_id"],
+          "required": [
+            "account_id",
+            "connect_id"
+          ],
+          "visible": [
+            "account_id",
+            "connect_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DOCUSIGN__GET_BRAND",
+    "name": "DOCUSIGN__BRAND",
     "description": "Get branding information for customizing the signing experience including logos, colors, and messaging.",
-    "tags": ["branding", "customization", "appearance"],
+    "tags": [
+      "branding",
+      "customization",
+      "appearance"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1755,20 +2406,34 @@
               "description": "Unique identifier for the brand"
             }
           },
-          "required": ["account_id", "brand_id"],
-          "visible": ["account_id", "brand_id"],
+          "required": [
+            "account_id",
+            "brand_id"
+          ],
+          "visible": [
+            "account_id",
+            "brand_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DOCUSIGN__LIST_BRANDS",
     "description": "List all available brands for the account to manage signing experience customization and corporate branding.",
-    "tags": ["branding", "list", "customization"],
+    "tags": [
+      "branding",
+      "list",
+      "customization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1788,13 +2453,21 @@
               "description": "DocuSign account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

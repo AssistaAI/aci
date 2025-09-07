@@ -19,7 +19,12 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Digital Signatures", "Document Management", "Workflow", "Legal"],
+  "categories": [
+    "Digital Signatures",
+    "Document Management",
+    "Workflow",
+    "Legal"
+  ],
   "visibility": "public",
   "active": true
 }

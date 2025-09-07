@@ -1,8 +1,12 @@
 [
   {
-    "name": "SHOPIFY__GET_PRODUCTS",
+    "name": "SHOPIFY__PRODUCTS",
     "description": "Retrieve products from Shopify store with their variants, pricing, and inventory information.",
-    "tags": ["products", "catalog", "inventory"],
+    "tags": [
+      "products",
+      "catalog",
+      "inventory"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -25,7 +29,11 @@
             },
             "status": {
               "type": "string",
-              "enum": ["active", "archived", "draft"],
+              "enum": [
+                "active",
+                "archived",
+                "draft"
+              ],
               "description": "Product status filter"
             },
             "vendor": {
@@ -42,19 +50,31 @@
             }
           },
           "required": [],
-          "visible": ["limit", "status", "vendor", "product_type", "collection_id"],
+          "visible": [
+            "limit",
+            "status",
+            "vendor",
+            "product_type",
+            "collection_id"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_PRODUCT",
     "description": "Create a new product in Shopify with variants, pricing, and inventory settings.",
-    "tags": ["products", "create", "catalog"],
+    "tags": [
+      "products",
+      "create",
+      "catalog"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -74,9 +94,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -102,7 +125,11 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["active", "archived", "draft"],
+                  "enum": [
+                    "active",
+                    "archived",
+                    "draft"
+                  ],
                   "default": "active",
                   "description": "Product status"
                 },
@@ -124,30 +151,54 @@
                         "description": "Stock keeping unit"
                       }
                     },
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
                   },
                   "description": "Product variants"
                 }
               },
-              "required": ["title"],
-              "visible": ["title", "body_html", "vendor", "product_type", "status", "variants"],
+              "required": [
+                "title"
+              ],
+              "visible": [
+                "title",
+                "body_html",
+                "vendor",
+                "product_type",
+                "status",
+                "variants"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["product"],
-          "visible": ["product"],
+          "required": [
+            "product"
+          ],
+          "visible": [
+            "product"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_PRODUCT",
     "description": "Update an existing product in Shopify with new information, pricing, or inventory levels.",
-    "tags": ["products", "update", "edit"],
+    "tags": [
+      "products",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -167,8 +218,12 @@
               "description": "Product ID to update"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -179,9 +234,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -207,29 +265,54 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["active", "archived", "draft"],
+                  "enum": [
+                    "active",
+                    "archived",
+                    "draft"
+                  ],
                   "description": "Product status"
                 }
               },
               "required": [],
-              "visible": ["title", "body_html", "vendor", "product_type", "status"],
+              "visible": [
+                "title",
+                "body_html",
+                "vendor",
+                "product_type",
+                "status"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["product"],
-          "visible": ["product"],
+          "required": [
+            "product"
+          ],
+          "visible": [
+            "product"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_ORDERS",
+    "name": "SHOPIFY__ORDERS",
     "description": "Retrieve orders from Shopify store with customer details, line items, and fulfillment status.",
-    "tags": ["orders", "sales", "fulfillment"],
+    "tags": [
+      "orders",
+      "sales",
+      "fulfillment"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -252,18 +335,38 @@
             },
             "status": {
               "type": "string",
-              "enum": ["open", "closed", "cancelled", "any"],
+              "enum": [
+                "open",
+                "closed",
+                "cancelled",
+                "any"
+              ],
               "default": "any",
               "description": "Order status filter"
             },
             "financial_status": {
               "type": "string",
-              "enum": ["authorized", "pending", "paid", "partially_paid", "refunded", "voided", "partially_refunded", "any"],
+              "enum": [
+                "authorized",
+                "pending",
+                "paid",
+                "partially_paid",
+                "refunded",
+                "voided",
+                "partially_refunded",
+                "any"
+              ],
               "description": "Financial status filter"
             },
             "fulfillment_status": {
               "type": "string",
-              "enum": ["shipped", "partial", "unshipped", "any", "unfulfilled"],
+              "enum": [
+                "shipped",
+                "partial",
+                "unshipped",
+                "any",
+                "unfulfilled"
+              ],
               "description": "Fulfillment status filter"
             },
             "created_at_min": {
@@ -278,19 +381,32 @@
             }
           },
           "required": [],
-          "visible": ["limit", "status", "financial_status", "fulfillment_status", "created_at_min", "created_at_max"],
+          "visible": [
+            "limit",
+            "status",
+            "financial_status",
+            "fulfillment_status",
+            "created_at_min",
+            "created_at_max"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_CUSTOMERS",
+    "name": "SHOPIFY__CUSTOMERS",
     "description": "Retrieve customers from Shopify store with their contact information, order history, and account details.",
-    "tags": ["customers", "crm", "accounts"],
+    "tags": [
+      "customers",
+      "crm",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -327,19 +443,30 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "created_at_min", "created_at_max"],
+          "visible": [
+            "limit",
+            "since_id",
+            "created_at_min",
+            "created_at_max"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_CUSTOMER",
     "description": "Create a new customer in Shopify with contact information and account preferences.",
-    "tags": ["customers", "create", "accounts"],
+    "tags": [
+      "customers",
+      "create",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -359,9 +486,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -417,30 +547,54 @@
                         "description": "Postal code"
                       }
                     },
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
                   },
                   "description": "Customer addresses"
                 }
               },
-              "required": ["email"],
-              "visible": ["first_name", "last_name", "email", "phone", "verified_email", "addresses"],
+              "required": [
+                "email"
+              ],
+              "visible": [
+                "first_name",
+                "last_name",
+                "email",
+                "phone",
+                "verified_email",
+                "addresses"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["customer"],
-          "visible": ["customer"],
+          "required": [
+            "customer"
+          ],
+          "visible": [
+            "customer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_INVENTORY_LEVELS",
+    "name": "SHOPIFY__INVENTORY_LEVELS",
     "description": "Retrieve inventory levels for products across different locations in Shopify.",
-    "tags": ["inventory", "stock", "locations"],
+    "tags": [
+      "inventory",
+      "stock",
+      "locations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -471,19 +625,29 @@
             }
           },
           "required": [],
-          "visible": ["inventory_item_ids", "location_ids", "limit"],
+          "visible": [
+            "inventory_item_ids",
+            "location_ids",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_INVENTORY_LEVEL",
     "description": "Update inventory quantity for a specific product variant at a location in Shopify.",
-    "tags": ["inventory", "update", "stock"],
+    "tags": [
+      "inventory",
+      "update",
+      "stock"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -503,9 +667,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -523,20 +690,37 @@
               "description": "New available quantity"
             }
           },
-          "required": ["location_id", "inventory_item_id", "available"],
-          "visible": ["location_id", "inventory_item_id", "available"],
+          "required": [
+            "location_id",
+            "inventory_item_id",
+            "available"
+          ],
+          "visible": [
+            "location_id",
+            "inventory_item_id",
+            "available"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_COLLECTIONS",
+    "name": "SHOPIFY__COLLECTIONS",
     "description": "Retrieve product collections from Shopify store with their products and organization structure.",
-    "tags": ["collections", "categories", "organization"],
+    "tags": [
+      "collections",
+      "categories",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -567,19 +751,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "title"],
+          "visible": [
+            "limit",
+            "since_id",
+            "title"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_COLLECTION",
     "description": "Create a new product collection in Shopify with rules for automatic or manual product inclusion.",
-    "tags": ["collections", "create", "organization"],
+    "tags": [
+      "collections",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -599,9 +793,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -619,7 +816,10 @@
                 },
                 "collection_type": {
                   "type": "string",
-                  "enum": ["smart", "custom"],
+                  "enum": [
+                    "smart",
+                    "custom"
+                  ],
                   "default": "custom",
                   "description": "Collection type (smart for automatic, custom for manual)"
                 },
@@ -646,30 +846,53 @@
                         "description": "Value to match against"
                       }
                     },
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
                   },
                   "description": "Smart collection rules"
                 }
               },
-              "required": ["title"],
-              "visible": ["title", "body_html", "collection_type", "published", "rules"],
+              "required": [
+                "title"
+              ],
+              "visible": [
+                "title",
+                "body_html",
+                "collection_type",
+                "published",
+                "rules"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["collection"],
-          "visible": ["collection"],
+          "required": [
+            "collection"
+          ],
+          "visible": [
+            "collection"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__DELETE_PRODUCT",
+    "name": "SHOPIFY__PRODUCT",
     "description": "Delete a product from Shopify store permanently, removing it from catalog and inventory.",
-    "tags": ["products", "delete", "remove"],
+    "tags": [
+      "products",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -689,20 +912,32 @@
               "description": "Product ID to delete"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_PRODUCT_BY_ID",
+    "name": "SHOPIFY__PRODUCT_BY_ID",
     "description": "Retrieve a specific product from Shopify by its ID with complete details including variants and images.",
-    "tags": ["products", "details", "variants"],
+    "tags": [
+      "products",
+      "details",
+      "variants"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -722,20 +957,32 @@
               "description": "Product ID to retrieve"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_CUSTOMER",
     "description": "Update an existing customer in Shopify with new contact information, addresses, or account preferences.",
-    "tags": ["customers", "update", "edit"],
+    "tags": [
+      "customers",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -755,8 +1002,12 @@
               "description": "Customer ID to update"
             }
           },
-          "required": ["customer_id"],
-          "visible": ["customer_id"],
+          "required": [
+            "customer_id"
+          ],
+          "visible": [
+            "customer_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -767,9 +1018,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -808,24 +1062,47 @@
                 }
               },
               "required": [],
-              "visible": ["first_name", "last_name", "email", "phone", "verified_email", "tags", "note"],
+              "visible": [
+                "first_name",
+                "last_name",
+                "email",
+                "phone",
+                "verified_email",
+                "tags",
+                "note"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["customer"],
-          "visible": ["customer"],
+          "required": [
+            "customer"
+          ],
+          "visible": [
+            "customer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__DELETE_CUSTOMER",
+    "name": "SHOPIFY__CUSTOMER",
     "description": "Delete a customer from Shopify store permanently, removing their account and associated data.",
-    "tags": ["customers", "delete", "remove"],
+    "tags": [
+      "customers",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -845,20 +1122,32 @@
               "description": "Customer ID to delete"
             }
           },
-          "required": ["customer_id"],
-          "visible": ["customer_id"],
+          "required": [
+            "customer_id"
+          ],
+          "visible": [
+            "customer_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_ORDER_BY_ID",
+    "name": "SHOPIFY__ORDER_BY_ID",
     "description": "Retrieve a specific order from Shopify by its ID with complete details including line items and customer information.",
-    "tags": ["orders", "details", "fulfillment"],
+    "tags": [
+      "orders",
+      "details",
+      "fulfillment"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -878,20 +1167,32 @@
               "description": "Order ID to retrieve"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_ORDER",
     "description": "Update an existing order in Shopify with new shipping information, notes, or tags.",
-    "tags": ["orders", "update", "fulfillment"],
+    "tags": [
+      "orders",
+      "update",
+      "fulfillment"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -911,8 +1212,12 @@
               "description": "Order ID to update"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -923,9 +1228,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -948,24 +1256,43 @@
                 }
               },
               "required": [],
-              "visible": ["note", "tags", "email"],
+              "visible": [
+                "note",
+                "tags",
+                "email"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["order"],
-          "visible": ["order"],
+          "required": [
+            "order"
+          ],
+          "visible": [
+            "order"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CANCEL_ORDER",
     "description": "Cancel an order in Shopify with optional reason and notification settings.",
-    "tags": ["orders", "cancel", "refund"],
+    "tags": [
+      "orders",
+      "cancel",
+      "refund"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -985,8 +1312,12 @@
               "description": "Order ID to cancel"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -997,16 +1328,25 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
           "properties": {
             "reason": {
               "type": "string",
-              "enum": ["customer", "inventory", "fraud", "declined", "other"],
+              "enum": [
+                "customer",
+                "inventory",
+                "fraud",
+                "declined",
+                "other"
+              ],
               "description": "Reason for cancellation"
             },
             "email": {
@@ -1021,19 +1361,33 @@
             }
           },
           "required": [],
-          "visible": ["reason", "email", "refund"],
+          "visible": [
+            "reason",
+            "email",
+            "refund"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_FULFILLMENTS",
+    "name": "SHOPIFY__FULFILLMENTS",
     "description": "Retrieve fulfillments for an order in Shopify with tracking information and shipping details.",
-    "tags": ["fulfillments", "shipping", "tracking"],
+    "tags": [
+      "fulfillments",
+      "shipping",
+      "tracking"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1053,20 +1407,32 @@
               "description": "Order ID to get fulfillments for"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_FULFILLMENT",
     "description": "Create a fulfillment for an order in Shopify with tracking information and line item details.",
-    "tags": ["fulfillments", "create", "shipping"],
+    "tags": [
+      "fulfillments",
+      "create",
+      "shipping"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1086,8 +1452,12 @@
               "description": "Order ID to create fulfillment for"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1098,9 +1468,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1133,38 +1506,65 @@
                     "properties": {
                       "id": {
                         "type": "string",
-                        "description": "Line item ID"
+                        "description": "Line item ID",
+                        "default": ""
                       },
                       "quantity": {
                         "type": "integer",
                         "description": "Quantity to fulfill"
                       }
                     },
-                    "required": ["id"],
-                    "additionalProperties": false
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
                   },
                   "description": "Line items to fulfill"
                 }
               },
-              "required": ["line_items"],
-              "visible": ["tracking_number", "tracking_company", "tracking_url", "notify_customer", "line_items"],
+              "required": [
+                "line_items"
+              ],
+              "visible": [
+                "tracking_number",
+                "tracking_company",
+                "tracking_url",
+                "notify_customer",
+                "line_items"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["fulfillment"],
-          "visible": ["fulfillment"],
+          "required": [
+            "fulfillment"
+          ],
+          "visible": [
+            "fulfillment"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_VARIANTS",
+    "name": "SHOPIFY__VARIANTS",
     "description": "Retrieve product variants from Shopify with pricing, inventory, and option details for a specific product.",
-    "tags": ["variants", "pricing", "inventory"],
+    "tags": [
+      "variants",
+      "pricing",
+      "inventory"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1184,20 +1584,32 @@
               "description": "Product ID to get variants for"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_VARIANT",
     "description": "Create a new variant for an existing product in Shopify with specific pricing and inventory settings.",
-    "tags": ["variants", "create", "pricing"],
+    "tags": [
+      "variants",
+      "create",
+      "pricing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1217,8 +1629,12 @@
               "description": "Product ID to create variant for"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1229,9 +1645,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1261,7 +1680,12 @@
                 },
                 "weight_unit": {
                   "type": "string",
-                  "enum": ["g", "kg", "oz", "lb"],
+                  "enum": [
+                    "g",
+                    "kg",
+                    "oz",
+                    "lb"
+                  ],
                   "description": "Weight unit"
                 },
                 "option1": {
@@ -1277,25 +1701,52 @@
                   "description": "Third option value (e.g., Material)"
                 }
               },
-              "required": ["price"],
-              "visible": ["price", "compare_at_price", "sku", "inventory_quantity", "weight", "weight_unit", "option1", "option2", "option3"],
+              "required": [
+                "price"
+              ],
+              "visible": [
+                "price",
+                "compare_at_price",
+                "sku",
+                "inventory_quantity",
+                "weight",
+                "weight_unit",
+                "option1",
+                "option2",
+                "option3"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["variant"],
-          "visible": ["variant"],
+          "required": [
+            "variant"
+          ],
+          "visible": [
+            "variant"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_VARIANT",
     "description": "Update an existing product variant in Shopify with new pricing, inventory, or option values.",
-    "tags": ["variants", "update", "pricing"],
+    "tags": [
+      "variants",
+      "update",
+      "pricing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1315,8 +1766,12 @@
               "description": "Variant ID to update"
             }
           },
-          "required": ["variant_id"],
-          "visible": ["variant_id"],
+          "required": [
+            "variant_id"
+          ],
+          "visible": [
+            "variant_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1327,9 +1782,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1359,29 +1817,56 @@
                 },
                 "weight_unit": {
                   "type": "string",
-                  "enum": ["g", "kg", "oz", "lb"],
+                  "enum": [
+                    "g",
+                    "kg",
+                    "oz",
+                    "lb"
+                  ],
                   "description": "Weight unit"
                 }
               },
               "required": [],
-              "visible": ["price", "compare_at_price", "sku", "inventory_quantity", "weight", "weight_unit"],
+              "visible": [
+                "price",
+                "compare_at_price",
+                "sku",
+                "inventory_quantity",
+                "weight",
+                "weight_unit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["variant"],
-          "visible": ["variant"],
+          "required": [
+            "variant"
+          ],
+          "visible": [
+            "variant"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__DELETE_VARIANT",
+    "name": "SHOPIFY__VARIANT",
     "description": "Delete a product variant from Shopify permanently, removing it from the product options.",
-    "tags": ["variants", "delete", "remove"],
+    "tags": [
+      "variants",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1405,20 +1890,34 @@
               "description": "Variant ID to delete"
             }
           },
-          "required": ["product_id", "variant_id"],
-          "visible": ["product_id", "variant_id"],
+          "required": [
+            "product_id",
+            "variant_id"
+          ],
+          "visible": [
+            "product_id",
+            "variant_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_DISCOUNTS",
+    "name": "SHOPIFY__DISCOUNTS",
     "description": "Retrieve discount codes and promotions from Shopify store with usage statistics and conditions.",
-    "tags": ["discounts", "promotions", "pricing"],
+    "tags": [
+      "discounts",
+      "promotions",
+      "pricing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1445,19 +1944,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id"],
+          "visible": [
+            "limit",
+            "since_id"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_DISCOUNT",
     "description": "Create a new discount code or promotion in Shopify with specific conditions and usage limits.",
-    "tags": ["discounts", "create", "promotions"],
+    "tags": [
+      "discounts",
+      "create",
+      "promotions"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1477,8 +1985,12 @@
               "description": "Price rule ID to create discount code for"
             }
           },
-          "required": ["price_rule_id"],
-          "visible": ["price_rule_id"],
+          "required": [
+            "price_rule_id"
+          ],
+          "visible": [
+            "price_rule_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1489,9 +2001,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1508,25 +2023,45 @@
                   "description": "Maximum number of uses"
                 }
               },
-              "required": ["code"],
-              "visible": ["code", "usage_limit"],
+              "required": [
+                "code"
+              ],
+              "visible": [
+                "code",
+                "usage_limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["discount_code"],
-          "visible": ["discount_code"],
+          "required": [
+            "discount_code"
+          ],
+          "visible": [
+            "discount_code"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_PRICE_RULES",
+    "name": "SHOPIFY__PRICE_RULES",
     "description": "Retrieve price rules from Shopify store that define discount conditions and values.",
-    "tags": ["price_rules", "discounts", "conditions"],
+    "tags": [
+      "price_rules",
+      "discounts",
+      "conditions"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1553,19 +2088,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id"],
+          "visible": [
+            "limit",
+            "since_id"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_PRICE_RULE",
     "description": "Create a new price rule in Shopify that defines discount conditions, values, and eligibility criteria.",
-    "tags": ["price_rules", "create", "discounts"],
+    "tags": [
+      "price_rules",
+      "create",
+      "discounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1585,9 +2129,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1601,22 +2148,34 @@
                 },
                 "target_type": {
                   "type": "string",
-                  "enum": ["line_item", "shipping_line"],
+                  "enum": [
+                    "line_item",
+                    "shipping_line"
+                  ],
                   "description": "What the discount applies to"
                 },
                 "target_selection": {
                   "type": "string",
-                  "enum": ["all", "entitled"],
+                  "enum": [
+                    "all",
+                    "entitled"
+                  ],
                   "description": "Which items the discount applies to"
                 },
                 "allocation_method": {
                   "type": "string",
-                  "enum": ["across", "each"],
+                  "enum": [
+                    "across",
+                    "each"
+                  ],
                   "description": "How discount is allocated"
                 },
                 "value_type": {
                   "type": "string",
-                  "enum": ["fixed_amount", "percentage"],
+                  "enum": [
+                    "fixed_amount",
+                    "percentage"
+                  ],
                   "description": "Discount value type"
                 },
                 "value": {
@@ -1625,7 +2184,10 @@
                 },
                 "customer_selection": {
                   "type": "string",
-                  "enum": ["all", "prerequisite"],
+                  "enum": [
+                    "all",
+                    "prerequisite"
+                  ],
                   "description": "Customer eligibility"
                 },
                 "starts_at": {
@@ -1643,25 +2205,57 @@
                   "description": "Maximum number of uses"
                 }
               },
-              "required": ["title", "target_type", "target_selection", "allocation_method", "value_type", "value", "customer_selection"],
-              "visible": ["title", "target_type", "target_selection", "allocation_method", "value_type", "value", "customer_selection", "starts_at", "ends_at", "usage_limit"],
+              "required": [
+                "title",
+                "target_type",
+                "target_selection",
+                "allocation_method",
+                "value_type",
+                "value",
+                "customer_selection"
+              ],
+              "visible": [
+                "title",
+                "target_type",
+                "target_selection",
+                "allocation_method",
+                "value_type",
+                "value",
+                "customer_selection",
+                "starts_at",
+                "ends_at",
+                "usage_limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["price_rule"],
-          "visible": ["price_rule"],
+          "required": [
+            "price_rule"
+          ],
+          "visible": [
+            "price_rule"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_TRANSACTIONS",
+    "name": "SHOPIFY__TRANSACTIONS",
     "description": "Retrieve payment transactions for an order in Shopify with payment gateway details and status.",
-    "tags": ["transactions", "payments", "financial"],
+    "tags": [
+      "transactions",
+      "payments",
+      "financial"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1681,20 +2275,32 @@
               "description": "Order ID to get transactions for"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_TRANSACTION",
     "description": "Create a new payment transaction for an order in Shopify, such as captures, refunds, or voids.",
-    "tags": ["transactions", "create", "payments"],
+    "tags": [
+      "transactions",
+      "create",
+      "payments"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1714,8 +2320,12 @@
               "description": "Order ID to create transaction for"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1726,9 +2336,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1738,7 +2351,13 @@
               "properties": {
                 "kind": {
                   "type": "string",
-                  "enum": ["authorization", "capture", "sale", "void", "refund"],
+                  "enum": [
+                    "authorization",
+                    "capture",
+                    "sale",
+                    "void",
+                    "refund"
+                  ],
                   "description": "Transaction type"
                 },
                 "amount": {
@@ -1754,25 +2373,48 @@
                   "description": "Parent transaction ID (for captures/refunds)"
                 }
               },
-              "required": ["kind", "amount"],
-              "visible": ["kind", "amount", "currency", "parent_id"],
+              "required": [
+                "kind",
+                "amount"
+              ],
+              "visible": [
+                "kind",
+                "amount",
+                "currency",
+                "parent_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["transaction"],
-          "visible": ["transaction"],
+          "required": [
+            "transaction"
+          ],
+          "visible": [
+            "transaction"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_WEBHOOKS",
+    "name": "SHOPIFY__WEBHOOKS",
     "description": "Retrieve webhooks configured in Shopify store for real-time notifications and integrations.",
-    "tags": ["webhooks", "notifications", "integrations"],
+    "tags": [
+      "webhooks",
+      "notifications",
+      "integrations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1803,19 +2445,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "topic"],
+          "visible": [
+            "limit",
+            "since_id",
+            "topic"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_WEBHOOK",
     "description": "Create a new webhook in Shopify to receive real-time notifications for specific events.",
-    "tags": ["webhooks", "create", "notifications"],
+    "tags": [
+      "webhooks",
+      "create",
+      "notifications"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1835,9 +2487,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1847,7 +2502,17 @@
               "properties": {
                 "topic": {
                   "type": "string",
-                  "enum": ["orders/create", "orders/updated", "orders/paid", "orders/cancelled", "orders/fulfilled", "products/create", "products/update", "customers/create", "customers/update"],
+                  "enum": [
+                    "orders/create",
+                    "orders/updated",
+                    "orders/paid",
+                    "orders/cancelled",
+                    "orders/fulfilled",
+                    "products/create",
+                    "products/update",
+                    "customers/create",
+                    "customers/update"
+                  ],
                   "description": "Event topic to subscribe to"
                 },
                 "address": {
@@ -1857,30 +2522,53 @@
                 },
                 "format": {
                   "type": "string",
-                  "enum": ["json", "xml"],
+                  "enum": [
+                    "json",
+                    "xml"
+                  ],
                   "default": "json",
                   "description": "Webhook payload format"
                 }
               },
-              "required": ["topic", "address"],
-              "visible": ["topic", "address", "format"],
+              "required": [
+                "topic",
+                "address"
+              ],
+              "visible": [
+                "topic",
+                "address",
+                "format"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["webhook"],
-          "visible": ["webhook"],
+          "required": [
+            "webhook"
+          ],
+          "visible": [
+            "webhook"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__DELETE_WEBHOOK",
+    "name": "SHOPIFY__WEBHOOK",
     "description": "Delete a webhook from Shopify store, stopping real-time notifications for the configured event.",
-    "tags": ["webhooks", "delete", "notifications"],
+    "tags": [
+      "webhooks",
+      "delete",
+      "notifications"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1900,20 +2588,32 @@
               "description": "Webhook ID to delete"
             }
           },
-          "required": ["webhook_id"],
-          "visible": ["webhook_id"],
+          "required": [
+            "webhook_id"
+          ],
+          "visible": [
+            "webhook_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_LOCATIONS",
+    "name": "SHOPIFY__LOCATIONS",
     "description": "Retrieve store locations from Shopify for inventory management and fulfillment settings.",
-    "tags": ["locations", "stores", "fulfillment"],
+    "tags": [
+      "locations",
+      "stores",
+      "fulfillment"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1931,9 +2631,13 @@
     }
   },
   {
-    "name": "SHOPIFY__GET_SHOP_INFO",
+    "name": "SHOPIFY__SHOP_INFO",
     "description": "Retrieve general information about the Shopify store including name, domain, currency, and settings.",
-    "tags": ["shop", "info", "settings"],
+    "tags": [
+      "shop",
+      "info",
+      "settings"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1953,7 +2657,11 @@
   {
     "name": "SHOPIFY__SEARCH_PRODUCTS",
     "description": "Search products in Shopify store by title, vendor, type, or tags with flexible query parameters.",
-    "tags": ["products", "search", "catalog"],
+    "tags": [
+      "products",
+      "search",
+      "catalog"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1992,19 +2700,31 @@
             }
           },
           "required": [],
-          "visible": ["title", "vendor", "handle", "product_type", "limit"],
+          "visible": [
+            "title",
+            "vendor",
+            "handle",
+            "product_type",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_ANALYTICS_REPORTS",
+    "name": "SHOPIFY__ANALYTICS_REPORTS",
     "description": "Retrieve analytics reports from Shopify store including sales, traffic, and conversion data.",
-    "tags": ["analytics", "reports", "sales"],
+    "tags": [
+      "analytics",
+      "reports",
+      "sales"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2031,19 +2751,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id"],
+          "visible": [
+            "limit",
+            "since_id"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_ABANDONED_CHECKOUTS",
+    "name": "SHOPIFY__ABANDONED_CHECKOUTS",
     "description": "Retrieve abandoned checkouts from Shopify to identify potential recovery opportunities and analyze cart abandonment.",
-    "tags": ["checkouts", "abandoned", "recovery"],
+    "tags": [
+      "checkouts",
+      "abandoned",
+      "recovery"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2080,19 +2809,30 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "created_at_min", "created_at_max"],
+          "visible": [
+            "limit",
+            "since_id",
+            "created_at_min",
+            "created_at_max"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_METAFIELDS",
+    "name": "SHOPIFY__METAFIELDS",
     "description": "Retrieve metafields for a resource in Shopify to access custom data and extended properties.",
-    "tags": ["metafields", "custom_data", "properties"],
+    "tags": [
+      "metafields",
+      "custom_data",
+      "properties"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2109,7 +2849,12 @@
           "properties": {
             "resource": {
               "type": "string",
-              "enum": ["products", "customers", "orders", "collections"],
+              "enum": [
+                "products",
+                "customers",
+                "orders",
+                "collections"
+              ],
               "description": "Resource type to get metafields for"
             },
             "resource_id": {
@@ -2117,20 +2862,34 @@
               "description": "Resource ID to get metafields for"
             }
           },
-          "required": ["resource", "resource_id"],
-          "visible": ["resource", "resource_id"],
+          "required": [
+            "resource",
+            "resource_id"
+          ],
+          "visible": [
+            "resource",
+            "resource_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_METAFIELD",
     "description": "Create a new metafield for a resource in Shopify to store custom data and extended properties.",
-    "tags": ["metafields", "create", "custom_data"],
+    "tags": [
+      "metafields",
+      "create",
+      "custom_data"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2147,7 +2906,12 @@
           "properties": {
             "resource": {
               "type": "string",
-              "enum": ["products", "customers", "orders", "collections"],
+              "enum": [
+                "products",
+                "customers",
+                "orders",
+                "collections"
+              ],
               "description": "Resource type to create metafield for"
             },
             "resource_id": {
@@ -2155,8 +2919,14 @@
               "description": "Resource ID to create metafield for"
             }
           },
-          "required": ["resource", "resource_id"],
-          "visible": ["resource", "resource_id"],
+          "required": [
+            "resource",
+            "resource_id"
+          ],
+          "visible": [
+            "resource",
+            "resource_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -2167,9 +2937,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2191,7 +2964,12 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["string", "integer", "json_string", "boolean"],
+                  "enum": [
+                    "string",
+                    "integer",
+                    "json_string",
+                    "boolean"
+                  ],
                   "description": "Value type"
                 },
                 "description": {
@@ -2199,25 +2977,51 @@
                   "description": "Metafield description"
                 }
               },
-              "required": ["namespace", "key", "value", "type"],
-              "visible": ["namespace", "key", "value", "type", "description"],
+              "required": [
+                "namespace",
+                "key",
+                "value",
+                "type"
+              ],
+              "visible": [
+                "namespace",
+                "key",
+                "value",
+                "type",
+                "description"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["metafield"],
-          "visible": ["metafield"],
+          "required": [
+            "metafield"
+          ],
+          "visible": [
+            "metafield"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_THEMES",
+    "name": "SHOPIFY__THEMES",
     "description": "Retrieve themes installed in Shopify store for design and customization management.",
-    "tags": ["themes", "design", "customization"],
+    "tags": [
+      "themes",
+      "design",
+      "customization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2234,24 +3038,35 @@
           "properties": {
             "role": {
               "type": "string",
-              "enum": ["main", "unpublished"],
+              "enum": [
+                "main",
+                "unpublished"
+              ],
               "description": "Filter themes by role"
             }
           },
           "required": [],
-          "visible": ["role"],
+          "visible": [
+            "role"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_PAGES",
+    "name": "SHOPIFY__PAGES",
     "description": "Retrieve pages from Shopify store including about us, policies, and custom content pages.",
-    "tags": ["pages", "content", "website"],
+    "tags": [
+      "pages",
+      "content",
+      "website"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2286,19 +3101,30 @@
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "title", "handle"],
+          "visible": [
+            "limit",
+            "since_id",
+            "title",
+            "handle"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_PAGE",
     "description": "Create a new page in Shopify store for content like about us, policies, or marketing material.",
-    "tags": ["pages", "create", "content"],
+    "tags": [
+      "pages",
+      "create",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2318,9 +3144,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2350,25 +3179,47 @@
                   "description": "Template suffix for custom page layouts"
                 }
               },
-              "required": ["title", "body_html"],
-              "visible": ["title", "body_html", "handle", "published", "template_suffix"],
+              "required": [
+                "title",
+                "body_html"
+              ],
+              "visible": [
+                "title",
+                "body_html",
+                "handle",
+                "published",
+                "template_suffix"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["page"],
-          "visible": ["page"],
+          "required": [
+            "page"
+          ],
+          "visible": [
+            "page"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__UPDATE_PAGE",
     "description": "Update an existing page in Shopify store with new content, title, or publication settings.",
-    "tags": ["pages", "update", "content"],
+    "tags": [
+      "pages",
+      "update",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2388,8 +3239,12 @@
               "description": "Page ID to update"
             }
           },
-          "required": ["page_id"],
-          "visible": ["page_id"],
+          "required": [
+            "page_id"
+          ],
+          "visible": [
+            "page_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -2400,9 +3255,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2428,24 +3286,44 @@
                 }
               },
               "required": [],
-              "visible": ["title", "body_html", "published", "template_suffix"],
+              "visible": [
+                "title",
+                "body_html",
+                "published",
+                "template_suffix"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["page"],
-          "visible": ["page"],
+          "required": [
+            "page"
+          ],
+          "visible": [
+            "page"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__DELETE_PAGE",
+    "name": "SHOPIFY__PAGE",
     "description": "Delete a page from Shopify store permanently, removing it from the website navigation and content.",
-    "tags": ["pages", "delete", "content"],
+    "tags": [
+      "pages",
+      "delete",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2465,20 +3343,32 @@
               "description": "Page ID to delete"
             }
           },
-          "required": ["page_id"],
-          "visible": ["page_id"],
+          "required": [
+            "page_id"
+          ],
+          "visible": [
+            "page_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "SHOPIFY__GET_GIFT_CARDS",
+    "name": "SHOPIFY__GIFT_CARDS",
     "description": "Retrieve gift cards from Shopify store with balance information and usage tracking.",
-    "tags": ["gift_cards", "payments", "balance"],
+    "tags": [
+      "gift_cards",
+      "payments",
+      "balance"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2505,24 +3395,38 @@
             },
             "status": {
               "type": "string",
-              "enum": ["enabled", "disabled", "expired"],
+              "enum": [
+                "enabled",
+                "disabled",
+                "expired"
+              ],
               "description": "Filter by gift card status"
             }
           },
           "required": [],
-          "visible": ["limit", "since_id", "status"],
+          "visible": [
+            "limit",
+            "since_id",
+            "status"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "SHOPIFY__CREATE_GIFT_CARD",
     "description": "Create a new gift card in Shopify with specified value and optional customer assignment.",
-    "tags": ["gift_cards", "create", "payments"],
+    "tags": [
+      "gift_cards",
+      "create",
+      "payments"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2542,9 +3446,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2574,18 +3481,35 @@
                   "description": "Gift card expiration date"
                 }
               },
-              "required": ["initial_value"],
-              "visible": ["initial_value", "code", "customer_id", "note", "expires_on"],
+              "required": [
+                "initial_value"
+              ],
+              "visible": [
+                "initial_value",
+                "code",
+                "customer_id",
+                "note",
+                "expires_on"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["gift_card"],
-          "visible": ["gift_card"],
+          "required": [
+            "gift_card"
+          ],
+          "visible": [
+            "gift_card"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }

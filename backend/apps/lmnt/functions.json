@@ -2,7 +2,9 @@
   {
     "name": "LMNT__SPEECH_BYTES",
     "description": "Synthesizes speech from a text string and returns the audio data as a binary stream.",
-    "tags": ["text-to-speech"],
+    "tags": [
+      "text-to-speech"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -32,25 +34,52 @@
               "type": "string",
               "default": "aurora",
               "description": "The model to use for synthesis. One of aurora (default) or blizzard.",
-              "enum": ["aurora", "blizzard"]
+              "enum": [
+                "aurora",
+                "blizzard"
+              ]
             },
             "language": {
               "type": "string",
               "default": "auto",
               "description": "The desired language. Two letter ISO 639-1 code.",
-              "enum": ["auto", "en", "es", "pt", "fr", "de", "zh", "ko", "hi", "ja", "ru", "it", "tr"]
+              "enum": [
+                "auto",
+                "en",
+                "es",
+                "pt",
+                "fr",
+                "de",
+                "zh",
+                "ko",
+                "hi",
+                "ja",
+                "ru",
+                "it",
+                "tr"
+              ]
             },
             "format": {
               "type": "string",
               "default": "mp3",
               "description": "The file format of the audio output",
-              "enum": ["aac", "mp3", "mulaw", "raw", "wav"]
+              "enum": [
+                "aac",
+                "mp3",
+                "mulaw",
+                "raw",
+                "wav"
+              ]
             },
             "sample_rate": {
               "type": "integer",
               "default": 24000,
               "description": "The desired output sample rate in Hz",
-              "enum": [8000, 16000, 24000]
+              "enum": [
+                8000,
+                16000,
+                24000
+              ]
             },
             "speed": {
               "type": "number",
@@ -87,20 +116,42 @@
               "minimum": 0
             }
           },
-          "required": ["voice", "text"],
-          "visible": ["voice", "text", "model", "language", "format", "sample_rate", "speed", "conversational", "length", "top_p", "temperature"],
+          "required": [
+            "voice",
+            "text"
+          ],
+          "visible": [
+            "voice",
+            "text",
+            "model",
+            "language",
+            "format",
+            "sample_rate",
+            "speed",
+            "conversational",
+            "length",
+            "top_p",
+            "temperature"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LMNT__SPEECH_ADVANCED",
     "description": "Synthesizes speech from a text string and provides advanced information about the synthesis.",
-    "tags": ["text-to-speech", "advanced"],
+    "tags": [
+      "text-to-speech",
+      "advanced"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -130,25 +181,52 @@
               "type": "string",
               "default": "aurora",
               "description": "The model to use for synthesis. One of aurora (default) or blizzard.",
-              "enum": ["aurora", "blizzard"]
+              "enum": [
+                "aurora",
+                "blizzard"
+              ]
             },
             "language": {
               "type": "string",
               "default": "auto",
               "description": "The desired language. Two letter ISO 639-1 code.",
-              "enum": ["auto", "en", "es", "pt", "fr", "de", "zh", "ko", "hi", "ja", "ru", "it", "tr"]
+              "enum": [
+                "auto",
+                "en",
+                "es",
+                "pt",
+                "fr",
+                "de",
+                "zh",
+                "ko",
+                "hi",
+                "ja",
+                "ru",
+                "it",
+                "tr"
+              ]
             },
             "format": {
               "type": "string",
               "default": "mp3",
               "description": "The file format of the audio output",
-              "enum": ["aac", "mp3", "mulaw", "raw", "wav"]
+              "enum": [
+                "aac",
+                "mp3",
+                "mulaw",
+                "raw",
+                "wav"
+              ]
             },
             "sample_rate": {
               "type": "integer",
               "default": 24000,
               "description": "The desired output sample rate in Hz",
-              "enum": [8000, 16000, 24000]
+              "enum": [
+                8000,
+                16000,
+                24000
+              ]
             },
             "speed": {
               "type": "number",
@@ -190,20 +268,42 @@
               "description": "If set as true, response will contain a durations object."
             }
           },
-          "required": ["voice", "text"],
-          "visible": ["voice", "text", "model", "language", "format", "sample_rate", "speed", "conversational", "length", "top_p", "temperature", "return_durations"],
+          "required": [
+            "voice",
+            "text"
+          ],
+          "visible": [
+            "voice",
+            "text",
+            "model",
+            "language",
+            "format",
+            "sample_rate",
+            "speed",
+            "conversational",
+            "length",
+            "top_p",
+            "temperature",
+            "return_durations"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LMNT__LIST_VOICES",
     "description": "Returns a list of voices available to you.",
-    "tags": ["voice-listing"],
+    "tags": [
+      "voice-listing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -228,23 +328,36 @@
               "type": "string",
               "default": "all",
               "description": "Which owner's voices to return. Choose from system, me, or all.",
-              "enum": ["system", "me", "all"]
+              "enum": [
+                "system",
+                "me",
+                "all"
+              ]
             }
           },
           "required": [],
-          "visible": ["starred", "owner"],
+          "visible": [
+            "starred",
+            "owner"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LMNT__VOICE_INFO",
     "description": "Returns details of a specific voice.",
-    "tags": ["voice-info"],
+    "tags": [
+      "voice-info"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -265,20 +378,30 @@
               "description": "The id of the voice to update, which can be retrieved by a call to List voices."
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LMNT__UPDATE_VOICE",
     "description": "Updates metadata for a specific voice. Only provided fields will be changed.",
-    "tags": ["voice-update"],
+    "tags": [
+      "voice-update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -299,8 +422,12 @@
               "description": "The id of the voice to update, which can be retrieved by a call to List voices."
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -329,19 +456,33 @@
             }
           },
           "required": [],
-          "visible": ["description", "gender", "name", "starred", "unfreeze"],
+          "visible": [
+            "description",
+            "gender",
+            "name",
+            "starred",
+            "unfreeze"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LMNT__DELETE_VOICE",
+    "name": "LMNT__VOICE",
     "description": "Deletes a voice and cancels any pending operations on it. Cannot be undone.",
-    "tags": ["voice-delete"],
+    "tags": [
+      "voice-delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -362,13 +503,21 @@
               "description": "The id of the voice to delete, which can be retrieved by a call to List voices."
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

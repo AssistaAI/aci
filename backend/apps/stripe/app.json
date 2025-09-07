@@ -13,7 +13,11 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Payment Processing", "E-commerce", "Financial Services"],
+  "categories": [
+    "Payment Processing",
+    "E-commerce",
+    "Financial Services"
+  ],
   "visibility": "public",
   "active": true
 }

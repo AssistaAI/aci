@@ -13,7 +13,11 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Project Management", "Workflow", "Team Collaboration"],
+  "categories": [
+    "Project Management",
+    "Workflow",
+    "Team Collaboration"
+  ],
   "visibility": "public",
   "active": true
 }

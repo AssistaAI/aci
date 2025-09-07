@@ -13,7 +13,12 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Website Builder", "CMS", "Ecommerce", "Design"],
+  "categories": [
+    "Website Builder",
+    "CMS",
+    "Ecommerce",
+    "Design"
+  ],
   "visibility": "public",
   "active": true
 }

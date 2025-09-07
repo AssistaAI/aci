@@ -1,8 +1,12 @@
 [
   {
-    "name": "LINKEDIN__GET_USER_PROFILE",
+    "name": "LINKEDIN__USER_PROFILE",
     "description": "Get the authenticated user's profile information including name, email, profile picture, and other basic details.",
-    "tags": ["profile", "user", "personal"],
+    "tags": [
+      "profile",
+      "user",
+      "personal"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -25,19 +29,27 @@
             }
           },
           "required": [],
-          "visible": ["projection"],
+          "visible": [
+            "projection"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINKEDIN__GET_USER_EMAIL",
+    "name": "LINKEDIN__USER_EMAIL",
     "description": "Get the authenticated user's primary email address.",
-    "tags": ["profile", "email", "contact"],
+    "tags": [
+      "profile",
+      "email",
+      "contact"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -65,19 +77,28 @@
             }
           },
           "required": [],
-          "visible": ["projection"],
+          "visible": [
+            "projection"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__CREATE_POST",
     "description": "Create and publish a post on LinkedIn. Supports text content with optional visibility settings and targeting.",
-    "tags": ["posts", "create", "share", "content"],
+    "tags": [
+      "posts",
+      "create",
+      "share",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -98,9 +119,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -114,7 +138,10 @@
               "type": "string",
               "description": "Post lifecycle state",
               "default": "PUBLISHED",
-              "enum": ["PUBLISHED", "DRAFT"]
+              "enum": [
+                "PUBLISHED",
+                "DRAFT"
+              ]
             },
             "specificContent": {
               "type": "object",
@@ -133,24 +160,42 @@
                           "description": "The text content of the post"
                         }
                       },
-                      "required": ["text"],
-                      "visible": ["text"],
+                      "required": [
+                        "text"
+                      ],
+                      "visible": [
+                        "text"
+                      ],
                       "additionalProperties": false
                     },
                     "shareMediaCategory": {
                       "type": "string",
                       "description": "Media category for the share",
                       "default": "NONE",
-                      "enum": ["NONE", "ARTICLE", "IMAGE"]
+                      "enum": [
+                        "NONE",
+                        "ARTICLE",
+                        "IMAGE"
+                      ]
                     }
                   },
-                  "required": ["shareCommentary", "shareMediaCategory"],
-                  "visible": ["shareCommentary", "shareMediaCategory"],
+                  "required": [
+                    "shareCommentary",
+                    "shareMediaCategory"
+                  ],
+                  "visible": [
+                    "shareCommentary",
+                    "shareMediaCategory"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["com.linkedin.ugc.ShareContent"],
-              "visible": ["com.linkedin.ugc.ShareContent"],
+              "required": [
+                "com.linkedin.ugc.ShareContent"
+              ],
+              "visible": [
+                "com.linkedin.ugc.ShareContent"
+              ],
               "additionalProperties": false
             },
             "visibility": {
@@ -161,28 +206,51 @@
                   "type": "string",
                   "description": "Visibility level",
                   "default": "PUBLIC",
-                  "enum": ["PUBLIC", "CONNECTIONS"]
+                  "enum": [
+                    "PUBLIC",
+                    "CONNECTIONS"
+                  ]
                 }
               },
-              "required": ["com.linkedin.ugc.MemberNetworkVisibility"],
-              "visible": ["com.linkedin.ugc.MemberNetworkVisibility"],
+              "required": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
+              "visible": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["author", "specificContent"],
-          "visible": ["author", "specificContent", "visibility"],
+          "required": [
+            "author",
+            "specificContent"
+          ],
+          "visible": [
+            "author",
+            "specificContent",
+            "visibility"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINKEDIN__GET_COMPANY_PROFILE",
+    "name": "LINKEDIN__COMPANY_PROFILE",
     "description": "Get company profile information by company ID or universal name.",
-    "tags": ["company", "organization", "profile"],
+    "tags": [
+      "company",
+      "organization",
+      "profile"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -203,8 +271,12 @@
               "description": "Company ID or universal name (e.g., '1337' or 'linkedin')"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -218,19 +290,31 @@
             }
           },
           "required": [],
-          "visible": ["projection"],
+          "visible": [
+            "projection"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__CREATE_COMPANY_POST",
     "description": "Create and publish a post on behalf of a company page. Requires admin access to the organization.",
-    "tags": ["company", "posts", "organization", "marketing"],
+    "tags": [
+      "company",
+      "posts",
+      "organization",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -251,9 +335,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -267,7 +354,10 @@
               "type": "string",
               "description": "Post lifecycle state",
               "default": "PUBLISHED",
-              "enum": ["PUBLISHED", "DRAFT"]
+              "enum": [
+                "PUBLISHED",
+                "DRAFT"
+              ]
             },
             "specificContent": {
               "type": "object",
@@ -286,24 +376,42 @@
                           "description": "The text content of the company post"
                         }
                       },
-                      "required": ["text"],
-                      "visible": ["text"],
+                      "required": [
+                        "text"
+                      ],
+                      "visible": [
+                        "text"
+                      ],
                       "additionalProperties": false
                     },
                     "shareMediaCategory": {
                       "type": "string",
                       "description": "Media category for the share",
                       "default": "NONE",
-                      "enum": ["NONE", "ARTICLE", "IMAGE"]
+                      "enum": [
+                        "NONE",
+                        "ARTICLE",
+                        "IMAGE"
+                      ]
                     }
                   },
-                  "required": ["shareCommentary", "shareMediaCategory"],
-                  "visible": ["shareCommentary", "shareMediaCategory"],
+                  "required": [
+                    "shareCommentary",
+                    "shareMediaCategory"
+                  ],
+                  "visible": [
+                    "shareCommentary",
+                    "shareMediaCategory"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["com.linkedin.ugc.ShareContent"],
-              "visible": ["com.linkedin.ugc.ShareContent"],
+              "required": [
+                "com.linkedin.ugc.ShareContent"
+              ],
+              "visible": [
+                "com.linkedin.ugc.ShareContent"
+              ],
               "additionalProperties": false
             },
             "visibility": {
@@ -314,28 +422,51 @@
                   "type": "string",
                   "description": "Visibility level for company posts",
                   "default": "PUBLIC",
-                  "enum": ["PUBLIC"]
+                  "enum": [
+                    "PUBLIC"
+                  ]
                 }
               },
-              "required": ["com.linkedin.ugc.MemberNetworkVisibility"],
-              "visible": ["com.linkedin.ugc.MemberNetworkVisibility"],
+              "required": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
+              "visible": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["author", "specificContent"],
-          "visible": ["author", "specificContent", "visibility"],
+          "required": [
+            "author",
+            "specificContent"
+          ],
+          "visible": [
+            "author",
+            "specificContent",
+            "visibility"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINKEDIN__GET_COMPANY_ANALYTICS",
+    "name": "LINKEDIN__COMPANY_ANALYTICS",
     "description": "Get analytics data for a company page including follower statistics and post performance metrics.",
-    "tags": ["analytics", "company", "metrics", "insights"],
+    "tags": [
+      "analytics",
+      "company",
+      "metrics",
+      "insights"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -364,7 +495,10 @@
               "type": "string",
               "description": "Time granularity for the data",
               "default": "DAY",
-              "enum": ["DAY", "MONTH"]
+              "enum": [
+                "DAY",
+                "MONTH"
+              ]
             },
             "timeIntervals.timeRange.start": {
               "type": "integer",
@@ -375,20 +509,35 @@
               "description": "End time as Unix timestamp (milliseconds)"
             }
           },
-          "required": ["organizationalEntity"],
-          "visible": ["organizationalEntity", "timeIntervals.timeGranularityType", "timeIntervals.timeRange.start", "timeIntervals.timeRange.end"],
+          "required": [
+            "organizationalEntity"
+          ],
+          "visible": [
+            "organizationalEntity",
+            "timeIntervals.timeGranularityType",
+            "timeIntervals.timeRange.start",
+            "timeIntervals.timeRange.end"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__SEARCH_COMPANIES",
     "description": "Search for companies on LinkedIn using keywords, with optional filtering by industry and location.",
-    "tags": ["search", "companies", "organizations"],
+    "tags": [
+      "search",
+      "companies",
+      "organizations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -425,20 +574,34 @@
               "maximum": 200
             }
           },
-          "required": ["keywords"],
-          "visible": ["keywords", "start", "count"],
+          "required": [
+            "keywords"
+          ],
+          "visible": [
+            "keywords",
+            "start",
+            "count"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINKEDIN__GET_USER_CONNECTIONS",
+    "name": "LINKEDIN__USER_CONNECTIONS",
     "description": "Get the authenticated user's 1st-degree connections. Returns basic profile information for connections.",
-    "tags": ["connections", "network", "contacts"],
+    "tags": [
+      "connections",
+      "network",
+      "contacts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -463,7 +626,11 @@
               "type": "string",
               "description": "Network degree filter",
               "default": "F",
-              "enum": ["F", "S", "O"]
+              "enum": [
+                "F",
+                "S",
+                "O"
+              ]
             },
             "start": {
               "type": "integer",
@@ -478,19 +645,30 @@
             }
           },
           "required": [],
-          "visible": ["network", "start", "count"],
+          "visible": [
+            "network",
+            "start",
+            "count"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINKEDIN__GET_POST_ANALYTICS",
+    "name": "LINKEDIN__POST_ANALYTICS",
     "description": "Get analytics data for a specific UGC post including engagement metrics like likes, comments, and shares.",
-    "tags": ["analytics", "posts", "engagement", "metrics"],
+    "tags": [
+      "analytics",
+      "posts",
+      "engagement",
+      "metrics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -511,20 +689,33 @@
               "description": "UGC Post ID to get analytics for"
             }
           },
-          "required": ["ugcPostId"],
-          "visible": ["ugcPostId"],
+          "required": [
+            "ugcPostId"
+          ],
+          "visible": [
+            "ugcPostId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__SHARE_ARTICLE",
     "description": "Share an external article or URL as a LinkedIn post with title, description, and thumbnail.",
-    "tags": ["share", "article", "link", "content"],
+    "tags": [
+      "share",
+      "article",
+      "link",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -545,9 +736,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -561,7 +755,10 @@
               "type": "string",
               "description": "Post lifecycle state",
               "default": "PUBLISHED",
-              "enum": ["PUBLISHED", "DRAFT"]
+              "enum": [
+                "PUBLISHED",
+                "DRAFT"
+              ]
             },
             "specificContent": {
               "type": "object",
@@ -581,7 +778,9 @@
                         }
                       },
                       "required": [],
-                      "visible": ["text"],
+                      "visible": [
+                        "text"
+                      ],
                       "additionalProperties": false
                     },
                     "shareMediaCategory": {
@@ -604,42 +803,67 @@
                             "properties": {
                               "text": {
                                 "type": "string",
-                                "description": "Article description or summary"
+                                "description": "Article description or summary",
+                                "default": ""
                               }
                             },
-                            "required": ["text"],
-                            "additionalProperties": false
+                            "required": [
+                              "text"
+                            ],
+                            "additionalProperties": false,
+                            "visible": []
                           },
                           "originalUrl": {
                             "type": "string",
-                            "description": "URL of the article being shared"
+                            "description": "URL of the article being shared",
+                            "default": ""
                           },
                           "title": {
                             "type": "object",
                             "properties": {
                               "text": {
                                 "type": "string",
-                                "description": "Article title"
+                                "description": "Article title",
+                                "default": ""
                               }
                             },
-                            "required": ["text"],
-                            "additionalProperties": false
+                            "required": [
+                              "text"
+                            ],
+                            "additionalProperties": false,
+                            "visible": [],
+                            "default": {}
                           }
                         },
-                        "required": ["status", "originalUrl", "title"],
-                        "additionalProperties": false
+                        "required": [
+                          "status",
+                          "originalUrl",
+                          "title"
+                        ],
+                        "additionalProperties": false,
+                        "visible": []
                       },
                       "minItems": 1,
                       "maxItems": 1
                     }
                   },
-                  "required": ["shareMediaCategory", "media"],
-                  "visible": ["shareCommentary", "media"],
+                  "required": [
+                    "shareMediaCategory",
+                    "media"
+                  ],
+                  "visible": [
+                    "shareCommentary",
+                    "media"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["com.linkedin.ugc.ShareContent"],
-              "visible": ["com.linkedin.ugc.ShareContent"],
+              "required": [
+                "com.linkedin.ugc.ShareContent"
+              ],
+              "visible": [
+                "com.linkedin.ugc.ShareContent"
+              ],
               "additionalProperties": false
             },
             "visibility": {
@@ -650,21 +874,40 @@
                   "type": "string",
                   "description": "Visibility level",
                   "default": "PUBLIC",
-                  "enum": ["PUBLIC", "CONNECTIONS"]
+                  "enum": [
+                    "PUBLIC",
+                    "CONNECTIONS"
+                  ]
                 }
               },
-              "required": ["com.linkedin.ugc.MemberNetworkVisibility"],
-              "visible": ["com.linkedin.ugc.MemberNetworkVisibility"],
+              "required": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
+              "visible": [
+                "com.linkedin.ugc.MemberNetworkVisibility"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["author", "specificContent"],
-          "visible": ["author", "specificContent", "visibility"],
+          "required": [
+            "author",
+            "specificContent"
+          ],
+          "visible": [
+            "author",
+            "specificContent",
+            "visibility"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }

@@ -13,7 +13,11 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Email Marketing", "Marketing Automation", "Analytics"],
+  "categories": [
+    "Email Marketing",
+    "Marketing Automation",
+    "Analytics"
+  ],
   "visibility": "public",
   "active": true
 }

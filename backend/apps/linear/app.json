@@ -13,7 +13,11 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Issue Tracking", "Project Management", "Development"],
+  "categories": [
+    "Issue Tracking",
+    "Project Management",
+    "Development"
+  ],
   "visibility": "public",
   "active": true
 }

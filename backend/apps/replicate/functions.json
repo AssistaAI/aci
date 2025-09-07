@@ -2,7 +2,12 @@
   {
     "name": "REPLICATE__MODEL_FLUX_1_1_PRO",
     "description": "Faster, better FLUX Pro. Text-to-image model with excellent image quality, prompt adherence, and output diversity.",
-    "tags": ["text-to-image", "prediction", "generate", "flux"],
+    "tags": [
+      "text-to-image",
+      "prediction",
+      "generate",
+      "flux"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -30,8 +35,12 @@
             }
           },
           "additionalProperties": false,
-          "required": ["Content-Type", "Prefer"],
-          "visible": []
+          "required": [
+            "Content-Type",
+            "Prefer"
+          ],
+          "visible": [],
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -94,7 +103,9 @@
                   "description": "Automatically modify the prompt for more creative generation."
                 }
               },
-              "required": ["prompt"],
+              "required": [
+                "prompt"
+              ],
               "visible": [
                 "seed",
                 "width",
@@ -110,20 +121,34 @@
               "additionalProperties": false
             }
           },
-          "required": ["input"],
-          "visible": ["input"],
+          "required": [
+            "input"
+          ],
+          "visible": [
+            "input"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "REPLICATE__MODEL_GROUNDING_DINO",
     "description": "Detects any object in an image based on a descriptive text query. It can detect objects it wasn't explicitly trained on.",
-    "tags": ["object-detection", "grounding-dino", "computer-vision", "zero-shot"],
+    "tags": [
+      "object-detection",
+      "grounding-dino",
+      "computer-vision",
+      "zero-shot"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -151,8 +176,12 @@
             }
           },
           "additionalProperties": false,
-          "required": ["Content-Type", "Prefer"],
-          "visible": []
+          "required": [
+            "Content-Type",
+            "Prefer"
+          ],
+          "visible": [],
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -186,24 +215,43 @@
                   "description": "Confidence level for text matching (0 to 1).",
                   "default": 0.25
                 },
-                 "show_visualisation": {
-                    "type": "boolean",
-                    "description": "Draw and visualize bounding boxes on the image.",
-                    "default": true
+                "show_visualisation": {
+                  "type": "boolean",
+                  "description": "Draw and visualize bounding boxes on the image.",
+                  "default": true
                 }
               },
-              "required": ["image", "query"],
-              "visible": ["image", "query", "box_threshold", "text_threshold", "show_visualisation"],
+              "required": [
+                "image",
+                "query"
+              ],
+              "visible": [
+                "image",
+                "query",
+                "box_threshold",
+                "text_threshold",
+                "show_visualisation"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["version", "input"],
-          "visible": ["input"],
+          "required": [
+            "version",
+            "input"
+          ],
+          "visible": [
+            "input"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }

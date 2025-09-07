@@ -1,8 +1,11 @@
 [
   {
-    "name": "AERO_WORKFLOW__GET_OTHERS",
+    "name": "AERO_WORKFLOW__OTHERS",
     "description": "Retrieve miscellaneous AeroWorkflow data",
-    "tags": ["aeroworkflow", "others"],
+    "tags": [
+      "aeroworkflow",
+      "others"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,20 +25,31 @@
               "description": "Account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "AERO_WORKFLOW__GET_EMAILS",
+    "name": "AERO_WORKFLOW__EMAILS",
     "description": "Retrieve paginated email data from AeroWorkflow",
-    "tags": ["aeroworkflow", "emails"],
+    "tags": [
+      "aeroworkflow",
+      "emails"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -55,8 +69,12 @@
               "description": "Account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -69,19 +87,29 @@
             }
           },
           "required": [],
-          "visible": ["pageNumber"],
+          "visible": [
+            "pageNumber"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "AERO_WORKFLOW__GET_TASKS",
+    "name": "AERO_WORKFLOW__TASKS",
     "description": "Retrieve task data from AeroWorkflow",
-    "tags": ["aeroworkflow", "tasks"],
+    "tags": [
+      "aeroworkflow",
+      "tasks"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -101,20 +129,31 @@
               "description": "Account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "AERO_WORKFLOW__GET_CONTACTS",
+    "name": "AERO_WORKFLOW__CONTACTS",
     "description": "Retrieve contact data from AeroWorkflow",
-    "tags": ["aeroworkflow", "contacts"],
+    "tags": [
+      "aeroworkflow",
+      "contacts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -134,20 +173,31 @@
               "description": "Account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "AERO_WORKFLOW__CREATE_CONTACT",
     "description": "Create a new contact in AeroWorkflow",
-    "tags": ["aeroworkflow", "contacts"],
+    "tags": [
+      "aeroworkflow",
+      "contacts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -168,8 +218,12 @@
               "description": "Account ID"
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -221,13 +275,26 @@
               "description": "Additional notes"
             }
           },
-          "required": ["firstName", "lastName"],
-          "visible": ["firstName", "lastName", "defaultEmailAddress"],
+          "required": [
+            "firstName",
+            "lastName"
+          ],
+          "visible": [
+            "firstName",
+            "lastName",
+            "defaultEmailAddress"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   }

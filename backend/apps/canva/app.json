@@ -26,11 +26,22 @@
             "export:write": "Export designs to various formats"
           }
         }
-      }
+      },
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ CLIENT_ID }}",
+      "client_secret": "{{ CLIENT_SECRET }}",
+      "authorize_url": "https://www.canva.com/api/oauth/authorize",
+      "access_token_url": "https://api.canva.com/rest/v1/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Design", "Marketing", "Collaboration"],
+  "categories": [
+    "Design",
+    "Marketing",
+    "Collaboration"
+  ],
   "visibility": "public",
   "active": true
 }

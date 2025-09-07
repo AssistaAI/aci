@@ -1,8 +1,12 @@
 [
   {
-    "name": "LINEAR__GET_ISSUES",
+    "name": "LINEAR__ISSUES",
     "description": "Retrieve issues from Linear with filtering options for teams, assignees, status, and labels.",
-    "tags": ["issues", "tasks", "project management"],
+    "tags": [
+      "issues",
+      "tasks",
+      "project management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,9 +26,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -58,12 +65,16 @@
                             }
                           },
                           "required": [],
-                          "visible": ["eq"],
+                          "visible": [
+                            "eq"
+                          ],
                           "additionalProperties": false
                         }
                       },
                       "required": [],
-                      "visible": ["id"],
+                      "visible": [
+                        "id"
+                      ],
                       "additionalProperties": false
                     },
                     "assignee": {
@@ -78,40 +89,63 @@
                             }
                           },
                           "required": [],
-                          "visible": ["eq"],
+                          "visible": [
+                            "eq"
+                          ],
                           "additionalProperties": false
                         }
                       },
                       "required": [],
-                      "visible": ["id"],
+                      "visible": [
+                        "id"
+                      ],
                       "additionalProperties": false
                     }
                   },
                   "required": [],
-                  "visible": ["team", "assignee"],
+                  "visible": [
+                    "team",
+                    "assignee"
+                  ],
                   "description": "Filter conditions for issues",
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["first", "filter"],
+              "visible": [
+                "first",
+                "filter"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_ISSUE",
     "description": "Create a new issue in Linear with title, description, team assignment, and optional labels.",
-    "tags": ["issues", "create", "task"],
+    "tags": [
+      "issues",
+      "create",
+      "task"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -131,9 +165,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -172,30 +209,57 @@
                       "description": "Issue priority (0=No priority, 1=Urgent, 2=High, 3=Medium, 4=Low)"
                     }
                   },
-                  "required": ["title", "teamId"],
-                  "visible": ["title", "description", "teamId", "assigneeId", "priority"],
+                  "required": [
+                    "title",
+                    "teamId"
+                  ],
+                  "visible": [
+                    "title",
+                    "description",
+                    "teamId",
+                    "assigneeId",
+                    "priority"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__UPDATE_ISSUE",
     "description": "Update an existing issue in Linear with new title, description, status, or assignee.",
-    "tags": ["issues", "update", "edit"],
+    "tags": [
+      "issues",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -215,9 +279,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -255,29 +322,54 @@
                     }
                   },
                   "required": [],
-                  "visible": ["title", "description", "stateId", "assigneeId"],
+                  "visible": [
+                    "title",
+                    "description",
+                    "stateId",
+                    "assigneeId"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["id", "input"],
-              "visible": ["id", "input"],
+              "required": [
+                "id",
+                "input"
+              ],
+              "visible": [
+                "id",
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__DELETE_ISSUE",
+    "name": "LINEAR__ISSUE",
     "description": "Permanently delete an issue from Linear workspace, removing it and all associated data.",
-    "tags": ["issues", "delete", "remove"],
+    "tags": [
+      "issues",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -297,9 +389,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -317,25 +412,43 @@
                   "description": "Issue ID to delete"
                 }
               },
-              "required": ["id"],
-              "visible": ["id"],
+              "required": [
+                "id"
+              ],
+              "visible": [
+                "id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_TEAMS",
+    "name": "LINEAR__TEAMS",
     "description": "Retrieve teams from Linear workspace with their details and member information.",
-    "tags": ["teams", "workspace", "organization"],
+    "tags": [
+      "teams",
+      "workspace",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -355,9 +468,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -368,12 +484,18 @@
               "description": "GraphQL query for retrieving teams"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
@@ -381,7 +503,11 @@
   {
     "name": "LINEAR__CREATE_TEAM",
     "description": "Create a new team in Linear workspace with name, key, description, and workflow configuration.",
-    "tags": ["teams", "create", "organization"],
+    "tags": [
+      "teams",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -401,9 +527,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -438,30 +567,56 @@
                       "description": "Whether the team is private"
                     }
                   },
-                  "required": ["name", "key"],
-                  "visible": ["name", "key", "description", "private"],
+                  "required": [
+                    "name",
+                    "key"
+                  ],
+                  "visible": [
+                    "name",
+                    "key",
+                    "description",
+                    "private"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_PROJECTS",
+    "name": "LINEAR__PROJECTS",
     "description": "Retrieve projects from Linear with their progress, milestones, and team assignments.",
-    "tags": ["projects", "milestones", "planning"],
+    "tags": [
+      "projects",
+      "milestones",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -481,9 +636,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -504,24 +662,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_PROJECT",
     "description": "Create a new project in Linear with name, description, target date, and team assignments.",
-    "tags": ["projects", "create", "planning"],
+    "tags": [
+      "projects",
+      "create",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -541,9 +714,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -580,30 +756,55 @@
                       "description": "Array of team IDs to assign to the project"
                     }
                   },
-                  "required": ["name"],
-                  "visible": ["name", "description", "targetDate", "teamIds"],
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "targetDate",
+                    "teamIds"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__UPDATE_PROJECT",
     "description": "Update an existing project in Linear with new name, description, target date, or team assignments.",
-    "tags": ["projects", "update", "edit"],
+    "tags": [
+      "projects",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -623,9 +824,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -660,34 +864,64 @@
                     },
                     "state": {
                       "type": "string",
-                      "enum": ["planned", "started", "completed", "canceled"],
+                      "enum": [
+                        "planned",
+                        "started",
+                        "completed",
+                        "canceled"
+                      ],
                       "description": "New project state"
                     }
                   },
                   "required": [],
-                  "visible": ["name", "description", "targetDate", "state"],
+                  "visible": [
+                    "name",
+                    "description",
+                    "targetDate",
+                    "state"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["id", "input"],
-              "visible": ["id", "input"],
+              "required": [
+                "id",
+                "input"
+              ],
+              "visible": [
+                "id",
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__DELETE_PROJECT",
+    "name": "LINEAR__PROJECT",
     "description": "Delete a project from Linear workspace permanently, removing it and all associated data.",
-    "tags": ["projects", "delete", "remove"],
+    "tags": [
+      "projects",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -707,9 +941,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -727,25 +964,43 @@
                   "description": "Project ID to delete"
                 }
               },
-              "required": ["id"],
-              "visible": ["id"],
+              "required": [
+                "id"
+              ],
+              "visible": [
+                "id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_COMMENTS",
+    "name": "LINEAR__COMMENTS",
     "description": "Retrieve comments for a specific issue in Linear with author details and timestamps.",
-    "tags": ["comments", "discussion", "collaboration"],
+    "tags": [
+      "comments",
+      "discussion",
+      "collaboration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -765,9 +1020,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -791,25 +1049,44 @@
                   "description": "Number of comments to retrieve"
                 }
               },
-              "required": ["issueId"],
-              "visible": ["issueId", "first"],
+              "required": [
+                "issueId"
+              ],
+              "visible": [
+                "issueId",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_COMMENT",
     "description": "Create a comment on an issue in Linear to facilitate team discussion and collaboration.",
-    "tags": ["comments", "create", "discussion"],
+    "tags": [
+      "comments",
+      "create",
+      "discussion"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -829,9 +1106,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -856,30 +1136,54 @@
                       "description": "Issue ID to comment on"
                     }
                   },
-                  "required": ["body", "issueId"],
-                  "visible": ["body", "issueId"],
+                  "required": [
+                    "body",
+                    "issueId"
+                  ],
+                  "visible": [
+                    "body",
+                    "issueId"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__UPDATE_COMMENT",
     "description": "Update an existing comment on an issue in Linear with new text content.",
-    "tags": ["comments", "update", "edit"],
+    "tags": [
+      "comments",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -899,9 +1203,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -926,30 +1233,54 @@
                       "description": "New comment text content"
                     }
                   },
-                  "required": ["body"],
-                  "visible": ["body"],
+                  "required": [
+                    "body"
+                  ],
+                  "visible": [
+                    "body"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["id", "input"],
-              "visible": ["id", "input"],
+              "required": [
+                "id",
+                "input"
+              ],
+              "visible": [
+                "id",
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__DELETE_COMMENT",
+    "name": "LINEAR__COMMENT",
     "description": "Delete a comment from an issue in Linear permanently, removing it from the discussion thread.",
-    "tags": ["comments", "delete", "remove"],
+    "tags": [
+      "comments",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -969,9 +1300,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -989,25 +1323,43 @@
                   "description": "Comment ID to delete"
                 }
               },
-              "required": ["id"],
-              "visible": ["id"],
+              "required": [
+                "id"
+              ],
+              "visible": [
+                "id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_LABELS",
+    "name": "LINEAR__LABELS",
     "description": "Retrieve labels from Linear workspace for categorizing and organizing issues.",
-    "tags": ["labels", "tags", "organization"],
+    "tags": [
+      "labels",
+      "tags",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1027,9 +1379,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1050,24 +1405,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_LABEL",
     "description": "Create a new label in Linear for categorizing and organizing issues with custom color and description.",
-    "tags": ["labels", "create", "organization"],
+    "tags": [
+      "labels",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1087,9 +1457,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1123,30 +1496,55 @@
                       "description": "Team ID to assign the label to"
                     }
                   },
-                  "required": ["name"],
-                  "visible": ["name", "description", "color", "teamId"],
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "color",
+                    "teamId"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__ADD_ISSUE_LABELS",
     "description": "Add labels to an existing issue in Linear for better categorization and filtering.",
-    "tags": ["issues", "labels", "organize"],
+    "tags": [
+      "issues",
+      "labels",
+      "organize"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1166,9 +1564,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1196,30 +1597,54 @@
                       "description": "Array of label IDs to add to the issue"
                     }
                   },
-                  "required": ["labelIds"],
-                  "visible": ["labelIds"],
+                  "required": [
+                    "labelIds"
+                  ],
+                  "visible": [
+                    "labelIds"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["id", "input"],
-              "visible": ["id", "input"],
+              "required": [
+                "id",
+                "input"
+              ],
+              "visible": [
+                "id",
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_CYCLES",
+    "name": "LINEAR__CYCLES",
     "description": "Retrieve development cycles from Linear for sprint planning and iteration management.",
-    "tags": ["cycles", "sprints", "iterations"],
+    "tags": [
+      "cycles",
+      "sprints",
+      "iterations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1239,9 +1664,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1275,40 +1703,62 @@
                             }
                           },
                           "required": [],
-                          "visible": ["eq"],
+                          "visible": [
+                            "eq"
+                          ],
                           "additionalProperties": false
                         }
                       },
                       "required": [],
-                      "visible": ["id"],
+                      "visible": [
+                        "id"
+                      ],
                       "additionalProperties": false
                     }
                   },
                   "required": [],
-                  "visible": ["team"],
+                  "visible": [
+                    "team"
+                  ],
                   "description": "Filter conditions for cycles",
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["first", "filter"],
+              "visible": [
+                "first",
+                "filter"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_CYCLE",
     "description": "Create a new development cycle in Linear for sprint planning with start date, end date, and team assignment.",
-    "tags": ["cycles", "create", "sprints"],
+    "tags": [
+      "cycles",
+      "create",
+      "sprints"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1328,9 +1778,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1369,30 +1822,57 @@
                       "description": "Cycle end date and time (ISO format)"
                     }
                   },
-                  "required": ["name", "teamId"],
-                  "visible": ["name", "description", "teamId", "startsAt", "endsAt"],
+                  "required": [
+                    "name",
+                    "teamId"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "teamId",
+                    "startsAt",
+                    "endsAt"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_WORKFLOW_STATES",
+    "name": "LINEAR__WORKFLOW_STATES",
     "description": "Retrieve workflow states from Linear teams for understanding issue progression and status tracking.",
-    "tags": ["workflow", "states", "status"],
+    "tags": [
+      "workflow",
+      "states",
+      "status"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1412,9 +1892,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1439,24 +1922,40 @@
                 }
               },
               "required": [],
-              "visible": ["teamId", "first"],
+              "visible": [
+                "teamId",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_WORKFLOW_STATE",
     "description": "Create a new workflow state in Linear team for customizing issue status progression and organization.",
-    "tags": ["workflow", "states", "create"],
+    "tags": [
+      "workflow",
+      "states",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1476,9 +1975,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1508,7 +2010,13 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["backlog", "unstarted", "started", "completed", "canceled"],
+                      "enum": [
+                        "backlog",
+                        "unstarted",
+                        "started",
+                        "completed",
+                        "canceled"
+                      ],
                       "description": "Type of workflow state"
                     },
                     "color": {
@@ -1517,30 +2025,58 @@
                       "description": "Hex color code for the state"
                     }
                   },
-                  "required": ["name", "teamId", "type"],
-                  "visible": ["name", "description", "teamId", "type", "color"],
+                  "required": [
+                    "name",
+                    "teamId",
+                    "type"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "teamId",
+                    "type",
+                    "color"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_USERS",
+    "name": "LINEAR__USERS",
     "description": "Retrieve users from Linear workspace with their roles, teams, and activity information.",
-    "tags": ["users", "team members", "workspace"],
+    "tags": [
+      "users",
+      "team members",
+      "workspace"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1560,9 +2096,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1583,24 +2122,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_MILESTONES",
+    "name": "LINEAR__MILESTONES",
     "description": "Retrieve milestones from Linear workspace with their progress, target dates, and associated projects.",
-    "tags": ["milestones", "roadmap", "planning"],
+    "tags": [
+      "milestones",
+      "roadmap",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1620,9 +2174,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1643,24 +2200,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_MILESTONE",
     "description": "Create a new milestone in Linear for tracking major deadlines and project goals.",
-    "tags": ["milestones", "create", "planning"],
+    "tags": [
+      "milestones",
+      "create",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1680,9 +2252,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1712,30 +2287,54 @@
                       "description": "Milestone target date (ISO format)"
                     }
                   },
-                  "required": ["name"],
-                  "visible": ["name", "description", "targetDate"],
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "targetDate"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__SEARCH_ISSUES",
     "description": "Search for issues in Linear workspace using text queries across titles, descriptions, and comments.",
-    "tags": ["search", "issues", "find"],
+    "tags": [
+      "search",
+      "issues",
+      "find"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1755,9 +2354,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1781,25 +2383,44 @@
                   "description": "Number of issues to return"
                 }
               },
-              "required": ["query"],
-              "visible": ["query", "first"],
+              "required": [
+                "query"
+              ],
+              "visible": [
+                "query",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ATTACHMENTS",
+    "name": "LINEAR__ATTACHMENTS",
     "description": "Retrieve attachments from a specific issue in Linear including files, images, and documents.",
-    "tags": ["attachments", "files", "documents"],
+    "tags": [
+      "attachments",
+      "files",
+      "documents"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1819,9 +2440,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1845,25 +2469,44 @@
                   "description": "Number of attachments to retrieve"
                 }
               },
-              "required": ["issueId"],
-              "visible": ["issueId", "first"],
+              "required": [
+                "issueId"
+              ],
+              "visible": [
+                "issueId",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_ATTACHMENT",
     "description": "Create an attachment on an issue in Linear by uploading a file or linking external content.",
-    "tags": ["attachments", "upload", "files"],
+    "tags": [
+      "attachments",
+      "upload",
+      "files"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1883,9 +2526,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1919,30 +2565,57 @@
                       "description": "Optional attachment subtitle or description"
                     }
                   },
-                  "required": ["title", "url", "issueId"],
-                  "visible": ["title", "url", "issueId", "subtitle"],
+                  "required": [
+                    "title",
+                    "url",
+                    "issueId"
+                  ],
+                  "visible": [
+                    "title",
+                    "url",
+                    "issueId",
+                    "subtitle"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ORGANIZATION_INFO",
+    "name": "LINEAR__ORGANIZATION_INFO",
     "description": "Retrieve organization information from Linear workspace including settings, subscription, and member count.",
-    "tags": ["organization", "workspace", "info"],
+    "tags": [
+      "organization",
+      "workspace",
+      "info"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1962,9 +2635,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1975,20 +2651,30 @@
               "description": "GraphQL query for retrieving organization information"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ISSUE_RELATIONS",
+    "name": "LINEAR__ISSUE_RELATIONS",
     "description": "Retrieve related issues for a specific issue in Linear including blocks, duplicates, and dependencies.",
-    "tags": ["issues", "relations", "dependencies"],
+    "tags": [
+      "issues",
+      "relations",
+      "dependencies"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2008,9 +2694,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2028,25 +2717,43 @@
                   "description": "Issue ID to get relations for"
                 }
               },
-              "required": ["issueId"],
-              "visible": ["issueId"],
+              "required": [
+                "issueId"
+              ],
+              "visible": [
+                "issueId"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_ISSUE_RELATION",
     "description": "Create a relationship between two issues in Linear such as blocks, duplicates, or relates to dependencies.",
-    "tags": ["issues", "relations", "dependencies"],
+    "tags": [
+      "issues",
+      "relations",
+      "dependencies"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2066,9 +2773,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2094,34 +2804,65 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["blocks", "blocked", "duplicate", "related"],
+                      "enum": [
+                        "blocks",
+                        "blocked",
+                        "duplicate",
+                        "related"
+                      ],
                       "description": "Type of relationship between issues"
                     }
                   },
-                  "required": ["issueId", "relatedIssueId", "type"],
-                  "visible": ["issueId", "relatedIssueId", "type"],
+                  "required": [
+                    "issueId",
+                    "relatedIssueId",
+                    "type"
+                  ],
+                  "visible": [
+                    "issueId",
+                    "relatedIssueId",
+                    "type"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ISSUE_HISTORY",
+    "name": "LINEAR__ISSUE_HISTORY",
     "description": "Retrieve the history of changes for a specific issue in Linear including status updates and field modifications.",
-    "tags": ["issues", "history", "audit"],
+    "tags": [
+      "issues",
+      "history",
+      "audit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2141,9 +2882,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2167,25 +2911,44 @@
                   "description": "Number of history entries to retrieve"
                 }
               },
-              "required": ["issueId"],
-              "visible": ["issueId", "first"],
+              "required": [
+                "issueId"
+              ],
+              "visible": [
+                "issueId",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ROADMAPS",
+    "name": "LINEAR__ROADMAPS",
     "description": "Retrieve roadmaps from Linear workspace for strategic planning and timeline visualization.",
-    "tags": ["roadmaps", "planning", "strategy"],
+    "tags": [
+      "roadmaps",
+      "planning",
+      "strategy"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2205,9 +2968,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2228,24 +2994,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_ROADMAP",
     "description": "Create a new roadmap in Linear for strategic planning and project timeline visualization.",
-    "tags": ["roadmaps", "create", "planning"],
+    "tags": [
+      "roadmaps",
+      "create",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2265,9 +3046,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2292,30 +3076,53 @@
                       "description": "Roadmap description"
                     }
                   },
-                  "required": ["name"],
-                  "visible": ["name", "description"],
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name",
+                    "description"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_CUSTOM_VIEWS",
+    "name": "LINEAR__CUSTOM_VIEWS",
     "description": "Retrieve custom views from Linear workspace for personalized issue filtering and organization.",
-    "tags": ["views", "filters", "organization"],
+    "tags": [
+      "views",
+      "filters",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2335,9 +3142,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2358,24 +3168,39 @@
                 }
               },
               "required": [],
-              "visible": ["first"],
+              "visible": [
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_CUSTOM_VIEW",
     "description": "Create a new custom view in Linear for personalized issue filtering, sorting, and organization.",
-    "tags": ["views", "create", "filters"],
+    "tags": [
+      "views",
+      "create",
+      "filters"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2395,9 +3220,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2431,30 +3259,55 @@
                       "description": "Team ID to associate the view with"
                     }
                   },
-                  "required": ["name"],
-                  "visible": ["name", "description", "shared", "teamId"],
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name",
+                    "description",
+                    "shared",
+                    "teamId"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_TEAM_MEMBERSHIPS",
+    "name": "LINEAR__TEAM_MEMBERSHIPS",
     "description": "Retrieve team memberships from Linear workspace showing users, roles, and team assignments.",
-    "tags": ["teams", "memberships", "roles"],
+    "tags": [
+      "teams",
+      "memberships",
+      "roles"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2474,9 +3327,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2501,24 +3357,40 @@
                 }
               },
               "required": [],
-              "visible": ["teamId", "first"],
+              "visible": [
+                "teamId",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__CREATE_TEAM_MEMBERSHIP",
     "description": "Add a user to a team in Linear workspace with specified role and permissions.",
-    "tags": ["teams", "memberships", "add"],
+    "tags": [
+      "teams",
+      "memberships",
+      "add"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2538,9 +3410,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2566,35 +3441,64 @@
                     },
                     "role": {
                       "type": "string",
-                      "enum": ["admin", "member", "guest"],
+                      "enum": [
+                        "admin",
+                        "member",
+                        "guest"
+                      ],
                       "default": "member",
                       "description": "Role for the team member"
                     }
                   },
-                  "required": ["teamId", "userId"],
-                  "visible": ["teamId", "userId", "role"],
+                  "required": [
+                    "teamId",
+                    "userId"
+                  ],
+                  "visible": [
+                    "teamId",
+                    "userId",
+                    "role"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["input"],
-              "visible": ["input"],
+              "required": [
+                "input"
+              ],
+              "visible": [
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_ISSUE_ESTIMATES",
+    "name": "LINEAR__ISSUE_ESTIMATES",
     "description": "Retrieve estimate information for issues in Linear including story points, time estimates, and complexity.",
-    "tags": ["estimates", "planning", "complexity"],
+    "tags": [
+      "estimates",
+      "planning",
+      "complexity"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2614,9 +3518,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2644,17 +3551,23 @@
                             }
                           },
                           "required": [],
-                          "visible": ["eq"],
+                          "visible": [
+                            "eq"
+                          ],
                           "additionalProperties": false
                         }
                       },
                       "required": [],
-                      "visible": ["id"],
+                      "visible": [
+                        "id"
+                      ],
                       "additionalProperties": false
                     }
                   },
                   "required": [],
-                  "visible": ["team"],
+                  "visible": [
+                    "team"
+                  ],
                   "description": "Filter conditions for issues",
                   "additionalProperties": false
                 },
@@ -2666,24 +3579,40 @@
                 }
               },
               "required": [],
-              "visible": ["filter", "first"],
+              "visible": [
+                "filter",
+                "first"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "LINEAR__UPDATE_ISSUE_ESTIMATE",
     "description": "Update the estimate for an existing issue in Linear with story points or time estimates for sprint planning.",
-    "tags": ["issues", "estimates", "planning"],
+    "tags": [
+      "issues",
+      "estimates",
+      "planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2703,9 +3632,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2739,29 +3671,52 @@
                     }
                   },
                   "required": [],
-                  "visible": ["estimate", "priority"],
+                  "visible": [
+                    "estimate",
+                    "priority"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["id", "input"],
-              "visible": ["id", "input"],
+              "required": [
+                "id",
+                "input"
+              ],
+              "visible": [
+                "id",
+                "input"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "LINEAR__GET_WORKSPACE_ANALYTICS",
+    "name": "LINEAR__WORKSPACE_ANALYTICS",
     "description": "Retrieve workspace analytics from Linear including team velocity, issue metrics, and productivity insights.",
-    "tags": ["analytics", "metrics", "productivity"],
+    "tags": [
+      "analytics",
+      "metrics",
+      "productivity"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2781,9 +3736,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2794,12 +3752,18 @@
               "description": "GraphQL query for retrieving workspace analytics"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }

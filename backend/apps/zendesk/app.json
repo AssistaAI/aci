@@ -1,27 +1,19 @@
 {
   "name": "ZENDESK",
-  "display_name": "Zendesk",
+  "display_name": "uLuzendesk",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/zendesk.svg",
-  "provider": "Zendesk Inc.",
+  "provider": "uLuzendesk Inc.",
   "version": "2024.1",
-  "description": "Zendesk is a leading customer service platform that provides ticketing, help desk, and customer engagement tools. This integration allows AI agents to manage tickets, customer interactions, knowledge base articles, and support analytics for comprehensive customer service automation.",
+  "description": "uLuzendesk integration for AI agents",
   "security_schemes": {
-    "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://{subdomain}.zendesk.com/oauth/authorizations/new",
-          "tokenUrl": "https://{subdomain}.zendesk.com/oauth/tokens",
-          "scopes": {
-            "read": "Read access to all Zendesk resources",
-            "write": "Write access to all Zendesk resources"
-          }
-        }
-      }
+    "api_key": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer"
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Customer Support", "Help Desk", "Customer Experience"],
+  "categories": ["Tools"],
   "visibility": "public",
   "active": true
 }

@@ -2,7 +2,11 @@
   {
     "name": "STEEL__SCRAPE_WEBPAGE",
     "description": "Extracts content from a specified URL. Returns the page content in various formats along with optional screenshot and PDF.",
-    "tags": ["browser", "web scraping", "content extraction"],
+    "tags": [
+      "browser",
+      "web scraping",
+      "content extraction"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -25,7 +29,12 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["html", "cleaned_html", "markdown", "readability"]
+                "enum": [
+                  "html",
+                  "cleaned_html",
+                  "markdown",
+                  "readability"
+                ]
               },
               "description": "Desired format(s) for the scraped content. Default is 'html'."
             },
@@ -50,20 +59,37 @@
               "default": false
             }
           },
-          "required": ["url"],
-          "visible": ["url", "format", "screenshot", "pdf", "delay", "useProxy"],
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url",
+            "format",
+            "screenshot",
+            "pdf",
+            "delay",
+            "useProxy"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__CAPTURE_SCREENSHOT",
     "description": "Captures a screenshot of a specified webpage.",
-    "tags": ["browser", "screenshot", "image"],
+    "tags": [
+      "browser",
+      "screenshot",
+      "image"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -98,20 +124,35 @@
               "default": false
             }
           },
-          "required": ["url"],
-          "visible": ["url", "fullPage", "delay", "useProxy"],
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url",
+            "fullPage",
+            "delay",
+            "useProxy"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__CONVERT_TO_PDF",
     "description": "Generates a PDF from a specified webpage.",
-    "tags": ["browser", "pdf", "document"],
+    "tags": [
+      "browser",
+      "pdf",
+      "document"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -141,20 +182,34 @@
               "default": false
             }
           },
-          "required": ["url"],
-          "visible": ["url", "delay", "useProxy"],
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url",
+            "delay",
+            "useProxy"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__LIST_SESSIONS",
     "description": "Fetches all active sessions for the current organization.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -180,24 +235,38 @@
             },
             "status": {
               "type": "string",
-              "enum": ["live", "released", "failed"],
+              "enum": [
+                "live",
+                "released",
+                "failed"
+              ],
               "description": "Filter sessions by current status"
             }
           },
           "required": [],
-          "visible": ["cursorId", "limit", "status"],
+          "visible": [
+            "cursorId",
+            "limit",
+            "status"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__CREATE_SESSION",
     "description": "Creates a new session with the provided configuration.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -252,15 +321,18 @@
                     "properties": {
                       "name": {
                         "type": "string",
-                        "description": "Name of the cookie"
+                        "description": "Name of the cookie",
+                        "default": ""
                       },
                       "value": {
                         "type": "string",
-                        "description": "Value of the cookie"
+                        "description": "Value of the cookie",
+                        "default": ""
                       },
                       "domain": {
                         "type": "string",
-                        "description": "Domain the cookie belongs to"
+                        "description": "Domain the cookie belongs to",
+                        "default": ""
                       },
                       "path": {
                         "type": "string",
@@ -281,12 +353,21 @@
                       },
                       "sameSite": {
                         "type": "string",
-                        "enum": ["Strict", "Lax", "None"],
+                        "enum": [
+                          "Strict",
+                          "Lax",
+                          "None"
+                        ],
                         "description": "SameSite attribute of the cookie"
                       }
                     },
-                    "required": ["name", "value", "domain"],
-                    "additionalProperties": false
+                    "required": [
+                      "name",
+                      "value",
+                      "domain"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
                   }
                 },
                 "localStorage": {
@@ -295,11 +376,13 @@
                   "properties": {},
                   "required": [],
                   "visible": [],
-                  "additionalProperties": true
+                  "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["cookies", "localStorage"],
+              "visible": [
+                "cookies"
+              ],
               "additionalProperties": false
             },
             "timeout": {
@@ -330,12 +413,20 @@
                   "description": "Height of the session"
                 }
               },
-              "required": ["width", "height"],
-              "visible": ["width", "height"],
+              "required": [
+                "width",
+                "height"
+              ],
+              "visible": [
+                "width",
+                "height"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["dimensions"],
+          "required": [
+            "dimensions"
+          ],
           "visible": [
             "sessionId",
             "userAgent",
@@ -352,15 +443,23 @@
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__RELEASE_ALL_SESSIONS",
     "description": "Releases all active sessions for the current organization.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -378,9 +477,13 @@
     }
   },
   {
-    "name": "STEEL__GET_SESSION_DETAILS",
+    "name": "STEEL__SESSION_DETAILS",
     "description": "Retrieves details of a specific session by ID.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -401,20 +504,32 @@
               "description": "The unique identifier of the session to retrieve"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "STEEL__GET_SESSION_CONTEXT",
+    "name": "STEEL__SESSION_CONTEXT",
     "description": "Fetches the context data of a specific session.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -435,20 +550,33 @@
               "description": "The unique identifier of the session to fetch context for"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "STEEL__GET_SESSION_EVENTS",
+    "name": "STEEL__SESSION_EVENTS",
     "description": "Get the recorded session events in the RRWeb format.",
-    "tags": ["browser", "session", "management", "recording"],
+    "tags": [
+      "browser",
+      "session",
+      "management",
+      "recording"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -469,20 +597,32 @@
               "description": "The unique identifier of the session to get recorded events for"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "STEEL__RELEASE_SESSION",
     "description": "Releases a specific session by ID.",
-    "tags": ["browser", "session", "management"],
+    "tags": [
+      "browser",
+      "session",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -503,20 +643,33 @@
               "description": "The unique identifier of the session to release"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "STEEL__GET_SESSION_LIVE_DETAILS",
+    "name": "STEEL__SESSION_LIVE_DETAILS",
     "description": "Returns the live state of the session, including pages, tabs, and browser state.",
-    "tags": ["browser", "session", "management", "live"],
+    "tags": [
+      "browser",
+      "session",
+      "management",
+      "live"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -537,13 +690,21 @@
               "description": "The unique identifier of the session to get live details for"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

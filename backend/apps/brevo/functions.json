@@ -2,7 +2,11 @@
   {
     "name": "BREVO__SEND_TRANSACTIONAL_EMAIL",
     "description": "Send a transactional email to one or multiple recipients with customizable content, templates, and attachments.",
-    "tags": ["email", "transactional", "send"],
+    "tags": [
+      "email",
+      "transactional",
+      "send"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,9 +26,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -42,8 +49,13 @@
                   "description": "Sender's email address"
                 }
               },
-              "required": ["email"],
-              "visible": ["name", "email"],
+              "required": [
+                "email"
+              ],
+              "visible": [
+                "name",
+                "email"
+              ],
               "additionalProperties": false
             },
             "to": {
@@ -61,8 +73,14 @@
                     "description": "Recipient's name"
                   }
                 },
-                "required": ["email"],
-                "visible": ["email", "name"]
+                "required": [
+                  "email"
+                ],
+                "visible": [
+                  "email",
+                  "name"
+                ],
+                "additionalProperties": false
               },
               "description": "List of recipients"
             },
@@ -90,31 +108,54 @@
                   "description": "First name parameter"
                 },
                 "LASTNAME": {
-                  "type": "string", 
+                  "type": "string",
                   "description": "Last name parameter"
                 }
               },
               "required": [],
-              "visible": ["FIRSTNAME", "LASTNAME"],
-              "additionalProperties": true,
+              "visible": [
+                "FIRSTNAME",
+                "LASTNAME"
+              ],
+              "additionalProperties": false,
               "description": "Parameters to personalize the email template"
             }
           },
-          "required": ["sender", "to"],
-          "visible": ["sender", "to", "subject", "htmlContent", "textContent", "templateId", "params"],
+          "required": [
+            "sender",
+            "to"
+          ],
+          "visible": [
+            "sender",
+            "to",
+            "subject",
+            "htmlContent",
+            "textContent",
+            "templateId",
+            "params"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BREVO__SEND_SMS",
     "description": "Send a transactional SMS message to one or multiple recipients with customizable content.",
-    "tags": ["sms", "transactional", "send"],
-    "visibility": "public", 
+    "tags": [
+      "sms",
+      "transactional",
+      "send"
+    ],
+    "visibility": "public",
     "active": true,
     "protocol": "rest",
     "protocol_data": {
@@ -133,16 +174,21 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["transactional"],
+              "enum": [
+                "transactional"
+              ],
               "default": "transactional",
               "description": "Type of SMS"
             },
@@ -159,20 +205,37 @@
               "description": "Mobile number to send SMS to (with country code)"
             }
           },
-          "required": ["message", "recipient"],
-          "visible": ["type", "message", "sender", "recipient"],
+          "required": [
+            "message",
+            "recipient"
+          ],
+          "visible": [
+            "type",
+            "message",
+            "sender",
+            "recipient"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BREVO__CREATE_CONTACT",
     "description": "Create a new contact in the Brevo database with email, phone, and custom attributes.",
-    "tags": ["contacts", "create", "crm"],
+    "tags": [
+      "contacts",
+      "create",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -192,9 +255,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -221,7 +287,11 @@
                 }
               },
               "required": [],
-              "visible": ["FIRSTNAME", "LASTNAME", "SMS"],
+              "visible": [
+                "FIRSTNAME",
+                "LASTNAME",
+                "SMS"
+              ],
               "additionalProperties": false
             },
             "listIds": {
@@ -237,20 +307,36 @@
               "description": "Whether to update the contact if it already exists"
             }
           },
-          "required": ["email"],
-          "visible": ["email", "attributes", "listIds", "updateEnabled"],
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email",
+            "attributes",
+            "listIds",
+            "updateEnabled"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BREVO__GET_CONTACTS",
+    "name": "BREVO__CONTACTS",
     "description": "Retrieve a list of all contacts from the Brevo database with filtering and pagination options.",
-    "tags": ["contacts", "list", "crm"],
+    "tags": [
+      "contacts",
+      "list",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -283,25 +369,39 @@
             },
             "sort": {
               "type": "string",
-              "enum": ["asc", "desc"],
+              "enum": [
+                "asc",
+                "desc"
+              ],
               "default": "desc",
               "description": "Sort order for contacts"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "modifiedSince", "sort"],
+          "visible": [
+            "limit",
+            "offset",
+            "modifiedSince",
+            "sort"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BREVO__UPDATE_CONTACT",
     "description": "Update an existing contact's information including email, attributes, and list subscriptions.",
-    "tags": ["contacts", "update", "crm"],
+    "tags": [
+      "contacts",
+      "update",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -321,8 +421,12 @@
               "description": "Email address or ID of the contact to update"
             }
           },
-          "required": ["identifier"],
-          "visible": ["identifier"],
+          "required": [
+            "identifier"
+          ],
+          "visible": [
+            "identifier"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -333,9 +437,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -357,7 +464,11 @@
                 }
               },
               "required": [],
-              "visible": ["FIRSTNAME", "LASTNAME", "SMS"],
+              "visible": [
+                "FIRSTNAME",
+                "LASTNAME",
+                "SMS"
+              ],
               "additionalProperties": false
             },
             "listIds": {
@@ -376,19 +487,33 @@
             }
           },
           "required": [],
-          "visible": ["attributes", "listIds", "unlinkListIds"],
+          "visible": [
+            "attributes",
+            "listIds",
+            "unlinkListIds"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BREVO__GET_EMAIL_CAMPAIGNS",
+    "name": "BREVO__EMAIL_CAMPAIGNS",
     "description": "Retrieve all email campaigns with their status, statistics, and configuration details.",
-    "tags": ["campaigns", "email", "marketing"],
+    "tags": [
+      "campaigns",
+      "email",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -405,12 +530,21 @@
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["classic", "trigger"],
+              "enum": [
+                "classic",
+                "trigger"
+              ],
               "description": "Type of campaign to filter by"
             },
             "status": {
               "type": "string",
-              "enum": ["draft", "sent", "archive", "queued", "suspended"],
+              "enum": [
+                "draft",
+                "sent",
+                "archive",
+                "queued",
+                "suspended"
+              ],
               "description": "Status of campaigns to filter by"
             },
             "limit": {
@@ -426,19 +560,31 @@
             }
           },
           "required": [],
-          "visible": ["type", "status", "limit", "offset"],
+          "visible": [
+            "type",
+            "status",
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BREVO__CREATE_EMAIL_CAMPAIGN",
     "description": "Create a new email marketing campaign with recipients, content, and scheduling options.",
-    "tags": ["campaigns", "email", "create", "marketing"],
+    "tags": [
+      "campaigns",
+      "email",
+      "create",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -458,9 +604,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -475,7 +624,10 @@
             },
             "type": {
               "type": "string",
-              "enum": ["classic", "trigger"],
+              "enum": [
+                "classic",
+                "trigger"
+              ],
               "default": "classic",
               "description": "Type of campaign"
             },
@@ -500,8 +652,13 @@
                   "description": "Sender's email address"
                 }
               },
-              "required": ["email"],
-              "visible": ["name", "email"],
+              "required": [
+                "email"
+              ],
+              "visible": [
+                "name",
+                "email"
+              ],
               "additionalProperties": false
             },
             "recipients": {
@@ -516,24 +673,47 @@
                 }
               },
               "required": [],
-              "visible": ["listIds"],
+              "visible": [
+                "listIds"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["name", "subject", "sender"],
-          "visible": ["name", "subject", "type", "htmlContent", "textContent", "sender", "recipients"],
+          "required": [
+            "name",
+            "subject",
+            "sender"
+          ],
+          "visible": [
+            "name",
+            "subject",
+            "type",
+            "htmlContent",
+            "textContent",
+            "sender",
+            "recipients"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BREVO__GET_LISTS",
+    "name": "BREVO__LISTS",
     "description": "Retrieve all contact lists with their details including subscriber count and creation date.",
-    "tags": ["lists", "contacts", "segments"],
+    "tags": [
+      "lists",
+      "contacts",
+      "segments"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -561,25 +741,38 @@
             },
             "sort": {
               "type": "string",
-              "enum": ["asc", "desc"],
+              "enum": [
+                "asc",
+                "desc"
+              ],
               "default": "desc",
               "description": "Sort order for lists"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "sort"],
+          "visible": [
+            "limit",
+            "offset",
+            "sort"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BREVO__CREATE_LIST",
     "description": "Create a new contact list for organizing and segmenting your contacts for targeted campaigns.",
-    "tags": ["lists", "create", "segments"],
+    "tags": [
+      "lists",
+      "create",
+      "segments"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -599,9 +792,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -615,20 +811,34 @@
               "description": "ID of the folder to create the list in"
             }
           },
-          "required": ["name"],
-          "visible": ["name", "folderId"],
+          "required": [
+            "name"
+          ],
+          "visible": [
+            "name",
+            "folderId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BREVO__GET_ACCOUNT_INFO",
+    "name": "BREVO__ACCOUNT_INFO",
     "description": "Retrieve account information including plan details, credits remaining, and account limits.",
-    "tags": ["account", "info", "credits"],
+    "tags": [
+      "account",
+      "info",
+      "credits"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -646,9 +856,13 @@
     }
   },
   {
-    "name": "BREVO__GET_EMAIL_STATISTICS", 
+    "name": "BREVO__EMAIL_STATISTICS",
     "description": "Get email campaign statistics including opens, clicks, bounces, and unsubscribes for performance analysis.",
-    "tags": ["statistics", "email", "analytics"],
+    "tags": [
+      "statistics",
+      "email",
+      "analytics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -668,13 +882,21 @@
               "description": "ID of the email campaign to get statistics for"
             }
           },
-          "required": ["campaignId"],
-          "visible": ["campaignId"],
+          "required": [
+            "campaignId"
+          ],
+          "visible": [
+            "campaignId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

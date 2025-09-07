@@ -2,7 +2,12 @@
   {
     "name": "PAGERDUTY__LIST_INCIDENTS",
     "description": "List incidents in PagerDuty with filtering and sorting options. This allows monitoring current incidents, tracking resolution progress, and managing incident workflows.",
-    "tags": ["pagerduty", "incidents", "list", "monitoring"],
+    "tags": [
+      "pagerduty",
+      "incidents",
+      "list",
+      "monitoring"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -35,7 +40,10 @@
             },
             "date_range": {
               "type": "string",
-              "enum": ["all", "today"],
+              "enum": [
+                "all",
+                "today"
+              ],
               "description": "Filter incidents by date range"
             },
             "incident_key": {
@@ -67,7 +75,10 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["high", "low"]
+                "enum": [
+                  "high",
+                  "low"
+                ]
               },
               "description": "Filter incidents by urgency level"
             },
@@ -75,13 +86,22 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["triggered", "acknowledged", "resolved"]
+                "enum": [
+                  "triggered",
+                  "acknowledged",
+                  "resolved"
+                ]
               },
               "description": "Filter incidents by status"
             },
             "sort_by": {
               "type": "string",
-              "enum": ["incident_number", "created_at", "resolved_at", "urgency"],
+              "enum": [
+                "incident_number",
+                "created_at",
+                "resolved_at",
+                "urgency"
+              ],
               "default": "created_at",
               "description": "Field to sort incidents by"
             },
@@ -89,7 +109,13 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "assignees", "acknowledgers", "teams", "first_trigger_log_entries"]
+                "enum": [
+                  "services",
+                  "assignees",
+                  "acknowledgers",
+                  "teams",
+                  "first_trigger_log_entries"
+                ]
               },
               "description": "Additional data to include in response"
             },
@@ -105,19 +131,40 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "date_range", "incident_key", "service_ids", "team_ids", "user_ids", "urgencies", "statuses", "sort_by", "include", "since", "until"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "date_range",
+            "incident_key",
+            "service_ids",
+            "team_ids",
+            "user_ids",
+            "urgencies",
+            "statuses",
+            "sort_by",
+            "include",
+            "since",
+            "until"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_INCIDENT",
+    "name": "PAGERDUTY__INCIDENT",
     "description": "Get detailed information about a specific PagerDuty incident including timeline, notes, and resolution details.",
-    "tags": ["pagerduty", "incident", "details"],
+    "tags": [
+      "pagerduty",
+      "incident",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -138,8 +185,12 @@
               "description": "The ID of the incident"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -150,25 +201,43 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "assignees", "acknowledgers", "teams", "log_entries"]
+                "enum": [
+                  "services",
+                  "assignees",
+                  "acknowledgers",
+                  "teams",
+                  "log_entries"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["include"],
+          "visible": [
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_INCIDENT",
     "description": "Create a new incident in PagerDuty. This allows manually triggering incidents for issues that require immediate attention.",
-    "tags": ["pagerduty", "incident", "create", "trigger"],
+    "tags": [
+      "pagerduty",
+      "incident",
+      "create",
+      "trigger"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -190,7 +259,9 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["incident"],
+                  "enum": [
+                    "incident"
+                  ],
                   "default": "incident",
                   "description": "The type of object being created"
                 },
@@ -208,17 +279,28 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["service_reference"],
+                      "enum": [
+                        "service_reference"
+                      ],
                       "default": "service_reference"
                     }
                   },
-                  "required": ["id", "type"],
-                  "visible": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "visible": [
+                    "id",
+                    "type"
+                  ],
                   "additionalProperties": false
                 },
                 "urgency": {
                   "type": "string",
-                  "enum": ["high", "low"],
+                  "enum": [
+                    "high",
+                    "low"
+                  ],
                   "default": "high",
                   "description": "The urgency level of the incident"
                 },
@@ -232,7 +314,9 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "enum": ["incident_body"],
+                      "enum": [
+                        "incident_body"
+                      ],
                       "default": "incident_body"
                     },
                     "details": {
@@ -240,30 +324,60 @@
                       "description": "Detailed description of the incident"
                     }
                   },
-                  "required": ["type", "details"],
-                  "visible": ["type", "details"],
+                  "required": [
+                    "type",
+                    "details"
+                  ],
+                  "visible": [
+                    "type",
+                    "details"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["type", "title", "service"],
-              "visible": ["type", "title", "service", "urgency", "incident_key", "body"],
+              "required": [
+                "type",
+                "title",
+                "service"
+              ],
+              "visible": [
+                "type",
+                "title",
+                "service",
+                "urgency",
+                "incident_key",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["incident"],
-          "visible": ["incident"],
+          "required": [
+            "incident"
+          ],
+          "visible": [
+            "incident"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_INCIDENT",
     "description": "Update an existing PagerDuty incident such as changing status, priority, or assignment. This allows managing incident lifecycle and escalation.",
-    "tags": ["pagerduty", "incident", "update", "manage"],
+    "tags": [
+      "pagerduty",
+      "incident",
+      "update",
+      "manage"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -284,8 +398,12 @@
               "description": "The ID of the incident to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -298,12 +416,17 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["incident"],
+                  "enum": [
+                    "incident"
+                  ],
                   "default": "incident"
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["acknowledged", "resolved"],
+                  "enum": [
+                    "acknowledged",
+                    "resolved"
+                  ],
                   "description": "The new status of the incident"
                 },
                 "resolution": {
@@ -316,7 +439,10 @@
                 },
                 "urgency": {
                   "type": "string",
-                  "enum": ["high", "low"],
+                  "enum": [
+                    "high",
+                    "low"
+                  ],
                   "description": "Updated urgency level"
                 },
                 "escalation_policy": {
@@ -329,12 +455,20 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["escalation_policy_reference"],
+                      "enum": [
+                        "escalation_policy_reference"
+                      ],
                       "default": "escalation_policy_reference"
                     }
                   },
-                  "required": ["id", "type"],
-                  "visible": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "visible": [
+                    "id",
+                    "type"
+                  ],
                   "additionalProperties": false
                 },
                 "assignments": {
@@ -352,40 +486,76 @@
                           },
                           "type": {
                             "type": "string",
-                            "enum": ["user_reference"],
+                            "enum": [
+                              "user_reference"
+                            ],
                             "default": "user_reference"
                           }
                         },
-                        "required": ["id", "type"],
-                        "visible": ["id", "type"],
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "visible": [
+                          "id",
+                          "type"
+                        ],
                         "additionalProperties": false
                       }
                     },
-                    "required": ["assignee"],
-                    "visible": ["assignee"],
+                    "required": [
+                      "assignee"
+                    ],
+                    "visible": [
+                      "assignee"
+                    ],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": ["type"],
-              "visible": ["type", "status", "resolution", "title", "urgency", "escalation_policy", "assignments"],
+              "required": [
+                "type"
+              ],
+              "visible": [
+                "type",
+                "status",
+                "resolution",
+                "title",
+                "urgency",
+                "escalation_policy",
+                "assignments"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["incident"],
-          "visible": ["incident"],
+          "required": [
+            "incident"
+          ],
+          "visible": [
+            "incident"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_SERVICES",
     "description": "List all services in PagerDuty. Services represent the applications, components, or systems monitored for incidents.",
-    "tags": ["pagerduty", "services", "list"],
+    "tags": [
+      "pagerduty",
+      "services",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -430,7 +600,11 @@
             },
             "sort_by": {
               "type": "string",
-              "enum": ["name", "name:asc", "name:desc"],
+              "enum": [
+                "name",
+                "name:asc",
+                "name:desc"
+              ],
               "default": "name",
               "description": "Field to sort services by"
             },
@@ -442,25 +616,44 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["escalation_policies", "teams", "integrations"]
+                "enum": [
+                  "escalation_policies",
+                  "teams",
+                  "integrations"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "team_ids", "time_zone", "sort_by", "query", "include"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "team_ids",
+            "time_zone",
+            "sort_by",
+            "query",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_SERVICE",
+    "name": "PAGERDUTY__SERVICE_GET_SERVICES",
     "description": "Get detailed information about a specific PagerDuty service including configuration and associated policies.",
-    "tags": ["pagerduty", "service", "details"],
+    "tags": [
+      "pagerduty",
+      "service",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -481,8 +674,12 @@
               "description": "The ID of the service"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -493,25 +690,40 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["escalation_policies", "teams", "integrations"]
+                "enum": [
+                  "escalation_policies",
+                  "teams",
+                  "integrations"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["include"],
+          "visible": [
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_SERVICE",
     "description": "Create a new service in PagerDuty. Services represent applications or systems that can generate incidents when issues occur.",
-    "tags": ["pagerduty", "service", "create"],
+    "tags": [
+      "pagerduty",
+      "service",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -549,17 +761,27 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["escalation_policy_reference"],
+                      "enum": [
+                        "escalation_policy_reference"
+                      ],
                       "default": "escalation_policy_reference"
                     }
                   },
-                  "required": ["id", "type"],
-                  "visible": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "visible": [
+                    "id",
+                    "type"
+                  ],
                   "additionalProperties": false
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["service"],
+                  "enum": [
+                    "service"
+                  ],
                   "default": "service"
                 },
                 "auto_resolve_timeout": {
@@ -572,30 +794,57 @@
                 },
                 "alert_creation": {
                   "type": "string",
-                  "enum": ["create_alerts_and_incidents", "create_incidents"],
+                  "enum": [
+                    "create_alerts_and_incidents",
+                    "create_incidents"
+                  ],
                   "default": "create_alerts_and_incidents",
                   "description": "How alerts are handled for this service"
                 }
               },
-              "required": ["name", "escalation_policy", "type"],
-              "visible": ["name", "description", "escalation_policy", "type", "auto_resolve_timeout", "acknowledgement_timeout", "alert_creation"],
+              "required": [
+                "name",
+                "escalation_policy",
+                "type"
+              ],
+              "visible": [
+                "name",
+                "description",
+                "escalation_policy",
+                "type",
+                "auto_resolve_timeout",
+                "acknowledgement_timeout",
+                "alert_creation"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["service"],
-          "visible": ["service"],
+          "required": [
+            "service"
+          ],
+          "visible": [
+            "service"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_SERVICE",
     "description": "Update an existing PagerDuty service configuration including name, escalation policy, and timeout settings.",
-    "tags": ["pagerduty", "service", "update"],
+    "tags": [
+      "pagerduty",
+      "service",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -616,8 +865,12 @@
               "description": "The ID of the service to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -646,12 +899,20 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["escalation_policy_reference"],
+                      "enum": [
+                        "escalation_policy_reference"
+                      ],
                       "default": "escalation_policy_reference"
                     }
                   },
-                  "required": ["id", "type"],
-                  "visible": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "visible": [
+                    "id",
+                    "type"
+                  ],
                   "additionalProperties": false
                 },
                 "auto_resolve_timeout": {
@@ -664,29 +925,53 @@
                 },
                 "alert_creation": {
                   "type": "string",
-                  "enum": ["create_alerts_and_incidents", "create_incidents"],
+                  "enum": [
+                    "create_alerts_and_incidents",
+                    "create_incidents"
+                  ],
                   "description": "How alerts are handled for this service"
                 }
               },
               "required": [],
-              "visible": ["name", "description", "escalation_policy", "auto_resolve_timeout", "acknowledgement_timeout", "alert_creation"],
+              "visible": [
+                "name",
+                "description",
+                "escalation_policy",
+                "auto_resolve_timeout",
+                "acknowledgement_timeout",
+                "alert_creation"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["service"],
-          "visible": ["service"],
+          "required": [
+            "service"
+          ],
+          "visible": [
+            "service"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__DELETE_SERVICE",
+    "name": "PAGERDUTY__SERVICE_DELETE_SERVICES",
     "description": "Delete a PagerDuty service. This permanently removes the service and its configuration from the account.",
-    "tags": ["pagerduty", "service", "delete"],
+    "tags": [
+      "pagerduty",
+      "service",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -707,20 +992,33 @@
               "description": "The ID of the service to delete"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_ESCALATION_POLICIES",
     "description": "List escalation policies in PagerDuty. Escalation policies define who gets notified and when during incident response.",
-    "tags": ["pagerduty", "escalation", "policies", "list"],
+    "tags": [
+      "pagerduty",
+      "escalation",
+      "policies",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -773,31 +1071,55 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "teams", "targets"]
+                "enum": [
+                  "services",
+                  "teams",
+                  "targets"
+                ]
               },
               "description": "Additional data to include in response"
             },
             "sort_by": {
               "type": "string",
-              "enum": ["name", "name:asc", "name:desc"],
+              "enum": [
+                "name",
+                "name:asc",
+                "name:desc"
+              ],
               "default": "name",
               "description": "Field to sort policies by"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "query", "user_ids", "team_ids", "include", "sort_by"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "query",
+            "user_ids",
+            "team_ids",
+            "include",
+            "sort_by"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_ESCALATION_POLICY",
+    "name": "PAGERDUTY__ESCALATION_POLICY",
     "description": "Get detailed information about a specific escalation policy including rules, targets, and schedule information.",
-    "tags": ["pagerduty", "escalation", "policy", "details"],
+    "tags": [
+      "pagerduty",
+      "escalation",
+      "policy",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -818,8 +1140,12 @@
               "description": "The ID of the escalation policy"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -830,25 +1156,41 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "teams", "targets"]
+                "enum": [
+                  "services",
+                  "teams",
+                  "targets"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["include"],
+          "visible": [
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_SCHEDULES",
     "description": "List on-call schedules in PagerDuty. Schedules define when users are on-call to receive incident notifications.",
-    "tags": ["pagerduty", "schedules", "on-call", "list"],
+    "tags": [
+      "pagerduty",
+      "schedules",
+      "on-call",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -887,25 +1229,42 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["schedule_layers", "users", "teams"]
+                "enum": [
+                  "schedule_layers",
+                  "users",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "query", "include"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "query",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_SCHEDULE",
+    "name": "PAGERDUTY__SCHEDULE",
     "description": "Get detailed information about a specific on-call schedule including layers, rotations, and current on-call assignments.",
-    "tags": ["pagerduty", "schedule", "on-call", "details"],
+    "tags": [
+      "pagerduty",
+      "schedule",
+      "on-call",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -926,8 +1285,12 @@
               "description": "The ID of the schedule"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -953,25 +1316,44 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["schedule_layers", "users", "teams"]
+                "enum": [
+                  "schedule_layers",
+                  "users",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["time_zone", "since", "until", "include"],
+          "visible": [
+            "time_zone",
+            "since",
+            "until",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_ON_CALLS",
     "description": "List who is currently on-call across all schedules or for specific schedules. This shows current on-call assignments and availability.",
-    "tags": ["pagerduty", "on-call", "schedules", "current"],
+    "tags": [
+      "pagerduty",
+      "on-call",
+      "schedules",
+      "current"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1011,7 +1393,11 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["users", "schedules", "escalation_policies"]
+                "enum": [
+                  "users",
+                  "schedules",
+                  "escalation_policies"
+                ]
               },
               "description": "Additional data to include in response"
             },
@@ -1053,19 +1439,38 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "time_zone", "include", "user_ids", "escalation_policy_ids", "schedule_ids", "since", "until", "earliest"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "time_zone",
+            "include",
+            "user_ids",
+            "escalation_policy_ids",
+            "schedule_ids",
+            "since",
+            "until",
+            "earliest"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_USERS",
     "description": "List users in PagerDuty including team members, contact information, and role assignments. This helps manage team membership and permissions.",
-    "tags": ["pagerduty", "users", "team", "list"],
+    "tags": [
+      "pagerduty",
+      "users",
+      "team",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1111,25 +1516,43 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["contact_methods", "notification_rules", "teams"]
+                "enum": [
+                  "contact_methods",
+                  "notification_rules",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "query", "team_ids", "include"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "query",
+            "team_ids",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_USER",
+    "name": "PAGERDUTY__USER_GET_USERS",
     "description": "Get detailed information about a specific PagerDuty user including contact methods, teams, and notification preferences.",
-    "tags": ["pagerduty", "user", "details", "profile"],
+    "tags": [
+      "pagerduty",
+      "user",
+      "details",
+      "profile"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1150,8 +1573,12 @@
               "description": "The ID of the user"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1162,25 +1589,41 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["contact_methods", "notification_rules", "teams"]
+                "enum": [
+                  "contact_methods",
+                  "notification_rules",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["include"],
+          "visible": [
+            "include"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_USER",
     "description": "Create a new user in PagerDuty. This allows adding team members to the incident response organization.",
-    "tags": ["pagerduty", "user", "create", "team"],
+    "tags": [
+      "pagerduty",
+      "user",
+      "create",
+      "team"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1202,7 +1645,9 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["user"],
+                  "enum": [
+                    "user"
+                  ],
                   "default": "user"
                 },
                 "name": {
@@ -1225,7 +1670,15 @@
                 },
                 "role": {
                   "type": "string",
-                  "enum": ["admin", "limited_user", "observer", "owner", "read_only_user", "restricted_access", "user"],
+                  "enum": [
+                    "admin",
+                    "limited_user",
+                    "observer",
+                    "owner",
+                    "read_only_user",
+                    "restricted_access",
+                    "user"
+                  ],
                   "default": "user",
                   "description": "The role of the user"
                 },
@@ -1238,25 +1691,51 @@
                   "description": "A description of the user"
                 }
               },
-              "required": ["type", "name", "email"],
-              "visible": ["type", "name", "email", "time_zone", "color", "role", "job_title", "description"],
+              "required": [
+                "type",
+                "name",
+                "email"
+              ],
+              "visible": [
+                "type",
+                "name",
+                "email",
+                "time_zone",
+                "color",
+                "role",
+                "job_title",
+                "description"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["user"],
-          "visible": ["user"],
+          "required": [
+            "user"
+          ],
+          "visible": [
+            "user"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_USER",
     "description": "Update an existing PagerDuty user's information including name, email, role, and preferences.",
-    "tags": ["pagerduty", "user", "update", "profile"],
+    "tags": [
+      "pagerduty",
+      "user",
+      "update",
+      "profile"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1277,8 +1756,12 @@
               "description": "The ID of the user to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1308,7 +1791,15 @@
                 },
                 "role": {
                   "type": "string",
-                  "enum": ["admin", "limited_user", "observer", "owner", "read_only_user", "restricted_access", "user"],
+                  "enum": [
+                    "admin",
+                    "limited_user",
+                    "observer",
+                    "owner",
+                    "read_only_user",
+                    "restricted_access",
+                    "user"
+                  ],
                   "description": "The updated role"
                 },
                 "job_title": {
@@ -1321,24 +1812,46 @@
                 }
               },
               "required": [],
-              "visible": ["name", "email", "time_zone", "color", "role", "job_title", "description"],
+              "visible": [
+                "name",
+                "email",
+                "time_zone",
+                "color",
+                "role",
+                "job_title",
+                "description"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["user"],
-          "visible": ["user"],
+          "required": [
+            "user"
+          ],
+          "visible": [
+            "user"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__DELETE_USER",
+    "name": "PAGERDUTY__USER_DELETE_USERS",
     "description": "Delete a PagerDuty user account. This removes the user from teams, schedules, and escalation policies.",
-    "tags": ["pagerduty", "user", "delete"],
+    "tags": [
+      "pagerduty",
+      "user",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1359,20 +1872,33 @@
               "description": "The ID of the user to delete"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_TEAMS",
     "description": "List teams in PagerDuty. Teams help organize users, services, and escalation policies for better incident management.",
-    "tags": ["pagerduty", "teams", "organization", "list"],
+    "tags": [
+      "pagerduty",
+      "teams",
+      "organization",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1409,19 +1935,30 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "query"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "query"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_TEAM",
+    "name": "PAGERDUTY__TEAM_GET_TEAMS",
     "description": "Get detailed information about a specific PagerDuty team including members and associated resources.",
-    "tags": ["pagerduty", "team", "details"],
+    "tags": [
+      "pagerduty",
+      "team",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1442,20 +1979,33 @@
               "description": "The ID of the team"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_TEAM",
     "description": "Create a new team in PagerDuty for organizing users and resources. This helps structure incident response teams and responsibilities.",
-    "tags": ["pagerduty", "team", "create", "organization"],
+    "tags": [
+      "pagerduty",
+      "team",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1477,7 +2027,9 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["team"],
+                  "enum": [
+                    "team"
+                  ],
                   "default": "team"
                 },
                 "name": {
@@ -1489,25 +2041,44 @@
                   "description": "The description of the team"
                 }
               },
-              "required": ["type", "name"],
-              "visible": ["type", "name", "description"],
+              "required": [
+                "type",
+                "name"
+              ],
+              "visible": [
+                "type",
+                "name",
+                "description"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["team"],
-          "visible": ["team"],
+          "required": [
+            "team"
+          ],
+          "visible": [
+            "team"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_TEAM",
     "description": "Update an existing PagerDuty team's name or description. This allows managing team information and organization structure.",
-    "tags": ["pagerduty", "team", "update"],
+    "tags": [
+      "pagerduty",
+      "team",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1528,8 +2099,12 @@
               "description": "The ID of the team to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1550,24 +2125,41 @@
                 }
               },
               "required": [],
-              "visible": ["name", "description"],
+              "visible": [
+                "name",
+                "description"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["team"],
-          "visible": ["team"],
+          "required": [
+            "team"
+          ],
+          "visible": [
+            "team"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__DELETE_TEAM",
+    "name": "PAGERDUTY__TEAM_DELETE_TEAMS",
     "description": "Delete a PagerDuty team. This removes the team and its associations but does not delete the users within the team.",
-    "tags": ["pagerduty", "team", "delete"],
+    "tags": [
+      "pagerduty",
+      "team",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1588,20 +2180,33 @@
               "description": "The ID of the team to delete"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_INCIDENT_NOTE",
     "description": "Add a note to an incident. This allows documenting investigation findings, resolution steps, and communication during incident response.",
-    "tags": ["pagerduty", "incident", "notes", "documentation"],
+    "tags": [
+      "pagerduty",
+      "incident",
+      "notes",
+      "documentation"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1622,8 +2227,12 @@
               "description": "The ID of the incident"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1639,25 +2248,44 @@
                   "description": "The content of the note"
                 }
               },
-              "required": ["content"],
-              "visible": ["content"],
+              "required": [
+                "content"
+              ],
+              "visible": [
+                "content"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["note"],
-          "visible": ["note"],
+          "required": [
+            "note"
+          ],
+          "visible": [
+            "note"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_INCIDENT_NOTES",
     "description": "List all notes for a specific incident. This allows reviewing the communication and documentation history during incident response.",
-    "tags": ["pagerduty", "incident", "notes", "history"],
+    "tags": [
+      "pagerduty",
+      "incident",
+      "notes",
+      "history"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1678,20 +2306,33 @@
               "description": "The ID of the incident"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_ALERTS",
     "description": "List alerts in PagerDuty with filtering options. Alerts are the individual notifications that can be grouped into incidents.",
-    "tags": ["pagerduty", "alerts", "notifications", "list"],
+    "tags": [
+      "pagerduty",
+      "alerts",
+      "notifications",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1731,7 +2372,10 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["triggered", "resolved"]
+                "enum": [
+                  "triggered",
+                  "resolved"
+                ]
               },
               "description": "Filter alerts by status"
             },
@@ -1765,7 +2409,10 @@
             },
             "sort_by": {
               "type": "string",
-              "enum": ["created_at", "resolved_at"],
+              "enum": [
+                "created_at",
+                "resolved_at"
+              ],
               "default": "created_at",
               "description": "Field to sort alerts by"
             },
@@ -1773,25 +2420,48 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "incidents", "integrations"]
+                "enum": [
+                  "services",
+                  "incidents",
+                  "integrations"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "time_zone", "statuses", "alert_key", "service_ids", "integration_ids", "since", "until", "sort_by", "include"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "time_zone",
+            "statuses",
+            "alert_key",
+            "service_ids",
+            "integration_ids",
+            "since",
+            "until",
+            "sort_by",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_ALERT",
+    "name": "PAGERDUTY__ALERT",
     "description": "Get detailed information about a specific PagerDuty alert including payload data and resolution status.",
-    "tags": ["pagerduty", "alert", "details"],
+    "tags": [
+      "pagerduty",
+      "alert",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1812,20 +2482,33 @@
               "description": "The ID of the alert"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_ALERT",
     "description": "Update the status of a PagerDuty alert (resolve or acknowledge). This allows managing individual alert states within incidents.",
-    "tags": ["pagerduty", "alert", "update", "status"],
+    "tags": [
+      "pagerduty",
+      "alert",
+      "update",
+      "status"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1846,8 +2529,12 @@
               "description": "The ID of the alert to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1860,34 +2547,59 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["alert"],
+                  "enum": [
+                    "alert"
+                  ],
                   "default": "alert"
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["resolved"],
+                  "enum": [
+                    "resolved"
+                  ],
                   "description": "The new status of the alert (currently only 'resolved' supported)"
                 }
               },
-              "required": ["type", "status"],
-              "visible": ["type", "status"],
+              "required": [
+                "type",
+                "status"
+              ],
+              "visible": [
+                "type",
+                "status"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["alert"],
-          "visible": ["alert"],
+          "required": [
+            "alert"
+          ],
+          "visible": [
+            "alert"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__GET_LOG_ENTRIES",
+    "name": "PAGERDUTY__LOG_ENTRIES",
     "description": "Get log entries that show the timeline of actions and events for incidents. This provides audit trail and incident timeline information.",
-    "tags": ["pagerduty", "logs", "timeline", "audit"],
+    "tags": [
+      "pagerduty",
+      "logs",
+      "timeline",
+      "audit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1942,25 +2654,46 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["incidents", "services", "channels", "teams"]
+                "enum": [
+                  "incidents",
+                  "services",
+                  "channels",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "time_zone", "since", "until", "is_overview", "include"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "time_zone",
+            "since",
+            "until",
+            "is_overview",
+            "include"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_OVERRIDE",
     "description": "Create a schedule override in PagerDuty. This allows temporarily changing who is on-call for specific time periods.",
-    "tags": ["pagerduty", "schedule", "override", "on-call"],
+    "tags": [
+      "pagerduty",
+      "schedule",
+      "override",
+      "on-call"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1981,8 +2714,12 @@
               "description": "The ID of the schedule"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -2013,12 +2750,20 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["user_reference"],
+                      "enum": [
+                        "user_reference"
+                      ],
                       "default": "user_reference"
                     }
                   },
-                  "required": ["id", "type"],
-                  "visible": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "visible": [
+                    "id",
+                    "type"
+                  ],
                   "additionalProperties": false
                 },
                 "time_zone": {
@@ -2027,25 +2772,49 @@
                   "description": "Time zone for the override period"
                 }
               },
-              "required": ["start", "end", "user"],
-              "visible": ["start", "end", "user", "time_zone"],
+              "required": [
+                "start",
+                "end",
+                "user"
+              ],
+              "visible": [
+                "start",
+                "end",
+                "user",
+                "time_zone"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["override"],
-          "visible": ["override"],
+          "required": [
+            "override"
+          ],
+          "visible": [
+            "override"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__LIST_MAINTENANCE_WINDOWS",
     "description": "List maintenance windows in PagerDuty. Maintenance windows prevent incidents from being triggered during planned maintenance periods.",
-    "tags": ["pagerduty", "maintenance", "windows", "list"],
+    "tags": [
+      "pagerduty",
+      "maintenance",
+      "windows",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2084,7 +2853,10 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["services", "teams"]
+                "enum": [
+                  "services",
+                  "teams"
+                ]
               },
               "description": "Additional data to include in response"
             },
@@ -2104,24 +2876,44 @@
             },
             "filter": {
               "type": "string",
-              "enum": ["past", "future", "ongoing"],
+              "enum": [
+                "past",
+                "future",
+                "ongoing"
+              ],
               "description": "Filter by time period relative to now"
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "total", "query", "include", "team_ids", "service_ids", "filter"],
+          "visible": [
+            "limit",
+            "offset",
+            "total",
+            "query",
+            "include",
+            "team_ids",
+            "service_ids",
+            "filter"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__CREATE_MAINTENANCE_WINDOW",
     "description": "Create a maintenance window to suppress incidents during planned maintenance. This prevents false alerts during known maintenance periods.",
-    "tags": ["pagerduty", "maintenance", "window", "create"],
+    "tags": [
+      "pagerduty",
+      "maintenance",
+      "window",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2143,7 +2935,9 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["maintenance_window"],
+                  "enum": [
+                    "maintenance_window"
+                  ],
                   "default": "maintenance_window"
                 },
                 "start_time": {
@@ -2172,35 +2966,68 @@
                       },
                       "type": {
                         "type": "string",
-                        "enum": ["service_reference"],
+                        "enum": [
+                          "service_reference"
+                        ],
                         "default": "service_reference"
                       }
                     },
-                    "required": ["id", "type"],
-                    "visible": ["id", "type"],
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "visible": [
+                      "id",
+                      "type"
+                    ],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": ["type", "start_time", "end_time", "description", "services"],
-              "visible": ["type", "start_time", "end_time", "description", "services"],
+              "required": [
+                "type",
+                "start_time",
+                "end_time",
+                "description",
+                "services"
+              ],
+              "visible": [
+                "type",
+                "start_time",
+                "end_time",
+                "description",
+                "services"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["maintenance_window"],
-          "visible": ["maintenance_window"],
+          "required": [
+            "maintenance_window"
+          ],
+          "visible": [
+            "maintenance_window"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "PAGERDUTY__UPDATE_MAINTENANCE_WINDOW",
     "description": "Update an existing maintenance window including time period, description, and affected services.",
-    "tags": ["pagerduty", "maintenance", "window", "update"],
+    "tags": [
+      "pagerduty",
+      "maintenance",
+      "window",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2221,8 +3048,12 @@
               "description": "The ID of the maintenance window to update"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -2259,35 +3090,63 @@
                       },
                       "type": {
                         "type": "string",
-                        "enum": ["service_reference"],
+                        "enum": [
+                          "service_reference"
+                        ],
                         "default": "service_reference"
                       }
                     },
-                    "required": ["id", "type"],
-                    "visible": ["id", "type"],
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "visible": [
+                      "id",
+                      "type"
+                    ],
                     "additionalProperties": false
                   }
                 }
               },
               "required": [],
-              "visible": ["start_time", "end_time", "description", "services"],
+              "visible": [
+                "start_time",
+                "end_time",
+                "description",
+                "services"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["maintenance_window"],
-          "visible": ["maintenance_window"],
+          "required": [
+            "maintenance_window"
+          ],
+          "visible": [
+            "maintenance_window"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "PAGERDUTY__DELETE_MAINTENANCE_WINDOW",
+    "name": "PAGERDUTY__MAINTENANCE_WINDOW",
     "description": "Delete a maintenance window from PagerDuty. This removes the scheduled maintenance period and restores normal alerting.",
-    "tags": ["pagerduty", "maintenance", "window", "delete"],
+    "tags": [
+      "pagerduty",
+      "maintenance",
+      "window",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2308,13 +3167,21 @@
               "description": "The ID of the maintenance window to delete"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

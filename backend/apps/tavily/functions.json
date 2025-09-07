@@ -2,7 +2,9 @@
   {
     "name": "TAVILY__SEARCH",
     "description": "Tavily Search API is a search engine optimized for LLMs, aimed at efficient, quick and persistent search results.",
-    "tags": ["search"],
+    "tags": [
+      "search"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -31,13 +33,19 @@
               "type": "string",
               "default": "basic",
               "description": "The depth of the search. It can be 'basic' or 'advanced'. Default is 'basic'.",
-              "enum": ["basic", "advanced"]
+              "enum": [
+                "basic",
+                "advanced"
+              ]
             },
             "topic": {
               "type": "string",
               "default": "general",
               "description": "The category of the search. This will determine which of our agents will be used for the search. Currently: only 'general' and 'news' are supported. Default is 'general'.",
-              "enum": ["general", "news"]
+              "enum": [
+                "general",
+                "news"
+              ]
             },
             "days": {
               "type": "integer",
@@ -84,13 +92,29 @@
               "description": "A list of domains to specifically exclude from the search results. Default is [], which doesn't exclude any domains."
             }
           },
-          "required": ["query", "api_key"],
-          "visible": ["query", "search_depth", "topic", "days", "max_results", "include_images", "include_image_descriptions", "include_answer"],
+          "required": [
+            "query",
+            "api_key"
+          ],
+          "visible": [
+            "query",
+            "search_depth",
+            "topic",
+            "days",
+            "max_results",
+            "include_images",
+            "include_image_descriptions",
+            "include_answer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     },
     "response": {}
@@ -98,7 +122,10 @@
   {
     "name": "TAVILY__EXTRACT",
     "description": "Tavily Extract API is used to scrape raw content from a provided list of URLs.",
-    "tags": ["search", "scrape"],
+    "tags": [
+      "search",
+      "scrape"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -127,13 +154,22 @@
               "description": "Your Tavily API Key."
             }
           },
-          "required": ["urls", "api_key"],
-          "visible": ["urls"],
+          "required": [
+            "urls",
+            "api_key"
+          ],
+          "visible": [
+            "urls"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     },
     "response": {}

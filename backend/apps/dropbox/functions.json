@@ -2,7 +2,12 @@
   {
     "name": "DROPBOX__LIST_FOLDER",
     "description": "List files and folders in a Dropbox directory. This allows browsing and discovering content within the user's Dropbox account.",
-    "tags": ["dropbox", "files", "folders", "list"],
+    "tags": [
+      "dropbox",
+      "files",
+      "folders",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -55,20 +60,39 @@
               "description": "Maximum number of entries to return"
             }
           },
-          "required": ["path"],
-          "visible": ["path", "recursive", "include_media_info", "include_deleted", "include_has_explicit_shared_members", "include_mounted_folders", "limit"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path",
+            "recursive",
+            "include_media_info",
+            "include_deleted",
+            "include_has_explicit_shared_members",
+            "include_mounted_folders",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__LIST_FOLDER_CONTINUE",
     "description": "Continue listing files from a previous list_folder request using a cursor. This enables pagination through large directories.",
-    "tags": ["dropbox", "files", "pagination", "continue"],
+    "tags": [
+      "dropbox",
+      "files",
+      "pagination",
+      "continue"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -89,20 +113,33 @@
               "description": "Cursor returned by list_folder or previous list_folder/continue"
             }
           },
-          "required": ["cursor"],
-          "visible": ["cursor"],
+          "required": [
+            "cursor"
+          ],
+          "visible": [
+            "cursor"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_METADATA",
+    "name": "DROPBOX__METADATA",
     "description": "Get metadata for a file or folder in Dropbox including size, modification date, and sharing information.",
-    "tags": ["dropbox", "metadata", "file", "info"],
+    "tags": [
+      "dropbox",
+      "metadata",
+      "file",
+      "info"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -138,20 +175,36 @@
               "description": "Include sharing information"
             }
           },
-          "required": ["path"],
-          "visible": ["path", "include_media_info", "include_deleted", "include_has_explicit_shared_members"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path",
+            "include_media_info",
+            "include_deleted",
+            "include_has_explicit_shared_members"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__DOWNLOAD_FILE",
     "description": "Download a file from Dropbox. This retrieves the file content for local processing or storage.",
-    "tags": ["dropbox", "download", "file", "content"],
+    "tags": [
+      "dropbox",
+      "download",
+      "file",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -172,20 +225,33 @@
               "description": "JSON string with download parameters: {\"path\": \"/path/to/file.txt\"}"
             }
           },
-          "required": ["Dropbox-API-Arg"],
-          "visible": ["Dropbox-API-Arg"],
+          "required": [
+            "Dropbox-API-Arg"
+          ],
+          "visible": [
+            "Dropbox-API-Arg"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header"],
-      "visible": ["header"],
+      "required": [
+        "header"
+      ],
+      "visible": [
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__UPLOAD_FILE",
     "description": "Upload a file to Dropbox. This allows storing content in the user's Dropbox account with optional overwrite settings.",
-    "tags": ["dropbox", "upload", "file", "store"],
+    "tags": [
+      "dropbox",
+      "upload",
+      "file",
+      "store"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -211,8 +277,14 @@
               "description": "Content type of the file being uploaded"
             }
           },
-          "required": ["Dropbox-API-Arg", "Content-Type"],
-          "visible": ["Dropbox-API-Arg", "Content-Type"],
+          "required": [
+            "Dropbox-API-Arg",
+            "Content-Type"
+          ],
+          "visible": [
+            "Dropbox-API-Arg",
+            "Content-Type"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -220,15 +292,26 @@
           "description": "The file content to upload (binary data)"
         }
       },
-      "required": ["header", "body"],
-      "visible": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "header",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__CREATE_FOLDER",
     "description": "Create a new folder in Dropbox for organizing files and content. This allows structuring data within the user's account.",
-    "tags": ["dropbox", "folder", "create", "organize"],
+    "tags": [
+      "dropbox",
+      "folder",
+      "create",
+      "organize"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -254,20 +337,34 @@
               "description": "Automatically rename if folder already exists"
             }
           },
-          "required": ["path"],
-          "visible": ["path", "autorename"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path",
+            "autorename"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__DELETE_FILE",
+    "name": "DROPBOX__FILE",
     "description": "Delete a file or folder from Dropbox. The item is moved to trash and can be restored by the user through the web interface.",
-    "tags": ["dropbox", "delete", "file", "folder"],
+    "tags": [
+      "dropbox",
+      "delete",
+      "file",
+      "folder"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -288,20 +385,33 @@
               "description": "The path to the file or folder to delete"
             }
           },
-          "required": ["path"],
-          "visible": ["path"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__MOVE_FILE",
     "description": "Move or rename a file or folder in Dropbox to a new location or name. This allows reorganizing content within the account.",
-    "tags": ["dropbox", "move", "rename", "organize"],
+    "tags": [
+      "dropbox",
+      "move",
+      "rename",
+      "organize"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -341,20 +451,38 @@
               "description": "Allow transferring ownership during move"
             }
           },
-          "required": ["from_path", "to_path"],
-          "visible": ["from_path", "to_path", "allow_shared_folder", "autorename", "allow_ownership_transfer"],
+          "required": [
+            "from_path",
+            "to_path"
+          ],
+          "visible": [
+            "from_path",
+            "to_path",
+            "allow_shared_folder",
+            "autorename",
+            "allow_ownership_transfer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__COPY_FILE",
     "description": "Copy a file or folder in Dropbox to a new location. This creates a duplicate of the content at the specified destination.",
-    "tags": ["dropbox", "copy", "duplicate", "file"],
+    "tags": [
+      "dropbox",
+      "copy",
+      "duplicate",
+      "file"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -394,20 +522,38 @@
               "description": "Allow transferring ownership during copy"
             }
           },
-          "required": ["from_path", "to_path"],
-          "visible": ["from_path", "to_path", "allow_shared_folder", "autorename", "allow_ownership_transfer"],
+          "required": [
+            "from_path",
+            "to_path"
+          ],
+          "visible": [
+            "from_path",
+            "to_path",
+            "allow_shared_folder",
+            "autorename",
+            "allow_ownership_transfer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__SEARCH_FILES",
     "description": "Search for files and folders in Dropbox by name, content, or other criteria. This enables finding content across the entire account.",
-    "tags": ["dropbox", "search", "files", "query"],
+    "tags": [
+      "dropbox",
+      "search",
+      "files",
+      "query"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -443,13 +589,19 @@
                 },
                 "order_by": {
                   "type": "string",
-                  "enum": ["relevance", "last_modified_time"],
+                  "enum": [
+                    "relevance",
+                    "last_modified_time"
+                  ],
                   "default": "relevance",
                   "description": "How to order search results"
                 },
                 "file_status": {
                   "type": "string",
-                  "enum": ["active", "deleted"],
+                  "enum": [
+                    "active",
+                    "deleted"
+                  ],
                   "default": "active",
                   "description": "Filter by file status"
                 },
@@ -469,30 +621,63 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "enum": ["image", "document", "pdf", "spreadsheet", "presentation", "audio", "video", "folder", "paper", "others"]
+                    "enum": [
+                      "image",
+                      "document",
+                      "pdf",
+                      "spreadsheet",
+                      "presentation",
+                      "audio",
+                      "video",
+                      "folder",
+                      "paper",
+                      "others"
+                    ]
                   },
                   "description": "Filter results by file categories"
                 }
               },
               "required": [],
-              "visible": ["path", "max_results", "order_by", "file_status", "filename_only", "file_extensions", "file_categories"],
+              "visible": [
+                "path",
+                "max_results",
+                "order_by",
+                "file_status",
+                "filename_only",
+                "file_extensions",
+                "file_categories"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["query", "options"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "query",
+            "options"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__CREATE_SHARED_LINK",
     "description": "Create a shared link for a file or folder in Dropbox. This generates a URL that can be shared with others for access to the content.",
-    "tags": ["dropbox", "sharing", "link", "access"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "link",
+      "access"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -518,7 +703,11 @@
               "properties": {
                 "requested_visibility": {
                   "type": "string",
-                  "enum": ["public", "team_only", "password"],
+                  "enum": [
+                    "public",
+                    "team_only",
+                    "password"
+                  ],
                   "default": "public",
                   "description": "Visibility level for the shared link"
                 },
@@ -533,36 +722,64 @@
                 },
                 "audience": {
                   "type": "string",
-                  "enum": ["public", "team", "members"],
+                  "enum": [
+                    "public",
+                    "team",
+                    "members"
+                  ],
                   "default": "public",
                   "description": "Intended audience for the link"
                 },
                 "access": {
                   "type": "string",
-                  "enum": ["viewer", "editor", "max"],
+                  "enum": [
+                    "viewer",
+                    "editor",
+                    "max"
+                  ],
                   "default": "viewer",
                   "description": "Access level granted by the link"
                 }
               },
               "required": [],
-              "visible": ["requested_visibility", "link_password", "expires", "audience", "access"],
+              "visible": [
+                "requested_visibility",
+                "link_password",
+                "expires",
+                "audience",
+                "access"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["path"],
-          "visible": ["path", "settings"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path",
+            "settings"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__LIST_SHARED_LINKS",
     "description": "List shared links created in Dropbox for managing access and permissions to files and folders.",
-    "tags": ["dropbox", "sharing", "links", "list"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "links",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -593,19 +810,32 @@
             }
           },
           "required": [],
-          "visible": ["path", "cursor", "direct_only"],
+          "visible": [
+            "path",
+            "cursor",
+            "direct_only"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__REVOKE_SHARED_LINK",
     "description": "Revoke a shared link in Dropbox to remove access for anyone who has the URL. This helps manage security and access control.",
-    "tags": ["dropbox", "sharing", "revoke", "security"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "revoke",
+      "security"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -627,20 +857,33 @@
               "description": "The shared link URL to revoke"
             }
           },
-          "required": ["url"],
-          "visible": ["url"],
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_SHARED_LINK_METADATA",
+    "name": "DROPBOX__SHARED_LINK_METADATA",
     "description": "Get metadata for a shared link including access permissions, expiration, and file information.",
-    "tags": ["dropbox", "sharing", "link", "metadata"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "link",
+      "metadata"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -670,20 +913,35 @@
               "description": "Password for password-protected links"
             }
           },
-          "required": ["url"],
-          "visible": ["url", "path", "link_password"],
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url",
+            "path",
+            "link_password"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__LIST_SHARED_FOLDERS",
     "description": "List shared folders that the user is a member of in Dropbox. This shows collaborative spaces and team folders.",
-    "tags": ["dropbox", "sharing", "folders", "collaboration"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "folders",
+      "collaboration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -713,25 +971,48 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["change_options", "disable_viewer_info", "change_viewer_info", "unshare", "relinquish_membership", "share_link", "create_link", "create_view_link", "create_edit_link"]
+                "enum": [
+                  "change_options",
+                  "disable_viewer_info",
+                  "change_viewer_info",
+                  "unshare",
+                  "relinquish_membership",
+                  "share_link",
+                  "create_link",
+                  "create_view_link",
+                  "create_edit_link"
+                ]
               },
               "description": "Filter folders by available actions"
             }
           },
           "required": [],
-          "visible": ["limit", "cursor", "actions"],
+          "visible": [
+            "limit",
+            "cursor",
+            "actions"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__SHARE_FOLDER",
     "description": "Share a folder with other users in Dropbox. This creates collaborative spaces where multiple users can access and edit content.",
-    "tags": ["dropbox", "sharing", "folder", "collaborate"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "folder",
+      "collaborate"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -753,19 +1034,29 @@
             },
             "member_policy": {
               "type": "string",
-              "enum": ["team", "anyone"],
+              "enum": [
+                "team",
+                "anyone"
+              ],
               "default": "anyone",
               "description": "Who can be added as members"
             },
             "acl_update_policy": {
               "type": "string",
-              "enum": ["owner", "editors"],
+              "enum": [
+                "owner",
+                "editors"
+              ],
               "default": "owner",
               "description": "Who can change folder permissions"
             },
             "shared_link_policy": {
               "type": "string",
-              "enum": ["anyone", "team", "members"],
+              "enum": [
+                "anyone",
+                "team",
+                "members"
+              ],
               "default": "anyone",
               "description": "Who can create shared links"
             },
@@ -778,25 +1069,51 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["change_options", "disable_viewer_info", "change_viewer_info", "unshare", "relinquish_membership", "share_link", "create_link"]
+                "enum": [
+                  "change_options",
+                  "disable_viewer_info",
+                  "change_viewer_info",
+                  "unshare",
+                  "relinquish_membership",
+                  "share_link",
+                  "create_link"
+                ]
               },
               "description": "Available actions for the shared folder"
             }
           },
-          "required": ["path"],
-          "visible": ["path", "member_policy", "acl_update_policy", "shared_link_policy", "force_async", "actions"],
+          "required": [
+            "path"
+          ],
+          "visible": [
+            "path",
+            "member_policy",
+            "acl_update_policy",
+            "shared_link_policy",
+            "force_async",
+            "actions"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__ADD_FOLDER_MEMBER",
     "description": "Add a member to a shared folder in Dropbox. This allows inviting users to collaborate on shared content with specified permissions.",
-    "tags": ["dropbox", "sharing", "member", "invite"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "member",
+      "invite"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -828,7 +1145,9 @@
                     "properties": {
                       ".tag": {
                         "type": "string",
-                        "enum": ["email"],
+                        "enum": [
+                          "email"
+                        ],
                         "default": "email",
                         "description": "Member type"
                       },
@@ -838,19 +1157,36 @@
                         "description": "Email address of the member to add"
                       }
                     },
-                    "required": [".tag", "email"],
-                    "visible": [".tag", "email"],
+                    "required": [
+                      ".tag",
+                      "email"
+                    ],
+                    "visible": [
+                      ".tag",
+                      "email"
+                    ],
                     "additionalProperties": false
                   },
                   "access_level": {
                     "type": "string",
-                    "enum": ["owner", "editor", "viewer", "viewer_no_comment"],
+                    "enum": [
+                      "owner",
+                      "editor",
+                      "viewer",
+                      "viewer_no_comment"
+                    ],
                     "default": "editor",
                     "description": "Access level for the member"
                   }
                 },
-                "required": ["member", "access_level"],
-                "visible": ["member", "access_level"],
+                "required": [
+                  "member",
+                  "access_level"
+                ],
+                "visible": [
+                  "member",
+                  "access_level"
+                ],
                 "additionalProperties": false
               }
             },
@@ -864,20 +1200,37 @@
               "description": "Custom message to include in invitation email"
             }
           },
-          "required": ["shared_folder_id", "members"],
-          "visible": ["shared_folder_id", "members", "quiet", "custom_message"],
+          "required": [
+            "shared_folder_id",
+            "members"
+          ],
+          "visible": [
+            "shared_folder_id",
+            "members",
+            "quiet",
+            "custom_message"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__REMOVE_FOLDER_MEMBER",
     "description": "Remove a member from a shared folder in Dropbox. This revokes their access to the shared content.",
-    "tags": ["dropbox", "sharing", "member", "remove"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "member",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -903,7 +1256,9 @@
               "properties": {
                 ".tag": {
                   "type": "string",
-                  "enum": ["email"],
+                  "enum": [
+                    "email"
+                  ],
                   "default": "email",
                   "description": "Member type"
                 },
@@ -913,8 +1268,14 @@
                   "description": "Email address of the member to remove"
                 }
               },
-              "required": [".tag", "email"],
-              "visible": [".tag", "email"],
+              "required": [
+                ".tag",
+                "email"
+              ],
+              "visible": [
+                ".tag",
+                "email"
+              ],
               "additionalProperties": false
             },
             "leave_a_copy": {
@@ -923,20 +1284,36 @@
               "description": "Allow member to keep a copy of the folder contents"
             }
           },
-          "required": ["shared_folder_id", "member"],
-          "visible": ["shared_folder_id", "member", "leave_a_copy"],
+          "required": [
+            "shared_folder_id",
+            "member"
+          ],
+          "visible": [
+            "shared_folder_id",
+            "member",
+            "leave_a_copy"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_FOLDER_MEMBERS",
+    "name": "DROPBOX__FOLDER_MEMBERS",
     "description": "List members of a shared folder in Dropbox including their access levels and permissions.",
-    "tags": ["dropbox", "sharing", "members", "permissions"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "members",
+      "permissions"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -960,7 +1337,14 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["change_options", "disable_viewer_info", "change_viewer_info", "unshare", "relinquish_membership", "share_link"]
+                "enum": [
+                  "change_options",
+                  "disable_viewer_info",
+                  "change_viewer_info",
+                  "unshare",
+                  "relinquish_membership",
+                  "share_link"
+                ]
               },
               "description": "Filter members by available actions"
             },
@@ -970,20 +1354,35 @@
               "description": "Maximum number of members to return"
             }
           },
-          "required": ["shared_folder_id"],
-          "visible": ["shared_folder_id", "actions", "limit"],
+          "required": [
+            "shared_folder_id"
+          ],
+          "visible": [
+            "shared_folder_id",
+            "actions",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__UPDATE_FOLDER_MEMBER",
     "description": "Update a member's access level in a shared folder. This allows changing permissions from viewer to editor or vice versa.",
-    "tags": ["dropbox", "sharing", "member", "permissions"],
+    "tags": [
+      "dropbox",
+      "sharing",
+      "member",
+      "permissions"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1009,7 +1408,9 @@
               "properties": {
                 ".tag": {
                   "type": "string",
-                  "enum": ["email"],
+                  "enum": [
+                    "email"
+                  ],
                   "default": "email",
                   "description": "Member type"
                 },
@@ -1019,30 +1420,58 @@
                   "description": "Email address of the member to update"
                 }
               },
-              "required": [".tag", "email"],
-              "visible": [".tag", "email"],
+              "required": [
+                ".tag",
+                "email"
+              ],
+              "visible": [
+                ".tag",
+                "email"
+              ],
               "additionalProperties": false
             },
             "access_level": {
               "type": "string",
-              "enum": ["owner", "editor", "viewer", "viewer_no_comment"],
+              "enum": [
+                "owner",
+                "editor",
+                "viewer",
+                "viewer_no_comment"
+              ],
               "description": "New access level for the member"
             }
           },
-          "required": ["shared_folder_id", "member", "access_level"],
-          "visible": ["shared_folder_id", "member", "access_level"],
+          "required": [
+            "shared_folder_id",
+            "member",
+            "access_level"
+          ],
+          "visible": [
+            "shared_folder_id",
+            "member",
+            "access_level"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_SPACE_USAGE",
+    "name": "DROPBOX__SPACE_USAGE",
     "description": "Get current space usage information for the Dropbox account including used space, allocated space, and quota details.",
-    "tags": ["dropbox", "space", "usage", "quota"],
+    "tags": [
+      "dropbox",
+      "space",
+      "usage",
+      "quota"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1063,15 +1492,22 @@
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_CURRENT_ACCOUNT",
+    "name": "DROPBOX__CURRENT_ACCOUNT",
     "description": "Get information about the current Dropbox user account including name, email, and account type.",
-    "tags": ["dropbox", "account", "user", "profile"],
+    "tags": [
+      "dropbox",
+      "account",
+      "user",
+      "profile"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1092,15 +1528,22 @@
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__CREATE_FILE_REQUEST",
     "description": "Create a file request in Dropbox that allows others to upload files to your account through a shared URL without needing a Dropbox account.",
-    "tags": ["dropbox", "file_request", "upload", "sharing"],
+    "tags": [
+      "dropbox",
+      "file_request",
+      "upload",
+      "sharing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1135,12 +1578,22 @@
                 },
                 "allow_late_uploads": {
                   "type": "string",
-                  "enum": ["seven_days", "one_day", "two_days", "three_days"],
+                  "enum": [
+                    "seven_days",
+                    "one_day",
+                    "two_days",
+                    "three_days"
+                  ],
                   "description": "Allow late uploads after deadline"
                 }
               },
-              "required": ["deadline"],
-              "visible": ["deadline", "allow_late_uploads"],
+              "required": [
+                "deadline"
+              ],
+              "visible": [
+                "deadline",
+                "allow_late_uploads"
+              ],
               "additionalProperties": false
             },
             "open": {
@@ -1153,20 +1606,38 @@
               "description": "Description of what files are being requested"
             }
           },
-          "required": ["title", "destination"],
-          "visible": ["title", "destination", "deadline", "open", "description"],
+          "required": [
+            "title",
+            "destination"
+          ],
+          "visible": [
+            "title",
+            "destination",
+            "deadline",
+            "open",
+            "description"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__LIST_FILE_REQUESTS",
     "description": "List file requests created in Dropbox for managing incoming file uploads and submissions from external users.",
-    "tags": ["dropbox", "file_requests", "list", "uploads"],
+    "tags": [
+      "dropbox",
+      "file_requests",
+      "list",
+      "uploads"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1194,19 +1665,30 @@
             }
           },
           "required": [],
-          "visible": ["limit", "cursor"],
+          "visible": [
+            "limit",
+            "cursor"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__GET_FILE_REQUEST",
+    "name": "DROPBOX__FILE_REQUEST_POST_GET",
     "description": "Get detailed information about a specific file request including submissions, deadline, and configuration.",
-    "tags": ["dropbox", "file_request", "details"],
+    "tags": [
+      "dropbox",
+      "file_request",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1227,20 +1709,32 @@
               "description": "ID of the file request"
             }
           },
-          "required": ["id"],
-          "visible": ["id"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "DROPBOX__UPDATE_FILE_REQUEST",
     "description": "Update a file request configuration including title, deadline, and open/closed status for managing file collection workflows.",
-    "tags": ["dropbox", "file_request", "update"],
+    "tags": [
+      "dropbox",
+      "file_request",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1279,12 +1773,20 @@
                 },
                 "allow_late_uploads": {
                   "type": "string",
-                  "enum": ["seven_days", "one_day", "two_days", "three_days"],
+                  "enum": [
+                    "seven_days",
+                    "one_day",
+                    "two_days",
+                    "three_days"
+                  ],
                   "description": "Updated late upload policy"
                 }
               },
               "required": [],
-              "visible": ["deadline", "allow_late_uploads"],
+              "visible": [
+                "deadline",
+                "allow_late_uploads"
+              ],
               "additionalProperties": false
             },
             "open": {
@@ -1296,20 +1798,37 @@
               "description": "Updated description"
             }
           },
-          "required": ["id"],
-          "visible": ["id", "title", "destination", "deadline", "open", "description"],
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id",
+            "title",
+            "destination",
+            "deadline",
+            "open",
+            "description"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "DROPBOX__DELETE_FILE_REQUEST",
+    "name": "DROPBOX__FILE_REQUEST_POST_DELETE",
     "description": "Delete a file request from Dropbox. This permanently removes the request and stops accepting new file submissions.",
-    "tags": ["dropbox", "file_request", "delete"],
+    "tags": [
+      "dropbox",
+      "file_request",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1333,13 +1852,21 @@
               "description": "Array of file request IDs to delete"
             }
           },
-          "required": ["ids"],
-          "visible": ["ids"],
+          "required": [
+            "ids"
+          ],
+          "visible": [
+            "ids"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }
