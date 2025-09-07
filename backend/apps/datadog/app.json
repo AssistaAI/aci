@@ -9,12 +9,7 @@
     "api_key": {
       "location": "header",
       "name": "DD-API-KEY",
-      "description": "Datadog API key for authentication"
-    },
-    "app_key": {
-      "location": "header",
-      "name": "DD-APPLICATION-KEY",
-      "description": "Datadog application key for enhanced API access"
+      "prefix": null
     }
   },
   "default_security_credentials_by_scheme": {},

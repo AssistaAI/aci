@@ -2,7 +2,12 @@
   {
     "name": "ATTIO__LIST_RECORDS",
     "description": "Query and list records (people, companies, or other objects) with filtering and sorting options.",
-    "tags": ["records", "query", "list", "search"],
+    "tags": [
+      "records",
+      "query",
+      "list",
+      "search"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,9 +27,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -32,11 +40,20 @@
             "object": {
               "type": "string",
               "description": "The object type to query (e.g., 'people', 'companies')",
-              "enum": ["people", "companies", "deals", "opportunities"]
+              "enum": [
+                "people",
+                "companies",
+                "deals",
+                "opportunities"
+              ]
             }
           },
-          "required": ["object"],
-          "visible": ["object"],
+          "required": [
+            "object"
+          ],
+          "visible": [
+            "object"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -57,19 +74,33 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__CREATE_RECORD",
     "description": "Create a new record (person, company, or other object type) in Attio.",
-    "tags": ["records", "create", "add"],
+    "tags": [
+      "records",
+      "create",
+      "add"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -89,9 +120,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -99,11 +133,20 @@
             "object": {
               "type": "string",
               "description": "The object type to create (e.g., 'people', 'companies')",
-              "enum": ["people", "companies", "deals", "opportunities"]
+              "enum": [
+                "people",
+                "companies",
+                "deals",
+                "opportunities"
+              ]
             }
           },
-          "required": ["object"],
-          "visible": ["object"],
+          "required": [
+            "object"
+          ],
+          "visible": [
+            "object"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -119,28 +162,42 @@
                   "properties": {},
                   "required": [],
                   "visible": [],
-                  "additionalProperties": true
+                  "additionalProperties": false
                 }
               },
-              "required": ["values"],
-              "visible": ["values"],
+              "required": [
+                "values"
+              ],
+              "visible": [],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "ATTIO__GET_RECORD",
+    "name": "ATTIO__RECORD_GET_RECORDS",
     "description": "Retrieve a specific record by its ID from any object type (people, companies, etc.).",
-    "tags": ["records", "get", "retrieve"],
+    "tags": [
+      "records",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -160,9 +217,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -170,27 +230,47 @@
             "object": {
               "type": "string",
               "description": "The object type (e.g., 'people', 'companies')",
-              "enum": ["people", "companies", "deals", "opportunities"]
+              "enum": [
+                "people",
+                "companies",
+                "deals",
+                "opportunities"
+              ]
             },
             "record_id": {
               "type": "string",
               "description": "Unique identifier of the record to retrieve"
             }
           },
-          "required": ["object", "record_id"],
-          "visible": ["object", "record_id"],
+          "required": [
+            "object",
+            "record_id"
+          ],
+          "visible": [
+            "object",
+            "record_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path"],
-      "visible": ["path"],
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__UPDATE_RECORD",
     "description": "Update an existing record by its ID. Use PATCH to modify specific values.",
-    "tags": ["records", "update", "modify"],
+    "tags": [
+      "records",
+      "update",
+      "modify"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -210,9 +290,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -220,15 +303,26 @@
             "object": {
               "type": "string",
               "description": "The object type (e.g., 'people', 'companies')",
-              "enum": ["people", "companies", "deals", "opportunities"]
+              "enum": [
+                "people",
+                "companies",
+                "deals",
+                "opportunities"
+              ]
             },
             "record_id": {
               "type": "string",
               "description": "Unique identifier of the record to update"
             }
           },
-          "required": ["object", "record_id"],
-          "visible": ["object", "record_id"],
+          "required": [
+            "object",
+            "record_id"
+          ],
+          "visible": [
+            "object",
+            "record_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -244,28 +338,43 @@
                   "properties": {},
                   "required": [],
                   "visible": [],
-                  "additionalProperties": true
+                  "additionalProperties": false
                 }
               },
-              "required": ["values"],
-              "visible": ["values"],
+              "required": [
+                "values"
+              ],
+              "visible": [],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__LIST_WORKSPACE_MEMBERS",
     "description": "Get a list of all workspace members and their details.",
-    "tags": ["workspace", "members", "users", "team"],
+    "tags": [
+      "workspace",
+      "members",
+      "users",
+      "team"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -285,12 +394,17 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header"],
+      "required": [
+        "header"
+      ],
       "visible": [],
       "additionalProperties": false
     }
@@ -298,7 +412,11 @@
   {
     "name": "ATTIO__CREATE_NOTE",
     "description": "Create a new note and associate it with one or more records.",
-    "tags": ["notes", "create", "content"],
+    "tags": [
+      "notes",
+      "create",
+      "content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -318,9 +436,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -337,25 +458,43 @@
                   "description": "Content of the note as plain text"
                 }
               },
-              "required": ["content"],
-              "visible": ["title", "content"],
+              "required": [
+                "content"
+              ],
+              "visible": [
+                "title",
+                "content"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [
+            "data"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__CREATE_TASK",
     "description": "Create a new task and optionally associate it with records.",
-    "tags": ["tasks", "create", "todo"],
+    "tags": [
+      "tasks",
+      "create",
+      "todo"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -375,9 +514,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -395,25 +537,43 @@
                   "description": "ISO 8601 timestamp for when the task is due"
                 }
               },
-              "required": ["content"],
-              "visible": ["content", "deadline_at"],
+              "required": [
+                "content"
+              ],
+              "visible": [
+                "content",
+                "deadline_at"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [
+            "data"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__LIST_OBJECTS",
     "description": "List all system-defined and user-defined objects in your workspace.",
-    "tags": ["objects", "schema", "configuration"],
+    "tags": [
+      "objects",
+      "schema",
+      "configuration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -433,20 +593,29 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header"],
+      "required": [
+        "header"
+      ],
       "visible": [],
       "additionalProperties": false
     }
   },
   {
-    "name": "ATTIO__GET_OBJECT",
+    "name": "ATTIO__OBJECT",
     "description": "Get a single object by its ID or slug to understand its schema and configuration.",
-    "tags": ["objects", "schema", "configuration"],
+    "tags": [
+      "objects",
+      "schema",
+      "configuration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -466,9 +635,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -478,20 +650,33 @@
               "description": "The object ID or slug to retrieve (e.g., 'people', 'companies')"
             }
           },
-          "required": ["object"],
-          "visible": ["object"],
+          "required": [
+            "object"
+          ],
+          "visible": [
+            "object"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path"],
-      "visible": ["path"],
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__LIST_ALL_LISTS",
     "description": "List all lists that your access token has access to for organizing records.",
-    "tags": ["lists", "organization", "collections"],
+    "tags": [
+      "lists",
+      "organization",
+      "collections"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -511,12 +696,17 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header"],
+      "required": [
+        "header"
+      ],
       "visible": [],
       "additionalProperties": false
     }
@@ -524,7 +714,11 @@
   {
     "name": "ATTIO__CREATE_LIST",
     "description": "Create a new list to organize and categorize records in your workspace.",
-    "tags": ["lists", "create", "organization"],
+    "tags": [
+      "lists",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -544,9 +738,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -567,25 +764,44 @@
                   "description": "Workspace access level for the list"
                 }
               },
-              "required": ["name"],
-              "visible": ["name", "parent_object", "workspace_access"],
+              "required": [
+                "name"
+              ],
+              "visible": [
+                "name",
+                "parent_object",
+                "workspace_access"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [
+            "data"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__LIST_ENTRIES",
     "description": "List entries in a specific list with filtering and sorting options.",
-    "tags": ["lists", "entries", "query"],
+    "tags": [
+      "lists",
+      "entries",
+      "query"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -605,9 +821,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -617,8 +836,12 @@
               "description": "The list ID to query entries from"
             }
           },
-          "required": ["list"],
-          "visible": ["list"],
+          "required": [
+            "list"
+          ],
+          "visible": [
+            "list"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -639,19 +862,33 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "ATTIO__CREATE_LIST_ENTRY",
     "description": "Add a record to a specific list.",
-    "tags": ["lists", "entries", "create"],
+    "tags": [
+      "lists",
+      "entries",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -671,9 +908,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -683,8 +923,12 @@
               "description": "The list ID to add the entry to"
             }
           },
-          "required": ["list"],
-          "visible": ["list"],
+          "required": [
+            "list"
+          ],
+          "visible": [
+            "list"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -705,30 +949,55 @@
                       "description": "The ID of the record to add to the list"
                     }
                   },
-                  "required": ["target_object", "target_record_id"],
-                  "visible": ["target_object", "target_record_id"],
+                  "required": [
+                    "target_object",
+                    "target_record_id"
+                  ],
+                  "visible": [
+                    "target_object",
+                    "target_record_id"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["parent_record"],
-              "visible": ["parent_record"],
+              "required": [
+                "parent_record"
+              ],
+              "visible": [
+                "parent_record"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["data"],
-          "visible": ["data"],
+          "required": [
+            "data"
+          ],
+          "visible": [
+            "data"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "ATTIO__DELETE_RECORD",
+    "name": "ATTIO__RECORD_DELETE_RECORDS",
     "description": "Delete a specific record by its ID from any object type.",
-    "tags": ["records", "delete", "remove"],
+    "tags": [
+      "records",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -748,9 +1017,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -758,20 +1030,36 @@
             "object": {
               "type": "string",
               "description": "The object type (e.g., 'people', 'companies')",
-              "enum": ["people", "companies", "deals", "opportunities"]
+              "enum": [
+                "people",
+                "companies",
+                "deals",
+                "opportunities"
+              ]
             },
             "record_id": {
               "type": "string",
               "description": "Unique identifier of the record to delete"
             }
           },
-          "required": ["object", "record_id"],
-          "visible": ["object", "record_id"],
+          "required": [
+            "object",
+            "record_id"
+          ],
+          "visible": [
+            "object",
+            "record_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path"],
-      "visible": ["path"],
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   }

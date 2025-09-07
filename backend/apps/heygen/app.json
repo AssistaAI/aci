@@ -13,7 +13,12 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["AI Video Generation", "Avatar", "Text-to-Speech", "Video"],
+  "categories": [
+    "AI Video Generation",
+    "Avatar",
+    "Text-to-Speech",
+    "Video"
+  ],
   "visibility": "public",
   "active": true
 }

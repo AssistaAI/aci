@@ -1,8 +1,12 @@
 [
   {
-    "name": "BAMBOOHR__GET_EMPLOYEE_DIRECTORY",
+    "name": "BAMBOOHR__EMPLOYEE_DIRECTORY",
     "description": "Get a directory of all employees in the company with basic information like names, departments, and contact details.",
-    "tags": ["employees", "directory", "list"],
+    "tags": [
+      "employees",
+      "directory",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,20 +26,32 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BAMBOOHR__GET_EMPLOYEE",
+    "name": "BAMBOOHR__EMPLOYEE",
     "description": "Get detailed information about a specific employee by their ID, including personal details, job information, and custom fields.",
-    "tags": ["employee", "details", "profile"],
+    "tags": [
+      "employee",
+      "details",
+      "profile"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -59,8 +75,14 @@
               "description": "Unique identifier for the employee"
             }
           },
-          "required": ["company_domain", "employee_id"],
-          "visible": ["company_domain", "employee_id"],
+          "required": [
+            "company_domain",
+            "employee_id"
+          ],
+          "visible": [
+            "company_domain",
+            "employee_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -72,19 +94,30 @@
             }
           },
           "required": [],
-          "visible": ["fields"],
+          "visible": [
+            "fields"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BAMBOOHR__ADD_EMPLOYEE",
     "description": "Add a new employee to the BambooHR system with their basic information and job details.",
-    "tags": ["employee", "create", "onboarding"],
+    "tags": [
+      "employee",
+      "create",
+      "onboarding"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -104,8 +137,12 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -116,9 +153,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -150,20 +190,41 @@
               "description": "Employee's hire date (YYYY-MM-DD format)"
             }
           },
-          "required": ["firstName", "lastName"],
-          "visible": ["firstName", "lastName", "workEmail", "department", "jobTitle", "hireDate"],
+          "required": [
+            "firstName",
+            "lastName"
+          ],
+          "visible": [
+            "firstName",
+            "lastName",
+            "workEmail",
+            "department",
+            "jobTitle",
+            "hireDate"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BAMBOOHR__UPDATE_EMPLOYEE",
     "description": "Update existing employee information including personal details, job information, and custom fields.",
-    "tags": ["employee", "update", "edit"],
+    "tags": [
+      "employee",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -187,8 +248,14 @@
               "description": "Unique identifier for the employee to update"
             }
           },
-          "required": ["company_domain", "employee_id"],
-          "visible": ["company_domain", "employee_id"],
+          "required": [
+            "company_domain",
+            "employee_id"
+          ],
+          "visible": [
+            "company_domain",
+            "employee_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -199,9 +266,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -229,19 +299,36 @@
             }
           },
           "required": [],
-          "visible": ["firstName", "lastName", "workEmail", "department", "jobTitle"],
+          "visible": [
+            "firstName",
+            "lastName",
+            "workEmail",
+            "department",
+            "jobTitle"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BAMBOOHR__GET_TIME_OFF_REQUESTS",
+    "name": "BAMBOOHR__TIME_OFF_REQUESTS",
     "description": "Retrieve time-off requests for employees, including pending, approved, and denied requests within a date range.",
-    "tags": ["time-off", "requests", "list", "pto"],
+    "tags": [
+      "time-off",
+      "requests",
+      "list",
+      "pto"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -261,8 +348,12 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -284,24 +375,45 @@
             },
             "status": {
               "type": "string",
-              "enum": ["approved", "denied", "superceded", "requested", "canceled"],
+              "enum": [
+                "approved",
+                "denied",
+                "superceded",
+                "requested",
+                "canceled"
+              ],
               "description": "Status of time-off requests to filter by"
             }
           },
           "required": [],
-          "visible": ["start", "end", "type", "status"],
+          "visible": [
+            "start",
+            "end",
+            "type",
+            "status"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BAMBOOHR__CREATE_TIME_OFF_REQUEST",
     "description": "Create a new time-off request for an employee, specifying dates, type, and reason.",
-    "tags": ["time-off", "create", "request", "pto"],
+    "tags": [
+      "time-off",
+      "create",
+      "request",
+      "pto"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -321,8 +433,12 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -333,9 +449,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -351,7 +470,7 @@
             },
             "end": {
               "type": "string",
-              "format": "date", 
+              "format": "date",
               "description": "End date of time off (YYYY-MM-DD)"
             },
             "timeOffTypeId": {
@@ -367,20 +486,44 @@
               "description": "Optional notes or reason for the time off request"
             }
           },
-          "required": ["employeeId", "start", "end", "timeOffTypeId"],
-          "visible": ["employeeId", "start", "end", "timeOffTypeId", "amount", "notes"],
+          "required": [
+            "employeeId",
+            "start",
+            "end",
+            "timeOffTypeId"
+          ],
+          "visible": [
+            "employeeId",
+            "start",
+            "end",
+            "timeOffTypeId",
+            "amount",
+            "notes"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BAMBOOHR__UPDATE_TIME_OFF_REQUEST_STATUS",
     "description": "Update the status of a time-off request (approve, deny, or cancel) with optional comments.",
-    "tags": ["time-off", "approve", "deny", "status"],
+    "tags": [
+      "time-off",
+      "approve",
+      "deny",
+      "status"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -404,8 +547,14 @@
               "description": "ID of the time-off request to update"
             }
           },
-          "required": ["company_domain", "request_id"],
-          "visible": ["company_domain", "request_id"],
+          "required": [
+            "company_domain",
+            "request_id"
+          ],
+          "visible": [
+            "company_domain",
+            "request_id"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -416,16 +565,23 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["approved", "denied", "canceled"],
+              "enum": [
+                "approved",
+                "denied",
+                "canceled"
+              ],
               "description": "New status for the time-off request"
             },
             "note": {
@@ -433,20 +589,36 @@
               "description": "Optional note explaining the status change"
             }
           },
-          "required": ["status"],
-          "visible": ["status", "note"],
+          "required": [
+            "status"
+          ],
+          "visible": [
+            "status",
+            "note"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BAMBOOHR__GET_WHOS_OUT",
+    "name": "BAMBOOHR__WHOS_OUT",
     "description": "Get a list of employees who are currently out or will be out on specified dates, including the reason and duration.",
-    "tags": ["time-off", "whos-out", "availability"],
+    "tags": [
+      "time-off",
+      "whos-out",
+      "availability"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -466,8 +638,12 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -485,19 +661,31 @@
             }
           },
           "required": [],
-          "visible": ["start", "end"],
+          "visible": [
+            "start",
+            "end"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BAMBOOHR__GET_TIME_OFF_POLICIES",
+    "name": "BAMBOOHR__TIME_OFF_POLICIES",
     "description": "Retrieve all available time-off policies and types configured in the system (vacation, sick leave, etc.).",
-    "tags": ["time-off", "policies", "types"],
+    "tags": [
+      "time-off",
+      "policies",
+      "types"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -517,20 +705,33 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "BAMBOOHR__GENERATE_CUSTOM_REPORT",
     "description": "Generate a custom report with specified employee fields and filters to get comprehensive HR data and insights.",
-    "tags": ["reports", "custom", "analytics", "data"],
+    "tags": [
+      "reports",
+      "custom",
+      "analytics",
+      "data"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -550,8 +751,12 @@
               "description": "Company subdomain in BambooHR"
             }
           },
-          "required": ["company_domain"],
-          "visible": ["company_domain"],
+          "required": [
+            "company_domain"
+          ],
+          "visible": [
+            "company_domain"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -562,9 +767,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -590,25 +798,46 @@
             },
             "format": {
               "type": "string",
-              "enum": ["JSON", "XML", "CSV"],
+              "enum": [
+                "JSON",
+                "XML",
+                "CSV"
+              ],
               "default": "JSON",
               "description": "Output format for the report"
             }
           },
-          "required": ["fields"],
-          "visible": ["title", "fields", "filters", "format"],
+          "required": [
+            "fields"
+          ],
+          "visible": [
+            "title",
+            "fields",
+            "format"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "BAMBOOHR__GET_COMPANY_REPORT",
+    "name": "BAMBOOHR__COMPANY_REPORT",
     "description": "Retrieve a pre-existing company report by its ID to get structured HR data and analytics.",
-    "tags": ["reports", "company", "analytics"],
+    "tags": [
+      "reports",
+      "company",
+      "analytics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -632,8 +861,14 @@
               "description": "ID of the company report to retrieve"
             }
           },
-          "required": ["company_domain", "report_id"],
-          "visible": ["company_domain", "report_id"],
+          "required": [
+            "company_domain",
+            "report_id"
+          ],
+          "visible": [
+            "company_domain",
+            "report_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -641,18 +876,29 @@
           "properties": {
             "format": {
               "type": "string",
-              "enum": ["JSON", "XML", "CSV"],
+              "enum": [
+                "JSON",
+                "XML",
+                "CSV"
+              ],
               "default": "JSON",
               "description": "Output format for the report"
             }
           },
           "required": [],
-          "visible": ["format"],
+          "visible": [
+            "format"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   }

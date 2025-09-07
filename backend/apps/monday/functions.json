@@ -1,8 +1,12 @@
 [
   {
-    "name": "MONDAY__GET_BOARDS",
+    "name": "MONDAY__BOARDS",
     "description": "Retrieve boards from Monday.com workspace with their structure, items, and metadata.",
-    "tags": ["boards", "workspace", "projects"],
+    "tags": [
+      "boards",
+      "workspace",
+      "projects"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,9 +26,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -45,24 +52,39 @@
                 }
               },
               "required": [],
-              "visible": ["limit"],
+              "visible": [
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_BOARD",
     "description": "Create a new board in Monday.com with specified name, kind, and template structure.",
-    "tags": ["boards", "create", "project"],
+    "tags": [
+      "boards",
+      "create",
+      "project"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -82,9 +104,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -103,30 +128,53 @@
                 },
                 "board_kind": {
                   "type": "string",
-                  "enum": ["public", "private", "share"],
+                  "enum": [
+                    "public",
+                    "private",
+                    "share"
+                  ],
                   "default": "public",
                   "description": "Board visibility kind"
                 }
               },
-              "required": ["board_name"],
-              "visible": ["board_name", "board_kind"],
+              "required": [
+                "board_name"
+              ],
+              "visible": [
+                "board_name",
+                "board_kind"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__DELETE_BOARD",
+    "name": "MONDAY__BOARD",
     "description": "Delete a board from Monday.com workspace permanently, removing all items and data.",
-    "tags": ["boards", "delete", "management"],
+    "tags": [
+      "boards",
+      "delete",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -146,9 +194,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -166,25 +217,43 @@
                   "description": "Board ID to delete"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__UPDATE_BOARD",
     "description": "Update board properties in Monday.com including name, description, and settings.",
-    "tags": ["boards", "update", "settings"],
+    "tags": [
+      "boards",
+      "update",
+      "settings"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -204,9 +273,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -225,7 +297,10 @@
                 },
                 "board_attribute": {
                   "type": "string",
-                  "enum": ["name", "description"],
+                  "enum": [
+                    "name",
+                    "description"
+                  ],
                   "description": "Board attribute to update"
                 },
                 "new_value": {
@@ -233,25 +308,47 @@
                   "description": "New value for the board attribute"
                 }
               },
-              "required": ["board_id", "board_attribute", "new_value"],
-              "visible": ["board_id", "board_attribute", "new_value"],
+              "required": [
+                "board_id",
+                "board_attribute",
+                "new_value"
+              ],
+              "visible": [
+                "board_id",
+                "board_attribute",
+                "new_value"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_ITEMS",
+    "name": "MONDAY__ITEMS",
     "description": "Retrieve items from a specific board in Monday.com with their column values and status.",
-    "tags": ["items", "tasks", "board-content"],
+    "tags": [
+      "items",
+      "tasks",
+      "board-content"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -271,9 +368,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -297,25 +397,44 @@
                   "description": "Number of items to return"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id", "limit"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id",
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_ITEM",
     "description": "Create a new item in a Monday.com board with name and initial column values.",
-    "tags": ["items", "create", "task"],
+    "tags": [
+      "items",
+      "create",
+      "task"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -335,9 +454,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -363,25 +485,46 @@
                   "description": "JSON string of column values (e.g., '{\"status\": \"Working on it\", \"text\": \"Description\"}')"
                 }
               },
-              "required": ["board_id", "item_name"],
-              "visible": ["board_id", "item_name", "column_values"],
+              "required": [
+                "board_id",
+                "item_name"
+              ],
+              "visible": [
+                "board_id",
+                "item_name",
+                "column_values"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__UPDATE_ITEM",
     "description": "Update column values for an existing item in Monday.com including status, text, and custom fields.",
-    "tags": ["items", "update", "edit"],
+    "tags": [
+      "items",
+      "update",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -401,9 +544,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -429,25 +575,47 @@
                   "description": "JSON string of column values to update"
                 }
               },
-              "required": ["item_id", "board_id", "column_values"],
-              "visible": ["item_id", "board_id", "column_values"],
+              "required": [
+                "item_id",
+                "board_id",
+                "column_values"
+              ],
+              "visible": [
+                "item_id",
+                "board_id",
+                "column_values"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__DELETE_ITEM",
+    "name": "MONDAY__ITEM",
     "description": "Delete an item from a Monday.com board permanently, removing all associated data.",
-    "tags": ["items", "delete", "management"],
+    "tags": [
+      "items",
+      "delete",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -467,9 +635,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -487,25 +658,43 @@
                   "description": "Item ID to delete"
                 }
               },
-              "required": ["item_id"],
-              "visible": ["item_id"],
+              "required": [
+                "item_id"
+              ],
+              "visible": [
+                "item_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__DUPLICATE_ITEM",
     "description": "Duplicate an item in Monday.com board with all its column values and properties.",
-    "tags": ["items", "duplicate", "copy"],
+    "tags": [
+      "items",
+      "duplicate",
+      "copy"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -525,9 +714,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -554,25 +746,46 @@
                   "description": "Whether to include updates in the duplication"
                 }
               },
-              "required": ["board_id", "item_id"],
-              "visible": ["board_id", "item_id", "with_updates"],
+              "required": [
+                "board_id",
+                "item_id"
+              ],
+              "visible": [
+                "board_id",
+                "item_id",
+                "with_updates"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__ARCHIVE_ITEM",
     "description": "Archive an item in Monday.com board to hide it from active view while preserving data.",
-    "tags": ["items", "archive", "organize"],
+    "tags": [
+      "items",
+      "archive",
+      "organize"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -592,9 +805,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -612,25 +828,43 @@
                   "description": "Item ID to archive"
                 }
               },
-              "required": ["item_id"],
-              "visible": ["item_id"],
+              "required": [
+                "item_id"
+              ],
+              "visible": [
+                "item_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__MOVE_ITEM_TO_GROUP",
     "description": "Move an item to a different group within Monday.com board for better organization.",
-    "tags": ["items", "move", "organization"],
+    "tags": [
+      "items",
+      "move",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -650,9 +884,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -674,25 +911,45 @@
                   "description": "Target group ID"
                 }
               },
-              "required": ["item_id", "group_id"],
-              "visible": ["item_id", "group_id"],
+              "required": [
+                "item_id",
+                "group_id"
+              ],
+              "visible": [
+                "item_id",
+                "group_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_COLUMNS",
+    "name": "MONDAY__COLUMNS",
     "description": "Retrieve columns from a Monday.com board with their types, settings, and configuration.",
-    "tags": ["columns", "board-structure", "schema"],
+    "tags": [
+      "columns",
+      "board-structure",
+      "schema"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -712,9 +969,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -732,25 +992,43 @@
                   "description": "Board ID to get columns from"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_COLUMN",
     "description": "Create a new column in a Monday.com board with specified type and configuration.",
-    "tags": ["columns", "create", "board-structure"],
+    "tags": [
+      "columns",
+      "create",
+      "board-structure"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -770,9 +1048,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -795,29 +1076,61 @@
                 },
                 "column_type": {
                   "type": "string",
-                  "enum": ["text", "numbers", "status", "date", "people", "timeline", "email", "phone", "link"],
+                  "enum": [
+                    "text",
+                    "numbers",
+                    "status",
+                    "date",
+                    "people",
+                    "timeline",
+                    "email",
+                    "phone",
+                    "link"
+                  ],
                   "description": "Column data type"
                 }
               },
-              "required": ["board_id", "title", "column_type"],
-              "visible": ["board_id", "title", "column_type"],
+              "required": [
+                "board_id",
+                "title",
+                "column_type"
+              ],
+              "visible": [
+                "board_id",
+                "title",
+                "column_type"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_GROUPS",
+    "name": "MONDAY__GROUPS",
     "description": "Retrieve groups from a Monday.com board for organizing items into logical sections.",
-    "tags": ["groups", "board-organization", "sections"],
+    "tags": [
+      "groups",
+      "board-organization",
+      "sections"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -837,9 +1150,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -857,25 +1173,43 @@
                   "description": "Board ID to get groups from"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_GROUP",
     "description": "Create a new group in a Monday.com board to organize items into logical sections.",
-    "tags": ["groups", "create", "organization"],
+    "tags": [
+      "groups",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -895,9 +1229,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -920,30 +1257,69 @@
                 },
                 "group_color": {
                   "type": "string",
-                  "enum": ["#0086c0", "#579bfc", "#66ccff", "#68a1bd", "#9aadbd", "#4eccc6", "#68bd6e", "#9cd326", "#cab641", "#ffcb00", "#fdab3d", "#ff158a", "#bb3354", "#ff5ac4", "#ad4c64", "#784bd1", "#7f5347"],
+                  "enum": [
+                    "#0086c0",
+                    "#579bfc",
+                    "#66ccff",
+                    "#68a1bd",
+                    "#9aadbd",
+                    "#4eccc6",
+                    "#68bd6e",
+                    "#9cd326",
+                    "#cab641",
+                    "#ffcb00",
+                    "#fdab3d",
+                    "#ff158a",
+                    "#bb3354",
+                    "#ff5ac4",
+                    "#ad4c64",
+                    "#784bd1",
+                    "#7f5347"
+                  ],
                   "default": "#0086c0",
                   "description": "Group color"
                 }
               },
-              "required": ["board_id", "group_name"],
-              "visible": ["board_id", "group_name", "group_color"],
+              "required": [
+                "board_id",
+                "group_name"
+              ],
+              "visible": [
+                "board_id",
+                "group_name",
+                "group_color"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__DUPLICATE_GROUP",
     "description": "Duplicate a group in Monday.com board with all its items and structure.",
-    "tags": ["groups", "duplicate", "copy"],
+    "tags": [
+      "groups",
+      "duplicate",
+      "copy"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -963,9 +1339,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -996,25 +1375,48 @@
                   "description": "Whether to add the duplicated group to the top of the board"
                 }
               },
-              "required": ["board_id", "group_id", "group_title"],
-              "visible": ["board_id", "group_id", "group_title", "add_to_top"],
+              "required": [
+                "board_id",
+                "group_id",
+                "group_title"
+              ],
+              "visible": [
+                "board_id",
+                "group_id",
+                "group_title",
+                "add_to_top"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__DELETE_GROUP",
+    "name": "MONDAY__GROUP",
     "description": "Delete a group from a Monday.com board, removing all items within the group.",
-    "tags": ["groups", "delete", "cleanup"],
+    "tags": [
+      "groups",
+      "delete",
+      "cleanup"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1034,9 +1436,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1058,25 +1463,45 @@
                   "description": "Group ID to delete"
                 }
               },
-              "required": ["board_id", "group_id"],
-              "visible": ["board_id", "group_id"],
+              "required": [
+                "board_id",
+                "group_id"
+              ],
+              "visible": [
+                "board_id",
+                "group_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_USERS",
+    "name": "MONDAY__USERS",
     "description": "Retrieve users from Monday.com workspace with their profiles, roles, and activity status.",
-    "tags": ["users", "team", "workspace"],
+    "tags": [
+      "users",
+      "team",
+      "workspace"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1096,9 +1521,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1119,24 +1547,39 @@
                 }
               },
               "required": [],
-              "visible": ["limit"],
+              "visible": [
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__ADD_USERS_TO_WORKSPACE",
     "description": "Add new users to Monday.com workspace by email with specified roles and team assignments.",
-    "tags": ["users", "invite", "workspace"],
+    "tags": [
+      "users",
+      "invite",
+      "workspace"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1156,9 +1599,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1181,30 +1627,54 @@
                 },
                 "user_kind": {
                   "type": "string",
-                  "enum": ["owner", "member", "guest", "viewer"],
+                  "enum": [
+                    "owner",
+                    "member",
+                    "guest",
+                    "viewer"
+                  ],
                   "default": "member",
                   "description": "Role for the new users"
                 }
               },
-              "required": ["user_emails"],
-              "visible": ["user_emails", "user_kind"],
+              "required": [
+                "user_emails"
+              ],
+              "visible": [
+                "user_emails",
+                "user_kind"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_UPDATE",
     "description": "Add an update or comment to an item in Monday.com for team collaboration and progress tracking.",
-    "tags": ["updates", "comments", "collaboration"],
+    "tags": [
+      "updates",
+      "comments",
+      "collaboration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1224,9 +1694,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1248,25 +1721,45 @@
                   "description": "Update content/message"
                 }
               },
-              "required": ["item_id", "body"],
-              "visible": ["item_id", "body"],
+              "required": [
+                "item_id",
+                "body"
+              ],
+              "visible": [
+                "item_id",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_UPDATES",
+    "name": "MONDAY__UPDATES",
     "description": "Retrieve updates and comments from Monday.com items for team communication and activity tracking.",
-    "tags": ["updates", "comments", "activity"],
+    "tags": [
+      "updates",
+      "comments",
+      "activity"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1286,9 +1779,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1312,25 +1808,44 @@
                   "description": "Number of updates to return"
                 }
               },
-              "required": ["item_id"],
-              "visible": ["item_id", "limit"],
+              "required": [
+                "item_id"
+              ],
+              "visible": [
+                "item_id",
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__LIKE_UPDATE",
     "description": "Like or unlike an update in Monday.com for engagement and team interaction.",
-    "tags": ["updates", "like", "engagement"],
+    "tags": [
+      "updates",
+      "like",
+      "engagement"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1350,9 +1865,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1370,25 +1888,43 @@
                   "description": "Update ID to like"
                 }
               },
-              "required": ["update_id"],
-              "visible": ["update_id"],
+              "required": [
+                "update_id"
+              ],
+              "visible": [
+                "update_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CLEAR_ITEM_UPDATES",
     "description": "Clear all updates from a Monday.com item for cleanup and organization.",
-    "tags": ["items", "updates", "cleanup"],
+    "tags": [
+      "items",
+      "updates",
+      "cleanup"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1408,9 +1944,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1428,25 +1967,43 @@
                   "description": "Item ID to clear updates from"
                 }
               },
-              "required": ["item_id"],
-              "visible": ["item_id"],
+              "required": [
+                "item_id"
+              ],
+              "visible": [
+                "item_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_WORKSPACES",
+    "name": "MONDAY__WORKSPACES",
     "description": "Retrieve workspaces available in Monday.com account with their settings and team information.",
-    "tags": ["workspaces", "organization", "teams"],
+    "tags": [
+      "workspaces",
+      "organization",
+      "teams"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1466,9 +2023,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1479,20 +2039,30 @@
               "description": "GraphQL query for retrieving workspaces"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_TEAMS",
+    "name": "MONDAY__TEAMS",
     "description": "Retrieve teams from Monday.com workspace with their members and permissions.",
-    "tags": ["teams", "workspace", "members"],
+    "tags": [
+      "teams",
+      "workspace",
+      "members"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1512,9 +2082,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1525,12 +2098,18 @@
               "description": "GraphQL query for retrieving teams"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
@@ -1538,7 +2117,11 @@
   {
     "name": "MONDAY__CREATE_TEAM",
     "description": "Create a new team in Monday.com workspace for organizing users and managing permissions.",
-    "tags": ["teams", "create", "organization"],
+    "tags": [
+      "teams",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1558,9 +2141,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1585,25 +2171,45 @@
                   "description": "Array of user IDs to add to the team"
                 }
               },
-              "required": ["name", "user_ids"],
-              "visible": ["name", "user_ids"],
+              "required": [
+                "name",
+                "user_ids"
+              ],
+              "visible": [
+                "name",
+                "user_ids"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__ADD_USERS_TO_TEAM",
     "description": "Add existing users to a Monday.com team for better organization and permissions management.",
-    "tags": ["teams", "users", "assign"],
+    "tags": [
+      "teams",
+      "users",
+      "assign"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1623,9 +2229,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1650,25 +2259,45 @@
                   "description": "Array of user IDs to add to the team"
                 }
               },
-              "required": ["team_id", "user_ids"],
-              "visible": ["team_id", "user_ids"],
+              "required": [
+                "team_id",
+                "user_ids"
+              ],
+              "visible": [
+                "team_id",
+                "user_ids"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_TAGS",
+    "name": "MONDAY__TAGS",
     "description": "Retrieve tags from Monday.com workspace for labeling and organizing items across boards.",
-    "tags": ["tags", "labels", "organization"],
+    "tags": [
+      "tags",
+      "labels",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1688,9 +2317,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1701,12 +2333,18 @@
               "description": "GraphQL query for retrieving workspace tags"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
@@ -1714,7 +2352,11 @@
   {
     "name": "MONDAY__CREATE_TAG",
     "description": "Create a new tag in Monday.com workspace for labeling and categorizing items.",
-    "tags": ["tags", "create", "labels"],
+    "tags": [
+      "tags",
+      "create",
+      "labels"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1734,9 +2376,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1755,30 +2400,67 @@
                 },
                 "tag_color": {
                   "type": "string",
-                  "enum": ["#0086c0", "#579bfc", "#66ccff", "#68a1bd", "#9aadbd", "#4eccc6", "#68bd6e", "#9cd326", "#cab641", "#ffcb00", "#fdab3d", "#ff158a", "#bb3354", "#ff5ac4", "#ad4c64", "#784bd1", "#7f5347"],
+                  "enum": [
+                    "#0086c0",
+                    "#579bfc",
+                    "#66ccff",
+                    "#68a1bd",
+                    "#9aadbd",
+                    "#4eccc6",
+                    "#68bd6e",
+                    "#9cd326",
+                    "#cab641",
+                    "#ffcb00",
+                    "#fdab3d",
+                    "#ff158a",
+                    "#bb3354",
+                    "#ff5ac4",
+                    "#ad4c64",
+                    "#784bd1",
+                    "#7f5347"
+                  ],
                   "default": "#0086c0",
                   "description": "Tag color for visual identification"
                 }
               },
-              "required": ["tag_name"],
-              "visible": ["tag_name", "tag_color"],
+              "required": [
+                "tag_name"
+              ],
+              "visible": [
+                "tag_name",
+                "tag_color"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_FOLDERS",
+    "name": "MONDAY__FOLDERS",
     "description": "Retrieve folders from Monday.com workspace for organizing boards hierarchically.",
-    "tags": ["folders", "organization", "workspace"],
+    "tags": [
+      "folders",
+      "organization",
+      "workspace"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1798,9 +2480,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1821,24 +2506,39 @@
                 }
               },
               "required": [],
-              "visible": ["limit"],
+              "visible": [
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
-          "visible": ["variables"],
+          "required": [
+            "query"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_FOLDER",
     "description": "Create a new folder in Monday.com workspace to organize boards into logical hierarchies.",
-    "tags": ["folders", "create", "organization"],
+    "tags": [
+      "folders",
+      "create",
+      "organization"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1858,9 +2558,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1879,7 +2582,25 @@
                 },
                 "color": {
                   "type": "string",
-                  "enum": ["#0086c0", "#579bfc", "#66ccff", "#68a1bd", "#9aadbd", "#4eccc6", "#68bd6e", "#9cd326", "#cab641", "#ffcb00", "#fdab3d", "#ff158a", "#bb3354", "#ff5ac4", "#ad4c64", "#784bd1", "#7f5347"],
+                  "enum": [
+                    "#0086c0",
+                    "#579bfc",
+                    "#66ccff",
+                    "#68a1bd",
+                    "#9aadbd",
+                    "#4eccc6",
+                    "#68bd6e",
+                    "#9cd326",
+                    "#cab641",
+                    "#ffcb00",
+                    "#fdab3d",
+                    "#ff158a",
+                    "#bb3354",
+                    "#ff5ac4",
+                    "#ad4c64",
+                    "#784bd1",
+                    "#7f5347"
+                  ],
                   "default": "#0086c0",
                   "description": "Folder color"
                 },
@@ -1888,25 +2609,45 @@
                   "description": "Parent folder ID for nested organization"
                 }
               },
-              "required": ["name"],
-              "visible": ["name", "color", "parent_folder_id"],
+              "required": [
+                "name"
+              ],
+              "visible": [
+                "name",
+                "color",
+                "parent_folder_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_WEBHOOK",
     "description": "Create a webhook in Monday.com to receive real-time notifications for board and item changes.",
-    "tags": ["webhooks", "automation", "notifications"],
+    "tags": [
+      "webhooks",
+      "automation",
+      "notifications"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1926,9 +2667,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1952,29 +2696,58 @@
                 },
                 "event": {
                   "type": "string",
-                  "enum": ["change_column_value", "create_item", "create_update", "edit_update", "create_board", "item_deleted"],
+                  "enum": [
+                    "change_column_value",
+                    "create_item",
+                    "create_update",
+                    "edit_update",
+                    "create_board",
+                    "item_deleted"
+                  ],
                   "description": "Event type to trigger webhook"
                 }
               },
-              "required": ["board_id", "url", "event"],
-              "visible": ["board_id", "url", "event"],
+              "required": [
+                "board_id",
+                "url",
+                "event"
+              ],
+              "visible": [
+                "board_id",
+                "url",
+                "event"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__DELETE_WEBHOOK",
+    "name": "MONDAY__WEBHOOK",
     "description": "Delete a webhook from Monday.com to stop receiving notifications for specific events.",
-    "tags": ["webhooks", "delete", "cleanup"],
+    "tags": [
+      "webhooks",
+      "delete",
+      "cleanup"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1994,9 +2767,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2014,25 +2790,43 @@
                   "description": "Webhook ID to delete"
                 }
               },
-              "required": ["id"],
-              "visible": ["id"],
+              "required": [
+                "id"
+              ],
+              "visible": [
+                "id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__SEARCH_ITEMS",
     "description": "Search for items across Monday.com boards using keywords and filters.",
-    "tags": ["search", "items", "find"],
+    "tags": [
+      "search",
+      "items",
+      "find"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2052,9 +2846,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2085,7 +2882,10 @@
                           "type": "string"
                         }
                       }
-                    }
+                    },
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
                   },
                   "description": "Column criteria for searching"
                 },
@@ -2096,25 +2896,45 @@
                   "description": "Number of items to return"
                 }
               },
-              "required": ["columns"],
-              "visible": ["board_id", "columns", "limit"],
+              "required": [
+                "columns"
+              ],
+              "visible": [
+                "board_id",
+                "columns",
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_ACTIVITY_LOGS",
+    "name": "MONDAY__ACTIVITY_LOGS",
     "description": "Retrieve activity logs from Monday.com for auditing and tracking all workspace changes.",
-    "tags": ["activity", "logs", "audit"],
+    "tags": [
+      "activity",
+      "logs",
+      "audit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2134,9 +2954,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2160,25 +2983,44 @@
                   "description": "Number of activity logs to return"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id", "limit"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id",
+                "limit"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_BOARD_SUBSCRIBERS",
+    "name": "MONDAY__BOARD_SUBSCRIBERS",
     "description": "Retrieve subscribers of a Monday.com board to see who receives notifications about board changes.",
-    "tags": ["boards", "subscribers", "notifications"],
+    "tags": [
+      "boards",
+      "subscribers",
+      "notifications"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2198,9 +3040,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2218,25 +3063,43 @@
                   "description": "Board ID to get subscribers from"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__ADD_SUBSCRIBERS_TO_BOARD",
     "description": "Add subscribers to a Monday.com board to receive notifications about board activities and changes.",
-    "tags": ["boards", "subscribers", "notifications"],
+    "tags": [
+      "boards",
+      "subscribers",
+      "notifications"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2256,9 +3119,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2284,30 +3150,54 @@
                 },
                 "kind": {
                   "type": "string",
-                  "enum": ["owner", "subscriber"],
+                  "enum": [
+                    "owner",
+                    "subscriber"
+                  ],
                   "default": "subscriber",
                   "description": "Subscription type for the users"
                 }
               },
-              "required": ["board_id", "user_ids"],
-              "visible": ["board_id", "user_ids", "kind"],
+              "required": [
+                "board_id",
+                "user_ids"
+              ],
+              "visible": [
+                "board_id",
+                "user_ids",
+                "kind"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__REMOVE_SUBSCRIBERS_FROM_BOARD",
     "description": "Remove subscribers from a Monday.com board to stop notifications about board activities.",
-    "tags": ["boards", "subscribers", "unsubscribe"],
+    "tags": [
+      "boards",
+      "subscribers",
+      "unsubscribe"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2327,9 +3217,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2354,25 +3247,45 @@
                   "description": "Array of user IDs to remove as subscribers"
                 }
               },
-              "required": ["board_id", "user_ids"],
-              "visible": ["board_id", "user_ids"],
+              "required": [
+                "board_id",
+                "user_ids"
+              ],
+              "visible": [
+                "board_id",
+                "user_ids"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_BOARD_VIEWS",
+    "name": "MONDAY__BOARD_VIEWS",
     "description": "Retrieve custom views from a Monday.com board including filters, sorting, and layout configurations.",
-    "tags": ["boards", "views", "filters"],
+    "tags": [
+      "boards",
+      "views",
+      "filters"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2392,9 +3305,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2412,25 +3328,43 @@
                   "description": "Board ID to get views from"
                 }
               },
-              "required": ["board_id"],
-              "visible": ["board_id"],
+              "required": [
+                "board_id"
+              ],
+              "visible": [
+                "board_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_BOARD_VIEW",
     "description": "Create a custom view in Monday.com board with specific filters, sorting, and display settings.",
-    "tags": ["boards", "views", "create"],
+    "tags": [
+      "boards",
+      "views",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2450,9 +3384,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2475,7 +3412,15 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["table", "kanban", "calendar", "chart", "gantt", "timeline", "map"],
+                  "enum": [
+                    "table",
+                    "kanban",
+                    "calendar",
+                    "chart",
+                    "gantt",
+                    "timeline",
+                    "map"
+                  ],
                   "default": "table",
                   "description": "View type"
                 },
@@ -2484,25 +3429,48 @@
                   "description": "JSON string containing view configuration"
                 }
               },
-              "required": ["board_id", "name", "type"],
-              "visible": ["board_id", "name", "type", "settings_json"],
+              "required": [
+                "board_id",
+                "name",
+                "type"
+              ],
+              "visible": [
+                "board_id",
+                "name",
+                "type",
+                "settings_json"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_ASSETS",
+    "name": "MONDAY__ASSETS",
     "description": "Retrieve file assets from Monday.com items including documents, images, and attachments.",
-    "tags": ["assets", "files", "attachments"],
+    "tags": [
+      "assets",
+      "files",
+      "attachments"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2522,9 +3490,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2545,25 +3516,43 @@
                   "description": "Array of asset IDs to retrieve"
                 }
               },
-              "required": ["asset_ids"],
-              "visible": ["asset_ids"],
+              "required": [
+                "asset_ids"
+              ],
+              "visible": [
+                "asset_ids"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MONDAY__CREATE_NOTIFICATION",
     "description": "Create a notification in Monday.com to alert team members about important updates or changes.",
-    "tags": ["notifications", "alerts", "communication"],
+    "tags": [
+      "notifications",
+      "alerts",
+      "communication"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2583,9 +3572,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2612,30 +3604,56 @@
                 },
                 "target_type": {
                   "type": "string",
-                  "enum": ["Project", "Board"],
+                  "enum": [
+                    "Project",
+                    "Board"
+                  ],
                   "default": "Project",
                   "description": "Type of target object"
                 }
               },
-              "required": ["text", "user_id", "target_id"],
-              "visible": ["text", "user_id", "target_id", "target_type"],
+              "required": [
+                "text",
+                "user_id",
+                "target_id"
+              ],
+              "visible": [
+                "text",
+                "user_id",
+                "target_id",
+                "target_type"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["query", "variables"],
-          "visible": ["variables"],
+          "required": [
+            "query",
+            "variables"
+          ],
+          "visible": [
+            "variables"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_ACCOUNT",
+    "name": "MONDAY__ACCOUNT",
     "description": "Retrieve account information from Monday.com including workspace details and billing info.",
-    "tags": ["account", "workspace", "billing"],
+    "tags": [
+      "account",
+      "workspace",
+      "billing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2655,9 +3673,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2668,20 +3689,30 @@
               "description": "GraphQL query for retrieving account info"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }
   },
   {
-    "name": "MONDAY__GET_COMPLEXITY",
+    "name": "MONDAY__COMPLEXITY",
     "description": "Retrieve API complexity usage information from Monday.com to monitor rate limits and optimize queries.",
-    "tags": ["complexity", "rate-limits", "monitoring"],
+    "tags": [
+      "complexity",
+      "rate-limits",
+      "monitoring"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2701,9 +3732,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -2714,12 +3748,18 @@
               "description": "GraphQL query for retrieving API complexity usage"
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         }
       },
-      "required": ["header", "body"],
+      "required": [
+        "header",
+        "body"
+      ],
       "visible": [],
       "additionalProperties": false
     }

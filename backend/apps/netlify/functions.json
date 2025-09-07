@@ -1,8 +1,13 @@
 [
   {
-    "name": "NETLIFY__GET_ACCOUNTS",
+    "name": "NETLIFY__ACCOUNTS",
     "description": "List all accounts/teams that the authenticated user has access to. In Netlify's API, accounts are equivalent to teams.",
-    "tags": ["accounts", "teams", "list", "organizations"],
+    "tags": [
+      "accounts",
+      "teams",
+      "list",
+      "organizations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -20,9 +25,14 @@
     }
   },
   {
-    "name": "NETLIFY__GET_ACCOUNT_BY_ID",
+    "name": "NETLIFY__ACCOUNT_BY_ID",
     "description": "Get information about a specific account/team by its ID or slug.",
-    "tags": ["accounts", "teams", "get", "retrieve"],
+    "tags": [
+      "accounts",
+      "teams",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -43,20 +53,35 @@
               "description": "The unique identifier or slug of the account/team."
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__CREATE_SITE",
     "description": "Create a new site/project on Netlify with full support for both public and private repositories. For private repositories, use NETLIFY__CREATE_DEPLOY_KEY first to generate a deploy key, then GITHUB__CREATE_DEPLOY_KEY to add it to your repository, then use this function with the deploy_key_id parameter. IMPORTANT: Verify the correct branch name (main vs master) in your repository before deployment to avoid branch not found errors.",
-    "tags": ["sites", "projects", "create", "private", "repository", "deploy"],
+    "tags": [
+      "sites",
+      "projects",
+      "create",
+      "private",
+      "repository",
+      "deploy"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -86,7 +111,11 @@
               "properties": {
                 "provider": {
                   "type": "string",
-                  "enum": ["github", "gitlab", "bitbucket"],
+                  "enum": [
+                    "github",
+                    "gitlab",
+                    "bitbucket"
+                  ],
                   "description": "Git provider."
                 },
                 "repo": {
@@ -120,24 +149,47 @@
                 }
               },
               "required": [],
-              "visible": ["provider", "repo", "branch", "dir", "cmd", "private", "id", "deploy_key_id"],
+              "visible": [
+                "provider",
+                "repo",
+                "branch",
+                "dir",
+                "cmd",
+                "private",
+                "id",
+                "deploy_key_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["name"],
-          "visible": ["name", "custom_domain", "repo"],
+          "required": [
+            "name"
+          ],
+          "visible": [
+            "name",
+            "custom_domain",
+            "repo"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__GET_SITES",
+    "name": "NETLIFY__SITES",
     "description": "Get all sites that the authenticated user has access to.",
-    "tags": ["sites", "list", "projects"],
+    "tags": [
+      "sites",
+      "list",
+      "projects"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -155,9 +207,13 @@
     }
   },
   {
-    "name": "NETLIFY__GET_SITE",
+    "name": "NETLIFY__SITE_GET_SITES",
     "description": "Get information about a specific site by its ID or domain.",
-    "tags": ["sites", "get", "retrieve"],
+    "tags": [
+      "sites",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -178,20 +234,32 @@
               "description": "The unique identifier or domain of the site."
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__UPDATE_SITE",
     "description": "Update an existing site's configuration.",
-    "tags": ["sites", "projects", "update"],
+    "tags": [
+      "sites",
+      "projects",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -212,8 +280,12 @@
               "description": "The unique identifier of the site."
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -246,29 +318,48 @@
                     }
                   },
                   "required": [],
-                  "visible": ["pretty_urls"],
+                  "visible": [
+                    "pretty_urls"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["html"],
+              "visible": [
+                "html"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["name", "custom_domain", "password", "processing_settings"],
+          "visible": [
+            "name",
+            "custom_domain",
+            "password",
+            "processing_settings"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__DELETE_SITE",
+    "name": "NETLIFY__SITE_DELETE_SITES",
     "description": "Permanently delete a site.",
-    "tags": ["sites", "delete", "remove"],
+    "tags": [
+      "sites",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -289,20 +380,33 @@
               "description": "The unique identifier of the site to delete."
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__GET_ENV_VARIABLES",
+    "name": "NETLIFY__ENV_VARIABLES",
     "description": "Get environment variables for an account/team.",
-    "tags": ["environment", "variables", "env", "config"],
+    "tags": [
+      "environment",
+      "variables",
+      "env",
+      "config"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -323,8 +427,12 @@
               "description": "The unique identifier of the account."
             }
           },
-          "required": ["account_id"],
-          "visible": ["account_id"],
+          "required": [
+            "account_id"
+          ],
+          "visible": [
+            "account_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -337,19 +445,31 @@
             }
           },
           "required": [],
-          "visible": ["site_id"],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__GET_DEPLOY",
+    "name": "NETLIFY__DEPLOY",
     "description": "Get information about a specific deployment.",
-    "tags": ["deploy", "deployment", "get", "retrieve"],
+    "tags": [
+      "deploy",
+      "deployment",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -370,20 +490,33 @@
               "description": "The unique identifier of the deployment."
             }
           },
-          "required": ["deploy_id"],
-          "visible": ["deploy_id"],
+          "required": [
+            "deploy_id"
+          ],
+          "visible": [
+            "deploy_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__LIST_DEPLOYS",
     "description": "List all deployments for a specific site.",
-    "tags": ["deploy", "deployment", "list", "site"],
+    "tags": [
+      "deploy",
+      "deployment",
+      "list",
+      "site"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -404,8 +537,12 @@
               "description": "The unique identifier of the site."
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -425,19 +562,33 @@
             }
           },
           "required": [],
-          "visible": ["page", "per_page"],
+          "visible": [
+            "page",
+            "per_page"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__GET_SITE_DEPLOY",
+    "name": "NETLIFY__SITE_DEPLOY",
     "description": "Get information about a specific deployment for a specific site.",
-    "tags": ["deploy", "deployment", "get", "retrieve", "site"],
+    "tags": [
+      "deploy",
+      "deployment",
+      "get",
+      "retrieve",
+      "site"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -462,20 +613,38 @@
               "description": "The unique identifier of the deployment."
             }
           },
-          "required": ["site_id", "deploy_id"],
-          "visible": ["site_id", "deploy_id"],
+          "required": [
+            "site_id",
+            "deploy_id"
+          ],
+          "visible": [
+            "site_id",
+            "deploy_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__CREATE_DEPLOY_KEY",
     "description": "Step 1 of private repository deployment: Create a new deploy key pair. This generates SSH keys that allow Netlify to access private repositories. After creating this, use NETLIFY__GET_DEPLOY_KEY or NETLIFY__LIST_DEPLOY_KEYS to get the public key, then add it to your GitHub repository using GITHUB__CREATE_DEPLOY_KEY.",
-    "tags": ["deploy", "key", "private", "repository", "create", "ssh", "workflow"],
+    "tags": [
+      "deploy",
+      "key",
+      "private",
+      "repository",
+      "create",
+      "ssh",
+      "workflow"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -497,19 +666,30 @@
             }
           },
           "required": [],
-          "visible": ["title"],
+          "visible": [
+            "title"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "NETLIFY__GET_DEPLOY_KEY",
+    "name": "NETLIFY__DEPLOY_KEY_GET_DEPLOY_KEYS",
     "description": "Get information about a specific deploy key.",
-    "tags": ["deploy", "key", "get", "retrieve"],
+    "tags": [
+      "deploy",
+      "key",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -530,20 +710,32 @@
               "description": "The unique identifier of the deploy key."
             }
           },
-          "required": ["key_id"],
-          "visible": ["key_id"],
+          "required": [
+            "key_id"
+          ],
+          "visible": [
+            "key_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__LIST_DEPLOY_KEYS",
     "description": "List all deploy keys for the account.",
-    "tags": ["deploy", "key", "list"],
+    "tags": [
+      "deploy",
+      "key",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -561,9 +753,14 @@
     }
   },
   {
-    "name": "NETLIFY__DELETE_DEPLOY_KEY",
+    "name": "NETLIFY__DEPLOY_KEY_DELETE_DEPLOY_KEYS",
     "description": "Delete a deploy key.",
-    "tags": ["deploy", "key", "delete", "remove"],
+    "tags": [
+      "deploy",
+      "key",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -584,20 +781,34 @@
               "description": "The unique identifier of the deploy key."
             }
           },
-          "required": ["key_id"],
-          "visible": ["key_id"],
+          "required": [
+            "key_id"
+          ],
+          "visible": [
+            "key_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__CREATE_BUILD_HOOK",
     "description": "Create a new build hook for a site. Build hooks provide unique URLs to trigger new builds and deploys from external services or scripts. Once created, use NETLIFY__TRIGGER_BUILD_HOOK to actually trigger builds.",
-    "tags": ["build", "hook", "create", "webhook", "integration"],
+    "tags": [
+      "build",
+      "hook",
+      "create",
+      "webhook",
+      "integration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -618,8 +829,12 @@
               "description": "The unique identifier of the site to create a build hook for."
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -636,20 +851,38 @@
               "description": "The branch to build when the hook is triggered. Defaults to the site's default branch."
             }
           },
-          "required": ["title"],
-          "visible": ["title", "branch"],
+          "required": [
+            "title"
+          ],
+          "visible": [
+            "title",
+            "branch"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "NETLIFY__TRIGGER_BUILD_HOOK",
     "description": "Trigger a new build and deployment by calling a build hook URL. Build hooks pull the latest code from the connected Git repository and rebuild the site. This is the recommended method for triggering Git-based deployments.",
-    "tags": ["build", "hook", "trigger", "deploy", "git", "webhook"],
+    "tags": [
+      "build",
+      "hook",
+      "trigger",
+      "deploy",
+      "git",
+      "webhook"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -670,8 +903,12 @@
               "description": "The build hook ID from the build hook URL. Find this in Project configuration > Build & deploy > Build hooks."
             }
           },
-          "required": ["hook_id"],
-          "visible": ["hook_id"],
+          "required": [
+            "hook_id"
+          ],
+          "visible": [
+            "hook_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -693,7 +930,11 @@
             }
           },
           "required": [],
-          "visible": ["trigger_branch", "trigger_title", "clear_cache"],
+          "visible": [
+            "trigger_branch",
+            "trigger_title",
+            "clear_cache"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -706,12 +947,20 @@
             }
           },
           "required": [],
-          "visible": ["message"],
+          "visible": [
+            "message"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query",
+        "body"
+      ],
       "additionalProperties": false
     }
   }

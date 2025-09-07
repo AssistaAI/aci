@@ -1,6 +1,6 @@
 [
   {
-    "name": "FIGMA__GET_FILE",
+    "name": "FIGMA__FILE",
     "description": "Retrieves the document structure of a Figma file based on the given file key. Returns the entire document as JSON including nodes, their names, and types.",
     "tags": [
       "figma",
@@ -90,7 +90,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_FILE_NODES",
+    "name": "FIGMA__FILE_NODES",
     "description": "Retrieves the nodes present in a Figma file based on the given file key and node IDs.",
     "tags": [
       "figma",
@@ -159,7 +159,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_IMAGE",
+    "name": "FIGMA__IMAGE",
     "description": "Retrieves images rendered from a Figma file based on the given file key and node IDs.",
     "tags": [
       "figma",
@@ -237,7 +237,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_FILE_VERSIONS",
+    "name": "FIGMA__FILE_VERSIONS",
     "description": "Retrieves the version history of a Figma file based on the given file key.",
     "tags": [
       "figma",
@@ -287,7 +287,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_TEAM_PROJECTS",
+    "name": "FIGMA__TEAM_PROJECTS",
     "description": "Retrieves a list of projects within a team based on the given team ID.",
     "tags": [
       "figma",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_PROJECT_FILES",
+    "name": "FIGMA__PROJECT_FILES",
     "description": "Lists the files in a given project based on the project ID.",
     "tags": [
       "figma",
@@ -385,7 +385,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_COMMENTS",
+    "name": "FIGMA__COMMENTS",
     "description": "Retrieves all comments from a Figma file, including their content and author information.",
     "tags": [
       "figma",
@@ -435,7 +435,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_IMAGE_FILLS",
+    "name": "FIGMA__IMAGE_FILLS",
     "description": "Returns download links for all images present in image fills in a document.",
     "tags": [
       "figma",
@@ -485,7 +485,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_FILE_COMPONENT_SETS",
+    "name": "FIGMA__FILE_COMPONENT_SETS",
     "description": "Returns a list of component sets in a file, indicating which components belong to which component set.",
     "tags": [
       "figma",
@@ -535,7 +535,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_STYLE",
+    "name": "FIGMA__STYLE",
     "description": "Retrieves a specific style node from a Figma file based on the given file key and node ID. Returns detailed information about the style, including its properties and metadata.",
     "tags": [
       "figma",
@@ -604,7 +604,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_COMPONENT",
+    "name": "FIGMA__COMPONENT",
     "description": "Retrieves a specific component node from a Figma file based on the given file key and node ID. Returns detailed information about the component, including its properties and metadata.",
     "tags": [
       "figma",
@@ -673,7 +673,7 @@
     }
   },
   {
-    "name": "FIGMA__POST_COMMENT",
+    "name": "FIGMA__COMMENT_POST_COMMENTS",
     "description": "Posts a new comment on a specific location or node within a Figma file. Supports thread creation and collaboration workflows.",
     "tags": [
       "figma",
@@ -773,7 +773,7 @@
     }
   },
   {
-    "name": "FIGMA__DELETE_COMMENT",
+    "name": "FIGMA__COMMENT_DELETE_COMMENTS",
     "description": "Deletes a specific comment from a Figma file. Requires appropriate permissions and comment ownership or team admin rights.",
     "tags": [
       "figma",
@@ -830,7 +830,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_TEAM_COMPONENTS",
+    "name": "FIGMA__TEAM_COMPONENTS",
     "description": "Retrieves a paginated list of published components from a team's library. Essential for managing design systems and component libraries.",
     "tags": [
       "figma",
@@ -902,7 +902,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_TEAM_STYLES",
+    "name": "FIGMA__TEAM_STYLES",
     "description": "Retrieves a paginated list of published styles from a team's library. Includes color, text, effect, and layout grid styles.",
     "tags": [
       "figma",
@@ -974,7 +974,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_USER_ME",
+    "name": "FIGMA__USER_ME",
     "description": "Returns information about the current user including profile details, team memberships, and access permissions.",
     "tags": [
       "figma",
@@ -1003,7 +1003,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_LIBRARY_ANALYTICS_COMPONENT_ACTIONS",
+    "name": "FIGMA__LIBRARY_ANALYTICS_COMPONENT_ACTIONS",
     "description": "Retrieves analytics data for component usage in a library, including detach events and usage patterns. Available for Organization and Enterprise plans.",
     "tags": [
       "figma",
@@ -1079,7 +1079,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_LIBRARY_ANALYTICS_STYLE_USAGES",
+    "name": "FIGMA__LIBRARY_ANALYTICS_STYLE_USAGES",
     "description": "Retrieves analytics data for style usage in a library, including usage counts and adoption patterns. Available for Organization and Enterprise plans.",
     "tags": [
       "figma",
@@ -1233,7 +1233,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_WEBHOOKS",
+    "name": "FIGMA__WEBHOOKS",
     "description": "Retrieves a list of all webhooks configured for the authenticated user or team, including their status and configuration.",
     "tags": [
       "figma",
@@ -1278,7 +1278,7 @@
     }
   },
   {
-    "name": "FIGMA__DELETE_WEBHOOK",
+    "name": "FIGMA__WEBHOOK",
     "description": "Deletes a specific webhook by its ID, stopping all future notifications for that webhook subscription.",
     "tags": [
       "figma",
@@ -1328,7 +1328,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_VARIABLES",
+    "name": "FIGMA__VARIABLES_GET_LOCAL",
     "description": "Retrieves local variables from a Figma file including collections, modes, and variable values. Available only for Enterprise organizations.",
     "tags": [
       "figma",
@@ -1376,7 +1376,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_PUBLISHED_VARIABLES",
+    "name": "FIGMA__PUBLISHED_VARIABLES",
     "description": "Retrieves published variables from a Figma file that are available to other files as a library. Enterprise feature for design token management.",
     "tags": [
       "figma",
@@ -1425,7 +1425,7 @@
     }
   },
   {
-    "name": "FIGMA__POST_VARIABLES",
+    "name": "FIGMA__VARIABLES_POST_VARIABLES",
     "description": "Creates or updates variables in a Figma file. Allows for programmatic management of design tokens and variable collections. Enterprise only.",
     "tags": [
       "figma",
@@ -1477,7 +1477,11 @@
                   "action": {
                     "type": "string",
                     "description": "Action to perform (CREATE, UPDATE, DELETE).",
-                    "enum": ["CREATE", "UPDATE", "DELETE"]
+                    "enum": [
+                      "CREATE",
+                      "UPDATE",
+                      "DELETE"
+                    ]
                   },
                   "id": {
                     "type": "string",
@@ -1500,13 +1504,20 @@
                         }
                       },
                       "required": [],
-                      "visible": ["name"],
+                      "visible": [
+                        "name"
+                      ],
                       "additionalProperties": false
                     }
                   }
                 },
                 "required": [],
-                "visible": ["action", "id", "name", "modes"],
+                "visible": [
+                  "action",
+                  "id",
+                  "name",
+                  "modes"
+                ],
                 "additionalProperties": false
               }
             },
@@ -1520,7 +1531,11 @@
                   "action": {
                     "type": "string",
                     "description": "Action to perform (CREATE, UPDATE, DELETE).",
-                    "enum": ["CREATE", "UPDATE", "DELETE"]
+                    "enum": [
+                      "CREATE",
+                      "UPDATE",
+                      "DELETE"
+                    ]
                   },
                   "id": {
                     "type": "string",
@@ -1537,11 +1552,22 @@
                   "resolvedType": {
                     "type": "string",
                     "description": "Type of the variable (COLOR, FLOAT, STRING, BOOLEAN).",
-                    "enum": ["COLOR", "FLOAT", "STRING", "BOOLEAN"]
+                    "enum": [
+                      "COLOR",
+                      "FLOAT",
+                      "STRING",
+                      "BOOLEAN"
+                    ]
                   }
                 },
                 "required": [],
-                "visible": ["action", "id", "name", "variableCollectionId", "resolvedType"],
+                "visible": [
+                  "action",
+                  "id",
+                  "name",
+                  "variableCollectionId",
+                  "resolvedType"
+                ],
                 "additionalProperties": false
               }
             }
@@ -1566,7 +1592,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_DEV_RESOURCES",
+    "name": "FIGMA__DEV_RESOURCES",
     "description": "Retrieves development resources and annotations from a Figma file, including code snippets, links, and implementation notes for developers.",
     "tags": [
       "figma",
@@ -1731,7 +1757,7 @@
     }
   },
   {
-    "name": "FIGMA__GET_PROTOTYPE_LINKS",
+    "name": "FIGMA__PROTOTYPE_LINKS",
     "description": "Retrieves prototype interaction links and flow configurations from a Figma file for testing and presentation purposes.",
     "tags": [
       "figma",

@@ -1,8 +1,11 @@
 [
   {
-    "name": "WEBFLOW__GET_AUTHORIZATION_INFO",
+    "name": "WEBFLOW__AUTHORIZATION_INFO",
     "description": "Get information about the current authorization token, including scopes and user details.",
-    "tags": ["authorization", "token"],
+    "tags": [
+      "authorization",
+      "token"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -22,7 +25,10 @@
   {
     "name": "WEBFLOW__LIST_SITES",
     "description": "List all sites that the current access token can access. Returns site details including ID, workspace, display name, and custom domains.",
-    "tags": ["sites", "list"],
+    "tags": [
+      "sites",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -40,9 +46,12 @@
     }
   },
   {
-    "name": "WEBFLOW__GET_SITE",
+    "name": "WEBFLOW__SITE",
     "description": "Get detailed information about a specific site including its configuration, domains, and settings.",
-    "tags": ["sites", "details"],
+    "tags": [
+      "sites",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -62,20 +71,31 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__PUBLISH_SITE",
     "description": "Publish a site to make changes live. Publishes the site to the live domain.",
-    "tags": ["sites", "publish"],
+    "tags": [
+      "sites",
+      "publish"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -95,8 +115,12 @@
               "description": "Unique identifier for the site to publish"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -109,19 +133,30 @@
             }
           },
           "required": [],
-          "visible": ["publishToWebflowSubdomain"],
+          "visible": [
+            "publishToWebflowSubdomain"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_COLLECTIONS",
     "description": "List all CMS collections for a specific site. Returns collection metadata including fields and settings.",
-    "tags": ["cms", "collections", "list"],
+    "tags": [
+      "cms",
+      "collections",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -141,20 +176,32 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_COLLECTION",
+    "name": "WEBFLOW__COLLECTION",
     "description": "Get detailed information about a specific CMS collection including its fields and configuration.",
-    "tags": ["cms", "collections", "details"],
+    "tags": [
+      "cms",
+      "collections",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -174,20 +221,32 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_COLLECTION",
     "description": "Create a new CMS collection for a site with specified fields and settings.",
-    "tags": ["cms", "collections", "create"],
+    "tags": [
+      "cms",
+      "collections",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -207,8 +266,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -227,20 +290,38 @@
               "description": "Plural name for collection items"
             }
           },
-          "required": ["displayName", "singularName", "pluralName"],
-          "visible": ["displayName", "singularName", "pluralName"],
+          "required": [
+            "displayName",
+            "singularName",
+            "pluralName"
+          ],
+          "visible": [
+            "displayName",
+            "singularName",
+            "pluralName"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_COLLECTION_ITEMS",
     "description": "List all items in a CMS collection with support for filtering, sorting, and pagination.",
-    "tags": ["cms", "items", "list"],
+    "tags": [
+      "cms",
+      "items",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -260,8 +341,12 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -280,19 +365,31 @@
             }
           },
           "required": [],
-          "visible": ["offset", "limit"],
+          "visible": [
+            "offset",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_COLLECTION_ITEM",
+    "name": "WEBFLOW__COLLECTION_ITEM",
     "description": "Get detailed information about a specific item in a CMS collection.",
-    "tags": ["cms", "items", "details"],
+    "tags": [
+      "cms",
+      "items",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -316,20 +413,35 @@
               "description": "Unique identifier for the collection item"
             }
           },
-          "required": ["collection_id", "item_id"],
-          "visible": ["collection_id", "item_id"],
+          "required": [
+            "collection_id",
+            "item_id"
+          ],
+          "visible": [
+            "collection_id",
+            "item_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_COLLECTION_ITEMS",
     "description": "Create one or multiple new items in a CMS collection. Supports bulk creation of up to 100 items per request.",
-    "tags": ["cms", "items", "create", "bulk"],
+    "tags": [
+      "cms",
+      "items",
+      "create",
+      "bulk"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -349,8 +461,12 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -363,7 +479,11 @@
                 "properties": {
                   "fieldData": {
                     "type": "object",
-                    "description": "Field data for the collection item"
+                    "description": "Field data for the collection item",
+                    "additionalProperties": false,
+                    "properties": {},
+                    "required": [],
+                    "visible": []
                   },
                   "isDraft": {
                     "type": "boolean",
@@ -371,27 +491,48 @@
                     "description": "Whether the item should be created as a draft"
                   }
                 },
-                "required": ["fieldData"],
-                "visible": ["fieldData", "isDraft"]
+                "required": [
+                  "fieldData"
+                ],
+                "visible": [
+                  "fieldData",
+                  "isDraft"
+                ],
+                "additionalProperties": false
               },
               "maxItems": 100,
               "description": "Array of items to create (max 100)"
             }
           },
-          "required": ["items"],
-          "visible": ["items"],
+          "required": [
+            "items"
+          ],
+          "visible": [
+            "items"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__UPDATE_COLLECTION_ITEMS",
     "description": "Update one or multiple existing items in a CMS collection. Supports bulk updates of up to 100 items per request.",
-    "tags": ["cms", "items", "update", "bulk"],
+    "tags": [
+      "cms",
+      "items",
+      "update",
+      "bulk"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -411,8 +552,12 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -429,34 +574,61 @@
                   },
                   "fieldData": {
                     "type": "object",
-                    "description": "Updated field data for the collection item"
+                    "description": "Updated field data for the collection item",
+                    "additionalProperties": false,
+                    "properties": {},
+                    "required": [],
+                    "visible": []
                   },
                   "isDraft": {
                     "type": "boolean",
                     "description": "Whether the item should be set as draft"
                   }
                 },
-                "required": ["id", "fieldData"],
-                "visible": ["id", "fieldData", "isDraft"]
+                "required": [
+                  "id",
+                  "fieldData"
+                ],
+                "visible": [
+                  "id",
+                  "fieldData",
+                  "isDraft"
+                ],
+                "additionalProperties": false
               },
               "maxItems": 100,
               "description": "Array of items to update (max 100)"
             }
           },
-          "required": ["items"],
-          "visible": ["items"],
+          "required": [
+            "items"
+          ],
+          "visible": [
+            "items"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__DELETE_COLLECTION_ITEMS",
+    "name": "WEBFLOW__COLLECTION_ITEMS",
     "description": "Delete one or multiple items from a CMS collection. Supports bulk deletion of up to 100 items per request.",
-    "tags": ["cms", "items", "delete", "bulk"],
+    "tags": [
+      "cms",
+      "items",
+      "delete",
+      "bulk"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -476,8 +648,12 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -492,20 +668,34 @@
               "description": "Array of item IDs to delete (max 100)"
             }
           },
-          "required": ["itemIds"],
-          "visible": ["itemIds"],
+          "required": [
+            "itemIds"
+          ],
+          "visible": [
+            "itemIds"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_COLLECTION_FIELD",
     "description": "Create a new field in an existing CMS collection with specified type and settings.",
-    "tags": ["cms", "fields", "create"],
+    "tags": [
+      "cms",
+      "fields",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -525,8 +715,12 @@
               "description": "Unique identifier for the collection"
             }
           },
-          "required": ["collection_id"],
-          "visible": ["collection_id"],
+          "required": [
+            "collection_id"
+          ],
+          "visible": [
+            "collection_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -534,7 +728,20 @@
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["PlainText", "RichText", "Image", "MultiImage", "Video", "Link", "Email", "Phone", "Number", "DateTime", "Switch", "Color"],
+              "enum": [
+                "PlainText",
+                "RichText",
+                "Image",
+                "MultiImage",
+                "Video",
+                "Link",
+                "Email",
+                "Phone",
+                "Number",
+                "DateTime",
+                "Switch",
+                "Color"
+              ],
               "description": "Type of field to create"
             },
             "displayName": {
@@ -552,20 +759,38 @@
               "description": "Whether this field must be unique"
             }
           },
-          "required": ["type", "displayName"],
-          "visible": ["type", "displayName", "isRequired", "isUnique"],
+          "required": [
+            "type",
+            "displayName"
+          ],
+          "visible": [
+            "type",
+            "displayName",
+            "isRequired",
+            "isUnique"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__UPDATE_COLLECTION_FIELD",
     "description": "Update an existing field in a CMS collection, modifying its settings and properties.",
-    "tags": ["cms", "fields", "update"],
+    "tags": [
+      "cms",
+      "fields",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -589,8 +814,14 @@
               "description": "Unique identifier for the field"
             }
           },
-          "required": ["collection_id", "field_id"],
-          "visible": ["collection_id", "field_id"],
+          "required": [
+            "collection_id",
+            "field_id"
+          ],
+          "visible": [
+            "collection_id",
+            "field_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -610,19 +841,32 @@
             }
           },
           "required": [],
-          "visible": ["displayName", "isRequired", "isUnique"],
+          "visible": [
+            "displayName",
+            "isRequired",
+            "isUnique"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__DELETE_COLLECTION_FIELD",
+    "name": "WEBFLOW__COLLECTION_FIELD",
     "description": "Remove a field from a CMS collection permanently.",
-    "tags": ["cms", "fields", "delete"],
+    "tags": [
+      "cms",
+      "fields",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -646,20 +890,33 @@
               "description": "Unique identifier for the field to delete"
             }
           },
-          "required": ["collection_id", "field_id"],
-          "visible": ["collection_id", "field_id"],
+          "required": [
+            "collection_id",
+            "field_id"
+          ],
+          "visible": [
+            "collection_id",
+            "field_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_FORMS",
     "description": "List all forms on a specific site, including form fields and settings.",
-    "tags": ["forms", "list"],
+    "tags": [
+      "forms",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -679,20 +936,31 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_FORM",
+    "name": "WEBFLOW__FORM",
     "description": "Get detailed information about a specific form including its fields and configuration.",
-    "tags": ["forms", "details"],
+    "tags": [
+      "forms",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -712,20 +980,32 @@
               "description": "Unique identifier for the form"
             }
           },
-          "required": ["form_id"],
-          "visible": ["form_id"],
+          "required": [
+            "form_id"
+          ],
+          "visible": [
+            "form_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_FORM_SUBMISSIONS",
     "description": "List form submissions for a specific form with pagination support.",
-    "tags": ["forms", "submissions", "list"],
+    "tags": [
+      "forms",
+      "submissions",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -745,8 +1025,12 @@
               "description": "Unique identifier for the form"
             }
           },
-          "required": ["form_id"],
-          "visible": ["form_id"],
+          "required": [
+            "form_id"
+          ],
+          "visible": [
+            "form_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -765,19 +1049,31 @@
             }
           },
           "required": [],
-          "visible": ["offset", "limit"],
+          "visible": [
+            "offset",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_FORM_SUBMISSION",
+    "name": "WEBFLOW__FORM_SUBMISSION_GET_SUBMISSIONS",
     "description": "Get detailed information about a specific form submission.",
-    "tags": ["forms", "submissions", "details"],
+    "tags": [
+      "forms",
+      "submissions",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -801,20 +1097,34 @@
               "description": "Unique identifier for the form submission"
             }
           },
-          "required": ["form_id", "submission_id"],
-          "visible": ["form_id", "submission_id"],
+          "required": [
+            "form_id",
+            "submission_id"
+          ],
+          "visible": [
+            "form_id",
+            "submission_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__UPDATE_FORM_SUBMISSION",
     "description": "Update form submission status and other properties.",
-    "tags": ["forms", "submissions", "update"],
+    "tags": [
+      "forms",
+      "submissions",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -838,8 +1148,14 @@
               "description": "Unique identifier for the form submission"
             }
           },
-          "required": ["form_id", "submission_id"],
-          "visible": ["form_id", "submission_id"],
+          "required": [
+            "form_id",
+            "submission_id"
+          ],
+          "visible": [
+            "form_id",
+            "submission_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -847,24 +1163,38 @@
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["read", "unread"],
+              "enum": [
+                "read",
+                "unread"
+              ],
               "description": "Status of the form submission"
             }
           },
           "required": [],
-          "visible": ["status"],
+          "visible": [
+            "status"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__DELETE_FORM_SUBMISSION",
+    "name": "WEBFLOW__FORM_SUBMISSION_DELETE_SUBMISSIONS",
     "description": "Delete a form submission permanently.",
-    "tags": ["forms", "submissions", "delete"],
+    "tags": [
+      "forms",
+      "submissions",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -888,20 +1218,33 @@
               "description": "Unique identifier for the form submission to delete"
             }
           },
-          "required": ["form_id", "submission_id"],
-          "visible": ["form_id", "submission_id"],
+          "required": [
+            "form_id",
+            "submission_id"
+          ],
+          "visible": [
+            "form_id",
+            "submission_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_ASSETS",
     "description": "List all assets (images, documents, etc.) for a specific site with pagination support.",
-    "tags": ["assets", "list"],
+    "tags": [
+      "assets",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -921,8 +1264,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -941,19 +1288,30 @@
             }
           },
           "required": [],
-          "visible": ["offset", "limit"],
+          "visible": [
+            "offset",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_ASSET",
+    "name": "WEBFLOW__ASSET",
     "description": "Get detailed information about a specific asset including its metadata and URLs.",
-    "tags": ["assets", "details"],
+    "tags": [
+      "assets",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -973,20 +1331,32 @@
               "description": "Unique identifier for the asset"
             }
           },
-          "required": ["asset_id"],
-          "visible": ["asset_id"],
+          "required": [
+            "asset_id"
+          ],
+          "visible": [
+            "asset_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_ASSET",
     "description": "Upload a new asset (image, document, etc.) to a Webflow site.",
-    "tags": ["assets", "create", "upload"],
+    "tags": [
+      "assets",
+      "create",
+      "upload"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1006,8 +1376,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1023,20 +1397,35 @@
               "description": "File data to upload"
             }
           },
-          "required": ["displayName", "file"],
-          "visible": ["displayName", "file"],
+          "required": [
+            "displayName",
+            "file"
+          ],
+          "visible": [
+            "displayName",
+            "file"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_WEBHOOKS",
     "description": "List all webhooks configured for a specific site.",
-    "tags": ["webhooks", "list"],
+    "tags": [
+      "webhooks",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1056,20 +1445,31 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_WEBHOOK",
+    "name": "WEBFLOW__WEBHOOK_GET_WEBHOOKS",
     "description": "Get detailed information about a specific webhook including its configuration and events.",
-    "tags": ["webhooks", "details"],
+    "tags": [
+      "webhooks",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1089,20 +1489,31 @@
               "description": "Unique identifier for the webhook"
             }
           },
-          "required": ["webhook_id"],
-          "visible": ["webhook_id"],
+          "required": [
+            "webhook_id"
+          ],
+          "visible": [
+            "webhook_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_WEBHOOK",
     "description": "Create a new webhook to receive notifications when specific events occur on a site.",
-    "tags": ["webhooks", "create"],
+    "tags": [
+      "webhooks",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1122,8 +1533,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1136,7 +1551,14 @@
             },
             "triggerType": {
               "type": "string",
-              "enum": ["form_submission", "site_publish", "collection_item_created", "collection_item_changed", "collection_item_deleted", "ecomm_new_order"],
+              "enum": [
+                "form_submission",
+                "site_publish",
+                "collection_item_created",
+                "collection_item_changed",
+                "collection_item_deleted",
+                "ecomm_new_order"
+              ],
               "description": "Type of event that triggers the webhook"
             },
             "filter": {
@@ -1148,20 +1570,35 @@
               "description": "Optional filters to limit when webhook fires"
             }
           },
-          "required": ["url", "triggerType"],
-          "visible": ["url", "triggerType"],
+          "required": [
+            "url",
+            "triggerType"
+          ],
+          "visible": [
+            "url",
+            "triggerType"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__DELETE_WEBHOOK",
+    "name": "WEBFLOW__WEBHOOK_DELETE_WEBHOOKS",
     "description": "Remove a webhook from a site permanently.",
-    "tags": ["webhooks", "delete"],
+    "tags": [
+      "webhooks",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1181,20 +1618,32 @@
               "description": "Unique identifier for the webhook to delete"
             }
           },
-          "required": ["webhook_id"],
-          "visible": ["webhook_id"],
+          "required": [
+            "webhook_id"
+          ],
+          "visible": [
+            "webhook_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_PRODUCTS",
     "description": "List all ecommerce products for a specific site with pagination and filtering support.",
-    "tags": ["ecommerce", "products", "list"],
+    "tags": [
+      "ecommerce",
+      "products",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1214,8 +1663,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1234,19 +1687,31 @@
             }
           },
           "required": [],
-          "visible": ["offset", "limit"],
+          "visible": [
+            "offset",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_PRODUCT",
+    "name": "WEBFLOW__PRODUCT",
     "description": "Get detailed information about a specific ecommerce product including variants and pricing.",
-    "tags": ["ecommerce", "products", "details"],
+    "tags": [
+      "ecommerce",
+      "products",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1266,20 +1731,32 @@
               "description": "Unique identifier for the product"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__CREATE_PRODUCT",
     "description": "Create a new ecommerce product with variants, pricing, and inventory information.",
-    "tags": ["ecommerce", "products", "create"],
+    "tags": [
+      "ecommerce",
+      "products",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1299,8 +1776,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1329,30 +1810,56 @@
                       "description": "Currency unit (e.g., USD)"
                     }
                   },
-                  "required": ["value", "unit"],
-                  "visible": ["value", "unit"],
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "visible": [
+                    "value",
+                    "unit"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["name"],
-              "visible": ["name", "description", "price"],
+              "required": [
+                "name"
+              ],
+              "visible": [
+                "name",
+                "description",
+                "price"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["fieldData"],
-          "visible": ["fieldData"],
+          "required": [
+            "fieldData"
+          ],
+          "visible": [
+            "fieldData"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__UPDATE_PRODUCT",
     "description": "Update an existing ecommerce product's information, pricing, or inventory.",
-    "tags": ["ecommerce", "products", "update"],
+    "tags": [
+      "ecommerce",
+      "products",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1372,8 +1879,12 @@
               "description": "Unique identifier for the product"
             }
           },
-          "required": ["product_id"],
-          "visible": ["product_id"],
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1403,29 +1914,47 @@
                     }
                   },
                   "required": [],
-                  "visible": ["value", "unit"],
+                  "visible": [
+                    "value",
+                    "unit"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["name", "description", "price"],
+              "visible": [
+                "name",
+                "description",
+                "price"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["fieldData"],
+          "visible": [
+            "fieldData"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__LIST_ORDERS",
     "description": "List all ecommerce orders for a specific site with pagination and filtering options.",
-    "tags": ["ecommerce", "orders", "list"],
+    "tags": [
+      "ecommerce",
+      "orders",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1445,8 +1974,12 @@
               "description": "Unique identifier for the site"
             }
           },
-          "required": ["site_id"],
-          "visible": ["site_id"],
+          "required": [
+            "site_id"
+          ],
+          "visible": [
+            "site_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1465,19 +1998,31 @@
             }
           },
           "required": [],
-          "visible": ["offset", "limit"],
+          "visible": [
+            "offset",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "WEBFLOW__GET_ORDER",
+    "name": "WEBFLOW__ORDER",
     "description": "Get detailed information about a specific ecommerce order including items and customer details.",
-    "tags": ["ecommerce", "orders", "details"],
+    "tags": [
+      "ecommerce",
+      "orders",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1497,20 +2042,32 @@
               "description": "Unique identifier for the order"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "WEBFLOW__UPDATE_ORDER",
     "description": "Update order fulfillment status and other order properties.",
-    "tags": ["ecommerce", "orders", "update"],
+    "tags": [
+      "ecommerce",
+      "orders",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1530,8 +2087,12 @@
               "description": "Unique identifier for the order"
             }
           },
-          "required": ["order_id"],
-          "visible": ["order_id"],
+          "required": [
+            "order_id"
+          ],
+          "visible": [
+            "order_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1539,7 +2100,11 @@
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["pending", "fulfilled", "cancelled"],
+              "enum": [
+                "pending",
+                "fulfilled",
+                "cancelled"
+              ],
               "description": "Updated order status"
             },
             "comment": {
@@ -1548,12 +2113,20 @@
             }
           },
           "required": [],
-          "visible": ["status", "comment"],
+          "visible": [
+            "status",
+            "comment"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   }

@@ -2,7 +2,10 @@
   {
     "name": "RENDER__LIST_WORKSPACES",
     "description": "List all workspaces that you have access to in your Render account.",
-    "tags": ["workspaces", "list"],
+    "tags": [
+      "workspaces",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -20,9 +23,13 @@
     }
   },
   {
-    "name": "RENDER__GET_WORKSPACE",
+    "name": "RENDER__WORKSPACE",
     "description": "Retrieve details of a specific workspace by its owner ID.",
-    "tags": ["workspaces", "get", "retrieve"],
+    "tags": [
+      "workspaces",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -43,20 +50,33 @@
               "description": "The ID of the workspace/owner to retrieve."
             }
           },
-          "required": ["ownerId"],
-          "visible": ["ownerId"],
+          "required": [
+            "ownerId"
+          ],
+          "visible": [
+            "ownerId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_WORKSPACE_MEMBERS",
     "description": "Retrieves the list of users belonging to the workspace with the provided ID.",
-    "tags": ["workspaces", "members", "list", "users"],
+    "tags": [
+      "workspaces",
+      "members",
+      "list",
+      "users"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -77,20 +97,31 @@
               "description": "The ID of the team/workspace to list members for."
             }
           },
-          "required": ["ownerId"],
-          "visible": ["ownerId"],
+          "required": [
+            "ownerId"
+          ],
+          "visible": [
+            "ownerId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_SERVICES",
     "description": "List all services in the current workspace. Returns a paginated list of services you have access to.",
-    "tags": ["services", "list"],
+    "tags": [
+      "services",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -123,19 +154,28 @@
             }
           },
           "required": [],
-          "visible": ["ownerId", "limit"],
+          "visible": [
+            "ownerId",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__GET_SERVICE",
+    "name": "RENDER__SERVICE",
     "description": "Retrieve details about a specific service by its ID.",
-    "tags": ["services", "get", "retrieve"],
+    "tags": [
+      "services",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -156,20 +196,32 @@
               "description": "The ID of the service to retrieve details for."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_ENV_VARS",
     "description": "List all environment variables for a specific service.",
-    "tags": ["environment", "variables", "list"],
+    "tags": [
+      "environment",
+      "variables",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -190,20 +242,32 @@
               "description": "The ID of the service to list environment variables for."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__UPDATE_ENV_VARS",
     "description": "Update multiple environment variables for a service. This replaces all environment variables.",
-    "tags": ["environment", "variables", "update"],
+    "tags": [
+      "environment",
+      "variables",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -224,8 +288,12 @@
               "description": "The ID of the service to update environment variables for."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -236,27 +304,44 @@
             "properties": {
               "key": {
                 "type": "string",
-                "description": "The environment variable name."
+                "description": "The environment variable name.",
+                "default": ""
               },
               "value": {
                 "type": "string",
-                "description": "The environment variable value."
+                "description": "The environment variable value.",
+                "default": ""
               }
             },
-            "required": ["key", "value"],
-            "additionalProperties": false
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false,
+            "visible": []
           }
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__GET_ENV_VAR",
+    "name": "RENDER__ENV_VAR_GET_ENV_VARS",
     "description": "Retrieve a specific environment variable by key for a service.",
-    "tags": ["environment", "variables", "get", "retrieve"],
+    "tags": [
+      "environment",
+      "variables",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -281,20 +366,35 @@
               "description": "The environment variable key to retrieve."
             }
           },
-          "required": ["serviceId", "key"],
-          "visible": ["serviceId", "key"],
+          "required": [
+            "serviceId",
+            "key"
+          ],
+          "visible": [
+            "serviceId",
+            "key"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__SET_ENV_VAR",
     "description": "Add or update a single environment variable for a service.",
-    "tags": ["environment", "variables", "set", "update"],
+    "tags": [
+      "environment",
+      "variables",
+      "set",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -319,8 +419,14 @@
               "description": "The environment variable key to set."
             }
           },
-          "required": ["serviceId", "key"],
-          "visible": ["serviceId", "key"],
+          "required": [
+            "serviceId",
+            "key"
+          ],
+          "visible": [
+            "serviceId",
+            "key"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -332,20 +438,34 @@
               "description": "The environment variable value."
             }
           },
-          "required": ["value"],
-          "visible": ["value"],
+          "required": [
+            "value"
+          ],
+          "visible": [
+            "value"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__DELETE_ENV_VAR",
+    "name": "RENDER__ENV_VAR_DELETE_ENV_VARS",
     "description": "Delete a specific environment variable by key for a service.",
-    "tags": ["environment", "variables", "delete"],
+    "tags": [
+      "environment",
+      "variables",
+      "delete"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -370,20 +490,34 @@
               "description": "The environment variable key to delete."
             }
           },
-          "required": ["serviceId", "key"],
-          "visible": ["serviceId", "key"],
+          "required": [
+            "serviceId",
+            "key"
+          ],
+          "visible": [
+            "serviceId",
+            "key"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__CREATE_WEB_SERVICE",
     "description": "Create a new web service with specified configuration including repository, build settings, and environment variables.",
-    "tags": ["services", "create", "web"],
+    "tags": [
+      "services",
+      "create",
+      "web"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -431,7 +565,15 @@
               "properties": {
                 "env": {
                   "type": "string",
-                  "enum": ["node", "python", "go", "ruby", "php", "rust", "docker"],
+                  "enum": [
+                    "node",
+                    "python",
+                    "go",
+                    "ruby",
+                    "php",
+                    "rust",
+                    "docker"
+                  ],
                   "description": "The runtime environment for the service."
                 },
                 "envSpecificDetails": {
@@ -447,25 +589,50 @@
                       "description": "The command to start the service."
                     }
                   },
-                  "required": ["buildCommand"],
-                  "visible": ["buildCommand", "startCommand"],
+                  "required": [
+                    "buildCommand"
+                  ],
+                  "visible": [
+                    "buildCommand",
+                    "startCommand"
+                  ],
                   "additionalProperties": false
                 },
                 "plan": {
                   "type": "string",
-                  "enum": ["free", "starter", "standard", "pro", "pro_plus"],
+                  "enum": [
+                    "free",
+                    "starter",
+                    "standard",
+                    "pro",
+                    "pro_plus"
+                  ],
                   "default": "free",
                   "description": "The service plan."
                 },
                 "region": {
                   "type": "string",
-                  "enum": ["oregon", "ohio", "virginia", "iowa", "frankfurt", "singapore"],
+                  "enum": [
+                    "oregon",
+                    "ohio",
+                    "virginia",
+                    "iowa",
+                    "frankfurt",
+                    "singapore"
+                  ],
                   "default": "oregon",
                   "description": "The region to deploy the service."
                 }
               },
-              "required": ["env"],
-              "visible": ["env", "envSpecificDetails", "plan", "region"],
+              "required": [
+                "env"
+              ],
+              "visible": [
+                "env",
+                "envSpecificDetails",
+                "plan",
+                "region"
+              ],
               "additionalProperties": false
             },
             "envVars": {
@@ -476,32 +643,62 @@
                 "properties": {
                   "key": {
                     "type": "string",
-                    "description": "Environment variable key."
+                    "description": "Environment variable key.",
+                    "default": ""
                   },
                   "value": {
                     "type": "string",
-                    "description": "Environment variable value."
+                    "description": "Environment variable value.",
+                    "default": ""
                   }
                 },
-                "required": ["key", "value"],
-                "additionalProperties": false
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "visible": []
               }
             }
           },
-          "required": ["type", "name", "ownerId", "repo", "serviceDetails"],
-          "visible": ["type", "name", "ownerId", "repo", "branch", "rootDir", "serviceDetails", "envVars"],
+          "required": [
+            "type",
+            "name",
+            "ownerId",
+            "repo",
+            "serviceDetails"
+          ],
+          "visible": [
+            "type",
+            "name",
+            "ownerId",
+            "repo",
+            "branch",
+            "rootDir",
+            "serviceDetails",
+            "envVars"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__CREATE_STATIC_SITE",
     "description": "Create a new static site with specified configuration including repository, build settings, and custom domains.",
-    "tags": ["services", "create", "static", "site"],
+    "tags": [
+      "services",
+      "create",
+      "static",
+      "site"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -536,7 +733,10 @@
             },
             "autoDeploy": {
               "type": "string",
-              "enum": ["yes", "no"],
+              "enum": [
+                "yes",
+                "no"
+              ],
               "default": "yes",
               "description": "Whether to enable automatic deployment."
             },
@@ -550,7 +750,7 @@
               "properties": {},
               "required": [],
               "visible": [],
-              "additionalProperties": true
+              "additionalProperties": false
             },
             "buildFilter": {
               "type": "object",
@@ -558,7 +758,7 @@
               "properties": {},
               "required": [],
               "visible": [],
-              "additionalProperties": true
+              "additionalProperties": false
             },
             "rootDir": {
               "type": "string",
@@ -572,15 +772,21 @@
                 "properties": {
                   "key": {
                     "type": "string",
-                    "description": "Environment variable key."
+                    "description": "Environment variable key.",
+                    "default": ""
                   },
                   "value": {
                     "type": "string",
-                    "description": "Environment variable value."
+                    "description": "Environment variable value.",
+                    "default": ""
                   }
                 },
-                "required": ["key", "value"],
-                "additionalProperties": false
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "visible": []
               }
             },
             "environmentId": {
@@ -603,7 +809,7 @@
                     "properties": {},
                     "required": [],
                     "visible": [],
-                    "additionalProperties": true
+                    "additionalProperties": false
                   }
                 },
                 "publishPath": {
@@ -613,7 +819,10 @@
                 },
                 "pullRequestPreviewsEnabled": {
                   "type": "string",
-                  "enum": ["yes", "no"],
+                  "enum": [
+                    "yes",
+                    "no"
+                  ],
                   "default": "no",
                   "description": "Whether to enable pull request previews. DEPRECATED: This field has been deprecated. previews.generation should be used in its place."
                 },
@@ -623,13 +832,18 @@
                   "properties": {
                     "generation": {
                       "type": "string",
-                      "enum": ["off", "on"],
+                      "enum": [
+                        "off",
+                        "on"
+                      ],
                       "default": "off",
                       "description": "Preview generation setting. Defaults to 'off'."
                     }
                   },
                   "required": [],
-                  "visible": ["generation"],
+                  "visible": [
+                    "generation"
+                  ],
                   "additionalProperties": false
                 },
                 "routes": {
@@ -643,7 +857,9 @@
                         "description": "The type of route (e.g., 'redirect')."
                       }
                     },
-                    "additionalProperties": true
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
                   }
                 },
                 "renderSubdomainPolicy": {
@@ -652,24 +868,56 @@
                 }
               },
               "required": [],
-              "visible": ["buildCommand", "headers", "publishPath", "pullRequestPreviewsEnabled", "previews", "routes", "renderSubdomainPolicy"],
+              "visible": [
+                "buildCommand",
+                "headers",
+                "publishPath",
+                "pullRequestPreviewsEnabled",
+                "previews",
+                "routes",
+                "renderSubdomainPolicy"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["type", "name", "ownerId", "repo"],
-          "visible": ["type", "name", "ownerId", "repo", "autoDeploy", "branch", "image", "buildFilter", "rootDir", "envVars", "environmentId", "serviceDetails"],
+          "required": [
+            "type",
+            "name",
+            "ownerId",
+            "repo"
+          ],
+          "visible": [
+            "type",
+            "name",
+            "ownerId",
+            "repo",
+            "autoDeploy",
+            "branch",
+            "rootDir",
+            "envVars",
+            "environmentId",
+            "serviceDetails"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__SUSPEND_SERVICE",
     "description": "Suspend a running service to stop it from consuming resources. The service can be resumed later.",
-    "tags": ["services", "suspend", "management"],
+    "tags": [
+      "services",
+      "suspend",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -690,20 +938,32 @@
               "description": "The ID of the service to suspend."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__RESUME_SERVICE",
     "description": "Resume a suspended service to restore it to running state.",
-    "tags": ["services", "resume", "management"],
+    "tags": [
+      "services",
+      "resume",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -724,20 +984,32 @@
               "description": "The ID of the service to resume."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__RESTART_SERVICE",
     "description": "Restart a service to reload its configuration and redeploy the latest code.",
-    "tags": ["services", "restart", "management"],
+    "tags": [
+      "services",
+      "restart",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -758,20 +1030,32 @@
               "description": "The ID of the service to restart."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_DEPLOYS",
     "description": "List all deployments for a specific service, including their status and deployment details.",
-    "tags": ["deploys", "deployments", "list"],
+    "tags": [
+      "deploys",
+      "deployments",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -792,8 +1076,12 @@
               "description": "The ID of the service to list deployments for."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -813,19 +1101,30 @@
             }
           },
           "required": [],
-          "visible": ["limit"],
+          "visible": [
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__TRIGGER_DEPLOY",
     "description": "Trigger a new deployment for a service to deploy the latest code from the connected repository.",
-    "tags": ["deploys", "deployments", "trigger"],
+    "tags": [
+      "deploys",
+      "deployments",
+      "trigger"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -846,20 +1145,33 @@
               "description": "The ID of the service to trigger deployment for."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__GET_DEPLOY",
+    "name": "RENDER__DEPLOY",
     "description": "Retrieve details about a specific deployment, including its status, logs, and deployment information.",
-    "tags": ["deploys", "deployments", "get", "retrieve"],
+    "tags": [
+      "deploys",
+      "deployments",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -884,20 +1196,34 @@
               "description": "The ID of the deployment to retrieve."
             }
           },
-          "required": ["serviceId", "deployId"],
-          "visible": ["serviceId", "deployId"],
+          "required": [
+            "serviceId",
+            "deployId"
+          ],
+          "visible": [
+            "serviceId",
+            "deployId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__CANCEL_DEPLOY",
     "description": "Cancel a running deployment to stop the deployment process.",
-    "tags": ["deploys", "deployments", "cancel"],
+    "tags": [
+      "deploys",
+      "deployments",
+      "cancel"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -922,20 +1248,34 @@
               "description": "The ID of the deployment to cancel."
             }
           },
-          "required": ["serviceId", "deployId"],
-          "visible": ["serviceId", "deployId"],
+          "required": [
+            "serviceId",
+            "deployId"
+          ],
+          "visible": [
+            "serviceId",
+            "deployId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__ROLLBACK_DEPLOY",
     "description": "Roll back to a previous deployment to restore the service to a previous working state.",
-    "tags": ["deploys", "deployments", "rollback"],
+    "tags": [
+      "deploys",
+      "deployments",
+      "rollback"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -960,20 +1300,34 @@
               "description": "The ID of the deployment to roll back to."
             }
           },
-          "required": ["serviceId", "deployId"],
-          "visible": ["serviceId", "deployId"],
+          "required": [
+            "serviceId",
+            "deployId"
+          ],
+          "visible": [
+            "serviceId",
+            "deployId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_POSTGRES_INSTANCES",
     "description": "List all Postgres database instances in your account with their configuration and status.",
-    "tags": ["postgres", "database", "list"],
+    "tags": [
+      "postgres",
+      "database",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1006,19 +1360,28 @@
             }
           },
           "required": [],
-          "visible": ["ownerId", "limit"],
+          "visible": [
+            "ownerId",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__CREATE_POSTGRES_INSTANCE",
     "description": "Create a new Postgres database instance with specified configuration including plan, region, and initial settings.",
-    "tags": ["postgres", "database", "create"],
+    "tags": [
+      "postgres",
+      "database",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1044,19 +1407,39 @@
             },
             "plan": {
               "type": "string",
-              "enum": ["free", "starter", "standard", "pro", "pro_plus"],
+              "enum": [
+                "free",
+                "starter",
+                "standard",
+                "pro",
+                "pro_plus"
+              ],
               "default": "free",
               "description": "The Postgres plan/tier."
             },
             "region": {
               "type": "string",
-              "enum": ["oregon", "ohio", "virginia", "iowa", "frankfurt", "singapore"],
+              "enum": [
+                "oregon",
+                "ohio",
+                "virginia",
+                "iowa",
+                "frankfurt",
+                "singapore"
+              ],
               "default": "oregon",
               "description": "The region to deploy the Postgres instance."
             },
             "version": {
               "type": "string",
-              "enum": ["11", "12", "13", "14", "15", "16"],
+              "enum": [
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16"
+              ],
               "default": "16",
               "description": "The Postgres version."
             },
@@ -1069,20 +1452,41 @@
               "description": "The initial database user."
             }
           },
-          "required": ["name", "ownerId", "version"],
-          "visible": ["name", "ownerId", "plan", "region", "version", "databaseName", "databaseUser"],
+          "required": [
+            "name",
+            "ownerId",
+            "version"
+          ],
+          "visible": [
+            "name",
+            "ownerId",
+            "plan",
+            "region",
+            "version",
+            "databaseName",
+            "databaseUser"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__GET_POSTGRES_INSTANCE",
+    "name": "RENDER__POSTGRES_INSTANCE",
     "description": "Retrieve details about a specific Postgres instance including configuration, status, and connection information.",
-    "tags": ["postgres", "database", "get", "retrieve"],
+    "tags": [
+      "postgres",
+      "database",
+      "get",
+      "retrieve"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1103,20 +1507,32 @@
               "description": "The ID of the Postgres instance to retrieve."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__UPDATE_POSTGRES_INSTANCE",
     "description": "Update configuration of an existing Postgres instance such as plan, auto-suspend settings, or other parameters.",
-    "tags": ["postgres", "database", "update"],
+    "tags": [
+      "postgres",
+      "database",
+      "update"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1137,8 +1553,12 @@
               "description": "The ID of the Postgres instance to update."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1147,7 +1567,13 @@
           "properties": {
             "plan": {
               "type": "string",
-              "enum": ["free", "starter", "standard", "pro", "pro_plus"],
+              "enum": [
+                "free",
+                "starter",
+                "standard",
+                "pro",
+                "pro_plus"
+              ],
               "description": "The Postgres plan/tier to update to."
             },
             "autoSuspend": {
@@ -1156,20 +1582,33 @@
             }
           },
           "required": [],
-          "visible": ["plan", "autoSuspend"],
+          "visible": [
+            "plan",
+            "autoSuspend"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
-
   {
-    "name": "RENDER__GET_POSTGRES_CONNECTION_INFO",
+    "name": "RENDER__POSTGRES_CONNECTION_INFO",
     "description": "Retrieve connection information for a Postgres instance including host, port, database name, and credentials.",
-    "tags": ["postgres", "database", "connection", "info"],
+    "tags": [
+      "postgres",
+      "database",
+      "connection",
+      "info"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1190,20 +1629,33 @@
               "description": "The ID of the Postgres instance."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__SUSPEND_POSTGRES_INSTANCE",
     "description": "Suspend a Postgres instance to stop it from consuming resources while preserving data.",
-    "tags": ["postgres", "database", "suspend", "management"],
+    "tags": [
+      "postgres",
+      "database",
+      "suspend",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1224,20 +1676,33 @@
               "description": "The ID of the Postgres instance to suspend."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__RESUME_POSTGRES_INSTANCE",
     "description": "Resume a suspended Postgres instance to restore it to active state.",
-    "tags": ["postgres", "database", "resume", "management"],
+    "tags": [
+      "postgres",
+      "database",
+      "resume",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1258,20 +1723,33 @@
               "description": "The ID of the Postgres instance to resume."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__RESTART_POSTGRES_INSTANCE",
     "description": "Restart a Postgres instance to reload configuration and apply any pending changes.",
-    "tags": ["postgres", "database", "restart", "management"],
+    "tags": [
+      "postgres",
+      "database",
+      "restart",
+      "management"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1292,20 +1770,33 @@
               "description": "The ID of the Postgres instance to restart."
             }
           },
-          "required": ["postgresId"],
-          "visible": ["postgresId"],
+          "required": [
+            "postgresId"
+          ],
+          "visible": [
+            "postgresId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_LOGS",
     "description": "List logs matching the provided filters. Logs are paginated by start and end timestamps.",
-    "tags": ["logs", "list", "filter", "monitoring"],
+    "tags": [
+      "logs",
+      "list",
+      "filter",
+      "monitoring"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1337,7 +1828,10 @@
             },
             "direction": {
               "type": "string",
-              "enum": ["backward", "forward"],
+              "enum": [
+                "backward",
+                "forward"
+              ],
               "default": "backward",
               "description": "The direction to query logs for. Backward will return most recent logs first."
             },
@@ -1412,20 +1906,47 @@
               "description": "The maximum number of items to return."
             }
           },
-          "required": ["ownerId", "resource"],
-          "visible": ["ownerId", "resource", "startTime", "endTime", "direction", "instance", "host", "statusCode", "method", "level", "type", "text", "path", "limit"],
+          "required": [
+            "ownerId",
+            "resource"
+          ],
+          "visible": [
+            "ownerId",
+            "resource",
+            "startTime",
+            "endTime",
+            "direction",
+            "instance",
+            "host",
+            "statusCode",
+            "method",
+            "level",
+            "type",
+            "text",
+            "path",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_LOG_LABEL_VALUES",
     "description": "List all values for a given log label in the logs matching the provided filters.",
-    "tags": ["logs", "labels", "values", "metadata"],
+    "tags": [
+      "logs",
+      "labels",
+      "values",
+      "metadata"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1447,7 +1968,14 @@
             },
             "label": {
               "type": "string",
-              "enum": ["host", "instance", "statusCode", "method", "level", "type"],
+              "enum": [
+                "host",
+                "instance",
+                "statusCode",
+                "method",
+                "level",
+                "type"
+              ],
               "description": "The label to query logs for."
             },
             "startTime": {
@@ -1462,7 +1990,10 @@
             },
             "direction": {
               "type": "string",
-              "enum": ["backward", "forward"],
+              "enum": [
+                "backward",
+                "forward"
+              ],
               "default": "backward",
               "description": "The direction to query logs for. Backward will return most recent logs first."
             },
@@ -1537,20 +2068,48 @@
               "description": "The maximum number of items to return."
             }
           },
-          "required": ["ownerId", "label", "resource"],
-          "visible": ["ownerId", "label", "resource", "startTime", "endTime", "direction", "instance", "host", "statusCode", "method", "level", "type", "text", "path", "limit"],
+          "required": [
+            "ownerId",
+            "label",
+            "resource"
+          ],
+          "visible": [
+            "ownerId",
+            "label",
+            "resource",
+            "startTime",
+            "endTime",
+            "direction",
+            "instance",
+            "host",
+            "statusCode",
+            "method",
+            "level",
+            "type",
+            "text",
+            "path",
+            "limit"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__LIST_KEY_VALUE_INSTANCES",
     "description": "List all Key Value instances in your Render account.",
-    "tags": ["key-value", "list", "instances"],
+    "tags": [
+      "key-value",
+      "list",
+      "instances"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1582,20 +2141,35 @@
               "description": "Pagination cursor for retrieving next set of instances."
             }
           },
-          "required": ["ownerId"],
-          "visible": ["ownerId", "limit", "cursor"],
+          "required": [
+            "ownerId"
+          ],
+          "visible": [
+            "ownerId",
+            "limit",
+            "cursor"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["query"],
-      "visible": ["query"],
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "RENDER__GET_KEY_VALUE_INSTANCE",
+    "name": "RENDER__KEY_VALUE_INSTANCE",
     "description": "Get details about a specific Key Value instance.",
-    "tags": ["key-value", "get", "retrieve", "instance"],
+    "tags": [
+      "key-value",
+      "get",
+      "retrieve",
+      "instance"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1616,20 +2190,32 @@
               "description": "The ID of the Key Value instance to retrieve."
             }
           },
-          "required": ["keyValueId"],
-          "visible": ["keyValueId"],
+          "required": [
+            "keyValueId"
+          ],
+          "visible": [
+            "keyValueId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__CREATE_KEY_VALUE_INSTANCE",
     "description": "Create a new Key Value instance.",
-    "tags": ["key-value", "create", "instance"],
+    "tags": [
+      "key-value",
+      "create",
+      "instance"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1655,29 +2241,57 @@
             },
             "region": {
               "type": "string",
-              "enum": ["oregon", "ohio", "virginia", "ireland", "frankfurt", "singapore"],
+              "enum": [
+                "oregon",
+                "ohio",
+                "virginia",
+                "ireland",
+                "frankfurt",
+                "singapore"
+              ],
               "description": "The region where the Key Value instance will be created."
             },
             "plan": {
               "type": "string",
-              "enum": ["starter", "standard"],
+              "enum": [
+                "starter",
+                "standard"
+              ],
               "description": "The Key Value instance plan."
             }
           },
-          "required": ["name", "ownerId", "region", "plan"],
-          "visible": ["name", "ownerId", "region", "plan"],
+          "required": [
+            "name",
+            "ownerId",
+            "region",
+            "plan"
+          ],
+          "visible": [
+            "name",
+            "ownerId",
+            "region",
+            "plan"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__UPDATE_SERVICE",
     "description": "Update configuration of an existing web service including build commands, start commands, and environment settings.",
-    "tags": ["service", "update", "configuration"],
+    "tags": [
+      "service",
+      "update",
+      "configuration"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1698,8 +2312,12 @@
               "description": "The ID of the service to update."
             }
           },
-          "required": ["serviceId"],
-          "visible": ["serviceId"],
+          "required": [
+            "serviceId"
+          ],
+          "visible": [
+            "serviceId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1724,39 +2342,72 @@
                     }
                   },
                   "required": [],
-                  "visible": ["buildCommand", "startCommand"],
+                  "visible": [
+                    "buildCommand",
+                    "startCommand"
+                  ],
                   "additionalProperties": false
                 },
                 "plan": {
                   "type": "string",
-                  "enum": ["free", "starter", "standard", "pro", "pro_plus"],
+                  "enum": [
+                    "free",
+                    "starter",
+                    "standard",
+                    "pro",
+                    "pro_plus"
+                  ],
                   "description": "The service plan."
                 },
                 "region": {
                   "type": "string",
-                  "enum": ["oregon", "ohio", "virginia", "iowa", "frankfurt", "singapore"],
+                  "enum": [
+                    "oregon",
+                    "ohio",
+                    "virginia",
+                    "iowa",
+                    "frankfurt",
+                    "singapore"
+                  ],
                   "description": "The region to deploy the service."
                 }
               },
               "required": [],
-              "visible": ["envSpecificDetails", "plan", "region"],
+              "visible": [
+                "envSpecificDetails",
+                "plan",
+                "region"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["serviceDetails"],
+          "visible": [
+            "serviceDetails"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "RENDER__RUN_SQL_QUERY",
     "description": "Execute a SQL query on a Render PostgreSQL database. This function retrieves connection information and executes the provided SQL query.",
-    "tags": ["postgres", "database", "sql", "query", "execute"],
+    "tags": [
+      "postgres",
+      "database",
+      "sql",
+      "query",
+      "execute"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "connector",
@@ -1777,8 +2428,16 @@
           "description": "The SQL query to execute on the database."
         }
       },
-      "required": ["workspace_id", "database_id", "sql"],
-      "visible": ["workspace_id", "database_id", "sql"],
+      "required": [
+        "workspace_id",
+        "database_id",
+        "sql"
+      ],
+      "visible": [
+        "workspace_id",
+        "database_id",
+        "sql"
+      ],
       "additionalProperties": false
     }
   }

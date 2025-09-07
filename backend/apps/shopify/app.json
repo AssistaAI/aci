@@ -13,7 +13,11 @@
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["E-commerce", "Online Store", "Inventory Management"],
+  "categories": [
+    "E-commerce",
+    "Online Store",
+    "Inventory Management"
+  ],
   "visibility": "public",
   "active": true
 }

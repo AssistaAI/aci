@@ -1,8 +1,12 @@
 [
   {
-    "name": "HUBSPOT__GET_CONTACTS",
+    "name": "HUBSPOT__CONTACTS",
     "description": "Retrieve a list of contacts from HubSpot CRM with filtering and property options.",
-    "tags": ["contacts", "crm", "list"],
+    "tags": [
+      "contacts",
+      "crm",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -29,19 +33,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "properties"],
+          "visible": [
+            "limit",
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_CONTACT",
     "description": "Create a new contact in HubSpot CRM with specified properties and information.",
-    "tags": ["contacts", "crm", "create"],
+    "tags": [
+      "contacts",
+      "crm",
+      "create"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -61,9 +74,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -93,25 +109,46 @@
                   "description": "Contact's company name"
                 }
               },
-              "required": ["email"],
-              "visible": ["email", "firstname", "lastname", "phone", "company"],
+              "required": [
+                "email"
+              ],
+              "visible": [
+                "email",
+                "firstname",
+                "lastname",
+                "phone",
+                "company"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_DEALS",
+    "name": "HUBSPOT__DEALS",
     "description": "Retrieve a list of deals from HubSpot CRM with their properties and pipeline information.",
-    "tags": ["deals", "crm", "sales"],
+    "tags": [
+      "deals",
+      "crm",
+      "sales"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -138,19 +175,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "properties"],
+          "visible": [
+            "limit",
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_DEAL",
     "description": "Create a new deal in HubSpot CRM with specified properties, amount, and pipeline stage.",
-    "tags": ["deals", "crm", "create", "sales"],
+    "tags": [
+      "deals",
+      "crm",
+      "create",
+      "sales"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -170,9 +217,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -197,25 +247,45 @@
                   "description": "Pipeline ID for the deal"
                 }
               },
-              "required": ["dealname"],
-              "visible": ["dealname", "amount", "dealstage", "pipeline"],
+              "required": [
+                "dealname"
+              ],
+              "visible": [
+                "dealname",
+                "amount",
+                "dealstage",
+                "pipeline"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_COMPANIES",
+    "name": "HUBSPOT__COMPANIES",
     "description": "Retrieve a list of companies from HubSpot CRM with their properties and information.",
-    "tags": ["companies", "crm", "organizations"],
+    "tags": [
+      "companies",
+      "crm",
+      "organizations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -242,19 +312,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "properties"],
+          "visible": [
+            "limit",
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_COMPANY",
     "description": "Create a new company in HubSpot CRM with specified properties and information.",
-    "tags": ["companies", "crm", "create", "organizations"],
+    "tags": [
+      "companies",
+      "crm",
+      "create",
+      "organizations"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -274,9 +354,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -301,25 +384,45 @@
                   "description": "Company phone number"
                 }
               },
-              "required": ["name"],
-              "visible": ["name", "domain", "industry", "phone"],
+              "required": [
+                "name"
+              ],
+              "visible": [
+                "name",
+                "domain",
+                "industry",
+                "phone"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__SEARCH_CRM",
     "description": "Search across HubSpot CRM objects (contacts, companies, deals) using filters and queries.",
-    "tags": ["search", "crm", "filter"],
+    "tags": [
+      "search",
+      "crm",
+      "filter"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -336,12 +439,20 @@
           "properties": {
             "object_type": {
               "type": "string",
-              "enum": ["contacts", "companies", "deals"],
+              "enum": [
+                "contacts",
+                "companies",
+                "deals"
+              ],
               "description": "Type of CRM object to search"
             }
           },
-          "required": ["object_type"],
-          "visible": ["object_type"],
+          "required": [
+            "object_type"
+          ],
+          "visible": [
+            "object_type"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -352,9 +463,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -378,19 +492,33 @@
             }
           },
           "required": [],
-          "visible": ["query", "limit", "properties"],
+          "visible": [
+            "query",
+            "limit",
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "header"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__UPDATE_CONTACT",
     "description": "Update an existing contact's properties and information in HubSpot CRM",
-    "tags": ["contacts", "update", "crm"],
+    "tags": [
+      "contacts",
+      "update",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -410,9 +538,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -422,8 +553,12 @@
               "description": "HubSpot ID of the contact to update"
             }
           },
-          "required": ["contact_id"],
-          "visible": ["contact_id"],
+          "required": [
+            "contact_id"
+          ],
+          "visible": [
+            "contact_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -459,24 +594,47 @@
                 }
               },
               "required": [],
-              "visible": ["email", "firstname", "lastname", "phone", "company", "lifecyclestage"],
+              "visible": [
+                "email",
+                "firstname",
+                "lastname",
+                "phone",
+                "company",
+                "lifecyclestage"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__UPDATE_DEAL",
     "description": "Update an existing deal's properties, stage, and amount in HubSpot CRM",
-    "tags": ["deals", "update", "crm", "sales"],
+    "tags": [
+      "deals",
+      "update",
+      "crm",
+      "sales"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -496,9 +654,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -508,8 +669,12 @@
               "description": "HubSpot ID of the deal to update"
             }
           },
-          "required": ["deal_id"],
-          "visible": ["deal_id"],
+          "required": [
+            "deal_id"
+          ],
+          "visible": [
+            "deal_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -541,24 +706,45 @@
                 }
               },
               "required": [],
-              "visible": ["dealname", "amount", "dealstage", "closedate", "pipeline"],
+              "visible": [
+                "dealname",
+                "amount",
+                "dealstage",
+                "closedate",
+                "pipeline"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__UPDATE_COMPANY",
     "description": "Update an existing company's properties and information in HubSpot CRM",
-    "tags": ["companies", "update", "crm"],
+    "tags": [
+      "companies",
+      "update",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -578,9 +764,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "path": {
           "type": "object",
@@ -590,8 +779,12 @@
               "description": "HubSpot ID of the company to update"
             }
           },
-          "required": ["company_id"],
-          "visible": ["company_id"],
+          "required": [
+            "company_id"
+          ],
+          "visible": [
+            "company_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -626,24 +819,46 @@
                 }
               },
               "required": [],
-              "visible": ["name", "domain", "industry", "phone", "city", "state"],
+              "visible": [
+                "name",
+                "domain",
+                "industry",
+                "phone",
+                "city",
+                "state"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_TICKETS",
+    "name": "HUBSPOT__TICKETS",
     "description": "Retrieve customer service tickets from HubSpot Service Hub with status and priority information",
-    "tags": ["tickets", "service", "support"],
+    "tags": [
+      "tickets",
+      "service",
+      "support"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -670,19 +885,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "properties"],
+          "visible": [
+            "limit",
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_TICKET",
     "description": "Create a new customer service ticket in HubSpot Service Hub with priority and assignment details",
-    "tags": ["tickets", "create", "service", "support"],
+    "tags": [
+      "tickets",
+      "create",
+      "service",
+      "support"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -702,9 +927,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -737,25 +965,47 @@
                   "description": "ID of the HubSpot user assigned to this ticket"
                 }
               },
-              "required": ["subject"],
-              "visible": ["subject", "content", "hs_pipeline", "hs_pipeline_stage", "hs_ticket_priority", "hubspot_owner_id"],
+              "required": [
+                "subject"
+              ],
+              "visible": [
+                "subject",
+                "content",
+                "hs_pipeline",
+                "hs_pipeline_stage",
+                "hs_ticket_priority",
+                "hubspot_owner_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_WORKFLOWS",
+    "name": "HUBSPOT__WORKFLOWS",
     "description": "Retrieve automation workflows from HubSpot with their trigger conditions and actions",
-    "tags": ["workflows", "automation", "marketing"],
+    "tags": [
+      "workflows",
+      "automation",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -783,19 +1033,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_FORMS",
+    "name": "HUBSPOT__FORMS",
     "description": "Retrieve HubSpot forms with their field configurations and submission settings for lead capture",
-    "tags": ["forms", "marketing", "lead-capture"],
+    "tags": [
+      "forms",
+      "marketing",
+      "lead-capture"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -823,19 +1082,28 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_EMAIL_CAMPAIGNS",
+    "name": "HUBSPOT__EMAIL_CAMPAIGNS",
     "description": "Retrieve email marketing campaigns from HubSpot with performance metrics and send statistics",
-    "tags": ["email", "campaigns", "marketing"],
+    "tags": [
+      "email",
+      "campaigns",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -863,19 +1131,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_EMAIL_CAMPAIGN",
     "description": "Create a new email marketing campaign in HubSpot with content, recipients, and scheduling options",
-    "tags": ["email", "create", "campaigns", "marketing"],
+    "tags": [
+      "email",
+      "create",
+      "campaigns",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -895,9 +1173,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -933,20 +1214,42 @@
               "description": "Plain text version of the email"
             }
           },
-          "required": ["name", "subject", "fromName", "fromEmail"],
-          "visible": ["name", "subject", "fromName", "fromEmail", "replyTo", "htmlContent", "textContent"],
+          "required": [
+            "name",
+            "subject",
+            "fromName",
+            "fromEmail"
+          ],
+          "visible": [
+            "name",
+            "subject",
+            "fromName",
+            "fromEmail",
+            "replyTo",
+            "htmlContent",
+            "textContent"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_LISTS",
+    "name": "HUBSPOT__LISTS",
     "description": "Retrieve contact lists from HubSpot with their membership criteria and contact counts for segmentation",
-    "tags": ["lists", "segmentation", "contacts"],
+    "tags": [
+      "lists",
+      "segmentation",
+      "contacts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -974,19 +1277,29 @@
             }
           },
           "required": [],
-          "visible": ["count", "offset"],
+          "visible": [
+            "count",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_LIST",
     "description": "Create a new contact list in HubSpot with filtering criteria for targeted marketing and segmentation",
-    "tags": ["lists", "create", "segmentation", "marketing"],
+    "tags": [
+      "lists",
+      "create",
+      "segmentation",
+      "marketing"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1006,9 +1319,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1024,7 +1340,11 @@
             },
             "processingType": {
               "type": "string",
-              "enum": ["MANUAL", "SNAPSHOT", "DYNAMIC"],
+              "enum": [
+                "MANUAL",
+                "SNAPSHOT",
+                "DYNAMIC"
+              ],
               "description": "How the list membership is determined"
             },
             "customProperties": {
@@ -1035,20 +1355,37 @@
               "description": "Custom properties to include in the list"
             }
           },
-          "required": ["name", "objectTypeId"],
-          "visible": ["name", "objectTypeId", "processingType", "customProperties"],
+          "required": [
+            "name",
+            "objectTypeId"
+          ],
+          "visible": [
+            "name",
+            "objectTypeId",
+            "processingType",
+            "customProperties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_ANALYTICS_REPORTS",
+    "name": "HUBSPOT__ANALYTICS_REPORTS",
     "description": "Retrieve analytics reports and performance metrics from HubSpot for marketing and sales activities",
-    "tags": ["analytics", "reports", "metrics"],
+    "tags": [
+      "analytics",
+      "reports",
+      "metrics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1076,19 +1413,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset"],
+          "visible": [
+            "limit",
+            "offset"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_NOTE",
     "description": "Create a note and associate it with contacts, companies, or deals in HubSpot CRM for activity tracking",
-    "tags": ["notes", "create", "activities", "crm"],
+    "tags": [
+      "notes",
+      "create",
+      "activities",
+      "crm"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1108,9 +1455,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1132,8 +1482,14 @@
                   "description": "ID of the HubSpot user creating the note"
                 }
               },
-              "required": ["hs_note_body"],
-              "visible": ["hs_note_body", "hs_timestamp", "hubspot_owner_id"],
+              "required": [
+                "hs_note_body"
+              ],
+              "visible": [
+                "hs_note_body",
+                "hs_timestamp",
+                "hubspot_owner_id"
+              ],
               "additionalProperties": false
             },
             "associations": {
@@ -1149,8 +1505,12 @@
                         "description": "ID of the object to associate with"
                       }
                     },
-                    "required": ["id"],
-                    "visible": ["id"],
+                    "required": [
+                      "id"
+                    ],
+                    "visible": [
+                      "id"
+                    ],
                     "additionalProperties": false
                   },
                   "types": {
@@ -1167,33 +1527,59 @@
                           "description": "Association type ID"
                         }
                       },
-                      "required": ["associationCategory", "associationTypeId"],
-                      "visible": ["associationCategory", "associationTypeId"],
+                      "required": [
+                        "associationCategory",
+                        "associationTypeId"
+                      ],
+                      "visible": [
+                        "associationCategory",
+                        "associationTypeId"
+                      ],
                       "additionalProperties": false
                     }
                   }
                 },
-                "required": ["to", "types"],
-                "visible": ["to", "types"],
+                "required": [
+                  "to",
+                  "types"
+                ],
+                "visible": [
+                  "to",
+                  "types"
+                ],
                 "additionalProperties": false
               },
               "description": "Objects to associate this note with"
             }
           },
-          "required": ["properties"],
-          "visible": ["properties", "associations"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties",
+            "associations"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_OWNERS",
+    "name": "HUBSPOT__OWNERS",
     "description": "Retrieve HubSpot team members and owners for assignment to contacts, deals, and tickets",
-    "tags": ["owners", "team", "users"],
+    "tags": [
+      "owners",
+      "team",
+      "users"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1225,19 +1611,29 @@
             }
           },
           "required": [],
-          "visible": ["limit", "offset", "email"],
+          "visible": [
+            "limit",
+            "offset",
+            "email"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "HUBSPOT__GET_PIPELINES",
+    "name": "HUBSPOT__PIPELINES",
     "description": "Retrieve sales and service pipelines from HubSpot with their stages and probability settings",
-    "tags": ["pipelines", "sales", "stages"],
+    "tags": [
+      "pipelines",
+      "sales",
+      "stages"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1254,24 +1650,40 @@
           "properties": {
             "object_type": {
               "type": "string",
-              "enum": ["deals", "tickets"],
+              "enum": [
+                "deals",
+                "tickets"
+              ],
               "description": "Type of object to get pipelines for"
             }
           },
-          "required": ["object_type"],
-          "visible": ["object_type"],
+          "required": [
+            "object_type"
+          ],
+          "visible": [
+            "object_type"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "HUBSPOT__CREATE_TASK",
     "description": "Create a task or activity in HubSpot and associate it with contacts, companies, or deals for follow-up tracking",
-    "tags": ["tasks", "create", "activities", "follow-up"],
+    "tags": [
+      "tasks",
+      "create",
+      "activities",
+      "follow-up"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1291,9 +1703,12 @@
               "default": "application/json"
             }
           },
-          "required": ["Content-Type"],
+          "required": [
+            "Content-Type"
+          ],
           "visible": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "default": {}
         },
         "body": {
           "type": "object",
@@ -1311,12 +1726,22 @@
                 },
                 "hs_task_status": {
                   "type": "string",
-                  "enum": ["NOT_STARTED", "IN_PROGRESS", "COMPLETED", "WAITING", "DEFERRED"],
+                  "enum": [
+                    "NOT_STARTED",
+                    "IN_PROGRESS",
+                    "COMPLETED",
+                    "WAITING",
+                    "DEFERRED"
+                  ],
                   "description": "Current status of the task"
                 },
                 "hs_task_priority": {
                   "type": "string",
-                  "enum": ["LOW", "MEDIUM", "HIGH"],
+                  "enum": [
+                    "LOW",
+                    "MEDIUM",
+                    "HIGH"
+                  ],
                   "description": "Priority level of the task"
                 },
                 "hs_task_due_date": {
@@ -1329,18 +1754,36 @@
                   "description": "ID of the HubSpot user assigned to this task"
                 }
               },
-              "required": ["hs_task_subject"],
-              "visible": ["hs_task_subject", "hs_task_body", "hs_task_status", "hs_task_priority", "hs_task_due_date", "hubspot_owner_id"],
+              "required": [
+                "hs_task_subject"
+              ],
+              "visible": [
+                "hs_task_subject",
+                "hs_task_body",
+                "hs_task_status",
+                "hs_task_priority",
+                "hs_task_due_date",
+                "hubspot_owner_id"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["properties"],
-          "visible": ["properties"],
+          "required": [
+            "properties"
+          ],
+          "visible": [
+            "properties"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["header", "body"],
-      "visible": ["body"],
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }

@@ -2,7 +2,11 @@
   {
     "name": "MICROSOFT_CALENDAR__LIST_CALENDARS",
     "description": "Get all the user's calendars. This retrieves calendars from the default calendar group and allows filtering, sorting, and selecting specific properties using OData query parameters.",
-    "tags": ["calendar", "calendars", "list"],
+    "tags": [
+      "calendar",
+      "calendars",
+      "list"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -44,19 +48,32 @@
             }
           },
           "required": [],
-          "visible": ["$select", "$filter", "$orderby", "$top", "$skip", "$expand"],
+          "visible": [
+            "$select",
+            "$filter",
+            "$orderby",
+            "$top",
+            "$skip",
+            "$expand"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query"],
+      "visible": [
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__CREATE_CALENDAR",
     "description": "Create a new calendar for the user. This creates a calendar in the user's default calendar group with the specified name and optional properties like color.",
-    "tags": ["calendar", "create", "new"],
+    "tags": [
+      "calendar",
+      "create",
+      "new"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -79,27 +96,52 @@
             "color": {
               "type": "string",
               "description": "The color theme for the calendar. Valid values include: lightBlue, lightGreen, lightOrange, lightGray, lightYellow, lightTeal, lightPink, lightBrown, lightRed, maxColor",
-              "enum": ["lightBlue", "lightGreen", "lightOrange", "lightGray", "lightYellow", "lightTeal", "lightPink", "lightBrown", "lightRed", "maxColor"]
+              "enum": [
+                "lightBlue",
+                "lightGreen",
+                "lightOrange",
+                "lightGray",
+                "lightYellow",
+                "lightTeal",
+                "lightPink",
+                "lightBrown",
+                "lightRed",
+                "maxColor"
+              ]
             },
             "hexColor": {
               "type": "string",
               "description": "The hex color code for the calendar (e.g., '#FF5733'). If provided, this takes precedence over the color property."
             }
           },
-          "required": ["name"],
-          "visible": ["name", "color", "hexColor"],
+          "required": [
+            "name"
+          ],
+          "visible": [
+            "name",
+            "color",
+            "hexColor"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_CALENDAR__GET_CALENDAR",
+    "name": "MICROSOFT_CALENDAR__CALENDAR_GET_CALENDARS",
     "description": "Get the properties and relationships of a specific calendar object by its ID. This retrieves detailed information about a calendar including permissions, settings, and metadata.",
-    "tags": ["calendar", "get", "details"],
+    "tags": [
+      "calendar",
+      "get",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -120,8 +162,12 @@
               "description": "The unique identifier of the calendar to retrieve"
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -138,19 +184,32 @@
             }
           },
           "required": [],
-          "visible": ["$select", "$expand"],
+          "visible": [
+            "$select",
+            "$expand"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__UPDATE_CALENDAR",
     "description": "Update the properties of an existing calendar object. You can modify the calendar name, color theme, or default calendar status. Only include properties you want to update.",
-    "tags": ["calendar", "update", "modify", "edit"],
+    "tags": [
+      "calendar",
+      "update",
+      "modify",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -171,8 +230,12 @@
               "description": "The unique identifier of the calendar to update"
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -186,7 +249,19 @@
             "color": {
               "type": "string",
               "description": "The color theme for the calendar. Valid values: lightBlue, lightGreen, lightOrange, lightGray, lightYellow, lightTeal, lightPink, lightBrown, lightRed, maxColor, auto",
-              "enum": ["lightBlue", "lightGreen", "lightOrange", "lightGray", "lightYellow", "lightTeal", "lightPink", "lightBrown", "lightRed", "maxColor", "auto"]
+              "enum": [
+                "lightBlue",
+                "lightGreen",
+                "lightOrange",
+                "lightGray",
+                "lightYellow",
+                "lightTeal",
+                "lightPink",
+                "lightBrown",
+                "lightRed",
+                "maxColor",
+                "auto"
+              ]
             },
             "hexColor": {
               "type": "string",
@@ -198,19 +273,34 @@
             }
           },
           "required": [],
-          "visible": ["name", "color", "hexColor", "isDefaultCalendar"],
+          "visible": [
+            "name",
+            "color",
+            "hexColor",
+            "isDefaultCalendar"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_CALENDAR__DELETE_CALENDAR",
+    "name": "MICROSOFT_CALENDAR__CALENDAR_DELETE_CALENDARS",
     "description": "Delete a calendar other than the default calendar. This permanently removes the calendar and all its events. The default calendar cannot be deleted.",
-    "tags": ["calendar", "delete", "remove"],
+    "tags": [
+      "calendar",
+      "delete",
+      "remove"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -231,20 +321,34 @@
               "description": "The unique identifier of the calendar to delete. Note: Cannot delete the default calendar (isDefaultCalendar=true)."
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__LIST_CALENDAR_VIEW",
     "description": "Get events, occurrences, exceptions and single instances from a calendar within a specified time range. This returns actual calendar events/appointments between the start and end dates.",
-    "tags": ["calendar", "events", "view", "appointments", "time-range"],
+    "tags": [
+      "calendar",
+      "events",
+      "view",
+      "appointments",
+      "time-range"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -265,8 +369,12 @@
               "description": "The unique identifier of the calendar to get events from"
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -302,8 +410,19 @@
               "description": "Number of events to skip for pagination"
             }
           },
-          "required": ["startDateTime", "endDateTime"],
-          "visible": ["startDateTime", "endDateTime", "$select", "$filter", "$orderby", "$top", "$skip"],
+          "required": [
+            "startDateTime",
+            "endDateTime"
+          ],
+          "visible": [
+            "startDateTime",
+            "endDateTime",
+            "$select",
+            "$filter",
+            "$orderby",
+            "$top",
+            "$skip"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -316,19 +435,33 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "query"],
-      "visible": ["path", "query", "header"],
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__LIST_EVENTS",
     "description": "Retrieve a list of all events in a calendar without date restrictions. This returns single instance meetings, series masters, and recurring events. Use this to get all events in a calendar regardless of time range.",
-    "tags": ["calendar", "events", "list", "all"],
+    "tags": [
+      "calendar",
+      "events",
+      "list",
+      "all"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -349,8 +482,12 @@
               "description": "The unique identifier of the calendar to get events from"
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -383,7 +520,14 @@
             }
           },
           "required": [],
-          "visible": ["$select", "$filter", "$orderby", "$top", "$skip", "$expand"],
+          "visible": [
+            "$select",
+            "$filter",
+            "$orderby",
+            "$top",
+            "$skip",
+            "$expand"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -396,19 +540,33 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query", "header"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__CREATE_EVENT",
     "description": "Create a new event in a calendar. This allows creating meetings, appointments, and events with attendees, locations, recurrence patterns, and online meeting details.",
-    "tags": ["calendar", "event", "create", "meeting", "appointment"],
+    "tags": [
+      "calendar",
+      "event",
+      "create",
+      "meeting",
+      "appointment"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -429,8 +587,12 @@
               "description": "The unique identifier of the calendar to create the event in"
             }
           },
-          "required": ["calendar_id"],
-          "visible": ["calendar_id"],
+          "required": [
+            "calendar_id"
+          ],
+          "visible": [
+            "calendar_id"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -441,100 +603,125 @@
               "type": "string",
               "description": "The event title/subject"
             },
-             "body": {
-               "type": "object",
-               "description": "The event description/body",
-               "properties": {
-                 "contentType": {
-                   "type": "string",
-                   "enum": ["text", "html"],
-                   "description": "The content type (text or html)"
-                 },
-                 "content": {
-                   "type": "string",
-                   "description": "The content of the event description"
-                 }
-               },
-               "required": [],
-               "visible": ["contentType", "content"],
-               "additionalProperties": false
-             },
-              "start": {
-               "type": "object",
-               "description": "Event start date and time",
-               "properties": {
-                 "dateTime": {
-                   "type": "string",
-                   "description": "Start date and time in ISO 8601 format (e.g., '2024-04-04T14:00:00')"
-                 },
-                 "timeZone": {
-                   "type": "string",
-                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
-                 }
-               },
-               "required": ["dateTime"],
-               "visible": ["dateTime", "timeZone"],
-               "additionalProperties": false
-             },
-             "end": {
-               "type": "object",
-               "description": "Event end date and time",
-               "properties": {
-                 "dateTime": {
-                   "type": "string",
-                   "description": "End date and time in ISO 8601 format (e.g., '2024-04-04T15:00:00')"
-                 },
-                 "timeZone": {
-                   "type": "string",
-                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
-                 }
-               },
-               "required": ["dateTime"],
-               "visible": ["dateTime", "timeZone"],
-               "additionalProperties": false
-             },
-                         "location": {
-               "type": "object",
-               "description": "Event location details",
-               "properties": {
-                 "displayName": {
-                   "type": "string",
-                   "description": "Location display name (e.g., 'Conference Room A', 'Microsoft Teams', '123 Main St')"
-                 },
-                 "address": {
-                   "type": "object",
-                   "description": "Physical address details",
-                   "properties": {
-                     "street": {
-                       "type": "string",
-                       "description": "Street address"
-                     },
-                     "city": {
-                       "type": "string",
-                       "description": "City name"
-                     },
-                     "state": {
-                       "type": "string",
-                       "description": "State or province"
-                     },
-                     "countryOrRegion": {
-                       "type": "string",
-                       "description": "Country or region"
-                     },
-                     "postalCode": {
-                       "type": "string",
-                       "description": "Postal or ZIP code"
-                     }
-                   },
-                   "required": [],
-                   "visible": ["street", "city", "state", "countryOrRegion", "postalCode"],
-                   "additionalProperties": false
-                 }
-               },
-               "required": [],
-               "visible": ["displayName", "address"],
-               "additionalProperties": false
-             },
+            "body": {
+              "type": "object",
+              "description": "The event description/body",
+              "properties": {
+                "contentType": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "html"
+                  ],
+                  "description": "The content type (text or html)"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "The content of the event description"
+                }
+              },
+              "required": [],
+              "visible": [
+                "contentType",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            "start": {
+              "type": "object",
+              "description": "Event start date and time",
+              "properties": {
+                "dateTime": {
+                  "type": "string",
+                  "description": "Start date and time in ISO 8601 format (e.g., '2024-04-04T14:00:00')"
+                },
+                "timeZone": {
+                  "type": "string",
+                  "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
+                }
+              },
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
+              "additionalProperties": false
+            },
+            "end": {
+              "type": "object",
+              "description": "Event end date and time",
+              "properties": {
+                "dateTime": {
+                  "type": "string",
+                  "description": "End date and time in ISO 8601 format (e.g., '2024-04-04T15:00:00')"
+                },
+                "timeZone": {
+                  "type": "string",
+                  "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
+                }
+              },
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
+              "additionalProperties": false
+            },
+            "location": {
+              "type": "object",
+              "description": "Event location details",
+              "properties": {
+                "displayName": {
+                  "type": "string",
+                  "description": "Location display name (e.g., 'Conference Room A', 'Microsoft Teams', '123 Main St')"
+                },
+                "address": {
+                  "type": "object",
+                  "description": "Physical address details",
+                  "properties": {
+                    "street": {
+                      "type": "string",
+                      "description": "Street address"
+                    },
+                    "city": {
+                      "type": "string",
+                      "description": "City name"
+                    },
+                    "state": {
+                      "type": "string",
+                      "description": "State or province"
+                    },
+                    "countryOrRegion": {
+                      "type": "string",
+                      "description": "Country or region"
+                    },
+                    "postalCode": {
+                      "type": "string",
+                      "description": "Postal or ZIP code"
+                    }
+                  },
+                  "required": [],
+                  "visible": [
+                    "street",
+                    "city",
+                    "state",
+                    "countryOrRegion",
+                    "postalCode"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [],
+              "visible": [
+                "displayName",
+                "address"
+              ],
+              "additionalProperties": false
+            },
             "attendees": {
               "type": "array",
               "description": "List of event attendees",
@@ -542,30 +729,43 @@
                 "type": "object",
                 "properties": {
                   "emailAddress": {
-                     "type": "object",
-                     "description": "Attendee email details",
-                     "properties": {
-                       "address": {
-                         "type": "string",
-                         "description": "Email address of the attendee"
-                       },
-                       "name": {
-                         "type": "string",
-                         "description": "Display name of the attendee"
-                       }
-                     },
-                     "required": ["address"],
-                     "visible": ["address", "name"],
-                     "additionalProperties": false
-                   },
+                    "type": "object",
+                    "description": "Attendee email details",
+                    "properties": {
+                      "address": {
+                        "type": "string",
+                        "description": "Email address of the attendee"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Display name of the attendee"
+                      }
+                    },
+                    "required": [
+                      "address"
+                    ],
+                    "visible": [
+                      "address",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
                   "type": {
                     "type": "string",
-                    "enum": ["required", "optional", "resource"],
+                    "enum": [
+                      "required",
+                      "optional",
+                      "resource"
+                    ],
                     "description": "Type of attendee (required, optional, or resource)"
                   }
                 },
-                "required": ["emailAddress"],
-                "visible": ["emailAddress"],
+                "required": [
+                  "emailAddress"
+                ],
+                "visible": [
+                  "emailAddress"
+                ],
                 "additionalProperties": false
               }
             },
@@ -575,17 +775,32 @@
             },
             "showAs": {
               "type": "string",
-              "enum": ["free", "tentative", "busy", "oof", "workingElsewhere"],
+              "enum": [
+                "free",
+                "tentative",
+                "busy",
+                "oof",
+                "workingElsewhere"
+              ],
               "description": "Show availability as (free, tentative, busy, oof, workingElsewhere)"
             },
             "sensitivity": {
               "type": "string",
-              "enum": ["normal", "personal", "private", "confidential"],
+              "enum": [
+                "normal",
+                "personal",
+                "private",
+                "confidential"
+              ],
               "description": "Event sensitivity level"
             },
             "importance": {
               "type": "string",
-              "enum": ["low", "normal", "high"],
+              "enum": [
+                "low",
+                "normal",
+                "high"
+              ],
               "description": "Event importance level"
             },
             "reminderMinutesBeforeStart": {
@@ -609,7 +824,12 @@
             },
             "onlineMeetingProvider": {
               "type": "string",
-              "enum": ["unknown", "skypeForBusiness", "skypeForConsumer", "teamsForBusiness"],
+              "enum": [
+                "unknown",
+                "skypeForBusiness",
+                "skypeForConsumer",
+                "teamsForBusiness"
+              ],
               "description": "Online meeting provider"
             },
             "allowNewTimeProposals": {
@@ -624,78 +844,152 @@
               "type": "object",
               "description": "Recurrence pattern for recurring events",
               "properties": {
-                                 "pattern": {
-                   "type": "object",
-                   "description": "Recurrence pattern details",
-                   "properties": {
-                     "type": {
-                       "type": "string",
-                       "enum": ["daily", "weekly", "absoluteMonthly", "relativeMonthly", "absoluteYearly", "relativeYearly"],
-                       "description": "Recurrence pattern type"
-                     },
-                     "interval": {
-                       "type": "integer",
-                       "description": "Interval between occurrences"
-                     },
-                     "daysOfWeek": {
-                       "type": "array",
-                       "description": "Days of the week for weekly patterns",
-                       "items": {
-                         "type": "string",
-                         "enum": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
-                       }
-                     }
-                   },
-                   "required": ["type"],
-                   "visible": ["type", "interval", "daysOfWeek"],
-                   "additionalProperties": false
-                 },
-                "range": {
-                   "type": "object",
-                   "description": "Recurrence range",
-                   "properties": {
-                     "type": {
-                       "type": "string",
-                       "enum": ["endDate", "noEnd", "numbered"],
-                       "description": "Range type"
-                     },
-                     "startDate": {
-                       "type": "string",
-                       "description": "Start date in YYYY-MM-DD format"
-                     },
-                     "endDate": {
-                       "type": "string",
-                       "description": "End date in YYYY-MM-DD format (for endDate type)"
-                     },
-                     "numberOfOccurrences": {
-                       "type": "integer",
-                       "description": "Number of occurrences (for numbered type)"
-                     }
-                   },
-                   "required": ["type", "startDate"],
-                   "visible": ["type", "startDate", "endDate", "numberOfOccurrences"],
-                   "additionalProperties": false
-                  }
+                "pattern": {
+                  "type": "object",
+                  "description": "Recurrence pattern details",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "daily",
+                        "weekly",
+                        "absoluteMonthly",
+                        "relativeMonthly",
+                        "absoluteYearly",
+                        "relativeYearly"
+                      ],
+                      "description": "Recurrence pattern type"
+                    },
+                    "interval": {
+                      "type": "integer",
+                      "description": "Interval between occurrences"
+                    },
+                    "daysOfWeek": {
+                      "type": "array",
+                      "description": "Days of the week for weekly patterns",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "sunday",
+                          "monday",
+                          "tuesday",
+                          "wednesday",
+                          "thursday",
+                          "friday",
+                          "saturday"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "visible": [
+                    "type",
+                    "interval",
+                    "daysOfWeek"
+                  ],
+                  "additionalProperties": false
                 },
-               "required": ["pattern", "range"],
-               "visible": ["pattern", "range"],
-               "additionalProperties": false
-             }
+                "range": {
+                  "type": "object",
+                  "description": "Recurrence range",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "endDate",
+                        "noEnd",
+                        "numbered"
+                      ],
+                      "description": "Range type"
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "description": "Start date in YYYY-MM-DD format"
+                    },
+                    "endDate": {
+                      "type": "string",
+                      "description": "End date in YYYY-MM-DD format (for endDate type)"
+                    },
+                    "numberOfOccurrences": {
+                      "type": "integer",
+                      "description": "Number of occurrences (for numbered type)"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "startDate"
+                  ],
+                  "visible": [
+                    "type",
+                    "startDate",
+                    "endDate",
+                    "numberOfOccurrences"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "pattern",
+                "range"
+              ],
+              "visible": [
+                "pattern",
+                "range"
+              ],
+              "additionalProperties": false
+            }
           },
-          "required": ["subject", "start", "end"],
-          "visible": ["subject", "body", "start", "end", "location", "attendees", "isAllDay", "showAs", "sensitivity", "importance", "reminderMinutesBeforeStart", "isReminderOn", "categories", "isOnlineMeeting", "onlineMeetingProvider", "allowNewTimeProposals", "responseRequested", "recurrence"],
+          "required": [
+            "subject",
+            "start",
+            "end"
+          ],
+          "visible": [
+            "subject",
+            "body",
+            "start",
+            "end",
+            "location",
+            "attendees",
+            "isAllDay",
+            "showAs",
+            "sensitivity",
+            "importance",
+            "reminderMinutesBeforeStart",
+            "isReminderOn",
+            "categories",
+            "isOnlineMeeting",
+            "onlineMeetingProvider",
+            "allowNewTimeProposals",
+            "responseRequested",
+            "recurrence"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_CALENDAR__GET_SCHEDULE",
+    "name": "MICROSOFT_CALENDAR__SCHEDULE",
     "description": "Get the free/busy availability information for a collection of users, distribution lists, or resources (rooms or equipment) for a specified time period. Perfect for finding available meeting times and checking when people are free.",
-    "tags": ["calendar", "schedule", "availability", "free-busy", "meeting-planning"],
+    "tags": [
+      "calendar",
+      "schedule",
+      "availability",
+      "free-busy",
+      "meeting-planning"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -733,8 +1027,13 @@
                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
                 }
               },
-              "required": ["dateTime"],
-              "visible": ["dateTime", "timeZone"],
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "endTime": {
@@ -750,8 +1049,13 @@
                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
                 }
               },
-              "required": ["dateTime"],
-              "visible": ["dateTime", "timeZone"],
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "availabilityViewInterval": {
@@ -761,8 +1065,17 @@
               "maximum": 1440
             }
           },
-          "required": ["schedules", "startTime", "endTime"],
-          "visible": ["schedules", "startTime", "endTime", "availabilityViewInterval"],
+          "required": [
+            "schedules",
+            "startTime",
+            "endTime"
+          ],
+          "visible": [
+            "schedules",
+            "startTime",
+            "endTime",
+            "availabilityViewInterval"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -775,19 +1088,33 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body", "header"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__LIST_ALL_EVENTS",
     "description": "Get a comprehensive list of all event objects across all calendars in the user's mailbox. This provides a unified view of all events from every calendar, supporting timezone preferences and OData query parameters for filtering, sorting, and pagination. Complements the specific calendar LIST_EVENTS function.",
-    "tags": ["calendar", "events", "list", "all", "comprehensive", "unified"],
+    "tags": [
+      "calendar",
+      "events",
+      "list",
+      "all",
+      "comprehensive",
+      "unified"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -829,7 +1156,14 @@
             }
           },
           "required": [],
-          "visible": ["$select", "$filter", "$orderby", "$top", "$skip", "$expand"],
+          "visible": [
+            "$select",
+            "$filter",
+            "$orderby",
+            "$top",
+            "$skip",
+            "$expand"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -842,19 +1176,32 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query", "header"],
+      "visible": [
+        "query",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__CREATE_EVENT_DEFAULT",
     "description": "Create an event in the user's default calendar with simplified parameters. Perfect for quick event creation without specifying a calendar ID. Supports all event features including attendees, locations, recurrence patterns, and online meeting details.",
-    "tags": ["calendar", "event", "create", "default", "meeting", "appointment", "simple"],
+    "tags": [
+      "calendar",
+      "event",
+      "create",
+      "default",
+      "meeting",
+      "appointment",
+      "simple"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -880,7 +1227,10 @@
               "properties": {
                 "contentType": {
                   "type": "string",
-                  "enum": ["text", "html"],
+                  "enum": [
+                    "text",
+                    "html"
+                  ],
                   "description": "The content type (text or html)"
                 },
                 "content": {
@@ -889,7 +1239,10 @@
                 }
               },
               "required": [],
-              "visible": ["contentType", "content"],
+              "visible": [
+                "contentType",
+                "content"
+              ],
               "additionalProperties": false
             },
             "start": {
@@ -905,8 +1258,13 @@
                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
                 }
               },
-              "required": ["dateTime"],
-              "visible": ["dateTime", "timeZone"],
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "end": {
@@ -922,8 +1280,13 @@
                   "description": "Time zone (e.g., 'UTC', 'America/New_York', 'Europe/London')"
                 }
               },
-              "required": ["dateTime"],
-              "visible": ["dateTime", "timeZone"],
+              "required": [
+                "dateTime"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "location": {
@@ -964,12 +1327,22 @@
                     }
                   },
                   "required": [],
-                  "visible": ["street", "city", "state", "countryOrRegion", "postalCode"],
+                  "visible": [
+                    "street",
+                    "city",
+                    "state",
+                    "countryOrRegion",
+                    "postalCode"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["displayName", "locationEmailAddress", "address"],
+              "visible": [
+                "displayName",
+                "locationEmailAddress",
+                "address"
+              ],
               "additionalProperties": false
             },
             "attendees": {
@@ -991,18 +1364,32 @@
                         "description": "Display name of the attendee or resource"
                       }
                     },
-                    "required": ["address"],
-                    "visible": ["address", "name"],
+                    "required": [
+                      "address"
+                    ],
+                    "visible": [
+                      "address",
+                      "name"
+                    ],
                     "additionalProperties": false
                   },
                   "type": {
                     "type": "string",
-                    "enum": ["required", "optional", "resource"],
+                    "enum": [
+                      "required",
+                      "optional",
+                      "resource"
+                    ],
                     "description": "Type: 'required' for essential attendees, 'optional' for non-essential, 'resource' for rooms/equipment"
                   }
                 },
-                "required": ["emailAddress"],
-                "visible": ["emailAddress", "type"],
+                "required": [
+                  "emailAddress"
+                ],
+                "visible": [
+                  "emailAddress",
+                  "type"
+                ],
                 "additionalProperties": false
               }
             },
@@ -1012,17 +1399,32 @@
             },
             "showAs": {
               "type": "string",
-              "enum": ["free", "tentative", "busy", "oof", "workingElsewhere"],
+              "enum": [
+                "free",
+                "tentative",
+                "busy",
+                "oof",
+                "workingElsewhere"
+              ],
               "description": "Show availability as (free, tentative, busy, oof, workingElsewhere)"
             },
             "sensitivity": {
               "type": "string",
-              "enum": ["normal", "personal", "private", "confidential"],
+              "enum": [
+                "normal",
+                "personal",
+                "private",
+                "confidential"
+              ],
               "description": "Event sensitivity level"
             },
             "importance": {
               "type": "string",
-              "enum": ["low", "normal", "high"],
+              "enum": [
+                "low",
+                "normal",
+                "high"
+              ],
               "description": "Event importance level"
             },
             "reminderMinutesBeforeStart": {
@@ -1046,7 +1448,12 @@
             },
             "onlineMeetingProvider": {
               "type": "string",
-              "enum": ["unknown", "skypeForBusiness", "skypeForConsumer", "teamsForBusiness"],
+              "enum": [
+                "unknown",
+                "skypeForBusiness",
+                "skypeForConsumer",
+                "teamsForBusiness"
+              ],
               "description": "Online meeting provider"
             },
             "allowNewTimeProposals": {
@@ -1067,7 +1474,14 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "enum": ["daily", "weekly", "absoluteMonthly", "relativeMonthly", "absoluteYearly", "relativeYearly"],
+                      "enum": [
+                        "daily",
+                        "weekly",
+                        "absoluteMonthly",
+                        "relativeMonthly",
+                        "absoluteYearly",
+                        "relativeYearly"
+                      ],
                       "description": "The recurrence pattern type"
                     },
                     "interval": {
@@ -1087,22 +1501,52 @@
                       "description": "Days of the week on which the event occurs",
                       "items": {
                         "type": "string",
-                        "enum": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+                        "enum": [
+                          "sunday",
+                          "monday",
+                          "tuesday",
+                          "wednesday",
+                          "thursday",
+                          "friday",
+                          "saturday"
+                        ]
                       }
                     },
                     "firstDayOfWeek": {
                       "type": "string",
-                      "enum": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
+                      "enum": [
+                        "sunday",
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday"
+                      ],
                       "description": "The first day of the week"
                     },
                     "index": {
                       "type": "string",
-                      "enum": ["first", "second", "third", "fourth", "last"],
+                      "enum": [
+                        "first",
+                        "second",
+                        "third",
+                        "fourth",
+                        "last"
+                      ],
                       "description": "Specifies on which instance of the allowed days specified in daysOfWeek the event occurs"
                     }
                   },
                   "required": [],
-                  "visible": ["type", "interval", "month", "dayOfMonth", "daysOfWeek", "firstDayOfWeek", "index"],
+                  "visible": [
+                    "type",
+                    "interval",
+                    "month",
+                    "dayOfMonth",
+                    "daysOfWeek",
+                    "firstDayOfWeek",
+                    "index"
+                  ],
                   "additionalProperties": false
                 },
                 "range": {
@@ -1111,7 +1555,11 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "enum": ["endDate", "noEnd", "numbered"],
+                      "enum": [
+                        "endDate",
+                        "noEnd",
+                        "numbered"
+                      ],
                       "description": "The recurrence range type"
                     },
                     "startDate": {
@@ -1128,29 +1576,69 @@
                     }
                   },
                   "required": [],
-                  "visible": ["type", "startDate", "endDate", "numberOfOccurrences"],
+                  "visible": [
+                    "type",
+                    "startDate",
+                    "endDate",
+                    "numberOfOccurrences"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["pattern", "range"],
+              "visible": [
+                "pattern",
+                "range"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["subject", "start", "end"],
-          "visible": ["subject", "body", "start", "end", "location", "attendees", "isAllDay", "showAs", "sensitivity", "importance", "reminderMinutesBeforeStart", "isReminderOn", "categories", "isOnlineMeeting", "onlineMeetingProvider", "allowNewTimeProposals", "responseRequested", "recurrence"],
+          "required": [
+            "subject",
+            "start",
+            "end"
+          ],
+          "visible": [
+            "subject",
+            "body",
+            "start",
+            "end",
+            "location",
+            "attendees",
+            "isAllDay",
+            "showAs",
+            "sensitivity",
+            "importance",
+            "reminderMinutesBeforeStart",
+            "isReminderOn",
+            "categories",
+            "isOnlineMeeting",
+            "onlineMeetingProvider",
+            "allowNewTimeProposals",
+            "responseRequested",
+            "recurrence"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_CALENDAR__GET_EVENT",
+    "name": "MICROSOFT_CALENDAR__EVENT_GET_EVENTS",
     "description": "Get the properties and relationships of a specific event. Returns event details including subject, body, attendees, location, start/end times, and all other event properties. Supports timezone preferences and custom property selection.",
-    "tags": ["calendar", "event", "get", "details"],
+    "tags": [
+      "calendar",
+      "event",
+      "get",
+      "details"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1171,8 +1659,12 @@
               "description": "The unique identifier of the event to retrieve"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -1189,7 +1681,10 @@
             }
           },
           "required": [],
-          "visible": ["$select", "$expand"],
+          "visible": [
+            "$select",
+            "$expand"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1202,19 +1697,33 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "query", "header"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__UPDATE_EVENT",
     "description": "Update the properties of an existing event. Can modify subject, attendees, times, location, body, importance, reminders, online meeting settings, and other event properties. Use PATCH to update only specified fields while preserving others.",
-    "tags": ["calendar", "event", "update", "modify", "edit"],
+    "tags": [
+      "calendar",
+      "event",
+      "update",
+      "modify",
+      "edit"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1235,8 +1744,12 @@
               "description": "The unique identifier of the event to update"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1253,7 +1766,10 @@
               "properties": {
                 "contentType": {
                   "type": "string",
-                  "enum": ["text", "html"],
+                  "enum": [
+                    "text",
+                    "html"
+                  ],
                   "description": "The format of the content (text or html)"
                 },
                 "content": {
@@ -1262,7 +1778,10 @@
                 }
               },
               "required": [],
-              "visible": ["contentType", "content"],
+              "visible": [
+                "contentType",
+                "content"
+              ],
               "additionalProperties": false
             },
             "start": {
@@ -1279,7 +1798,10 @@
                 }
               },
               "required": [],
-              "visible": ["dateTime", "timeZone"],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "end": {
@@ -1296,7 +1818,10 @@
                 }
               },
               "required": [],
-              "visible": ["dateTime", "timeZone"],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             },
             "location": {
@@ -1309,7 +1834,18 @@
                 },
                 "locationType": {
                   "type": "string",
-                  "enum": ["default", "conferenceRoom", "homeAddress", "businessAddress", "geoCoordinates", "streetAddress", "hotel", "restaurant", "localBusiness", "postalAddress"],
+                  "enum": [
+                    "default",
+                    "conferenceRoom",
+                    "homeAddress",
+                    "businessAddress",
+                    "geoCoordinates",
+                    "streetAddress",
+                    "hotel",
+                    "restaurant",
+                    "localBusiness",
+                    "postalAddress"
+                  ],
                   "description": "The type of location"
                 },
                 "uniqueId": {
@@ -1318,7 +1854,13 @@
                 },
                 "uniqueIdType": {
                   "type": "string",
-                  "enum": ["unknown", "locationStore", "directory", "private", "bing"],
+                  "enum": [
+                    "unknown",
+                    "locationStore",
+                    "directory",
+                    "private",
+                    "bing"
+                  ],
                   "description": "For internal use only"
                 },
                 "address": {
@@ -1347,7 +1889,13 @@
                     }
                   },
                   "required": [],
-                  "visible": ["street", "city", "state", "countryOrRegion", "postalCode"],
+                  "visible": [
+                    "street",
+                    "city",
+                    "state",
+                    "countryOrRegion",
+                    "postalCode"
+                  ],
                   "additionalProperties": false
                 },
                 "coordinates": {
@@ -1364,12 +1912,22 @@
                     }
                   },
                   "required": [],
-                  "visible": ["latitude", "longitude"],
+                  "visible": [
+                    "latitude",
+                    "longitude"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["displayName", "locationType", "uniqueId", "uniqueIdType", "address", "coordinates"],
+              "visible": [
+                "displayName",
+                "locationType",
+                "uniqueId",
+                "uniqueIdType",
+                "address",
+                "coordinates"
+              ],
               "additionalProperties": false
             },
             "attendees": {
@@ -1380,7 +1938,11 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "enum": ["required", "optional", "resource"],
+                    "enum": [
+                      "required",
+                      "optional",
+                      "resource"
+                    ],
                     "description": "The type of attendee"
                   },
                   "emailAddress": {
@@ -1397,28 +1959,50 @@
                       }
                     },
                     "required": [],
-                    "visible": ["address", "name"],
+                    "visible": [
+                      "address",
+                      "name"
+                    ],
                     "additionalProperties": false
                   }
                 },
                 "required": [],
-                "visible": ["type", "emailAddress"],
+                "visible": [
+                  "type",
+                  "emailAddress"
+                ],
                 "additionalProperties": false
               }
             },
             "importance": {
               "type": "string",
-              "enum": ["low", "normal", "high"],
+              "enum": [
+                "low",
+                "normal",
+                "high"
+              ],
               "description": "The importance of the event"
             },
             "sensitivity": {
               "type": "string",
-              "enum": ["normal", "personal", "private", "confidential"],
+              "enum": [
+                "normal",
+                "personal",
+                "private",
+                "confidential"
+              ],
               "description": "The sensitivity level of the event"
             },
             "showAs": {
               "type": "string",
-              "enum": ["free", "tentative", "busy", "oof", "workingElsewhere", "unknown"],
+              "enum": [
+                "free",
+                "tentative",
+                "busy",
+                "oof",
+                "workingElsewhere",
+                "unknown"
+              ],
               "description": "The status to show during the event time"
             },
             "isAllDay": {
@@ -1439,7 +2023,11 @@
             },
             "onlineMeetingProvider": {
               "type": "string",
-              "enum": ["teamsForBusiness", "skypeForBusiness", "skypeForConsumer"],
+              "enum": [
+                "teamsForBusiness",
+                "skypeForBusiness",
+                "skypeForConsumer"
+              ],
               "description": "Represents the online meeting service provider"
             },
             "responseRequested": {
@@ -1467,7 +2055,14 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "enum": ["daily", "weekly", "absoluteMonthly", "relativeMonthly", "absoluteYearly", "relativeYearly"],
+                      "enum": [
+                        "daily",
+                        "weekly",
+                        "absoluteMonthly",
+                        "relativeMonthly",
+                        "absoluteYearly",
+                        "relativeYearly"
+                      ],
                       "description": "The recurrence pattern type"
                     },
                     "interval": {
@@ -1487,22 +2082,52 @@
                       "description": "Days of the week on which the event occurs",
                       "items": {
                         "type": "string",
-                        "enum": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+                        "enum": [
+                          "sunday",
+                          "monday",
+                          "tuesday",
+                          "wednesday",
+                          "thursday",
+                          "friday",
+                          "saturday"
+                        ]
                       }
                     },
                     "firstDayOfWeek": {
                       "type": "string",
-                      "enum": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
+                      "enum": [
+                        "sunday",
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday"
+                      ],
                       "description": "The first day of the week"
                     },
                     "index": {
                       "type": "string",
-                      "enum": ["first", "second", "third", "fourth", "last"],
+                      "enum": [
+                        "first",
+                        "second",
+                        "third",
+                        "fourth",
+                        "last"
+                      ],
                       "description": "Specifies on which instance of the allowed days specified in daysOfWeek the event occurs"
                     }
                   },
                   "required": [],
-                  "visible": ["type", "interval", "month", "dayOfMonth", "daysOfWeek", "firstDayOfWeek", "index"],
+                  "visible": [
+                    "type",
+                    "interval",
+                    "month",
+                    "dayOfMonth",
+                    "daysOfWeek",
+                    "firstDayOfWeek",
+                    "index"
+                  ],
                   "additionalProperties": false
                 },
                 "range": {
@@ -1511,7 +2136,11 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "enum": ["endDate", "noEnd", "numbered"],
+                      "enum": [
+                        "endDate",
+                        "noEnd",
+                        "numbered"
+                      ],
                       "description": "The recurrence range type"
                     },
                     "startDate": {
@@ -1528,29 +2157,67 @@
                     }
                   },
                   "required": [],
-                  "visible": ["type", "startDate", "endDate", "numberOfOccurrences"],
+                  "visible": [
+                    "type",
+                    "startDate",
+                    "endDate",
+                    "numberOfOccurrences"
+                  ],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": ["pattern", "range"],
+              "visible": [
+                "pattern",
+                "range"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["subject", "body", "start", "end", "location", "attendees", "importance", "sensitivity", "showAs", "isAllDay", "isReminderOn", "reminderMinutesBeforeStart", "isOnlineMeeting", "onlineMeetingProvider", "responseRequested", "hideAttendees", "categories", "recurrence"],
+          "visible": [
+            "subject",
+            "body",
+            "start",
+            "end",
+            "location",
+            "attendees",
+            "importance",
+            "sensitivity",
+            "showAs",
+            "isAllDay",
+            "isReminderOn",
+            "reminderMinutesBeforeStart",
+            "isOnlineMeeting",
+            "onlineMeetingProvider",
+            "responseRequested",
+            "hideAttendees",
+            "categories",
+            "recurrence"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_CALENDAR__DELETE_EVENT",
+    "name": "MICROSOFT_CALENDAR__EVENT_DELETE_EVENTS",
     "description": "Delete a specific event from the calendar. If the event is a meeting, deleting it on the organizer's calendar sends a cancellation message to all attendees. This action cannot be undone.",
-    "tags": ["calendar", "event", "delete", "remove", "cancel"],
+    "tags": [
+      "calendar",
+      "event",
+      "delete",
+      "remove",
+      "cancel"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1571,20 +2238,34 @@
               "description": "The unique identifier of the event to delete"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__PERMANENT_DELETE_EVENT",
     "description": "Permanently delete an event and place it in the purges folder in the dumpster. Unlike regular delete, this action moves the event to a deeper deletion state that cannot be recovered by standard means. Email clients cannot access permanently deleted items.",
-    "tags": ["calendar", "event", "permanent", "delete", "purge"],
+    "tags": [
+      "calendar",
+      "event",
+      "permanent",
+      "delete",
+      "purge"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1605,20 +2286,34 @@
               "description": "The unique identifier of the event to permanently delete"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__DELTA_EVENTS",
     "description": "Get a set of event resources that have been added, deleted, or updated in a calendarView (a range of events defined by start and end dates) of the user's primary calendar. Supports delta query for incremental sync.",
-    "tags": ["calendar", "event", "delta", "sync", "changes"],
+    "tags": [
+      "calendar",
+      "event",
+      "delta",
+      "sync",
+      "changes"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1652,7 +2347,12 @@
             }
           },
           "required": [],
-          "visible": ["startDateTime", "endDateTime", "$deltatoken", "$skiptoken"],
+          "visible": [
+            "startDateTime",
+            "endDateTime",
+            "$deltatoken",
+            "$skiptoken"
+          ],
           "additionalProperties": false
         },
         "header": {
@@ -1665,19 +2365,30 @@
             }
           },
           "required": [],
-          "visible": ["Prefer"],
+          "visible": [
+            "Prefer"
+          ],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": ["query", "header"],
+      "visible": [
+        "query",
+        "header"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__FORWARD_EVENT",
     "description": "Forward a meeting event to new recipients. Allows the organizer or attendee to forward the meeting request, optionally including a comment. The new recipients will be added to the event and notified.",
-    "tags": ["calendar", "event", "forward", "invite", "meeting"],
+    "tags": [
+      "calendar",
+      "event",
+      "forward",
+      "invite",
+      "meeting"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1698,8 +2409,12 @@
               "description": "The unique identifier of the event to forward"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1728,31 +2443,57 @@
                         "description": "The display name of the recipient."
                       }
                     },
-                    "required": ["Address"],
-                    "visible": ["Address", "Name"],
+                    "required": [
+                      "Address"
+                    ],
+                    "visible": [
+                      "Address",
+                      "Name"
+                    ],
                     "additionalProperties": false
                   }
                 },
-                "required": ["EmailAddress"],
-                "visible": ["EmailAddress"],
+                "required": [
+                  "EmailAddress"
+                ],
+                "visible": [
+                  "EmailAddress"
+                ],
                 "additionalProperties": false
               }
             }
           },
-          "required": ["ToRecipients"],
-          "visible": ["Comment", "ToRecipients"],
+          "required": [
+            "ToRecipients"
+          ],
+          "visible": [
+            "Comment",
+            "ToRecipients"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__ACCEPT_EVENT",
     "description": "Accept the specified event in a user calendar. Optionally include a comment and choose whether to send a response to the organizer.",
-    "tags": ["calendar", "event", "accept", "response", "meeting"],
+    "tags": [
+      "calendar",
+      "event",
+      "accept",
+      "response",
+      "meeting"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1773,8 +2514,12 @@
               "description": "The unique identifier of the event to accept"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1791,19 +2536,33 @@
             }
           },
           "required": [],
-          "visible": ["comment", "sendResponse"],
+          "visible": [
+            "comment",
+            "sendResponse"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__TENTATIVELY_ACCEPT_EVENT",
     "description": "Tentatively accept the specified event in a user calendar. Optionally include a comment, propose a new time, and choose whether to send a response to the organizer.",
-    "tags": ["calendar", "event", "tentative", "response", "meeting"],
+    "tags": [
+      "calendar",
+      "event",
+      "tentative",
+      "response",
+      "meeting"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1824,8 +2583,12 @@
               "description": "The unique identifier of the event to tentatively accept"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1857,8 +2620,14 @@
                       "description": "Time zone for the start time (e.g., 'UTC', 'Pacific Standard Time')"
                     }
                   },
-                  "required": ["dateTime", "timeZone"],
-                  "visible": ["dateTime", "timeZone"],
+                  "required": [
+                    "dateTime",
+                    "timeZone"
+                  ],
+                  "visible": [
+                    "dateTime",
+                    "timeZone"
+                  ],
                   "additionalProperties": false
                 },
                 "end": {
@@ -1874,30 +2643,57 @@
                       "description": "Time zone for the end time (e.g., 'UTC', 'Pacific Standard Time')"
                     }
                   },
-                  "required": ["dateTime", "timeZone"],
-                  "visible": ["dateTime", "timeZone"],
+                  "required": [
+                    "dateTime",
+                    "timeZone"
+                  ],
+                  "visible": [
+                    "dateTime",
+                    "timeZone"
+                  ],
                   "additionalProperties": false
                 }
               },
-              "required": ["start", "end"],
-              "visible": ["start", "end"],
+              "required": [
+                "start",
+                "end"
+              ],
+              "visible": [
+                "start",
+                "end"
+              ],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": ["comment", "sendResponse", "proposedNewTime"],
+          "visible": [
+            "comment",
+            "sendResponse",
+            "proposedNewTime"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path", "body"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__DISMISS_REMINDER",
     "description": "Dismiss a reminder that has been triggered for an event in a user calendar.",
-    "tags": ["calendar", "event", "reminder", "dismiss", "notification"],
+    "tags": [
+      "calendar",
+      "event",
+      "reminder",
+      "dismiss",
+      "notification"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1918,20 +2714,34 @@
               "description": "The unique identifier of the event to dismiss the reminder for"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path"],
-      "visible": ["path"],
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__SNOOZE_REMINDER",
     "description": "Postpone a reminder for an event in a user calendar until a new time.",
-    "tags": ["calendar", "event", "reminder", "snooze", "notification"],
+    "tags": [
+      "calendar",
+      "event",
+      "reminder",
+      "snooze",
+      "notification"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1952,8 +2762,12 @@
               "description": "The unique identifier of the event to snooze the reminder for"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "body": {
@@ -1973,25 +2787,47 @@
                   "description": "The time zone for the new reminder time (e.g., 'UTC', 'Pacific Standard Time')"
                 }
               },
-              "required": ["dateTime", "timeZone"],
-              "visible": ["dateTime", "timeZone"],
+              "required": [
+                "dateTime",
+                "timeZone"
+              ],
+              "visible": [
+                "dateTime",
+                "timeZone"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["newReminderTime"],
-          "visible": ["newReminderTime"],
+          "required": [
+            "newReminderTime"
+          ],
+          "visible": [
+            "newReminderTime"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "body"],
-      "visible": ["path", "body"],
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_CALENDAR__LIST_INSTANCES",
     "description": "Get the instances (occurrences) of an event for a specified time range. If the event is a seriesMaster, returns the occurrences and exceptions in the range.",
-    "tags": ["calendar", "event", "instances", "recurrence", "occurrences"],
+    "tags": [
+      "calendar",
+      "event",
+      "instances",
+      "recurrence",
+      "occurrences"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2012,8 +2848,12 @@
               "description": "The unique identifier of the event (series master or single event)"
             }
           },
-          "required": ["eventId"],
-          "visible": ["eventId"],
+          "required": [
+            "eventId"
+          ],
+          "visible": [
+            "eventId"
+          ],
           "additionalProperties": false
         },
         "query": {
@@ -2045,13 +2885,29 @@
               "description": "Property to sort instances by (e.g., 'start/dateTime asc')"
             }
           },
-          "required": ["startDateTime", "endDateTime"],
-          "visible": ["startDateTime", "endDateTime", "$select", "$top", "$skip", "$orderby"],
+          "required": [
+            "startDateTime",
+            "endDateTime"
+          ],
+          "visible": [
+            "startDateTime",
+            "endDateTime",
+            "$select",
+            "$top",
+            "$skip",
+            "$orderby"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["path", "query"],
-      "visible": ["path", "query"],
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
       "additionalProperties": false
     }
   }
