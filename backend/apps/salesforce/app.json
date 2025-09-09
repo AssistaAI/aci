@@ -7,15 +7,24 @@
   "description": "Salesforce is the world's leading customer relationship management (CRM) platform. This integration enables comprehensive access to sales, marketing, and service data including accounts, contacts, leads, opportunities, cases, and campaigns.",
   "security_schemes": {
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+          "tokenUrl": "https://login.salesforce.com/services/oauth2/token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_SALESFORCE_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_SALESFORCE_APP_CLIENT_SECRET }}",
-      "scope": "api refresh_token",
       "authorize_url": "https://login.salesforce.com/services/oauth2/authorize",
-      "access_token_url": "https://login.salesforce.com/services/oauth2/token",
-      "refresh_token_url": "https://login.salesforce.com/services/oauth2/token"
+      "access_token_url": "https://login.salesforce.com/services/oauth2/token"
     }
   },
   "default_security_credentials_by_scheme": {},

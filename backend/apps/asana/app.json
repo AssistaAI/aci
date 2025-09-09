@@ -7,12 +7,22 @@
   "description": "Integration with ASANA Support API to manage users, tickets, and organizations.",
   "security_schemes": {
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://app.asana.com/-/oauth_authorize",
+          "tokenUrl": "https://app.asana.com/-/oauth_token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ ASANA_CLIENT_ID }}",
       "client_secret": "{{ ASANA_CLIENT_SECRET }}",
-      "scope": "default",
       "authorize_url": "https://app.asana.com/-/oauth_authorize",
       "access_token_url": "https://app.asana.com/-/oauth_token"
     }
