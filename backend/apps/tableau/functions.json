@@ -1,0 +1,43 @@
+[
+  {
+    "name": "TABLEAU__PLACEHOLDER",
+    "description": "Placeholder function for Tableau integration - needs proper implementation",
+    "tags": [
+      "tableau",
+      "placeholder"
+    ],
+    "visibility": "public",
+    "active": false,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/placeholder",
+      "server_url": "https://your-server.tableau.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "required": [
+        "header"
+      ],
+      "visible": [
+        "header"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

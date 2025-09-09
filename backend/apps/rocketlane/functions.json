@@ -1,493 +1,1178 @@
 [
-    {
-        "name": "ROCKETLANE__GET_FIELD",
-        "description": "Get field details by ID from Rocketlane",
-        "tags": [
-            "fields",
-            "get"
-        ],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/fields/{fieldId}",
-            "server_url": "https://api.rocketlane.com/api/1.0"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-               "header": {
-                    "type": "object",
-                    "description": "Headers for the HTTP request",
-                    "properties": {
-                        "accept": {
-                            "type": "string",
-                            "description": "Accept header",
-                            "default": "application/json"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "accept"
-                    ],
-                    "visible": []
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters",
-                    "properties": {
-                        "fieldId": {
-                            "type": "integer",
-                            "format": "int64",
-                            "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
-                            "minimum": 0,
-                            "default": 1
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldId"
-                    ],
-                    "visible": [
-                        "fieldId"
-                    ]
-                },
-                "query": {
-                    "type": "object",
-                    "description": "Query parameters",
-                    "properties": {
-                        "includeFields": {
-                            "type": "array",
-                            "description": "Specify which field properties should be returned in the response body. Use comma separated values. If left blank, default properties are returned.",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "includeAllFields": {
-                            "type": "boolean",
-                            "description": "Specify if all the field properties should be returned in the response body. If left blank, default field properties are returned.",
-                            "default": true
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [],
-                    "visible": [
-                        "includeFields",
-                        "includeAllFields"
-                    ]
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "header",
-                "path"
-            ],
-            "visible": [
-                "path",
-                "query"
-            ]
-        }
+  {
+    "name": "ROCKETLANE__FIELD_GET_FIELDS",
+    "description": "Get field details by ID from Rocketlane",
+    "tags": [
+      "fields",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/fields/{fieldId}",
+      "server_url": "https://api.rocketlane.com/api/1.0"
     },
-    {
-        "name": "ROCKETLANE__UPDATE_FIELD",
-        "description": "Update field details by ID in Rocketlane",
-        "tags": [
-            "fields",
-            "update"
-        ],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "PUT",
-            "path": "/fields/{fieldId}",
-            "server_url": "https://api.rocketlane.com/api/1.0"
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
         },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the HTTP request",
-                    "properties": {
-                        "Content-Type": {
-                            "type": "string",
-                            "description": "Content-Type header",
-                            "default": "application/json"
-                        },
-                        "accept": {
-                            "type": "string",
-                            "description": "Accept header",
-                            "default": "application/json"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "Content-Type",
-                        "accept"
-                    ],
-                    "visible": []
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters",
-                    "properties": {
-                        "fieldId": {
-                            "type": "integer",
-                            "format": "int64",
-                            "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
-                            "minimum": 0,
-                            "default": 1
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldId"
-                    ],
-                    "visible": [
-                        "fieldId"
-                    ]
-                },
-                "query": {
-                    "type": "object",
-                    "description": "Query parameters",
-                    "properties": {
-                        "includeFields": {
-                            "type": "array",
-                            "description": "Specify which field properties should be returned in the response body. Use comma separated values. If left blank, default properties are returned.",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "includeAllFields": {
-                            "type": "boolean",
-                            "description": "Specify if all the field properties should be returned in the response body. If left blank, default field properties are returned.",
-                            "default": true
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [],
-                    "visible": [
-                        "includeFields",
-                        "includeAllFields"
-                    ]
-                },
-                "body": {
-                    "type": "object",
-                    "description": "Body parameters for updating the field",
-                    "properties": {
-                        "fieldLabel": {
-                            "type": "string",
-                            "description": "The fieldLabel is the name of the field"
-                        },
-                        "fieldDescription": {
-                            "type": "string",
-                            "description": "The description of the field"
-                        },
-                        "enabled": {
-                            "type": "boolean",
-                            "description": "This depicts if the field is enabled or not. Only those fields which are enabled will reflect in the account.",
-                            "default": false
-                        },
-                        "private": {
-                            "type": "boolean",
-                            "description": "This depicts if the field is private or not.",
-                            "default": false
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldLabel"
-                    ],
-                    "visible": [
-                        "fieldLabel",
-                        "fieldDescription",
-                        "enabled",
-                        "private"
-                    ]
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "header",
-                "path",
-                "body"
-            ],
-            "visible": [
-                "path",
-                "query",
-                "body"
-            ]
-        }
-    },
-    {
-        "name": "ROCKETLANE__DELETE_FIELD",
-        "description": "Delete a field by ID from Rocketlane",
-        "tags": [
-            "fields",
-            "delete"
-        ],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "DELETE",
-            "path": "/fields/{fieldId}",
-            "server_url": "https://api.rocketlane.com/api/1.0"
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "fieldId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
+              "minimum": 0,
+              "default": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldId"
+          ],
+          "visible": [
+            "fieldId"
+          ]
         },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the HTTP request",
-                    "properties": {
-                        "accept": {
-                            "type": "string",
-                            "description": "Accept header",
-                            "default": "application/json"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "accept"
-                    ],
-                    "visible": []
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters",
-                    "properties": {
-                        "fieldId": {
-                            "type": "integer",
-                            "format": "int64",
-                            "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
-                            "minimum": 0,
-                            "default": 1
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldId"
-                    ],
-                    "visible": [
-                        "fieldId"
-                    ]
-                }
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "includeFields": {
+              "type": "array",
+              "description": "Specify which field properties should be returned in the response body. Use comma separated values. If left blank, default properties are returned.",
+              "items": {
+                "type": "string"
+              }
             },
-            "additionalProperties": false,
-            "required": [
-                "header",
-                "path"
-            ],
-            "visible": [
-                "path"
-            ]
+            "includeAllFields": {
+              "type": "boolean",
+              "description": "Specify if all the field properties should be returned in the response body. If left blank, default field properties are returned.",
+              "default": true
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "includeFields",
+            "includeAllFields"
+          ]
         }
-    },
-    {
-        "name": "ROCKETLANE__ADD_FIELD_OPTION",
-        "description": "Add a new option to a field in Rocketlane",
-        "tags": [
-            "fields",
-            "options",
-            "add"
-        ],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "POST",
-            "path": "/fields/{fieldId}/add-option",
-            "server_url": "https://api.rocketlane.com/api/1.0"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the HTTP request",
-                    "properties": {
-                        "Content-Type": {
-                            "type": "string",
-                            "description": "Content-Type header",
-                            "default": "application/json"
-                        },
-                        "accept": {
-                            "type": "string",
-                            "description": "Accept header",
-                            "default": "application/json"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "Content-Type",
-                        "accept"
-                    ],
-                    "visible": []
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters",
-                    "properties": {
-                        "fieldId": {
-                            "type": "integer",
-                            "format": "int64",
-                            "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
-                            "minimum": 0,
-                            "default": 1
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldId"
-                    ],
-                    "visible": [
-                        "fieldId"
-                    ]
-                },
-                "body": {
-                    "type": "object",
-                    "description": "Body parameters for adding the field option",
-                    "properties": {
-                        "optionColor": {
-                            "type": "string",
-                            "description": "The optionColor reflects the color of the options for the single or multiple choice field",
-                            "enum": ["RED", "BLUE", "GREEN", "YELLOW", "PURPLE", "ORANGE"],
-                            "default": "RED"
-                        },
-                        "optionLabel": {
-                            "type": "string",
-                            "description": "The optionLabel reflects the name of the options for the single or multiple choice field"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "optionColor",
-                        "optionLabel"
-                    ],
-                    "visible": [
-                        "optionColor",
-                        "optionLabel"
-                    ]
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "header",
-                "path",
-                "body"
-            ],
-            "visible": [
-                "path",
-                "body"
-            ]
-        }
-    },
-    {
-        "name": "ROCKETLANE__UPDATE_FIELD_OPTION",
-        "description": "Update a SINGLE_CHOICE or MULTIPLE_CHOICE field's option values using the fieldId and optionValue. This API returns the updated option object. Developers can update field option related information, including the label and color for the provided optionValue.",
-        "tags": [
-            "fields",
-            "options",
-            "update"
-        ],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "POST",
-            "path": "/fields/{fieldId}/update-option",
-            "server_url": "https://api.rocketlane.com/api/1.0"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the HTTP request",
-                    "properties": {
-                        "Content-Type": {
-                            "type": "string",
-                            "description": "Content-Type header",
-                            "default": "application/json"
-                        },
-                        "accept": {
-                            "type": "string",
-                            "description": "Accept header",
-                            "default": "application/json"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "Content-Type",
-                        "accept"
-                    ],
-                    "visible": []
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters",
-                    "properties": {
-                        "fieldId": {
-                            "type": "integer",
-                            "format": "int64",
-                            "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
-                            "minimum": 0,
-                            "default": 1
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "fieldId"
-                    ],
-                    "visible": [
-                        "fieldId"
-                    ]
-                },
-                "body": {
-                    "type": "object",
-                    "description": "Body parameters for updating the field option",
-                    "properties": {
-                        "optionValue": {
-                            "type": "integer",
-                            "description": "The optionId is the unique identifier for the option"
-                        },
-                        "optionColor": {
-                            "type": "string",
-                            "description": "The optionColor reflects the color of the options for the single or multiple choice field",
-                            "enum": ["RED", "BLUE", "GREEN", "YELLOW", "PURPLE", "ORANGE"],
-                            "default": "RED"
-                        },
-                        "optionLabel": {
-                            "type": "string",
-                            "description": "The optionLabel reflects the name of the options for the single or multiple choice field"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "optionValue",
-                        "optionColor",
-                        "optionLabel"
-                    ],
-                    "visible": [
-                        "optionValue",
-                        "optionColor",
-                        "optionLabel"
-                    ]
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "header",
-                "path",
-                "body"
-            ],
-            "visible": [
-                "path",
-                "body"
-            ]
-        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ]
     }
+  },
+  {
+    "name": "ROCKETLANE__UPDATE_FIELD",
+    "description": "Update field details by ID in Rocketlane",
+    "tags": [
+      "fields",
+      "update"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/fields/{fieldId}",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "fieldId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
+              "minimum": 0,
+              "default": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldId"
+          ],
+          "visible": [
+            "fieldId"
+          ]
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "includeFields": {
+              "type": "array",
+              "description": "Specify which field properties should be returned in the response body. Use comma separated values. If left blank, default properties are returned.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "includeAllFields": {
+              "type": "boolean",
+              "description": "Specify if all the field properties should be returned in the response body. If left blank, default field properties are returned.",
+              "default": true
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "includeFields",
+            "includeAllFields"
+          ]
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for updating the field",
+          "properties": {
+            "fieldLabel": {
+              "type": "string",
+              "description": "The fieldLabel is the name of the field"
+            },
+            "fieldDescription": {
+              "type": "string",
+              "description": "The description of the field"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "This depicts if the field is enabled or not. Only those fields which are enabled will reflect in the account.",
+              "default": false
+            },
+            "private": {
+              "type": "boolean",
+              "description": "This depicts if the field is private or not.",
+              "default": false
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldLabel"
+          ],
+          "visible": [
+            "fieldLabel",
+            "fieldDescription",
+            "enabled",
+            "private"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "query",
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__FIELD_DELETE_FIELDS",
+    "description": "Delete a field by ID from Rocketlane",
+    "tags": [
+      "fields",
+      "delete"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/fields/{fieldId}",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "fieldId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
+              "minimum": 0,
+              "default": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldId"
+          ],
+          "visible": [
+            "fieldId"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__ADD_FIELD_OPTION",
+    "description": "Add a new option to a field in Rocketlane",
+    "tags": [
+      "fields",
+      "options",
+      "add"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/fields/{fieldId}/add-option",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "fieldId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
+              "minimum": 0,
+              "default": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldId"
+          ],
+          "visible": [
+            "fieldId"
+          ]
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for adding the field option",
+          "properties": {
+            "optionColor": {
+              "type": "string",
+              "description": "The optionColor reflects the color of the options for the single or multiple choice field",
+              "enum": [
+                "RED",
+                "BLUE",
+                "GREEN",
+                "YELLOW",
+                "PURPLE",
+                "ORANGE"
+              ],
+              "default": "RED"
+            },
+            "optionLabel": {
+              "type": "string",
+              "description": "The optionLabel reflects the name of the options for the single or multiple choice field"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "optionColor",
+            "optionLabel"
+          ],
+          "visible": [
+            "optionColor",
+            "optionLabel"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__UPDATE_FIELD_OPTION",
+    "description": "Update a SINGLE_CHOICE or MULTIPLE_CHOICE field's option values using the fieldId and optionValue. This API returns the updated option object. Developers can update field option related information, including the label and color for the provided optionValue.",
+    "tags": [
+      "fields",
+      "options",
+      "update"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/fields/{fieldId}/update-option",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "fieldId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The field's unique, system-generated identifier, which can be used to identify the field globally",
+              "minimum": 0,
+              "default": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "fieldId"
+          ],
+          "visible": [
+            "fieldId"
+          ]
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for updating the field option",
+          "properties": {
+            "optionValue": {
+              "type": "integer",
+              "description": "The optionId is the unique identifier for the option"
+            },
+            "optionColor": {
+              "type": "string",
+              "description": "The optionColor reflects the color of the options for the single or multiple choice field",
+              "enum": [
+                "RED",
+                "BLUE",
+                "GREEN",
+                "YELLOW",
+                "PURPLE",
+                "ORANGE"
+              ],
+              "default": "RED"
+            },
+            "optionLabel": {
+              "type": "string",
+              "description": "The optionLabel reflects the name of the options for the single or multiple choice field"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "optionValue",
+            "optionColor",
+            "optionLabel"
+          ],
+          "visible": [
+            "optionValue",
+            "optionColor",
+            "optionLabel"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__PROJECTS",
+    "description": "Get a list of all projects in Rocketlane",
+    "tags": [
+      "projects",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/projects",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Filter projects by status",
+              "enum": [
+                "Active",
+                "Completed",
+                "On Hold",
+                "Cancelled"
+              ]
+            },
+            "customer": {
+              "type": "string",
+              "description": "Filter projects by customer name or ID"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of projects to return",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Number of projects to skip for pagination",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "status",
+            "customer",
+            "limit",
+            "offset"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header"
+      ],
+      "visible": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__CREATE_PROJECT",
+    "description": "Create a new project in Rocketlane",
+    "tags": [
+      "projects",
+      "create"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/projects",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for creating the project",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the project"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the project"
+            },
+            "customer": {
+              "type": "string",
+              "description": "Customer name or ID for the project"
+            },
+            "templateId": {
+              "type": "integer",
+              "description": "Project template ID to use"
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date of the project in YYYY-MM-DD format"
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date",
+              "description": "End date of the project in YYYY-MM-DD format"
+            },
+            "status": {
+              "type": "string",
+              "description": "Initial status of the project",
+              "enum": [
+                "Active",
+                "On Hold",
+                "Cancelled"
+              ],
+              "default": "Active"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "customer"
+          ],
+          "visible": [
+            "name",
+            "description",
+            "customer",
+            "templateId",
+            "startDate",
+            "endDate",
+            "status"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__PROJECT",
+    "description": "Get project details by ID from Rocketlane",
+    "tags": [
+      "projects",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/projects/{projectId}",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "projectId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The project's unique, system-generated identifier",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "projectId"
+          ],
+          "visible": [
+            "projectId"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__UPDATE_PROJECT",
+    "description": "Update project details by ID in Rocketlane",
+    "tags": [
+      "projects",
+      "update"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/projects/{projectId}",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "projectId": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The project's unique, system-generated identifier",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "projectId"
+          ],
+          "visible": [
+            "projectId"
+          ]
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for updating the project",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Updated name of the project"
+            },
+            "description": {
+              "type": "string",
+              "description": "Updated description of the project"
+            },
+            "status": {
+              "type": "string",
+              "description": "Updated status of the project",
+              "enum": [
+                "Active",
+                "Completed",
+                "On Hold",
+                "Cancelled"
+              ]
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Updated start date of the project in YYYY-MM-DD format"
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Updated end date of the project in YYYY-MM-DD format"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "name",
+            "description",
+            "status",
+            "startDate",
+            "endDate"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__TASKS",
+    "description": "Get a list of tasks in Rocketlane",
+    "tags": [
+      "tasks",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/tasks",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "projectId": {
+              "type": "integer",
+              "description": "Filter tasks by project ID"
+            },
+            "assignee": {
+              "type": "string",
+              "description": "Filter tasks by assignee"
+            },
+            "status": {
+              "type": "string",
+              "description": "Filter tasks by status",
+              "enum": [
+                "Not Started",
+                "In Progress",
+                "Completed",
+                "On Hold"
+              ]
+            },
+            "priority": {
+              "type": "string",
+              "description": "Filter tasks by priority",
+              "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ]
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of tasks to return",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Number of tasks to skip for pagination",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "projectId",
+            "assignee",
+            "status",
+            "priority",
+            "limit",
+            "offset"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header"
+      ],
+      "visible": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__CREATE_TASK",
+    "description": "Create a new task in Rocketlane",
+    "tags": [
+      "tasks",
+      "create"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/tasks",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content-Type header",
+              "default": "application/json"
+            },
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Content-Type",
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Body parameters for creating the task",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Title of the task"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the task"
+            },
+            "projectId": {
+              "type": "integer",
+              "description": "Project ID where the task belongs"
+            },
+            "assignee": {
+              "type": "string",
+              "description": "User ID or email of the task assignee"
+            },
+            "priority": {
+              "type": "string",
+              "description": "Priority level of the task",
+              "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+              ],
+              "default": "Medium"
+            },
+            "dueDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Due date of the task in YYYY-MM-DD format"
+            },
+            "status": {
+              "type": "string",
+              "description": "Initial status of the task",
+              "enum": [
+                "Not Started",
+                "In Progress",
+                "On Hold"
+              ],
+              "default": "Not Started"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "projectId"
+          ],
+          "visible": [
+            "title",
+            "description",
+            "projectId",
+            "assignee",
+            "priority",
+            "dueDate",
+            "status"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "ROCKETLANE__CUSTOMERS",
+    "description": "Get a list of customers in Rocketlane",
+    "tags": [
+      "customers",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/customers",
+      "server_url": "https://api.rocketlane.com/api/1.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "accept": {
+              "type": "string",
+              "description": "Accept header",
+              "default": "application/json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "accept"
+          ],
+          "visible": [],
+          "default": {}
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "search": {
+              "type": "string",
+              "description": "Search customers by name or email"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of customers to return",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Number of customers to skip for pagination",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": [
+            "search",
+            "limit",
+            "offset"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header"
+      ],
+      "visible": [
+        "query"
+      ]
+    }
+  }
 ]

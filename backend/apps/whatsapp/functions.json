@@ -1,0 +1,1551 @@
+[
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_MESSAGES",
+    "description": "Send message to customer",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{phone_number_id}/messages",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "messaging_product": {
+              "type": "string",
+              "enum": [
+                "whatsapp"
+              ],
+              "default": "whatsapp"
+            },
+            "recipient_type": {
+              "type": "string",
+              "enum": [
+                "individual"
+              ],
+              "default": "individual"
+            },
+            "to": {
+              "type": "string",
+              "default": ""
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "text",
+                "template",
+                "image",
+                "document",
+                "audio",
+                "video",
+                "location",
+                "contacts"
+              ],
+              "default": ""
+            },
+            "text": {
+              "type": "object",
+              "properties": {
+                "body": {
+                  "type": "string"
+                },
+                "preview_url": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false,
+              "required": [],
+              "visible": []
+            },
+            "template": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "language": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {},
+                  "required": [],
+                  "visible": []
+                },
+                "components": {
+                  "type": "array"
+                }
+              },
+              "additionalProperties": false,
+              "required": [],
+              "visible": []
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [],
+              "visible": []
+            },
+            "document": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "type": "string"
+                },
+                "filename": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [],
+              "visible": []
+            }
+          },
+          "required": [
+            "to",
+            "type"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "to",
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_MEDIA",
+    "description": "Upload media file",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{phone_number_id}/media",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__MEDIA_ID",
+    "description": "Get media file URL",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{media_id}",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "media_id": {
+              "type": "string",
+              "description": "Unique identifier for the media file"
+            }
+          },
+          "required": [
+            "media_id"
+          ],
+          "visible": [
+            "media_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_MESSAGE_TEMPLATES_GET_MESSAGE_TEMPLATES",
+    "description": "List message templates",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/message_templates",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Filter templates by approval status"
+            },
+            "category": {
+              "type": "string",
+              "description": "Filter templates by category"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_MESSAGE_TEMPLATES_POST_MESSAGE_TEMPLATES",
+    "description": "Create message template",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{business_account_id}/message_templates",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": ""
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "AUTHENTICATION",
+                "MARKETING",
+                "UTILITY"
+              ],
+              "default": ""
+            },
+            "language": {
+              "type": "string",
+              "default": ""
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "HEADER",
+                      "BODY",
+                      "FOOTER",
+                      "BUTTONS"
+                    ]
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "format": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [],
+                "visible": []
+              },
+              "default": []
+            }
+          },
+          "required": [
+            "name",
+            "category",
+            "language",
+            "components"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "name",
+            "category",
+            "language",
+            "components"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_MESSAGE_TEMPLATES_TEMPLATE_ID_GET_MESSAGE_TEMPLATES",
+    "description": "Get message template details",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/message_templates/{template_id}",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            },
+            "template_id": {
+              "type": "string",
+              "description": "Unique identifier for the message template"
+            }
+          },
+          "required": [
+            "business_account_id",
+            "template_id"
+          ],
+          "visible": [
+            "business_account_id",
+            "template_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_MESSAGE_TEMPLATES_TEMPLATE_ID_DELETE_MESSAGE_TEMPLATES",
+    "description": "Delete message template",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/{business_account_id}/message_templates/{template_id}",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            },
+            "template_id": {
+              "type": "string",
+              "description": "Unique identifier for the template to delete"
+            }
+          },
+          "required": [
+            "business_account_id",
+            "template_id"
+          ],
+          "visible": [
+            "business_account_id",
+            "template_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_MESSAGES_MESSAGE_ID",
+    "description": "Get message status",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{phone_number_id}/messages/{message_id}",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            },
+            "message_id": {
+              "type": "string",
+              "description": "Unique identifier for the message"
+            }
+          },
+          "required": [
+            "phone_number_id",
+            "message_id"
+          ],
+          "visible": [
+            "phone_number_id",
+            "message_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_CONVERSATIONS",
+    "description": "List customer conversations",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{phone_number_id}/conversations",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of conversations to return"
+            },
+            "status": {
+              "type": "string",
+              "description": "Filter conversations by status"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_CONVERSATIONS_CONVERSATION_BY_ID_MESSAGES",
+    "description": "Get conversation message history",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{phone_number_id}/conversations/{conversation_id}/messages",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            },
+            "conversation_id": {
+              "type": "string",
+              "description": "Unique identifier for the conversation"
+            }
+          },
+          "required": [
+            "phone_number_id",
+            "conversation_id"
+          ],
+          "visible": [
+            "phone_number_id",
+            "conversation_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of messages to return"
+            },
+            "before": {
+              "type": "string",
+              "description": "Cursor for pagination to get older messages"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_PHONE_NUMBERS",
+    "description": "Get phone number information",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{phone_number_id}/phone_numbers",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_PHONE_NUMBERS",
+    "description": "List all business phone numbers",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/phone_numbers",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_WEBHOOKS",
+    "description": "Configure webhook",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{phone_number_id}/webhooks",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "callback_url": {
+              "type": "string",
+              "format": "uri",
+              "default": ""
+            },
+            "verify_token": {
+              "type": "string",
+              "default": ""
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "messages",
+                  "message_deliveries",
+                  "message_reads",
+                  "message_echoes"
+                ]
+              },
+              "default": []
+            }
+          },
+          "required": [
+            "callback_url",
+            "verify_token",
+            "fields"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "callback_url",
+            "verify_token",
+            "fields"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_ANALYTICS",
+    "description": "Get messaging analytics",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/analytics",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "description": "Start date for analytics period"
+            },
+            "end": {
+              "type": "string",
+              "description": "End date for analytics period"
+            },
+            "granularity": {
+              "type": "string",
+              "description": "Data granularity for analytics"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_COMMERCE_SETTINGS_GET_COMMERCE_SETTINGS",
+    "description": "Get commerce settings",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/commerce_settings",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_COMMERCE_SETTINGS_PATCH_COMMERCE_SETTINGS",
+    "description": "Update commerce settings",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/{business_account_id}/commerce_settings",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "is_catalog_visible": {
+              "type": "boolean"
+            },
+            "is_cart_enabled": {
+              "type": "boolean"
+            },
+            "catalog_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_SUBSCRIBED_APPS",
+    "description": "List subscribed apps",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/subscribed_apps",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_REGISTER",
+    "description": "Register phone number",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{phone_number_id}/register",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "messaging_product": {
+              "type": "string",
+              "enum": [
+                "whatsapp"
+              ],
+              "default": "whatsapp"
+            },
+            "pin": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          "required": [
+            "pin"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "pin"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__PHONE_NUMBER_BY_ID_DEREGISTER",
+    "description": "Deregister phone number",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{phone_number_id}/deregister",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "phone_number_id": {
+              "type": "string",
+              "description": "WhatsApp Business phone number ID"
+            }
+          },
+          "required": [
+            "phone_number_id"
+          ],
+          "visible": [
+            "phone_number_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "messaging_product": {
+              "type": "string",
+              "enum": [
+                "whatsapp"
+              ],
+              "default": "whatsapp"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_UPLOADS",
+    "description": "Upload session start",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{business_account_id}/uploads",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "file_length": {
+              "type": "integer",
+              "default": 0
+            },
+            "file_type": {
+              "type": "string",
+              "default": ""
+            },
+            "file_name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "file_length",
+            "file_type"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "file_length",
+            "file_type"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_CONTACTS",
+    "description": "List customer contacts",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/contacts",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of contacts to return"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_CONTACTS_CONTACT_BY_ID_TAGS_POST_TAGS",
+    "description": "Tag customer contact",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/{business_account_id}/contacts/{contact_id}/tags",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            },
+            "contact_id": {
+              "type": "string",
+              "description": "Customer contact identifier"
+            }
+          },
+          "required": [
+            "business_account_id",
+            "contact_id"
+          ],
+          "visible": [
+            "business_account_id",
+            "contact_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "required": [
+            "tags"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "tags"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_CONTACTS_CONTACT_BY_ID_TAGS_DELETE_TAGS",
+    "description": "Remove tags from contact",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/{business_account_id}/contacts/{contact_id}/tags",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            },
+            "contact_id": {
+              "type": "string",
+              "description": "Customer contact identifier"
+            }
+          },
+          "required": [
+            "business_account_id",
+            "contact_id"
+          ],
+          "visible": [
+            "business_account_id",
+            "contact_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_BUSINESS_PROFILE_GET_BUSINESS_PROFILE",
+    "description": "Get business profile",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/{business_account_id}/business_profile",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "WHATSAPP__BUSINESS_ACCOUNT_BY_ID_BUSINESS_PROFILE_PATCH_BUSINESS_PROFILE",
+    "description": "Update business profile",
+    "tags": [
+      "whatsapp"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/{business_account_id}/business_profile",
+      "server_url": "https://graph.facebook.com/v20.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_account_id": {
+              "type": "string",
+              "description": "WhatsApp Business Account ID"
+            }
+          },
+          "required": [
+            "business_account_id"
+          ],
+          "visible": [
+            "business_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "about": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "profile_picture_url": {
+              "type": "string"
+            },
+            "websites": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vertical": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

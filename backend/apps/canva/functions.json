@@ -1,0 +1,2414 @@
+[
+  {
+    "name": "CANVA__DESIGNS_GET_DESIGNS",
+    "description": "List all designs in the team",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/designs",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query to filter designs by name or content"
+            },
+            "owner_id": {
+              "type": "string",
+              "description": "Filter designs by owner user ID"
+            },
+            "folder_id": {
+              "type": "string",
+              "description": "Filter designs by folder ID"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of designs to return per page"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_POST_DESIGNS",
+    "description": "Create a new design from template",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/designs",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "design_type": {
+              "type": "string",
+              "enum": [
+                "presentation",
+                "poster",
+                "social-media",
+                "document",
+                "video",
+                "website",
+                "custom"
+              ],
+              "default": ""
+            },
+            "template_id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "default": ""
+            },
+            "folder_id": {
+              "type": "string"
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "design_type",
+            "title"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "design_type",
+            "title"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_DESIGN_ID_GET_DESIGNS",
+    "description": "Get design details",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/designs/{design_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Unique identifier for the design"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_DESIGN_ID_PATCH_DESIGNS",
+    "description": "Update design metadata",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/designs/{design_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Unique identifier for the design"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "folder_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_DESIGN_ID_DELETE_DESIGNS",
+    "description": "Delete a design",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/designs/{design_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Unique identifier for the design to delete"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_DESIGN_BY_ID_EXPORT",
+    "description": "Export design to file format",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/designs/{design_id}/export",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Unique identifier for the design"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "file_type": {
+              "type": "string",
+              "enum": [
+                "png",
+                "jpg",
+                "pdf",
+                "svg",
+                "gif",
+                "mp4",
+                "pptx"
+              ],
+              "default": ""
+            },
+            "quality": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "default": "high"
+            },
+            "pages": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "include_bleed": {
+              "type": "boolean",
+              "default": false
+            },
+            "transparent_background": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "required": [
+            "file_type"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "file_type"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DESIGNS_DESIGN_BY_ID_SHARE",
+    "description": "Share design with team members",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/designs/{design_id}/share",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Unique identifier for the design"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "recipient_emails": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "email"
+              }
+            },
+            "permission": {
+              "type": "string",
+              "enum": [
+                "view",
+                "comment",
+                "edit"
+              ],
+              "default": "view"
+            },
+            "message": {
+              "type": "string"
+            },
+            "create_link": {
+              "type": "boolean",
+              "default": false
+            },
+            "link_expiry": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__TEMPLATES",
+    "description": "Browse available templates",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/templates",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query for template content or style"
+            },
+            "category": {
+              "type": "string",
+              "description": "Template category filter"
+            },
+            "color": {
+              "type": "string",
+              "description": "Filter templates by primary color"
+            },
+            "style": {
+              "type": "string",
+              "description": "Filter templates by design style"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of templates to return"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__FOLDERS_GET_FOLDERS",
+    "description": "List all folders",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/folders",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "parent_folder_id": {
+              "type": "string",
+              "description": "Filter folders by parent folder ID"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__FOLDERS_POST_FOLDERS",
+    "description": "Create a new folder",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/folders",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": ""
+            },
+            "parent_folder_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__FOLDERS_FOLDER_ID_GET_FOLDERS",
+    "description": "Get folder details and contents",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/folders/{folder_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "folder_id": {
+              "type": "string",
+              "description": "Unique identifier for the folder"
+            }
+          },
+          "required": [
+            "folder_id"
+          ],
+          "visible": [
+            "folder_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__FOLDERS_FOLDER_ID_PATCH_FOLDERS",
+    "description": "Update folder",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/folders/{folder_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "folder_id": {
+              "type": "string",
+              "description": "Unique identifier for the folder"
+            }
+          },
+          "required": [
+            "folder_id"
+          ],
+          "visible": [
+            "folder_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "parent_folder_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__FOLDERS_FOLDER_ID_DELETE_FOLDERS",
+    "description": "Delete folder",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/folders/{folder_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "folder_id": {
+              "type": "string",
+              "description": "Unique identifier for the folder to delete"
+            }
+          },
+          "required": [
+            "folder_id"
+          ],
+          "visible": [
+            "folder_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__BRAND_TEMPLATES_GET_TEMPLATES",
+    "description": "Get brand templates",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/brand/templates",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__BRAND_TEMPLATES_POST_TEMPLATES",
+    "description": "Create brand template",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/brand/templates",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": ""
+            },
+            "design_id": {
+              "type": "string",
+              "default": ""
+            },
+            "category": {
+              "type": "string"
+            },
+            "brand_kit_id": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "design_id"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "name",
+            "design_id"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__BRAND_KITS_GET_KITS",
+    "description": "Get brand kits",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/brand/kits",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__BRAND_KITS_POST_KITS",
+    "description": "Create new brand kit",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/brand/kits",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": ""
+            },
+            "colors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "font_combinations": {
+              "type": "array"
+            },
+            "logo_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__BRAND_KITS_KIT_ID_GET_KITS",
+    "description": "Get brand kit details",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/brand/kits/{kit_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "kit_id": {
+              "type": "string",
+              "description": "Unique identifier for the brand kit"
+            }
+          },
+          "required": [
+            "kit_id"
+          ],
+          "visible": [
+            "kit_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__BRAND_KITS_KIT_ID_PATCH_KITS",
+    "description": "Update brand kit",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/brand/kits/{kit_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "kit_id": {
+              "type": "string",
+              "description": "Unique identifier for the brand kit"
+            }
+          },
+          "required": [
+            "kit_id"
+          ],
+          "visible": [
+            "kit_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "colors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "font_combinations": {
+              "type": "array"
+            },
+            "logo_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ASSETS_GET_ASSETS",
+    "description": "List uploaded assets",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/assets",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "asset_type": {
+              "type": "string",
+              "description": "Filter assets by type"
+            },
+            "tag": {
+              "type": "string",
+              "description": "Filter assets by tag"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of assets to return"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ASSETS_POST_ASSETS",
+    "description": "Upload new asset",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/assets",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__ASSETS_ASSET_ID_GET_ASSETS",
+    "description": "Get asset details",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/assets/{asset_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "description": "Unique identifier for the asset"
+            }
+          },
+          "required": [
+            "asset_id"
+          ],
+          "visible": [
+            "asset_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ASSETS_ASSET_ID_PATCH_ASSETS",
+    "description": "Update asset metadata",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/assets/{asset_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "description": "Unique identifier for the asset"
+            }
+          },
+          "required": [
+            "asset_id"
+          ],
+          "visible": [
+            "asset_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "folder_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ASSETS_ASSET_ID_DELETE_ASSETS",
+    "description": "Delete asset",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/assets/{asset_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "description": "Unique identifier for the asset to delete"
+            }
+          },
+          "required": [
+            "asset_id"
+          ],
+          "visible": [
+            "asset_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__TEAM",
+    "description": "Get team information",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/team",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__TEAM_MEMBERS_GET_MEMBERS",
+    "description": "List team members",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/team/members",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__TEAM_MEMBERS_POST_MEMBERS",
+    "description": "Invite team member",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/team/members",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "format": "email",
+              "default": ""
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "editor",
+                "viewer"
+              ],
+              "default": "editor"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "email"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__TEAM_MEMBERS_MEMBER_ID_PATCH_MEMBERS",
+    "description": "Update team member role",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/team/members/{member_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "member_id": {
+              "type": "string",
+              "description": "Unique identifier for the team member"
+            }
+          },
+          "required": [
+            "member_id"
+          ],
+          "visible": [
+            "member_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "editor",
+                "viewer"
+              ],
+              "default": ""
+            }
+          },
+          "required": [
+            "role"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "role"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__TEAM_MEMBERS_MEMBER_ID_DELETE_MEMBERS",
+    "description": "Remove team member",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/team/members/{member_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "member_id": {
+              "type": "string",
+              "description": "Unique identifier for the team member to remove"
+            }
+          },
+          "required": [
+            "member_id"
+          ],
+          "visible": [
+            "member_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__COMMENTS_GET_COMMENTS",
+    "description": "Get comments for a design",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/comments",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Design ID to get comments for"
+            }
+          },
+          "required": [
+            "design_id"
+          ],
+          "visible": [
+            "design_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__COMMENTS_POST_COMMENTS",
+    "description": "Add comment to design",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/comments",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "default": ""
+            },
+            "message": {
+              "type": "string",
+              "default": ""
+            },
+            "position": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false,
+              "required": [],
+              "visible": []
+            }
+          },
+          "required": [
+            "design_id",
+            "message"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "design_id",
+            "message"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__COMMENTS_COMMENT_ID_PATCH_COMMENTS",
+    "description": "Update comment",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/comments/{comment_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "comment_id": {
+              "type": "string",
+              "description": "Unique identifier for the comment"
+            }
+          },
+          "required": [
+            "comment_id"
+          ],
+          "visible": [
+            "comment_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            },
+            "resolved": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__COMMENTS_COMMENT_ID_DELETE_COMMENTS",
+    "description": "Delete comment",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/comments/{comment_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "comment_id": {
+              "type": "string",
+              "description": "Unique identifier for the comment to delete"
+            }
+          },
+          "required": [
+            "comment_id"
+          ],
+          "visible": [
+            "comment_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRESENTATIONS_GET_PRESENTATIONS",
+    "description": "List presentations",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/presentations",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of presentations to return"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRESENTATIONS_POST_PRESENTATIONS",
+    "description": "Create presentation",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/presentations",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": ""
+            },
+            "template_id": {
+              "type": "string"
+            },
+            "slide_count": {
+              "type": "integer",
+              "default": 1
+            },
+            "folder_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "title"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRESENTATIONS_PRESENTATION_BY_ID_SLIDES_GET_SLIDES",
+    "description": "Get presentation slides",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/presentations/{presentation_id}/slides",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "presentation_id": {
+              "type": "string",
+              "description": "Unique identifier for the presentation"
+            }
+          },
+          "required": [
+            "presentation_id"
+          ],
+          "visible": [
+            "presentation_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRESENTATIONS_PRESENTATION_BY_ID_SLIDES_POST_SLIDES",
+    "description": "Add slide to presentation",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/presentations/{presentation_id}/slides",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "presentation_id": {
+              "type": "string",
+              "description": "Unique identifier for the presentation"
+            }
+          },
+          "required": [
+            "presentation_id"
+          ],
+          "visible": [
+            "presentation_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "layout": {
+              "type": "string",
+              "enum": [
+                "title",
+                "content",
+                "image",
+                "comparison",
+                "blank"
+              ],
+              "default": ""
+            },
+            "position": {
+              "type": "integer"
+            },
+            "template_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "layout"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "layout"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ANALYTICS_DESIGNS",
+    "description": "Get design analytics",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/analytics/designs",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "Filter analytics for specific design"
+            },
+            "date_from": {
+              "type": "string",
+              "description": "Start date for analytics period"
+            },
+            "date_to": {
+              "type": "string",
+              "description": "End date for analytics period"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__ANALYTICS_TEAM",
+    "description": "Get team analytics",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/analytics/team",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "period": {
+              "type": "string",
+              "description": "Analytics period to retrieve"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__AUTOMATIONS_GET_AUTOMATIONS",
+    "description": "List design automations",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/automations",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__AUTOMATIONS_POST_AUTOMATIONS",
+    "description": "Create design automation",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/automations",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": ""
+            },
+            "template_id": {
+              "type": "string",
+              "default": ""
+            },
+            "data_source": {
+              "type": "string"
+            },
+            "output_format": {
+              "type": "string",
+              "enum": [
+                "png",
+                "jpg",
+                "pdf"
+              ]
+            },
+            "schedule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "template_id"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "name",
+            "template_id"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__AUTOMATIONS_AUTOMATION_ID_GET_AUTOMATIONS",
+    "description": "Get automation details",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/automations/{automation_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "automation_id": {
+              "type": "string",
+              "description": "Unique identifier for the automation"
+            }
+          },
+          "required": [
+            "automation_id"
+          ],
+          "visible": [
+            "automation_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__AUTOMATIONS_AUTOMATION_ID_PATCH_AUTOMATIONS",
+    "description": "Update automation",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/automations/{automation_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "automation_id": {
+              "type": "string",
+              "description": "Unique identifier for the automation"
+            }
+          },
+          "required": [
+            "automation_id"
+          ],
+          "visible": [
+            "automation_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "schedule": {
+              "type": "string"
+            },
+            "data_source": {
+              "type": "string"
+            },
+            "is_active": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__AUTOMATIONS_AUTOMATION_ID_DELETE_AUTOMATIONS",
+    "description": "Delete automation",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/automations/{automation_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "automation_id": {
+              "type": "string",
+              "description": "Unique identifier for the automation to delete"
+            }
+          },
+          "required": [
+            "automation_id"
+          ],
+          "visible": [
+            "automation_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRINT_PRODUCTS",
+    "description": "List available print products",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/print-products",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Filter print products by category"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__PRINT_PRODUCTS_PRODUCT_BY_ID_ORDERS",
+    "description": "Order print product",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/print-products/{product_id}/orders",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "product_id": {
+              "type": "string",
+              "description": "Unique identifier for the print product"
+            }
+          },
+          "required": [
+            "product_id"
+          ],
+          "visible": [
+            "product_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "default": ""
+            },
+            "quantity": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 0
+            },
+            "shipping_address": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "default": {}
+            },
+            "customizations": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": [],
+              "visible": []
+            }
+          },
+          "required": [
+            "design_id",
+            "quantity",
+            "shipping_address"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "design_id",
+            "quantity",
+            "shipping_address"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__WEBHOOKS_GET_WEBHOOKS",
+    "description": "List webhooks",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/webhooks",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "visible": []
+    }
+  },
+  {
+    "name": "CANVA__WEBHOOKS_POST_WEBHOOKS",
+    "description": "Create webhook",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/webhooks",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "default": ""
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "design.created",
+                  "design.updated",
+                  "design.exported",
+                  "comment.added",
+                  "team.member_added"
+                ]
+              },
+              "default": []
+            },
+            "secret": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url",
+            "events"
+          ],
+          "additionalProperties": false,
+          "visible": [
+            "url",
+            "events"
+          ]
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__WEBHOOKS_WEBHOOK_ID",
+    "description": "Delete webhook",
+    "tags": [
+      "canva"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/webhooks/{webhook_id}",
+      "server_url": "https://api.canva.com/rest/v1"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "webhook_id": {
+              "type": "string",
+              "description": "Unique identifier for the webhook to delete"
+            }
+          },
+          "required": [
+            "webhook_id"
+          ],
+          "visible": [
+            "webhook_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

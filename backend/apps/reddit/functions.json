@@ -1,302 +1,1045 @@
 [
-    {
-        "name": "REDDIT__GET_SUBREDDIT_POSTS",
-        "description": "Retrieves posts from a specified subreddit",
-        "tags": ["subreddit", "posts", "content"],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/r/{subreddit}/{sort}",
-            "server_url": "https://oauth.reddit.com"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the http request",
-                    "properties": {
-                        "user-agent": {
-                            "type": "string",
-                            "description": "User-Agent header",
-                            "default": "ACI::REDDIT"
-                        }
-                    },
-                    "required": ["user-agent"],
-                    "visible": [],
-                    "additionalProperties": false
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters for the http request",
-                    "properties": {
-                        "subreddit": {
-                            "type": "string",
-                            "description": "The name of the subreddit"
-                        },
-                        "sort": {
-                            "type": "string",
-                            "description": "Sort method for posts",
-                            "enum": ["hot", "new", "top", "rising"]
-                        }
-                    },
-                    "required": ["subreddit", "sort"],
-                    "visible": ["subreddit", "sort"],
-                    "additionalProperties": false
-                },
-                "query": {
-                    "type": "object",
-                    "description": "Optional query parameters for the http request",
-                    "properties": {
-                        "limit": {
-                            "type": "integer",
-                            "description": "The maximum number of posts to return",
-                            "default": 25
-                        },
-                        "after": {
-                            "type": "string",
-                            "description": "The fullname of a thing to use as the anchor point for pagination"
-                        }
-                    },
-                    "required": [],
-                    "visible": ["limit", "after"],
-                    "additionalProperties": false
-                }
-            },
-            "required": ["header", "path"],
-            "visible": ["path", "query"],
-            "additionalProperties": false
-        }
+  {
+    "name": "REDDIT__SUBREDDIT_POSTS",
+    "description": "Retrieves posts from a specified subreddit",
+    "tags": [
+      "subreddit",
+      "posts",
+      "content"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/r/{subreddit}/{sort}",
+      "server_url": "https://oauth.reddit.com"
     },
-    {
-        "name": "REDDIT__GET_POST_COMMENTS",
-        "description": "Retrieves comments for a specific post",
-        "tags": ["comments", "post", "content"],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/comments/{article}",
-            "server_url": "https://oauth.reddit.com"
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
         },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the http request",
-                    "properties": {
-                        "user-agent": {
-                            "type": "string",
-                            "description": "User-Agent header",
-                            "default": "ACI::REDDIT"
-                        }
-                    },
-                    "required": ["user-agent"],
-                    "visible": [],
-                    "additionalProperties": false
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters for the http request",
-                    "properties": {
-                        "article": {
-                            "type": "string",
-                            "description": "The ID of the post to get comments for"
-                        }
-                    },
-                    "required": ["article"],
-                    "visible": ["article"],
-                    "additionalProperties": false
-                },
-                "query": {
-                    "type": "object",
-                    "description": "Optional query parameters for the http request",
-                    "properties": {
-                        "sort": {
-                            "type": "string",
-                            "description": "Sort method for comments",
-                            "enum": ["confidence", "top", "new", "controversial", "old", "random", "qa"],
-                            "default": "confidence"
-                        },
-                        "limit": {
-                            "type": "integer",
-                            "description": "The maximum number of comments to return",
-                            "default": 25
-                        }
-                    },
-                    "required": [],
-                    "visible": ["sort", "limit"],
-                    "additionalProperties": false
-                }
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "subreddit": {
+              "type": "string",
+              "description": "The name of the subreddit"
             },
-            "required": ["header", "path"],
-            "visible": ["path", "query"],
-            "additionalProperties": false
-        }
-    },
-    {
-        "name": "REDDIT__GET_USER_INFO",
-        "description": "Retrieves information about a Reddit user",
-        "tags": ["user", "profile"],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/user/{username}/about",
-            "server_url": "https://oauth.reddit.com"
+            "sort": {
+              "type": "string",
+              "description": "Sort method for posts",
+              "enum": [
+                "hot",
+                "new",
+                "top",
+                "rising"
+              ]
+            }
+          },
+          "required": [
+            "subreddit",
+            "sort"
+          ],
+          "visible": [
+            "subreddit",
+            "sort"
+          ],
+          "additionalProperties": false
         },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the http request",
-                    "properties": {
-                        "user-agent": {
-                            "type": "string",
-                            "description": "User-Agent header",
-                            "default": "ACI::REDDIT"
-                        }
-                    },
-                    "required": ["user-agent"],
-                    "visible": [],
-                    "additionalProperties": false
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters for the http request",
-                    "properties": {
-                        "username": {
-                            "type": "string",
-                            "description": "The username of the Reddit user"
-                        }
-                    },
-                    "required": ["username"],
-                    "visible": ["username"],
-                    "additionalProperties": false
-                }
+        "query": {
+          "type": "object",
+          "description": "Optional query parameters for the http request",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of posts to return",
+              "default": 25
             },
-            "required": ["header", "path"],
-            "visible": ["path"],
-            "additionalProperties": false
+            "after": {
+              "type": "string",
+              "description": "The fullname of a thing to use as the anchor point for pagination"
+            }
+          },
+          "required": [],
+          "visible": [
+            "limit",
+            "after"
+          ],
+          "additionalProperties": false
         }
-    },
-    {
-        "name": "REDDIT__SEARCH",
-        "description": "Searches Reddit for posts and comments",
-        "tags": ["search", "content"],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/search",
-            "server_url": "https://oauth.reddit.com"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the http request",
-                    "properties": {
-                        "user-agent": {
-                            "type": "string",
-                            "description": "User-Agent header",
-                            "default": "ACI::REDDIT"
-                        }
-                    },
-                    "required": ["user-agent"],
-                    "visible": [],
-                    "additionalProperties": false
-                },
-                "query": {
-                    "type": "object",
-                    "description": "Query parameters for the http request",
-                    "properties": {
-                        "q": {
-                            "type": "string",
-                            "description": "The search query"
-                        },
-                        "sort": {
-                            "type": "string",
-                            "description": "Sort method for results",
-                            "enum": ["relevance", "hot", "top", "new", "comments"],
-                            "default": "relevance"
-                        },
-                        "t": {
-                            "type": "string",
-                            "description": "Time period for results",
-                            "enum": ["hour", "day", "week", "month", "year", "all"],
-                            "default": "all"
-                        },
-                        "limit": {
-                            "type": "integer",
-                            "description": "The maximum number of results to return",
-                            "default": 25
-                        }
-                    },
-                    "required": ["q"],
-                    "visible": ["q", "sort", "t", "limit"],
-                    "additionalProperties": false
-                }
-            },
-            "required": ["header", "query"],
-            "visible": ["query"],
-            "additionalProperties": false
-        }
-    },
-    {
-        "name": "REDDIT__GET_SUBREDDIT_INFO",
-        "description": "Retrieves information about a subreddit",
-        "tags": ["subreddit", "info"],
-        "visibility": "public",
-        "active": true,
-        "protocol": "rest",
-        "protocol_data": {
-            "method": "GET",
-            "path": "/r/{subreddit}/about",
-            "server_url": "https://oauth.reddit.com"
-        },
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "type": "object",
-                    "description": "Headers for the http request",
-                    "properties": {
-                        "user-agent": {
-                            "type": "string",
-                            "description": "User-Agent header",
-                            "default": "ACI::REDDIT"
-                        }
-                    },
-                    "required": ["user-agent"],
-                    "visible": [],
-                    "additionalProperties": false
-                },
-                "path": {
-                    "type": "object",
-                    "description": "Path parameters for the http request",
-                    "properties": {
-                        "subreddit": {
-                            "type": "string",
-                            "description": "The name of the subreddit"
-                        }
-                    },
-                    "required": ["subreddit"],
-                    "visible": ["subreddit"],
-                    "additionalProperties": false
-                }
-            },
-            "required": ["header", "path"],
-            "visible": ["path"],
-            "additionalProperties": false
-        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
+  },
+  {
+    "name": "REDDIT__POST_COMMENTS",
+    "description": "Retrieves comments for a specific post",
+    "tags": [
+      "comments",
+      "post",
+      "content"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/comments/{article}",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "article": {
+              "type": "string",
+              "description": "The ID of the post to get comments for"
+            }
+          },
+          "required": [
+            "article"
+          ],
+          "visible": [
+            "article"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Optional query parameters for the http request",
+          "properties": {
+            "sort": {
+              "type": "string",
+              "description": "Sort method for comments",
+              "enum": [
+                "confidence",
+                "top",
+                "new",
+                "controversial",
+                "old",
+                "random",
+                "qa"
+              ],
+              "default": "confidence"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of comments to return",
+              "default": 25
+            }
+          },
+          "required": [],
+          "visible": [
+            "sort",
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__USER_INFO",
+    "description": "Retrieves information about a Reddit user",
+    "tags": [
+      "user",
+      "profile"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/user/{username}/about",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "The username of the Reddit user"
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "visible": [
+            "username"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__SEARCH",
+    "description": "Searches Reddit for posts and comments",
+    "tags": [
+      "search",
+      "content"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/search",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters for the http request",
+          "properties": {
+            "q": {
+              "type": "string",
+              "description": "The search query"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Sort method for results",
+              "enum": [
+                "relevance",
+                "hot",
+                "top",
+                "new",
+                "comments"
+              ],
+              "default": "relevance"
+            },
+            "t": {
+              "type": "string",
+              "description": "Time period for results",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month",
+                "year",
+                "all"
+              ],
+              "default": "all"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of results to return",
+              "default": 25
+            }
+          },
+          "required": [
+            "q"
+          ],
+          "visible": [
+            "q",
+            "sort",
+            "t",
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__SUBREDDIT_INFO",
+    "description": "Retrieves information about a subreddit",
+    "tags": [
+      "subreddit",
+      "info"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/r/{subreddit}/about",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "subreddit": {
+              "type": "string",
+              "description": "The name of the subreddit"
+            }
+          },
+          "required": [
+            "subreddit"
+          ],
+          "visible": [
+            "subreddit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__SUBMIT_POST",
+    "description": "Submits a new post to a specified subreddit. Can create text posts, link posts, or image posts depending on the content provided.",
+    "tags": [
+      "reddit",
+      "posts",
+      "submit"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/submit",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            },
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type header",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Post submission data",
+          "properties": {
+            "sr": {
+              "type": "string",
+              "description": "The name of the subreddit (without r/ prefix)"
+            },
+            "title": {
+              "type": "string",
+              "description": "The title of the submission"
+            },
+            "kind": {
+              "type": "string",
+              "description": "The kind of submission",
+              "enum": [
+                "self",
+                "link"
+              ],
+              "default": "self"
+            },
+            "text": {
+              "type": "string",
+              "description": "Text content for self posts (when kind is 'self')"
+            },
+            "url": {
+              "type": "string",
+              "description": "URL for link posts (when kind is 'link')"
+            },
+            "nsfw": {
+              "type": "boolean",
+              "description": "Whether the post should be marked as NSFW",
+              "default": false
+            },
+            "spoiler": {
+              "type": "boolean",
+              "description": "Whether the post should be marked as a spoiler",
+              "default": false
+            }
+          },
+          "required": [
+            "sr",
+            "title",
+            "kind"
+          ],
+          "visible": [
+            "sr",
+            "title",
+            "kind",
+            "text",
+            "url",
+            "nsfw",
+            "spoiler"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__REPLY_TO_POST",
+    "description": "Replies to a Reddit post or comment with a text comment.",
+    "tags": [
+      "reddit",
+      "comments",
+      "reply"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/comment",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            },
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type header",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Comment reply data",
+          "properties": {
+            "parent": {
+              "type": "string",
+              "description": "The fullname of the parent post or comment to reply to (e.g., t3_abc123 for post, t1_def456 for comment)"
+            },
+            "text": {
+              "type": "string",
+              "description": "The text content of the reply (markdown supported)"
+            }
+          },
+          "required": [
+            "parent",
+            "text"
+          ],
+          "visible": [
+            "parent",
+            "text"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__VOTE_ON_POST",
+    "description": "Upvotes, downvotes, or removes vote from a Reddit post or comment.",
+    "tags": [
+      "reddit",
+      "vote",
+      "interaction"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/vote",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            },
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type header",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Vote data",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The fullname of the post or comment to vote on (e.g., t3_abc123 for post, t1_def456 for comment)"
+            },
+            "dir": {
+              "type": "string",
+              "description": "Vote direction: '1' for upvote, '-1' for downvote, '0' to remove vote",
+              "enum": [
+                "1",
+                "-1",
+                "0"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "dir"
+          ],
+          "visible": [
+            "id",
+            "dir"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__USER_POSTS",
+    "description": "Retrieves posts submitted by a specific Reddit user, with sorting and filtering options.",
+    "tags": [
+      "reddit",
+      "user",
+      "posts"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/user/{username}/submitted",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "The username of the Reddit user"
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "visible": [
+            "username"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Optional query parameters for the http request",
+          "properties": {
+            "sort": {
+              "type": "string",
+              "description": "Sort method for posts",
+              "enum": [
+                "hot",
+                "new",
+                "top",
+                "rising"
+              ],
+              "default": "new"
+            },
+            "t": {
+              "type": "string",
+              "description": "Time period for 'top' sort",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month",
+                "year",
+                "all"
+              ],
+              "default": "all"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of posts to return",
+              "default": 25
+            },
+            "after": {
+              "type": "string",
+              "description": "The fullname of a thing to use as the anchor point for pagination"
+            }
+          },
+          "required": [],
+          "visible": [
+            "sort",
+            "t",
+            "limit",
+            "after"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__USER_COMMENTS",
+    "description": "Retrieves comments made by a specific Reddit user, with sorting and filtering options.",
+    "tags": [
+      "reddit",
+      "user",
+      "comments"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/user/{username}/comments",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "The username of the Reddit user"
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "visible": [
+            "username"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Optional query parameters for the http request",
+          "properties": {
+            "sort": {
+              "type": "string",
+              "description": "Sort method for comments",
+              "enum": [
+                "hot",
+                "new",
+                "top",
+                "controversial"
+              ],
+              "default": "new"
+            },
+            "t": {
+              "type": "string",
+              "description": "Time period for 'top' or 'controversial' sort",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month",
+                "year",
+                "all"
+              ],
+              "default": "all"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of comments to return",
+              "default": 25
+            },
+            "after": {
+              "type": "string",
+              "description": "The fullname of a thing to use as the anchor point for pagination"
+            }
+          },
+          "required": [],
+          "visible": [
+            "sort",
+            "t",
+            "limit",
+            "after"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "REDDIT__MULTIREDDIT",
+    "description": "Retrieves posts from multiple subreddits combined, useful for getting a diverse feed of content from various communities.",
+    "tags": [
+      "reddit",
+      "multireddit",
+      "posts"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/r/{subreddits}/{sort}",
+      "server_url": "https://oauth.reddit.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the http request",
+          "properties": {
+            "user-agent": {
+              "type": "string",
+              "description": "User-Agent header",
+              "default": "ACI::REDDIT"
+            }
+          },
+          "required": [
+            "user-agent"
+          ],
+          "visible": [
+            "user-agent"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the http request",
+          "properties": {
+            "subreddits": {
+              "type": "string",
+              "description": "Plus-separated list of subreddit names (e.g., 'technology+programming+science')"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Sort method for posts",
+              "enum": [
+                "hot",
+                "new",
+                "top",
+                "rising"
+              ]
+            }
+          },
+          "required": [
+            "subreddits",
+            "sort"
+          ],
+          "visible": [
+            "subreddits",
+            "sort"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Optional query parameters for the http request",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of posts to return",
+              "default": 25
+            },
+            "t": {
+              "type": "string",
+              "description": "Time period for 'top' sort",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month",
+                "year",
+                "all"
+              ],
+              "default": "day"
+            },
+            "after": {
+              "type": "string",
+              "description": "The fullname of a thing to use as the anchor point for pagination"
+            }
+          },
+          "required": [],
+          "visible": [
+            "limit",
+            "t",
+            "after"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  }
 ]

@@ -6,21 +6,25 @@
   "version": "1.0.0",
   "description": "Figma is a browser-based collaborative interface design tool. This integration allows access to and processing of Figma design files and resources.",
   "security_schemes": {
-    "api_key": {
-      "location": "header",
-      "name": "X-Figma-Token",
-      "prefix": null
-    },
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://www.figma.com/oauth",
+          "tokenUrl": "https://www.figma.com/api/oauth/token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_FIGMA_APP_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_FIGMA_APP_CLIENT_SECRET }}",
-      "scope": "current_user:read file_comments:read file_comments:write file_content:read file_dev_resources:read file_dev_resources:write file_metadata:read file_variables:read file_variables:write file_versions:read files:read library_analytics:read library_assets:read library_content:read projects:read team_library_content:read webhooks:read webhooks:write",
+      "client_id": "{{ FIGMA_CLIENT_ID }}",
+      "client_secret": "{{ FIGMA_CLIENT_SECRET }}",
       "authorize_url": "https://www.figma.com/oauth",
-      "access_token_url": "https://api.figma.com/v1/oauth/token",
-      "refresh_token_url": "https://api.figma.com/v1/oauth/refresh"
+      "access_token_url": "https://www.figma.com/api/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},

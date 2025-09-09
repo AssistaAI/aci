@@ -2,7 +2,9 @@
   {
     "name": "EXA_AI__SEARCH",
     "description": "Find webpages using Exa’s embeddings-based or Google-style keyword search.",
-    "tags": ["search"],
+    "tags": [
+      "search"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -31,7 +33,11 @@
               "type": "string",
               "default": "neural",
               "description": "The Type of search, 'keyword', 'neural', or 'auto' (decides between keyword and neural). Default neural.",
-              "enum": ["keyword", "neural", "auto"]
+              "enum": [
+                "keyword",
+                "neural",
+                "auto"
+              ]
             },
             "category": {
               "type": "string",
@@ -120,8 +126,12 @@
                     }
                   },
                   "required": [],
-                  "visible": ["maxCharacters", "includeHtmlTags"],
-                  "additionalProperties": false
+                  "visible": [
+                    "maxCharacters",
+                    "includeHtmlTags"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 },
                 "highlights": {
                   "type": "object",
@@ -141,9 +151,16 @@
                       "type": "string"
                     }
                   },
-                  "required": ["numSentences", "highlightsPerUrl"],
-                  "visible": ["numSentences", "highlightsPerUrl"],
-                  "additionalProperties": false
+                  "required": [
+                    "numSentences",
+                    "highlightsPerUrl"
+                  ],
+                  "visible": [
+                    "numSentences",
+                    "highlightsPerUrl"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 },
                 "summary": {
                   "type": "object",
@@ -155,16 +172,25 @@
                     }
                   },
                   "required": [],
-                  "visible": ["query"],
-                  "additionalProperties": false
+                  "visible": [
+                    "query"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 }
               },
-              "required": ["text", "highlights", "summary"],
+              "required": [
+                "text",
+                "highlights",
+                "summary"
+              ],
               "visible": [],
               "additionalProperties": false
             }
           },
-          "required": ["query"],
+          "required": [
+            "query"
+          ],
           "visible": [
             "query",
             "useAutoprompt",
@@ -175,15 +201,21 @@
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
-    "name": "EXA_AI__GET_CONTENTS",
+    "name": "EXA_AI__CONTENTS",
     "description": "Retrieve contents of documents based on a list of document IDs.",
-    "tags": ["scrape"],
+    "tags": [
+      "scrape"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -221,7 +253,10 @@
                 }
               },
               "required": [],
-              "visible": ["maxCharacters", "includeHtmlTags"],
+              "visible": [
+                "maxCharacters",
+                "includeHtmlTags"
+              ],
               "additionalProperties": false
             },
             "highlights": {
@@ -242,8 +277,14 @@
                   "type": "string"
                 }
               },
-              "required": ["numSentences", "highlightsPerUrl"],
-              "visible": ["numSentences", "highlightsPerUrl"],
+              "required": [
+                "numSentences",
+                "highlightsPerUrl"
+              ],
+              "visible": [
+                "numSentences",
+                "highlightsPerUrl"
+              ],
               "additionalProperties": false
             },
             "summary": {
@@ -256,24 +297,36 @@
                 }
               },
               "required": [],
-              "visible": ["query"],
+              "visible": [
+                "query"
+              ],
               "additionalProperties": false
             }
           },
-          "required": ["ids"],
-          "visible": ["ids"],
+          "required": [
+            "ids"
+          ],
+          "visible": [
+            "ids"
+          ],
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "EXA_AI__FINDSIMILAR",
     "description": "Find similar links to the link provided and optionally get page contents.",
-    "tags": ["search"],
+    "tags": [
+      "search"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -364,8 +417,12 @@
                     }
                   },
                   "required": [],
-                  "visible": ["maxCharacters", "includeHtmlTags"],
-                  "additionalProperties": false
+                  "visible": [
+                    "maxCharacters",
+                    "includeHtmlTags"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 },
                 "highlights": {
                   "type": "object",
@@ -385,9 +442,16 @@
                       "type": "string"
                     }
                   },
-                  "required": ["numSentences", "highlightsPerUrl"],
-                  "visible": ["numSentences", "highlightsPerUrl"],
-                  "additionalProperties": false
+                  "required": [
+                    "numSentences",
+                    "highlightsPerUrl"
+                  ],
+                  "visible": [
+                    "numSentences",
+                    "highlightsPerUrl"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 },
                 "summary": {
                   "type": "object",
@@ -399,16 +463,25 @@
                     }
                   },
                   "required": [],
-                  "visible": ["query"],
-                  "additionalProperties": false
+                  "visible": [
+                    "query"
+                  ],
+                  "additionalProperties": false,
+                  "default": {}
                 }
               },
-              "required": ["text", "highlights", "summary"],
+              "required": [
+                "text",
+                "highlights",
+                "summary"
+              ],
               "visible": [],
               "additionalProperties": false
             }
           },
-          "required": ["url"],
+          "required": [
+            "url"
+          ],
           "visible": [
             "url",
             "numResults"
@@ -416,15 +489,22 @@
           "additionalProperties": false
         }
       },
-      "required": ["body"],
-      "visible": ["body"],
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
       "additionalProperties": false
     }
   },
   {
     "name": "EXA_AI__ANSWER",
     "description": "Get an LLM answer to a question informed by Exa search results.",
-    "tags": ["awnser", "ai"],
+    "tags": [
+      "awnser",
+      "ai"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -458,16 +538,27 @@
               "type": "string",
               "default": "exa",
               "description": "The model to use for answering the query. Default exa.",
-              "enum": ["exa", "exa-pro"]
+              "enum": [
+                "exa",
+                "exa-pro"
+              ]
             }
           },
-          "visible": ["query"],
-          "required": ["query"],
+          "visible": [
+            "query"
+          ],
+          "required": [
+            "query"
+          ],
           "additionalProperties": false
         }
       },
-      "visible": ["body"],
-      "required": ["body"],
+      "visible": [
+        "body"
+      ],
+      "required": [
+        "body"
+      ],
       "additionalProperties": false
     }
   }

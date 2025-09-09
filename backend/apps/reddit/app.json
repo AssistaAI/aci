@@ -7,16 +7,24 @@
   "description": "The Reddit API allows you to interact with Reddit programmatically, including post management, comments, user interactions, and subreddit operations.",
   "security_schemes": {
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+          "tokenUrl": "https://www.reddit.com/api/v1/access_token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_REDDIT_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_REDDIT_APP_CLIENT_SECRET }}",
-      "token_endpoint_auth_method": "client_secret_basic",
-      "scope": "identity read vote submit flair edit history mysubreddits",
       "authorize_url": "https://www.reddit.com/api/v1/authorize",
-      "access_token_url": "https://www.reddit.com/api/v1/access_token",
-      "refresh_token_url": "https://www.reddit.com/api/v1/access_token"
+      "access_token_url": "https://www.reddit.com/api/v1/access_token"
     }
   },
   "default_security_credentials_by_scheme": {},
