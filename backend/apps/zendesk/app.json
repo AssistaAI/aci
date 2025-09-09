@@ -7,24 +7,15 @@
   "description": "uLuzendesk integration for AI agents",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://{subdomain}.zendesk.com/oauth/authorizations/new",
-          "tokenUrl": "https://{subdomain}.zendesk.com/oauth/tokens",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ ZENDESK_CLIENT_ID }}",
       "client_secret": "{{ ZENDESK_CLIENT_SECRET }}",
+      "scope": "read write",
       "authorize_url": "https://{subdomain}.zendesk.com/oauth/authorizations/new",
-      "access_token_url": "https://{subdomain}.zendesk.com/oauth/tokens"
+      "access_token_url": "https://{subdomain}.zendesk.com/oauth/tokens",
+      "refresh_token_url": "https://{subdomain}.zendesk.com/oauth/tokens"
     }
   },
   "default_security_credentials_by_scheme": {},

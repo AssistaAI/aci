@@ -7,24 +7,15 @@
   "description": "LinkedIn API integration for professional networking, posting content, managing company pages, and accessing professional data. Enables programmatic access to LinkedIn's professional network and business features.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://www.linkedin.com/oauth/v2/authorization",
-          "tokenUrl": "https://www.linkedin.com/oauth/v2/accessToken",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_LINKEDIN_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_LINKEDIN_CLIENT_SECRET }}",
+      "scope": "r_liteprofile r_emailaddress w_member_social",
       "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
-      "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken"
+      "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
+      "refresh_token_url": "https://www.linkedin.com/oauth/v2/accessToken"
     }
   },
   "default_security_credentials_by_scheme": {},

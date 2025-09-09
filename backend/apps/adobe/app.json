@@ -7,24 +7,15 @@
   "description": "uLuadobe integration for AI agents",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://ims-na1.adobelogin.com/ims/authorize/v2",
-          "tokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ ADOBE_CLIENT_ID }}",
       "client_secret": "{{ ADOBE_CLIENT_SECRET }}",
+      "scope": "creative_sdk",
       "authorize_url": "https://ims-na1.adobelogin.com/ims/authorize/v2",
-      "access_token_url": "https://ims-na1.adobelogin.com/ims/token/v3"
+      "access_token_url": "https://ims-na1.adobelogin.com/ims/token/v3",
+      "refresh_token_url": "https://ims-na1.adobelogin.com/ims/token/v3"
     }
   },
   "default_security_credentials_by_scheme": {},

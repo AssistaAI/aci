@@ -7,24 +7,15 @@
   "description": "Zoho Desk API integration for customer support and ticket management. Provides access to tickets, contacts, departments, and customer support features.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
-          "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_ZOHO_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_ZOHO_APP_CLIENT_SECRET }}",
+      "scope": "Desk.tickets.ALL Desk.contacts.READ Desk.contacts.WRITE",
       "authorize_url": "https://accounts.zoho.com/oauth/v2/auth",
-      "access_token_url": "https://accounts.zoho.com/oauth/v2/token"
+      "access_token_url": "https://accounts.zoho.com/oauth/v2/token",
+      "refresh_token_url": "https://accounts.zoho.com/oauth/v2/token"
     }
   },
   "default_security_credentials_by_scheme": {},

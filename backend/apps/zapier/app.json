@@ -7,24 +7,15 @@
   "description": "Zapier is a workflow automation platform that connects apps and automates repetitive tasks. This integration enables creation and management of Zaps (automated workflows), triggers, actions, and webhook-based automation between different applications.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://zapier.com/oauth/authorize/",
-          "tokenUrl": "https://zapier.com/oauth/token/",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ ZAPIER_CLIENT_ID }}",
       "client_secret": "{{ ZAPIER_CLIENT_SECRET }}",
+      "scope": "",
       "authorize_url": "https://zapier.com/oauth/authorize/",
-      "access_token_url": "https://zapier.com/oauth/token/"
+      "access_token_url": "https://zapier.com/oauth/token/",
+      "refresh_token_url": "https://zapier.com/oauth/token/"
     }
   },
   "default_security_credentials_by_scheme": {},
