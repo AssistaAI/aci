@@ -6,10 +6,15 @@
   "version": "2024-01-01",
   "description": "GitLab integration for AI agents",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ GITLAB_CLIENT_ID }}",
+      "client_secret": "{{ GITLAB_CLIENT_SECRET }}",
+      "scope": "api read_user read_api read_repository write_repository",
+      "authorize_url": "https://gitlab.com/oauth/authorize",
+      "access_token_url": "https://gitlab.com/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},

@@ -34,7 +34,9 @@
       "required": [
         "header"
       ],
-      "visible": [],
+      "visible": [
+        "header"
+      ],
       "additionalProperties": false
     }
   }

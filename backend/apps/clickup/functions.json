@@ -29,7 +29,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -37,7 +39,9 @@
       "required": [
         "header"
       ],
-      "visible": [],
+      "visible": [
+        "header"
+      ],
       "additionalProperties": false
     }
   },
@@ -71,7 +75,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -189,7 +195,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -268,7 +276,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -330,7 +340,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -528,7 +540,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -663,7 +677,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -908,7 +924,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1059,7 +1077,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1236,7 +1256,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1397,7 +1419,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1676,7 +1700,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1840,7 +1866,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2172,7 +2200,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },

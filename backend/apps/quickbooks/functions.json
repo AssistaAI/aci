@@ -110,7 +110,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -354,7 +357,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -566,7 +572,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -805,7 +814,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1072,7 +1084,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1294,7 +1309,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1561,7 +1579,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1783,7 +1804,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2048,7 +2072,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2335,7 +2362,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2602,7 +2632,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3085,7 +3118,10 @@
             "Content-Type",
             "Accept"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type",
+            "Accept"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3287,7 +3323,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },

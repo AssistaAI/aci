@@ -31,7 +31,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -129,7 +131,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -224,7 +228,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -287,7 +293,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -383,7 +391,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -453,7 +463,10 @@
             "user-agent",
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -562,7 +575,10 @@
             "user-agent",
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -638,7 +654,10 @@
             "user-agent",
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent",
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -713,7 +732,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -825,7 +846,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -937,7 +960,9 @@
           "required": [
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },

@@ -139,7 +139,10 @@
             "type"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "to",
+            "type"
+          ]
         }
       },
       "required": [
@@ -386,7 +389,12 @@
             "components"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "name",
+            "category",
+            "language",
+            "components"
+          ]
         }
       },
       "required": [
@@ -823,7 +831,11 @@
             "fields"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "callback_url",
+            "verify_token",
+            "fields"
+          ]
         }
       },
       "required": [
@@ -1099,7 +1111,9 @@
             "pin"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "pin"
+          ]
         }
       },
       "required": [
@@ -1224,7 +1238,10 @@
             "file_type"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "file_length",
+            "file_type"
+          ]
         }
       },
       "required": [
@@ -1347,7 +1364,9 @@
             "tags"
           ],
           "additionalProperties": false,
-          "visible": []
+          "visible": [
+            "tags"
+          ]
         }
       },
       "required": [

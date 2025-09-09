@@ -6,14 +6,21 @@
   "version": "2024.1",
   "description": "uLuadobe integration for AI agents",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ ADOBE_CLIENT_ID }}",
+      "client_secret": "{{ ADOBE_CLIENT_SECRET }}",
+      "scope": "openid,AdobeID,read_organizations,additional_info.projectedProductContext,additional_info.job_function",
+      "authorize_url": "https://ims-na1.adobelogin.com/ims/authorize/v2",
+      "access_token_url": "https://ims-na1.adobelogin.com/ims/token/v3"
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Tools"],
+  "categories": [
+    "Tools"
+  ],
   "visibility": "public",
   "active": true
 }

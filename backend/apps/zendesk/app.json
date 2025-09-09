@@ -6,14 +6,21 @@
   "version": "2024.1",
   "description": "uLuzendesk integration for AI agents",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ ZENDESK_CLIENT_ID }}",
+      "client_secret": "{{ ZENDESK_CLIENT_SECRET }}",
+      "scope": "read write",
+      "authorize_url": "https://{subdomain}.zendesk.com/oauth/authorizations/new",
+      "access_token_url": "https://{subdomain}.zendesk.com/oauth/tokens"
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Tools"],
+  "categories": [
+    "Tools"
+  ],
   "visibility": "public",
   "active": true
 }

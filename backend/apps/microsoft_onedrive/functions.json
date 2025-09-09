@@ -1228,7 +1228,9 @@
           "required": [
             "$select"
           ],
-          "visible": [],
+          "visible": [
+            "$select"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -1397,7 +1399,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1470,7 +1474,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },

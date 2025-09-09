@@ -214,7 +214,10 @@
             "suggestionsViewMode",
             "includeTabsContent"
           ],
-          "visible": [],
+          "visible": [
+            "suggestionsViewMode",
+            "includeTabsContent"
+          ],
           "additionalProperties": false
         }
       },

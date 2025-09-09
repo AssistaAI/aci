@@ -10,17 +10,11 @@
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_ZAPIER_APP_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_ZAPIER_APP_CLIENT_SECRET }}",
-      "scope": "zap:read zap:write trigger:read action:read webhook:read webhook:write",
+      "client_id": "{{ ZAPIER_CLIENT_ID }}",
+      "client_secret": "{{ ZAPIER_CLIENT_SECRET }}",
+      "scope": "read write",
       "authorize_url": "https://zapier.com/oauth/authorize/",
-      "access_token_url": "https://zapier.com/oauth/token/",
-      "refresh_token_url": "https://zapier.com/oauth/token/"
-    },
-    "api_key": {
-      "location": "header",
-      "name": "X-API-Key",
-      "prefix": null
+      "access_token_url": "https://zapier.com/oauth/token/"
     }
   },
   "default_security_credentials_by_scheme": {},
