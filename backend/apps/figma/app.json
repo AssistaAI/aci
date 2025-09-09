@@ -7,24 +7,15 @@
   "description": "Figma is a browser-based collaborative interface design tool. This integration allows access to and processing of Figma design files and resources.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://www.figma.com/oauth",
-          "tokenUrl": "https://www.figma.com/api/oauth/token",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ FIGMA_CLIENT_ID }}",
       "client_secret": "{{ FIGMA_CLIENT_SECRET }}",
+      "scope": "file_read",
       "authorize_url": "https://www.figma.com/oauth",
-      "access_token_url": "https://www.figma.com/api/oauth/token"
+      "access_token_url": "https://www.figma.com/api/oauth/token",
+      "refresh_token_url": "https://www.figma.com/api/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},

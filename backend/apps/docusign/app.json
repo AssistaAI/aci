@@ -7,24 +7,15 @@
   "description": "DocuSign is the leading electronic signature platform that enables secure, legally binding digital signatures and document workflows. This integration allows AI agents to create envelopes, send documents for signature, manage recipients, track signature status, and automate document approval processes.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://account.docusign.com/oauth/auth",
-          "tokenUrl": "https://account.docusign.com/oauth/token",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ DOCUSIGN_CLIENT_ID }}",
       "client_secret": "{{ DOCUSIGN_CLIENT_SECRET }}",
+      "scope": "signature impersonation",
       "authorize_url": "https://account.docusign.com/oauth/auth",
-      "access_token_url": "https://account.docusign.com/oauth/token"
+      "access_token_url": "https://account.docusign.com/oauth/token",
+      "refresh_token_url": "https://account.docusign.com/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},

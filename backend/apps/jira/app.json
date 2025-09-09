@@ -7,24 +7,15 @@
   "description": "Jira API integration for issue tracking and project management. Provides functionality to create, update, and manage issues, projects, and workflows.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://auth.atlassian.com/authorize?audience=api.atlassian.com&response_type=code&prompt=consent",
-          "tokenUrl": "https://auth.atlassian.com/oauth/token",
-          "scopes": {
-            "read": "Read access",
-            "write": "Write access"
-          }
-        }
-      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_JIRA_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_JIRA_APP_CLIENT_SECRET }}",
+      "scope": "read:jira-user read:jira-work write:jira-work",
       "authorize_url": "https://auth.atlassian.com/authorize?audience=api.atlassian.com&response_type=code&prompt=consent",
-      "access_token_url": "https://auth.atlassian.com/oauth/token"
+      "access_token_url": "https://auth.atlassian.com/oauth/token",
+      "refresh_token_url": "https://auth.atlassian.com/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},
