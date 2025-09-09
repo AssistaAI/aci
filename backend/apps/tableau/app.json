@@ -12,27 +12,7 @@
       "prefix": "Bearer"
     }
   },
-  "default_security_credentials_by_scheme": {
-    "http_bearer": {
-      "credentials": {
-        "token": {
-          "type": "string",
-          "description": "Your Tableau Server Personal Access Token",
-          "visibility": "invisible"
-        },
-        "server_url": {
-          "type": "string",
-          "description": "Your Tableau Server URL (e.g., https://your-server.tableau.com)",
-          "visibility": "visible"
-        },
-        "site_id": {
-          "type": "string",
-          "description": "Tableau Site ID (leave empty for default site)",
-          "visibility": "visible"
-        }
-      }
-    }
-  },
+  "default_security_credentials_by_scheme": {},
   "categories": [
     "Analytics",
     "Business Intelligence",

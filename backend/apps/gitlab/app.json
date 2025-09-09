@@ -7,12 +7,22 @@
   "description": "GitLab integration for AI agents",
   "security_schemes": {
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://gitlab.com/oauth/authorize",
+          "tokenUrl": "https://gitlab.com/oauth/token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ GITLAB_CLIENT_ID }}",
       "client_secret": "{{ GITLAB_CLIENT_SECRET }}",
-      "scope": "api read_user read_api read_repository write_repository",
       "authorize_url": "https://gitlab.com/oauth/authorize",
       "access_token_url": "https://gitlab.com/oauth/token"
     }

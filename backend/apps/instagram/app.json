@@ -7,12 +7,22 @@
   "description": "Instagram Business API provides comprehensive social media management capabilities for businesses to manage their Instagram presence. This integration enables AI agents to publish posts, manage stories, analyze engagement metrics, handle direct messages, manage business profiles, and automate content workflows for effective social media marketing and customer engagement.",
   "security_schemes": {
     "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://www.facebook.com/v20.0/dialog/oauth",
+          "tokenUrl": "https://graph.facebook.com/v20.0/oauth/access_token",
+          "scopes": {
+            "read": "Read access",
+            "write": "Write access"
+          }
+        }
+      },
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ INSTAGRAM_CLIENT_ID }}",
       "client_secret": "{{ INSTAGRAM_CLIENT_SECRET }}",
-      "scope": "instagram_basic,instagram_content_publish,instagram_manage_comments",
       "authorize_url": "https://www.facebook.com/v20.0/dialog/oauth",
       "access_token_url": "https://graph.facebook.com/v20.0/oauth/access_token"
     }

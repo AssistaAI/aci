@@ -12,27 +12,7 @@
       "prefix": "Bearer"
     }
   },
-  "default_security_credentials_by_scheme": {
-    "http_bearer": {
-      "credentials": {
-        "token": {
-          "type": "string",
-          "description": "Your WhatsApp Business API access token",
-          "visibility": "invisible"
-        },
-        "phone_number_id": {
-          "type": "string",
-          "description": "Your WhatsApp Business phone number ID",
-          "visibility": "visible"
-        },
-        "business_account_id": {
-          "type": "string",
-          "description": "Your WhatsApp Business Account ID",
-          "visibility": "visible"
-        }
-      }
-    }
-  },
+  "default_security_credentials_by_scheme": {},
   "categories": [
     "Communication",
     "Customer Support",
