@@ -37,7 +37,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -134,7 +137,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -203,7 +209,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -301,7 +310,11 @@
             "user-agent",
             "content-length"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-length"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -376,7 +389,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -499,7 +515,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -574,7 +593,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -697,7 +719,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -778,7 +803,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -913,7 +941,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1000,7 +1031,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1122,7 +1157,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1245,7 +1284,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1353,7 +1396,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1454,7 +1501,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1596,7 +1646,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1684,7 +1737,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1798,7 +1855,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1898,7 +1958,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2001,7 +2064,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2105,7 +2171,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2249,7 +2319,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2353,7 +2426,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2435,7 +2511,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2546,7 +2625,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2668,7 +2751,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2777,7 +2863,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2899,7 +2989,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3010,7 +3103,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3098,7 +3195,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3205,7 +3306,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3315,7 +3420,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3412,7 +3521,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3494,7 +3606,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3728,7 +3844,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3865,7 +3985,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3955,7 +4078,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4071,7 +4197,11 @@
             "user-agent",
             "content-type"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent",
+            "content-type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4177,7 +4307,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4259,7 +4392,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4341,7 +4477,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4430,7 +4569,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4538,7 +4680,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4613,7 +4758,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4704,7 +4852,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4782,7 +4933,11 @@
             "content-type",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "content-type",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -4890,7 +5045,10 @@
             "accept",
             "user-agent"
           ],
-          "visible": [],
+          "visible": [
+            "accept",
+            "user-agent"
+          ],
           "additionalProperties": false,
           "default": {}
         },

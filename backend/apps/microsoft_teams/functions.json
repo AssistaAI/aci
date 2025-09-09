@@ -2450,7 +2450,7 @@
           "properties": {
             "reactionType": {
               "type": "string",
-              "description": "The emoji reaction as unicode (e.g., '👍', '❤️', '😀')"
+              "description": "The emoji reaction as unicode (e.g., '\ud83d\udc4d', '\u2764\ufe0f', '\ud83d\ude00')"
             }
           },
           "required": [
@@ -2529,7 +2529,7 @@
           "properties": {
             "reactionType": {
               "type": "string",
-              "description": "The emoji reaction to remove as unicode (e.g., '👍', '❤️', '😀')"
+              "description": "The emoji reaction to remove as unicode (e.g., '\ud83d\udc4d', '\u2764\ufe0f', '\ud83d\ude00')"
             }
           },
           "required": [
@@ -2602,7 +2602,7 @@
           "properties": {
             "reactionType": {
               "type": "string",
-              "description": "The emoji reaction as unicode (e.g., '👍', '❤️', '😀')"
+              "description": "The emoji reaction as unicode (e.g., '\ud83d\udc4d', '\u2764\ufe0f', '\ud83d\ude00')"
             }
           },
           "required": [
@@ -2675,7 +2675,7 @@
           "properties": {
             "reactionType": {
               "type": "string",
-              "description": "The emoji reaction to remove as unicode (e.g., '👍', '❤️', '😀')"
+              "description": "The emoji reaction to remove as unicode (e.g., '\ud83d\udc4d', '\u2764\ufe0f', '\ud83d\ude00')"
             }
           },
           "required": [

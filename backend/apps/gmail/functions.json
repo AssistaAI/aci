@@ -1142,7 +1142,9 @@
           "required": [
             "format"
           ],
-          "visible": [],
+          "visible": [
+            "format"
+          ],
           "additionalProperties": false,
           "default": {}
         }

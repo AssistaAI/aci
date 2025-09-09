@@ -89,7 +89,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -223,7 +225,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -439,7 +443,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -673,7 +679,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -751,7 +759,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -835,7 +845,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1064,7 +1076,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1218,7 +1232,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },

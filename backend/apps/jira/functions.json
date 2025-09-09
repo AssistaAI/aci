@@ -272,7 +272,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -526,7 +528,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -709,7 +713,7 @@
   },
   {
     "name": "JIRA__TRANSITION_ISSUE",
-    "description": "Transition an issue through workflow states (To Do → In Progress → Done) in Jira",
+    "description": "Transition an issue through workflow states (To Do \u2192 In Progress \u2192 Done) in Jira",
     "tags": [
       "issues",
       "transition",
@@ -742,7 +746,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -888,7 +894,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1240,7 +1248,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1726,7 +1736,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1936,7 +1948,9 @@
           "required": [
             "Content-Type"
           ],
-          "visible": [],
+          "visible": [
+            "Content-Type"
+          ],
           "additionalProperties": false,
           "default": {}
         },

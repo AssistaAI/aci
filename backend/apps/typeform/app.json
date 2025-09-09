@@ -6,14 +6,21 @@
   "version": "2024.1",
   "description": "uLutypeform integration for AI agents",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ TYPEFORM_CLIENT_ID }}",
+      "client_secret": "{{ TYPEFORM_CLIENT_SECRET }}",
+      "scope": "accounts:read forms:read forms:write responses:read workspaces:read workspaces:write",
+      "authorize_url": "https://api.typeform.com/oauth/authorize",
+      "access_token_url": "https://api.typeform.com/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},
-  "categories": ["Tools"],
+  "categories": [
+    "Tools"
+  ],
   "visibility": "public",
   "active": true
 }

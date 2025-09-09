@@ -65,7 +65,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -112,7 +114,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -266,7 +270,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -348,7 +354,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -365,7 +373,9 @@
           "required": [
             "archived"
           ],
-          "visible": [],
+          "visible": [
+            "archived"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -435,7 +445,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -497,7 +509,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -543,7 +557,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -551,7 +567,9 @@
       "required": [
         "header"
       ],
-      "visible": [],
+      "visible": [
+        "header"
+      ],
       "additionalProperties": false
     }
   },
@@ -586,7 +604,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -934,7 +954,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1149,7 +1171,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -1211,7 +1235,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -1275,7 +1301,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1440,7 +1468,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1616,7 +1646,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -1681,7 +1713,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -1896,7 +1930,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -1959,7 +1995,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -2023,7 +2061,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2129,7 +2169,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2301,7 +2343,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -2379,7 +2423,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -2426,7 +2472,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2560,7 +2608,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2653,7 +2703,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2749,7 +2801,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -2840,7 +2894,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -2848,7 +2904,9 @@
       "required": [
         "header"
       ],
-      "visible": [],
+      "visible": [
+        "header"
+      ],
       "additionalProperties": false
     }
   },
@@ -2925,7 +2983,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -2973,7 +3033,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3083,7 +3145,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -3146,7 +3210,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -3187,7 +3253,9 @@
           "required": [
             "parent"
           ],
-          "visible": [],
+          "visible": [
+            "parent"
+          ],
           "additionalProperties": false
         }
       },
@@ -3287,7 +3355,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         }
@@ -3353,7 +3423,9 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [],
+          "visible": [
+            "Notion-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
