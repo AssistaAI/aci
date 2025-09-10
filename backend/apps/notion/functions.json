@@ -3247,7 +3247,10 @@
                 }
               ],
               "required": [],
-              "visible": []
+              "visible": [
+                "page_id",
+                "database_id"
+              ]
             }
           },
           "required": [

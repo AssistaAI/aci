@@ -1495,9 +1495,7 @@
       "required": [
         "body"
       ],
-      "visible": [
-        "body"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
@@ -1533,9 +1531,7 @@
       "required": [
         "body"
       ],
-      "visible": [
-        "body"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
