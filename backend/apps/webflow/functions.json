@@ -11,7 +11,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/token",
+      "path": "/v2/token/introspect",
       "server_url": "https://api.webflow.com"
     },
     "parameters": {

@@ -681,7 +681,7 @@
     "active": true,
     "protocol": "rest",
     "protocol_data": {
-      "method": "GET",
+      "method": "POST",
       "path": "/drafts/",
       "server_url": "https://api.typefully.com/v1"
     },

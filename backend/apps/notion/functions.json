@@ -2875,8 +2875,8 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/workspace",
-      "server_url": "https://api.notion.com/v1"
+      "path": "/v1/workspace",
+      "server_url": "https://api.notion.com"
     },
     "parameters": {
       "type": "object",
