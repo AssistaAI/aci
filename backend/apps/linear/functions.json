@@ -363,7 +363,7 @@
     }
   },
   {
-    "name": "LINEAR__ISSUE",
+    "name": "LINEAR__DELETE_ISSUE",
     "description": "Permanently delete an issue from Linear workspace, removing it and all associated data.",
     "tags": [
       "issues",
@@ -915,7 +915,7 @@
     }
   },
   {
-    "name": "LINEAR__PROJECT",
+    "name": "LINEAR__DELETE_PROJECT",
     "description": "Delete a project from Linear workspace permanently, removing it and all associated data.",
     "tags": [
       "projects",
@@ -1274,7 +1274,7 @@
     }
   },
   {
-    "name": "LINEAR__COMMENT",
+    "name": "LINEAR__DELETE_COMMENT",
     "description": "Delete a comment from an issue in Linear permanently, removing it from the discussion thread.",
     "tags": [
       "comments",

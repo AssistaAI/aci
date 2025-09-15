@@ -24,11 +24,6 @@
               "type": "string",
               "description": "The search query you want to execute with Tavily."
             },
-            "api_key": {
-              "type": "string",
-              "default": "X-API-KEY",
-              "description": "Your Tavily API Key."
-            },
             "search_depth": {
               "type": "string",
               "default": "basic",
@@ -93,8 +88,7 @@
             }
           },
           "required": [
-            "query",
-            "api_key"
+            "query"
           ],
           "visible": [
             "query",
@@ -147,16 +141,10 @@
                 "type": "string"
               },
               "description": "The urls you want to extract with Tavily."
-            },
-            "api_key": {
-              "type": "string",
-              "default": "X-API-KEY",
-              "description": "Your Tavily API Key."
             }
           },
           "required": [
-            "urls",
-            "api_key"
+            "urls"
           ],
           "visible": [
             "urls"

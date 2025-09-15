@@ -1,6 +1,7 @@
 [
   {
-    "name": "AGENT_SECRETS_MANAGER__LIST_CREDENTIALS",
+ 
+    
     "description": "List all website credential secrets",
     "tags": [
       "secrets"
@@ -123,7 +124,7 @@
     }
   },
   {
-    "name": "AGENT_SECRETS_MANAGER__CREDENTIAL_FOR_DOMAIN_GET_4",
+    "name": "AGENT_SECRETS_MANAGER__CREDENTIAL_FOR_DOMAIN_GET_5",
     "description": "Delete a website credential secret with username and password for a given domain",
     "tags": [
       "secrets"

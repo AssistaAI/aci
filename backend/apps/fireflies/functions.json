@@ -139,7 +139,7 @@
             "query": {
               "type": "string",
               "description": "GraphQL query to get user information",
-              "default": "query GetUser($userId: String) { user(id: $userId) { user_id name email integrations minutes_consumed is_admin recent_transcript recent_meeting num_transcripts } }"
+              "default": "query GetUser($userId: String) { user(id: $userId) { user_id name email minutes_consumed is_admin recent_transcript recent_meeting num_transcripts } }"
             },
             "variables": {
               "type": "object",
@@ -219,7 +219,7 @@
             "query": {
               "type": "string",
               "description": "GraphQL query to list users",
-              "default": "{ users { user_id name email integrations } }"
+              "default": "{ users { user_id name email } }"
             }
           },
           "required": [
@@ -752,7 +752,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "rest",
+    "protocol": "connector",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",
@@ -981,7 +981,7 @@
             "query": {
               "type": "string",
               "description": "GraphQL mutation to create soundbite",
-              "default": "mutation CreateSoundbite($transcriptId: String!, $startTime: Float!, $endTime: Float!, $title: String) { createSoundbite(transcript_id: $transcriptId, start_time: $startTime, end_time: $endTime, title: $title) { id url duration title } }"
+              "default": "mutation CreateBite($transcriptId: String!, $startTime: Float!, $endTime: Float!, $title: String) { createBite(transcript_id: $transcriptId, start_time: $startTime, end_time: $endTime, title: $title) { id url duration title } }"
             },
             "variables": {
               "type": "object",
@@ -1049,7 +1049,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "rest",
+    "protocol": "connector",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",
@@ -1105,14 +1105,13 @@
     }
   },
   {
-    "name": "FIREFLIES__UPDATE_MEETING_NOTES",
-    "description": "Update or add custom notes to a meeting transcript for better organization and context",
+    "name": "FIREFLIES__UPDATE_MEETING_TITLE",
+    "description": "Update the title of a meeting transcript for better organization and identification",
     "tags": [
       "meetings",
-      "notes",
+      "title",
       "update",
-      "organization",
-      "context"
+      "organization"
     ],
     "visibility": "public",
     "active": true,
@@ -1149,7 +1148,7 @@
             "query": {
               "type": "string",
               "description": "GraphQL mutation to update meeting notes",
-              "default": "mutation UpdateMeetingNotes($transcriptId: String!, $notes: String!, $tags: [String]) { updateMeetingNotes(transcript_id: $transcriptId, notes: $notes, tags: $tags) { id notes tags } }"
+              "default": "mutation UpdateMeetingTitle($transcriptId: String!, $title: String!) { updateMeetingTitle(transcript_id: $transcriptId, title: $title) { id title } }"
             },
             "variables": {
               "type": "object",
@@ -1159,26 +1158,18 @@
                   "type": "string",
                   "description": "ID of the transcript to update notes for"
                 },
-                "notes": {
+                "title": {
                   "type": "string",
-                  "description": "Custom notes to add to the meeting"
-                },
-                "tags": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Optional tags to categorize the meeting"
+                  "description": "New title for the meeting"
                 }
               },
               "required": [
                 "transcriptId",
-                "notes"
+                "title"
               ],
               "visible": [
                 "transcriptId",
-                "notes",
-                "tags"
+                "title"
               ],
               "additionalProperties": false
             }
@@ -1215,7 +1206,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "rest",
+    "protocol": "connector",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",

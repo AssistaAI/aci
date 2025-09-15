@@ -6,10 +6,18 @@
   "version": "1.0.0",
   "description": "\"Create issues, track progress, and manage projects effortlessly through chat, keeping your team organized and on track.\"",
   "security_schemes": {
-    "api_key": {
-      "location": "header",
-      "name": "Authorization",
-      "prefix": "Bearer"
+    "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://linear.app/oauth/authorize",
+          "tokenUrl": "https://api.linear.app/oauth/token",
+          "scopes": {
+            "read": "Read access to all resources",
+            "write": "Write access to all resources"
+          }
+        }
+      }
     }
   },
   "default_security_credentials_by_scheme": {},
