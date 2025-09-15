@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/confluence.svg",
   "provider": "Atlassian",
   "version": "1.0.0",
-  "description": "Confluence is a team workspace where knowledge and collaboration meet. This integration provides comprehensive content management capabilities for creating, organizing, and maintaining team documentation, project spaces, and knowledge bases.",
+  "description": "\"Create, organize, and share team documentation effortlessly to enhance collaboration and streamline knowledge sharing.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/anchor_browser.svg",
   "provider": "Anchor Browser Inc.",
   "version": "1.0.0",
-  "description": "Anchor Browser is a powerful web browser application that provides secure browsing, tabbed navigation, and built-in privacy features. It enables users to browse websites, manage bookmarks, and synchronize browsing data across multiple devices while maintaining privacy and security.",
+  "description": "\"Browse websites safely, manage bookmarks, and enjoy private surfing with easy chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

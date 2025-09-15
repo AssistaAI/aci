@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/wrike.svg",
   "provider": "Wrike, Inc.",
   "version": "1.0.0",
-  "description": "Wrike is an intelligent work management platform that provides project management, task tracking, collaboration and workflow automation capabilities. It enables teams to centrally manage projects, automate repetitive tasks, customize workspaces, and gain key insights through real-time reports and dashboards.",
+  "description": "\"Manage projects, track tasks, collaborate with your team, and automate workflows effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

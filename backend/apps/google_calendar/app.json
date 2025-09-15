@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_calendar.svg",
   "provider": "Google",
   "version": "3.0.0",
-  "description": "The Google Calendar API is a RESTful API that can be accessed through explicit HTTP calls. The API exposes most of the features available in the Google Calendar Web interface.",
+  "description": "\"Schedule events, manage your calendar, and set reminders effortlessly through chat to stay organized and save time.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

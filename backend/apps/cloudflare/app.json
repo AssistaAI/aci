@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/cloudflare.png",
   "provider": "https://developers.cloudflare.com/api",
   "version": "1.0.0",
-  "description": "The Cloudflare API allows programmatic control over your Cloudflare account, including DNS, DDoS protection, and more.",
+  "description": "\"Manage your website's security, optimize performance, and adjust DNS settings effortlessly through simple chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

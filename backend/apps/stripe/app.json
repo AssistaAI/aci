@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/stripe.svg",
   "provider": "Stripe, Inc.",
   "version": "1.0.0",
-  "description": "Stripe is a comprehensive payment processing platform that enables businesses to accept online payments, manage subscriptions, handle refunds, and access detailed financial reporting. It provides secure payment infrastructure for e-commerce, SaaS, marketplaces, and mobile applications.",
+  "description": "\"Process payments, manage subscriptions, handle refunds, and track finances effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

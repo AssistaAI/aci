@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/zapier.svg",
   "provider": "Zapier",
   "version": "1.0.0",
-  "description": "Zapier is a workflow automation platform that connects apps and automates repetitive tasks. This integration enables creation and management of Zaps (automated workflows), triggers, actions, and webhook-based automation between different applications.",
+  "description": "\"Connect apps, automate tasks, and streamline workflows effortlessly through simple chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

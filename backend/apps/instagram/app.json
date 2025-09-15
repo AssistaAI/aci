@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/instagram.svg",
   "provider": "Meta Platforms, Inc.",
   "version": "v20.0",
-  "description": "Instagram Business API provides comprehensive social media management capabilities for businesses to manage their Instagram presence. This integration enables AI agents to publish posts, manage stories, analyze engagement metrics, handle direct messages, manage business profiles, and automate content workflows for effective social media marketing and customer engagement.",
+  "description": "\"Post content, manage stories, analyze engagement, and boost your Instagram business effortlessly through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

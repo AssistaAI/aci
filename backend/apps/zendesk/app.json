@@ -1,10 +1,10 @@
 {
   "name": "ZENDESK",
-  "display_name": "uLuzendesk",
+  "display_name": "Zendesk",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/zendesk.svg",
-  "provider": "uLuzendesk Inc.",
+  "provider": "Zendesk Inc.",
   "version": "2024.1",
-  "description": "uLuzendesk integration for AI agents",
+  "description": "\"Manage support tickets, respond to customer inquiries, and streamline help desk tasks through simple chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/aci.png",
   "provider": "ACI.dev",
   "version": "1.0.0",
-  "description": "The Frontend QA Agent helps you evaluate and debug your website.",
+  "description": "\"Test websites, spot bugs, and assess quality effortlessly through chat to ensure your site runs smoothly.\"",
   "security_schemes": {
     "no_auth": {}
   },

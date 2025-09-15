@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/serpapi.svg",
   "provider": "SerpApi",
   "version": "1.0",
-  "description": "SerpApi integration for web search, images, news, academic papers, and trends, providing access to Google Search, Images, News, Scholar, and Trends APIs.",
+  "description": "\"Search the web, find images, and explore news and trends effortlessly through chat commands for quick access to information.\"",
   "security_schemes": {
     "api_key": {
       "location": "query",

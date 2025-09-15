@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/github.svg",
   "provider": "GitHub",
   "version": "2022-11-28",
-  "description": "The GitHub API allows you to interact with GitHub programmatically, including repository management, pull requests, issues, commits, and more.",
+  "description": "\"Create repositories, manage code, track issues, and collaborate on projects seamlessly using simple chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

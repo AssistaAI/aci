@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/agentmail.svg",
   "provider": "Agent Mail",
   "version": "1.0.0",
-  "description": "Agent Mail is an email service that helps manage and automate email communications with features for inbox management, thread tracking, and message handling.",
+  "description": "\"Send emails, organize your inbox, and automate tasks effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

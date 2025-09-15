@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/fireflies.svg",
   "provider": "Fireflies.ai",
   "version": "1.0.0",
-  "description": "Fireflies.ai is an AI meeting assistant that automatically records, transcribes, and analyzes your meetings. It helps teams capture and retrieve knowledge from voice conversations across all video conferencing platforms.",
+  "description": "\"Record meetings, transcribe discussions, and summarize key points effortlessly to enhance collaboration and productivity.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

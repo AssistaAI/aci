@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/typefully.svg",
   "provider": "Typefully",
   "version": "1.0.0",
-  "description": "Typefully is a Twitter/X writing platform that helps users create, schedule, and publish better tweets and threads. It provides powerful API capabilities for draft management and content scheduling.",
+  "description": "\"Craft, schedule, and publish engaging tweets and threads effortlessly through chat to boost your social media presence.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_docs.svg",
   "provider": "Google",
   "version": "1.0.0",
-  "description": "The Google Docs API allows developers to create, read, and update Google Docs documents programmatically. It provides access to Google Docs through RESTful HTTP calls, including create, read and update the Google Docs document.",
+  "description": "\"Create, edit, and collaborate on documents effortlessly through chat, making teamwork and writing projects smoother.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

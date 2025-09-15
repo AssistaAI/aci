@@ -1,10 +1,10 @@
 {
   "name": "ATTIO",
   "display_name": "Attio",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/attio.svg",
+  "logo": "https://logo.clearbit.com/attio.com",
   "provider": "Attio",
   "version": "1.0.0",
-  "description": "Attio is a modern CRM platform that provides powerful tools for managing contacts, companies, deals, and customer relationships with flexible data structures and automation capabilities.",
+  "description": "\"Manage contacts, track deals, and strengthen customer relationships effortlessly through easy chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

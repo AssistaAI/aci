@@ -1,10 +1,10 @@
 {
   "name": "ADOBE",
-  "display_name": "uLuadobe",
+  "display_name": "Adobe",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/adobe.svg",
-  "provider": "uLuadobe Inc.",
+  "provider": "Adobe Inc.",
   "version": "2024.1",
-  "description": "uLuadobe integration for AI agents",
+  "description": "\"Design and edit documents, images, and media effortlessly using simple chat commands to enhance your creative projects.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

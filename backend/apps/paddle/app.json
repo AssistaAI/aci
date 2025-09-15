@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/paddle.jpeg",
   "provider": "Paddle",
   "version": "1.0.0",
-  "description": "Paddle is a complete payments infrastructure for SaaS companies. It helps businesses sell software globally with checkout, subscriptions, taxes, anti-fraud, and financial services all in one unified platform.",
+  "description": "\"Manage subscriptions, process payments, and handle taxes effortlessly through chat commands, simplifying your software sales globally.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

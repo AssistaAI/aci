@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/breezy.svg",
   "provider": "Breezy HR",
   "version": "aipolabs_0.0.1",
-  "description": "Breezy HR is an applicant tracking system that helps companies streamline their hiring process with features for job posting, candidate management, and interview scheduling.",
+  "description": "\"Post jobs, manage candidates, and schedule interviews effortlessly to simplify your hiring process.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

@@ -270,11 +270,11 @@
                   },
                   "options": {
                     "type": "object",
-                    "description": "Additional options for the field based on its type",
+                    "description": "Additional options for the field based on its type. IMPORTANT: Only include options that are valid for the specific field type. Fields that DO NOT accept any options: singleLineText, multilineText, email, url, phoneNumber, autoNumber, createdTime, createdBy, lastModifiedTime, lastModifiedBy, barcode, button. For these types, omit the options field entirely. Other field types require specific options: currency needs 'symbol' and optionally 'precision', date/dateTime need 'dateFormat'/'timeFormat'/'timeZone', singleSelect/multipleSelects need 'choices', etc.",
                     "properties": {
                       "precision": {
                         "type": "integer",
-                        "description": "For number fields, the number of digits after the decimal point"
+                        "description": "For number, percent, and currency fields, the number of digits after the decimal point"
                       },
                       "symbol": {
                         "type": "string",
@@ -785,10 +785,7 @@
                   "fields": {
                     "type": "object",
                     "description": "Field values for the record",
-                    "additionalProperties": false,
-                    "properties": {},
-                    "required": [],
-                    "visible": []
+                    "additionalProperties": true
                   }
                 },
                 "required": [
@@ -1220,8 +1217,8 @@
             },
             "options": {
               "type": "object",
-              "description": "Additional options for the field based on its type",
-              "additionalProperties": false,
+              "description": "Additional options for the field based on its type. IMPORTANT: Only include options that are valid for the specific field type. Fields that DO NOT accept any options: singleLineText, multilineText, email, url, phoneNumber, autoNumber, createdTime, createdBy, lastModifiedTime, lastModifiedBy, barcode, button. For these types, omit the options field entirely. Other field types require specific options: currency needs 'symbol' and optionally 'precision', date/dateTime need 'dateFormat'/'timeFormat'/'timeZone', singleSelect/multipleSelects need 'choices', etc.",
+              "additionalProperties": true,
               "properties": {},
               "required": [],
               "visible": []
@@ -1234,7 +1231,8 @@
           "visible": [
             "name",
             "description",
-            "type"
+            "type",
+            "options"
           ],
           "additionalProperties": false
         }
@@ -1407,18 +1405,18 @@
                       },
                       "additionalProperties": false,
                       "required": [],
-                      "visible": []
+                      "visible": ["dataTypes", "recordChangeScope"]
                     }
                   },
                   "additionalProperties": false,
                   "required": [],
-                  "visible": []
+                  "visible": ["filters"]
                 }
               },
               "required": [
                 "options"
               ],
-              "visible": [],
+              "visible": ["options"],
               "additionalProperties": false
             }
           },
@@ -1427,7 +1425,8 @@
             "specification"
           ],
           "visible": [
-            "notificationUrl"
+            "notificationUrl",
+            "specification"
           ],
           "additionalProperties": false
         }
@@ -1577,7 +1576,7 @@
       "data"
     ],
     "visibility": "public",
-    "active": true,
+    "active": false,
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
@@ -1881,7 +1880,7 @@
     "active": true,
     "protocol": "rest",
     "protocol_data": {
-      "method": "PUT",
+      "method": "PATCH",
       "path": "/{base_id}/{table_id_or_name}",
       "server_url": "https://api.airtable.com/v0"
     },
@@ -2700,7 +2699,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
-      "path": "/{base_id}/{table_id_or_name}/listRecords",
+      "path": "/{base_id}/{table_id_or_name}",
       "server_url": "https://api.airtable.com/v0"
     },
     "parameters": {
@@ -2739,10 +2738,7 @@
                   "fields": {
                     "type": "object",
                     "description": "Field values for the record",
-                    "additionalProperties": false,
-                    "properties": {},
-                    "required": [],
-                    "visible": []
+                    "additionalProperties": true
                   }
                 },
                 "required": [

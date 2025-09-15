@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/netlify.svg",
   "provider": "Netlify, Inc.",
   "version": "1.0.0",
-  "description": "Netlify is a cloud hosting platform for web applications and static sites with continuous deployment, forms, and serverless functions.",
+  "description": "\"Deploy websites, manage hosting, and build web applications effortlessly through chat for seamless online presence.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

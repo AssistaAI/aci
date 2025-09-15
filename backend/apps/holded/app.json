@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/holded.svg",
   "provider": "Holded",
   "version": "1.0.0",
-  "description": "Holded API for managing team, employees, payroll, treasury, invoicing and other business operations.",
+  "description": "\"Manage payroll, create invoices, and track finances using simple commands to streamline your business operations.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

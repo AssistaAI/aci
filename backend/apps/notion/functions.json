@@ -65,11 +65,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -114,11 +114,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -270,11 +270,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -354,11 +354,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -445,11 +445,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -509,11 +509,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -557,11 +557,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -604,11 +604,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -954,11 +954,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -1171,11 +1171,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -1235,11 +1235,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -1301,11 +1301,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -1468,11 +1468,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -1646,11 +1646,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -1713,11 +1713,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -1930,11 +1930,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -1995,11 +1995,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -2061,11 +2061,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2169,11 +2169,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2343,11 +2343,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -2423,11 +2423,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -2472,11 +2472,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2608,11 +2608,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2703,11 +2703,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2801,11 +2801,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -2894,11 +2894,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -2983,11 +2983,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -3033,11 +3033,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -3145,11 +3145,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -3210,11 +3210,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",
@@ -3358,11 +3358,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         }
       },
       "required": [
@@ -3426,11 +3426,11 @@
           "required": [
             "Notion-Version"
           ],
-          "visible": [
-            "Notion-Version"
-          ],
+          "visible": [],
           "additionalProperties": false,
-          "default": {}
+          "default": {
+            "Notion-Version": "2022-06-28"
+          }
         },
         "body": {
           "type": "object",

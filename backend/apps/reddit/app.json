@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/reddit.svg",
   "provider": "Reddit",
   "version": "1.0",
-  "description": "The Reddit API allows you to interact with Reddit programmatically, including post management, comments, user interactions, and subreddit operations.",
+  "description": "\"Post updates, respond to comments, explore subreddits, and connect with communities using easy chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

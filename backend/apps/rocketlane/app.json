@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/rocketlane.svg",
   "provider": "Rocketlane",
   "version": "1.0.0",
-  "description": "Rocketlane API for managing customer onboarding, project management, and client collaboration.",
+  "description": "\"Manage customer onboarding, track projects, and collaborate with clients effortlessly using simple chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

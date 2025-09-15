@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/pagerduty.svg",
   "provider": "PagerDuty, Inc.",
   "version": "1.0.0",
-  "description": "PagerDuty is a digital operations management platform that empowers teams to proactively mitigate issues that matter to their business before customers are impacted. This integration provides comprehensive incident management, alerting, and on-call scheduling capabilities.",
+  "description": "\"Manage incidents, send alerts, and schedule on-call shifts effortlessly, ensuring your team addresses issues before they affect customers.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

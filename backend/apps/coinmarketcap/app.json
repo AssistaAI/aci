@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/coinmarketcap.svg",
   "provider": "CoinMarketCap, Inc.",
   "version": "1.0.0",
-  "description": "CoinMarketCap API provides cryptocurrency market data including listings, quotes, mapping and global metrics. API accessible is subject to the pricing tier of the user.",
+  "description": "\"Track cryptocurrency prices, explore market trends, and analyze data effortlessly through chat commands to make informed investment decisions.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

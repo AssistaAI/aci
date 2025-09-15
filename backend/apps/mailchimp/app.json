@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/mailchimp.svg",
   "provider": "Intuit Mailchimp",
   "version": "3.0.0",
-  "description": "Mailchimp is a comprehensive marketing automation and email marketing platform that helps businesses connect with their audience through targeted campaigns, automation, and analytics. This integration enables AI agents to manage audiences, create campaigns, and track marketing performance.",
+  "description": "\"Design email campaigns, manage contacts, and automate marketing to boost engagement and save time with easy chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

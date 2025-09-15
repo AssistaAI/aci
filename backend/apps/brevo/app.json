@@ -1,10 +1,10 @@
 {
   "name": "BREVO",
   "display_name": "Brevo",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/brevo.svg",
+  "logo": "https://cdn.brandfetch.io/brevo.com",
   "provider": "Brevo (formerly Sendinblue)",
   "version": "3.0.0",
-  "description": "Brevo is a comprehensive digital marketing platform providing email marketing, SMS campaigns, transactional messaging, marketing automation, and CRM tools. This integration enables AI agents to manage contacts, send emails and SMS, create campaigns, and track marketing performance.",
+  "description": "\"Send emails, launch marketing campaigns, and manage customer contacts effortlessly through simple chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

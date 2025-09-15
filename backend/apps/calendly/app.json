@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/calendly.svg",
   "provider": "Calendly",
   "version": "1.0",
-  "description": "Calendly integration for scheduling and managing meetings. This app allows you to automate your scheduling process, embed Calendly on your website, and manage your availability.",
+  "description": "\"Schedule meetings, set availability, and automate bookings quickly through chat for seamless time management.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

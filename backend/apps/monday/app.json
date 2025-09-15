@@ -1,10 +1,10 @@
 {
   "name": "MONDAY",
   "display_name": "Monday.com",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/monday.svg",
+  "logo": "https://logo.clearbit.com/monday.com",
   "provider": "monday.com Ltd.",
   "version": "2024.1",
-  "description": "Monday.com is a flexible work management platform that enables teams to plan, organize, and track work across projects and workflows. This integration allows AI agents to manage boards, items, updates, and team collaboration efficiently.",
+  "description": "\"Organize projects, track tasks, and streamline team workflows using easy chat commands for better collaboration.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

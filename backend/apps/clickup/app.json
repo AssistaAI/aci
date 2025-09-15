@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/clickup.png",
   "provider": "ClickUp",
   "version": "4.0.0",
-  "description": "The ClickUp API allows you to interact with ClickUp programmatically, including workspace management, tasks, lists, folders, and more.",
+  "description": "\"Create tasks, track projects, and organize your team\u2019s workflow effortlessly through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

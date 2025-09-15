@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/whatsapp.svg",
   "provider": "Meta Platforms, Inc.",
   "version": "v20.0",
-  "description": "WhatsApp Business API enables businesses to communicate with customers at scale through the world's most popular messaging platform. This integration allows AI agents to send and receive messages, manage customer conversations, handle media files, create message templates, and automate customer support workflows with comprehensive messaging capabilities.",
+  "description": "\"Send and receive messages, manage customer chats, and automate support tasks to improve communication and streamline your business.\"",
   "security_schemes": {
     "http_bearer": {
       "location": "header",

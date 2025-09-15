@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/render.jpg",
   "provider": "Render Services, Inc.",
   "version": "1.0.0",
-  "description": "Render is a cloud hosting platform that provides auto-scaling web services, static sites, and databases with continuous deployment from Git.",
+  "description": "\"Host websites, deploy updates, and manage databases effortlessly through chat, streamlining your online presence.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

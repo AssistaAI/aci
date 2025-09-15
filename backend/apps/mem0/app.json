@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/mem0.png",
   "provider": "Mem0",
   "version": "1.0.0",
-  "description": "Persistent, semantic memory API for AI agents enabling long-term context retention and personalized interactions",
+  "description": "\"Save memories, recall details, and enjoy personalized conversations with effortless chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

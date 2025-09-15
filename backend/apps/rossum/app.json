@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/rossum.svg",
   "provider": "Resend",
   "version": "1.0.0",
-  "description": "Automate complex transactional workflows with Rossum's AI document processing solution. Reduce manual tasks, increase accuracy, drive efficiency.",
+  "description": "\"Streamline document processing, reduce manual tasks, and boost accuracy using simple chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",
