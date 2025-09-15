@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/arxiv.svg",
   "provider": "Cornell University",
   "version": "1.0.0",
-  "description": "arXiv is an open-access repository of electronic preprints and postprints approved for posting after moderation, but not peer review. It consists of scientific papers in the fields of mathematics, physics, astronomy, electrical engineering, computer science, quantitative biology, statistics, mathematical finance and economics.",
+  "description": "\"Search for academic papers, access research publications, and discover scientific literature effortlessly through chat.\"",
   "security_schemes": {
     "no_auth": {}
   },

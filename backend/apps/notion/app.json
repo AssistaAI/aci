@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/notion.svg",
   "provider": "Notion Labs, Inc.",
   "version": "2022-06-28",
-  "description": "Notion API is a REST API to manage Notion workspaces which are collaborative environments where teams can organize work, manage projects, and store information in a highly customizable way.",
+  "description": "\"Create pages, organize projects, and collaborate with your team easily through chat for seamless productivity.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

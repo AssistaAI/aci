@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/trello.svg",
   "provider": "Atlassian",
   "version": "1.0.0",
-  "description": "Trello is a visual project management tool that uses boards, lists, and cards to organize tasks and workflows. This integration provides comprehensive project management capabilities for team collaboration, task tracking, and workflow automation.",
+  "description": "\"Organize projects, manage tasks, and collaborate visually to streamline your workflow and boost team productivity.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

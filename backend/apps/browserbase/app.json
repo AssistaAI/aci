@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/browserbase.png",
   "provider": "Browserbase",
   "version": "1.0.0",
-  "description": "Browserbase is a platform for running headless browsers.",
+  "description": "\"Control web browsers, gather data, and automate tasks effortlessly through chat to save time and enhance productivity.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

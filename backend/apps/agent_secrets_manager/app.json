@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/agent_secrets_manager.svg",
   "provider": "ACI.dev",
   "version": "1.0.0",
-  "description": "The Agent Secrets Manager allows you to store and retrieve secrets. For example, you can store username/password for a website login credential, or a secret API key for a user.",
+  "description": "\"Store sensitive information, manage credentials, and secure access with easy chat commands for peace of mind.\"",
   "security_schemes": {
     "no_auth": {}
   },

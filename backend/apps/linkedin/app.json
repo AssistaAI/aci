@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/linkedin.svg",
   "provider": "LinkedIn Corporation",
   "version": "2.0.0",
-  "description": "LinkedIn API integration for professional networking, posting content, managing company pages, and accessing professional data. Enables programmatic access to LinkedIn's professional network and business features.",
+  "description": "\"Post updates, manage company pages, and expand your professional network effortlessly through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

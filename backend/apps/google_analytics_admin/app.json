@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_analytics.svg",
   "provider": "Google",
   "version": "1.0.0",
-  "description": "The Google Analytics Admin API allows for programmatic access to the Google Analytics configuration data and is only compatible with Google Analytics properties.",
+  "description": "\"Set up tracking, manage data rules, and control analytics settings effortlessly through chat commands for better insights.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

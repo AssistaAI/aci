@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/cal.svg",
   "provider": "Cal.com, Inc.",
   "version": "2.0.0",
-  "description": "Cal.com is a fully customizable scheduling platform that enables individuals and teams to automate meeting bookings, manage availability, and integrate with popular calendar and productivity tools. With Cal.com, users can streamline appointment scheduling, avoid double bookings, and enhance collaboration through flexible, privacy-focused solutions.",
+  "description": "\"Schedule meetings, manage your calendar, and book appointments effortlessly through chat for smoother planning.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/microsoft_teams.jpg",
   "provider": "Microsoft",
   "version": "1.0.0",
-  "description": "The Microsoft Graph Teams API enables access to Microsoft Teams data including teams, channels, messages, and team settings. This integration allows managing Teams content and collaboration on behalf of the user.",
+  "description": "\"Send messages, manage channels, and collaborate effortlessly with your team right from the chat.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

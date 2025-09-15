@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/docusign.svg",
   "provider": "DocuSign, Inc.",
   "version": "2.1.0",
-  "description": "DocuSign is the leading electronic signature platform that enables secure, legally binding digital signatures and document workflows. This integration allows AI agents to create envelopes, send documents for signature, manage recipients, track signature status, and automate document approval processes.",
+  "description": "\"Send documents for signatures, track approvals, and streamline signing processes effortlessly through chat.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

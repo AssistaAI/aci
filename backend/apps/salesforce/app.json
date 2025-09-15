@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/salesforce.svg",
   "provider": "Salesforce",
   "version": "1.0.0",
-  "description": "Salesforce is the world's leading customer relationship management (CRM) platform. This integration enables comprehensive access to sales, marketing, and service data including accounts, contacts, leads, opportunities, cases, and campaigns.",
+  "description": "\"Manage customer relationships, track sales, and analyze marketing data effortlessly through chat commands to boost your business success.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

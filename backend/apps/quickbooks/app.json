@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/quickbooks.svg",
   "provider": "Intuit Inc.",
   "version": "1.0.0",
-  "description": "QuickBooks is a comprehensive accounting software platform that helps businesses manage finances, invoicing, payments, and payroll. This integration provides complete financial management capabilities for automated accounting workflows and business intelligence.",
+  "description": "\"Manage finances, send invoices, process payments, and handle payroll effortlessly through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

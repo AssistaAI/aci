@@ -1,10 +1,10 @@
 {
   "name": "AIDBASE",
-  "display_name": "AIDBASE",
+  "display_name": "Aidbase",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/aidbase.svg",
   "provider": "Aidbase, Inc.",
   "version": "aipolabs_0.0.1",
-  "description": "Integration with Aidbase API to manage resources and workflows.",
+  "description": "\"Build knowledge bases, organize support resources, and streamline customer help processes with easy chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

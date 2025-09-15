@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/dify.svg",
   "provider": "Dify",
   "version": "1.0.0",
-  "description": "Dify API for managing AI-driven tasks and workflows.",
+  "description": "\"Automate tasks, streamline workflows, and manage processes easily through chat commands to boost your productivity.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

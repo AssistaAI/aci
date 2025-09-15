@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/zoho_desk.svg",
   "provider": "Zoho",
   "version": "1.0",
-  "description": "Zoho Desk API integration for customer support and ticket management. Provides access to tickets, contacts, departments, and customer support features.",
+  "description": "\"Manage customer support tickets, track contacts, and streamline communication effortlessly through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

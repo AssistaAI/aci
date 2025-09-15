@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/jira.svg",
   "provider": "Atlassian",
   "version": "1.0.0",
-  "description": "Jira API integration for issue tracking and project management. Provides functionality to create, update, and manage issues, projects, and workflows.",
+  "description": "\"Track issues, manage projects, and organize workflows effortlessly through chat to boost team collaboration.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

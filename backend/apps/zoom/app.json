@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/zoom.svg",
   "provider": "Zoom Video Communications",
   "version": "1.0.0",
-  "description": "Zoom is a video communications platform providing meetings, webinars, and collaboration tools. This integration enables comprehensive management of meetings, participants, recordings, and real-time communication features for remote collaboration.",
+  "description": "\"Schedule video meetings, host webinars, and manage recordings effortlessly through chat for seamless remote collaboration.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

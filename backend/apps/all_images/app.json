@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/all_images.svg",
   "provider": "All-Images.ai",
   "version": "1.0",
-  "description": "All-Images.ai API integration for image search and AI image generation. Provides capabilities for searching stock images and generating custom images using AI.",
+  "description": "\"Search stock images, generate custom visuals, and create media content effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

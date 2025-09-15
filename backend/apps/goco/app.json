@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/goco.svg",
   "provider": "GoCo",
   "version": "1.0.0",
-  "description": "GoCo API for managing HR, benefits, and payroll operations.",
+  "description": "\"Manage HR tasks, handle employee benefits, and process payroll effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

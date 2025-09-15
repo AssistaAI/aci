@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/one_signal.svg",
   "provider": "OneSignal Inc.",
   "version": "1.0.0",
-  "description": "OneSignal is a comprehensive customer engagement solution that provides push notifications, in-app messaging, email, and SMS services. This integration enables managing and sending cross-platform notifications, tracking user engagement, and accessing notification analytics.",
+  "description": "\"Send push notifications, track user engagement, and access analytics to boost customer communication effortlessly through chat.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

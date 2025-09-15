@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/intercom.svg",
   "provider": "Intercom Inc.",
   "version": "1.0.0",
-  "description": "Intercom is a customer messaging platform that enables businesses to communicate with customers through chat, email, and in-app messages. This integration provides comprehensive customer support, marketing automation, and user engagement capabilities for modern customer communication workflows.",
+  "description": "\"Send messages, provide support, and automate customer interactions through chat and email for faster engagement.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

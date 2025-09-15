@@ -1,10 +1,10 @@
 {
   "name": "BAMBOOHR",
   "display_name": "BambooHR",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/bamboohr.svg",
+  "logo": "https://logo.clearbit.com/bamboohr.com",
   "provider": "BambooHR, Inc.",
   "version": "1.0.0",
-  "description": "BambooHR is a comprehensive human resources management system that helps businesses manage employee data, time-off requests, payroll, performance reviews, and HR reporting. This integration enables AI agents to interact with employee records, manage time-off, and generate HR insights.",
+  "description": "\"Manage employee records, approve time-off requests, and streamline HR tasks effortlessly through chat.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

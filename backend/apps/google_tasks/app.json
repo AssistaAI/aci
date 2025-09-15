@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_tasks.svg",
   "provider": "Google",
   "version": "2.0.0",
-  "description": "The Google Tasks API allows managing tasks and task lists programmatically.",
+  "description": "\"Create task lists, set reminders, and track your to-dos easily through conversation to stay organized and productive.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/tableau.svg",
   "provider": "Salesforce, Inc.",
   "version": "3.23",
-  "description": "Tableau is the industry-leading business intelligence and data visualization platform that helps organizations see and understand their data. This integration enables AI agents to create and manage dashboards, generate reports, automate data refreshes, share insights, and perform comprehensive analytics operations for data-driven decision making across enterprise environments.",
+  "description": "\"Create dashboards, generate reports, and share insights effortlessly to make data-driven decisions with simple chat commands.\"",
   "security_schemes": {
     "http_bearer": {
       "location": "header",

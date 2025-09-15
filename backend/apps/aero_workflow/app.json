@@ -1,10 +1,10 @@
 {
   "name": "AERO_WORKFLOW",
-  "display_name": "Aero workflow",
+  "display_name": "Aero Workflow",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/aeroworkflow.svg",
   "provider": "Aero workflow",
   "version": "1.0.0",
-  "description": "Aero is workflow & practice management built specifically with the modern cloud-based accounting firm in mind.",
+  "description": "\"Manage accounting tasks, track client projects, and simplify your practice operations all through easy chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

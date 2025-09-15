@@ -1,10 +1,10 @@
 {
   "name": "TYPEFORM",
-  "display_name": "uLutypeform",
+  "display_name": "Typeform",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/typeform.svg",
-  "provider": "uLutypeform Inc.",
+  "provider": "Typeform Inc.",
   "version": "2024.1",
-  "description": "uLutypeform integration for AI agents",
+  "description": "\"Create surveys, design forms, and gather responses effortlessly through chat to engage your audience and simplify data collection.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

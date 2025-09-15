@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/coda.svg",
   "provider": "Coda, Inc.",
   "version": "1.0.0",
-  "description": "Coda is a document editor that brings together documents, spreadsheets, and applications into a single flexible platform. It allows teams to collaborate in real-time, create interactive documents, and build custom workflows without coding.",
+  "description": "\"Create interactive documents, build custom workflows, and collaborate on spreadsheets easily through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",

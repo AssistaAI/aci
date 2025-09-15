@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/gitlab.svg",
   "provider": "GitLab",
   "version": "2024-01-01",
-  "description": "GitLab integration for AI agents",
+  "description": "\"Create repositories, manage code, track issues, and collaborate on projects easily through chat commands.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

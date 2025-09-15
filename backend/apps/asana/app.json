@@ -1,10 +1,10 @@
 {
   "name": "ASANA",
-  "display_name": "ASANA",
+  "display_name": "Asana",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/asana.png",
   "provider": "ASANA, Inc.",
   "version": "aipolabs_0.0.1",
-  "description": "Integration with ASANA Support API to manage users, tickets, and organizations.",
+  "description": "\"Create tasks, manage projects, and streamline team workflows instantly through chat for better collaboration.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/hubspot.svg",
   "provider": "HubSpot, Inc.",
   "version": "3.0.0",
-  "description": "HubSpot is a comprehensive CRM and inbound marketing platform that provides tools for sales, marketing, customer service, and content management. This integration enables AI agents to manage contacts, deals, companies, tickets, and marketing campaigns while tracking customer interactions and sales pipelines.",
+  "description": "\"Manage contacts, track deals, and run marketing campaigns seamlessly through chat to boost your sales efficiency.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",

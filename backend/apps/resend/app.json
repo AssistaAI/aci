@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/resend.svg",
   "provider": "Resend",
   "version": "1.0.0",
-  "description": "Resend is the email API for developers. It provides a modern API for sending transactional emails, managing email templates, and tracking email delivery status with comprehensive analytics.",
+  "description": "\"Send and track transactional emails, manage templates, and ensure delivery status effortlessly through chat commands.\"",
   "security_schemes": {
     "api_key": {
       "location": "header",
