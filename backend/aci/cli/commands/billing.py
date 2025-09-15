@@ -217,3 +217,6 @@ def create_test_subscription(org_id: str, plan_name: str, skip_dry_run: bool) ->
                 db_session.rollback()
                 console.print(f"[bold red]Error during commit: {e}[/bold red]")
                 raise click.Abort() from e
+
+
+#  python -m aci.cli create-test-subscription --org-id "bac88731-6222-4a98-b3b6-95dbc24a2ca2"--plan-name team --skip-dry-run
