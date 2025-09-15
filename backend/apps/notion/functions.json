@@ -567,9 +567,7 @@
       "required": [
         "header"
       ],
-      "visible": [
-        "header"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
@@ -2904,9 +2902,7 @@
       "required": [
         "header"
       ],
-      "visible": [
-        "header"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },

@@ -518,7 +518,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "connector",
+    "protocol": "rest",
     "protocol_data": {
       "method": "GET",
       "path": "/projects",
@@ -893,7 +893,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "connector",
+    "protocol": "rest",
     "protocol_data": {
       "method": "GET",
       "path": "/tasks",

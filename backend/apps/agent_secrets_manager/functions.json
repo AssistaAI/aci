@@ -1,7 +1,6 @@
 [
   {
- 
-    
+    "name": "AGENT_SECRETS_MANAGER__LIST_CREDENTIALS",
     "description": "List all website credential secrets",
     "tags": [
       "secrets"
