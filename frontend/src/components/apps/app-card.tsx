@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -26,7 +27,12 @@ interface AppCardProps {
 }
 
 export function AppCard({ app, isConfigured = false }: AppCardProps) {
+  const [isClient, setIsClient] = useState(false);
   const { data: linkedAccounts = [] } = useAppLinkedAccounts(app.name);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   return (
     <Link href={`/apps/${app.name}`} className="block">
       <Card className="h-[300px] transition-shadow hover:shadow-lg flex flex-col overflow-hidden relative">
@@ -110,12 +116,12 @@ export function AppCard({ app, isConfigured = false }: AppCardProps) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <span className="text-sm bg-primary/10 px-2.5 py-1 font-medium text-primary border rounded-full border-border">
-                    {linkedAccounts.length}
+                    {isClient ? linkedAccounts.length : 0}
                   </span>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="text-xs">
-                    {`Linked Accounts: ${linkedAccounts.length}`}
+                    {`Linked Accounts: ${isClient ? linkedAccounts.length : 0}`}
                   </p>
                 </TooltipContent>
               </Tooltip>

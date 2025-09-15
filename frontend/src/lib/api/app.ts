@@ -1,12 +1,15 @@
 import { App } from "@/lib/types/app";
 
 export async function getAllApps(apiKey: string): Promise<App[]> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/apps`, {
-    method: "GET",
-    headers: {
-      "X-API-KEY": apiKey,
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/apps?limit=1000`,
+    {
+      method: "GET",
+      headers: {
+        "X-API-KEY": apiKey,
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error(
