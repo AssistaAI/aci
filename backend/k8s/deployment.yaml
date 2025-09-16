@@ -170,11 +170,10 @@ spec:
           timeoutSeconds: 5           # Mai mult timp
           failureThreshold: 3         # Mai multe încercări
         
-        # Resource limits - Guaranteed QoS for maximum stability
-        # resources:
-        #   requests:
-        #     memory: "2Gi"             # Guaranteed memory allocation
-        #     cpu: "1"                  # Guaranteed CPU allocation
-        #   limits:
-        #     memory: "2Gi"             # Same as requests = Guaranteed QoS
-        #     cpu: "1"                  # Same as requests = Guaranteed QoS
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
