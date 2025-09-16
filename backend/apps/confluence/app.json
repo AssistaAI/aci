@@ -1,7 +1,7 @@
 {
   "name": "CONFLUENCE",
   "display_name": "Confluence",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/confluence.svg",
+  "logo": "https://logo.clearbit.com/atlassian.com",
   "provider": "Atlassian",
   "version": "1.0.0",
   "description": "\"Create, organize, and share team documentation effortlessly to enhance collaboration and streamline knowledge sharing.\"",

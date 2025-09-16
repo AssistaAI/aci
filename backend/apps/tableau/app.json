@@ -1,7 +1,7 @@
 {
   "name": "TABLEAU",
   "display_name": "Tableau",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/tableau.svg",
+  "logo": "https://logo.clearbit.com/tableau.com",
   "provider": "Salesforce, Inc.",
   "version": "3.23",
   "description": "\"Create dashboards, generate reports, and share insights effortlessly to make data-driven decisions with simple chat commands.\"",

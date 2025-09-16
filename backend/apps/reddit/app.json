@@ -10,9 +10,9 @@
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_REDDIT_APP_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_REDDIT_APP_CLIENT_SECRET }}",
-      "scope": "read submit",
+      "client_id": "{{ REDDIT_CLIENT_ID }}",
+      "client_secret": "{{ REDDIT_CLIENT_SECRET }}",
+      "scope": "identity read submit vote edit history save subscribe privatemessages report flair modconfig modflair modlog modposts modwiki mysubreddits wikiedit wikiread",
       "authorize_url": "https://www.reddit.com/api/v1/authorize",
       "access_token_url": "https://www.reddit.com/api/v1/access_token",
       "refresh_token_url": "https://www.reddit.com/api/v1/access_token"

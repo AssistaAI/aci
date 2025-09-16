@@ -1,7 +1,7 @@
 {
   "name": "WHATSAPP",
-  "display_name": "WhatsApp Business API",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/whatsapp.svg",
+  "display_name": "WhatsApp Business",
+  "logo": "https://logo.clearbit.com/whatsapp.com",
   "provider": "Meta Platforms, Inc.",
   "version": "v20.0",
   "description": "\"Send and receive messages, manage customer chats, and automate support tasks to improve communication and streamline your business.\"",
