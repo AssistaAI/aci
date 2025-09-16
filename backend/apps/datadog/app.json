@@ -1,7 +1,7 @@
 {
   "name": "DATADOG",
   "display_name": "Datadog",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/datadog.svg",
+  "logo": "https://logo.clearbit.com/datadoghq.com",
   "provider": "Datadog, Inc.",
   "version": "1.0.0",
   "description": "\"Monitor application performance, track system health, and set alerts for issues using simple chat commands.\"",

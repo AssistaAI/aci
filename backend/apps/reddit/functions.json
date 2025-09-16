@@ -474,6 +474,11 @@
           "type": "object",
           "description": "Post submission data",
           "properties": {
+            "api_type": {
+              "type": "string",
+              "description": "Response format type",
+              "default": "json"
+            },
             "sr": {
               "type": "string",
               "description": "The name of the subreddit (without r/ prefix)"
@@ -511,6 +516,7 @@
             }
           },
           "required": [
+            "api_type",
             "sr",
             "title",
             "kind"
@@ -586,6 +592,11 @@
           "type": "object",
           "description": "Comment reply data",
           "properties": {
+            "api_type": {
+              "type": "string",
+              "description": "Response format type",
+              "default": "json"
+            },
             "parent": {
               "type": "string",
               "description": "The fullname of the parent post or comment to reply to (e.g., t3_abc123 for post, t1_def456 for comment)"
@@ -596,6 +607,7 @@
             }
           },
           "required": [
+            "api_type",
             "parent",
             "text"
           ],

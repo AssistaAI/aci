@@ -1,7 +1,7 @@
 {
   "name": "QUICKBOOKS",
   "display_name": "QuickBooks",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/quickbooks.svg",
+  "logo": "https://logo.clearbit.com/quickbooks.com",
   "provider": "Intuit Inc.",
   "version": "1.0.0",
   "description": "\"Manage finances, send invoices, process payments, and handle payroll effortlessly through chat commands.\"",

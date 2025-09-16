@@ -1,7 +1,7 @@
 {
   "name": "PAGERDUTY",
   "display_name": "PagerDuty",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/pagerduty.svg",
+  "logo": "https://logo.clearbit.com/pagerduty.com",
   "provider": "PagerDuty, Inc.",
   "version": "1.0.0",
   "description": "\"Manage incidents, send alerts, and schedule on-call shifts effortlessly, ensuring your team addresses issues before they affect customers.\"",

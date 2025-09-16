@@ -15,7 +15,8 @@
       "scope": "openid profile w_member_social email",
       "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
       "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
-      "refresh_token_url": "https://www.linkedin.com/oauth/v2/accessToken"
+      "refresh_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
+      "token_endpoint_auth_method": "client_secret_post"
     }
   },
   "default_security_credentials_by_scheme": {},
