@@ -7,17 +7,15 @@
   "description": "\"Create issues, track progress, and manage projects effortlessly through chat, keeping your team organized and on track.\"",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://linear.app/oauth/authorize",
-          "tokenUrl": "https://api.linear.app/oauth/token",
-          "scopes": {
-            "read": "Read access to all resources",
-            "write": "Write access to all resources"
-          }
-        }
-      }
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ AIPOLABS_LINEAR_CLIENT_ID }}",
+      "client_secret": "{{ AIPOLABS_LINEAR_CLIENT_SECRET }}",
+      "scope": "read write",
+      "authorize_url": "https://linear.app/oauth/authorize",
+      "access_token_url": "https://api.linear.app/oauth/token",
+      "refresh_token_url": "https://api.linear.app/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},

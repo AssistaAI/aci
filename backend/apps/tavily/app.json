@@ -4,11 +4,11 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/tavily.svg",
   "provider": "Tavily, Inc.",
   "version": "aipolabs_0.0.1",
-  "description": "\"Search, filter, and extract information effortlessly to streamline your AI development tasks in just a few simple commands.\"",
+  "description": "Tavily is a search tool that focuses on optimizing search for AI developers and autonomous AI agents. We take care of all the burden of searching, scraping, filtering and extracting.",
   "security_schemes": {
     "api_key": {
-      "location": "header",
-      "name": "X-API-Key",
+      "location": "body",
+      "name": "api_key",
       "prefix": null
     }
   },

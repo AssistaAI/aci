@@ -12,7 +12,8 @@
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_DISCORD_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_DISCORD_APP_CLIENT_SECRET }}",
-      "scope": "bot applications.commands",
+      "scope": "identify email openid connections guilds guilds.join guilds.members.read applications.commands messages.read",
+      "token_endpoint_auth_method": "client_secret_post",
       "authorize_url": "https://discord.com/api/oauth2/authorize",
       "access_token_url": "https://discord.com/api/oauth2/token",
       "refresh_token_url": "https://discord.com/api/oauth2/token"

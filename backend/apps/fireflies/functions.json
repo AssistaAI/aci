@@ -752,7 +752,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "connector",
+    "protocol": "rest",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",
@@ -1049,7 +1049,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "connector",
+    "protocol": "rest",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",
@@ -1206,7 +1206,7 @@
     ],
     "visibility": "public",
     "active": true,
-    "protocol": "connector",
+    "protocol": "rest",
     "protocol_data": {
       "method": "POST",
       "path": "/graphql",
