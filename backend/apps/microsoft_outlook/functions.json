@@ -2,10 +2,7 @@
   {
     "name": "MICROSOFT_OUTLOOK__LIST_MESSAGES",
     "description": "List email messages from the user's inbox.",
-    "tags": [
-      "email",
-      "messages"
-    ],
+    "tags": ["email", "messages"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -39,31 +36,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "$top",
-            "$skip",
-            "$filter",
-            "$orderby"
-          ],
+          "visible": ["$top", "$skip", "$filter", "$orderby"],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": [
-        "query"
-      ],
+      "visible": ["query"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__LIST_MESSAGES_IN_FOLDER",
     "description": "Get all messages in a specified mail folder. Supports filtering, pagination, and sorting using OData query parameters. This allows you to retrieve messages from any specific folder in the mailbox.",
-    "tags": [
-      "email",
-      "messages",
-      "folders",
-      "list"
-    ],
+    "tags": ["email", "messages", "folders", "list"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -84,12 +69,8 @@
               "description": "The unique identifier of the mail folder, or a well-known folder name (e.g., 'inbox', 'drafts', 'sentitems')"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "query": {
@@ -126,36 +107,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "$select",
-            "$filter",
-            "$orderby",
-            "$top",
-            "$skip",
-            "$search",
-            "$expand"
-          ],
+          "visible": ["$select", "$filter", "$orderby", "$top", "$skip", "$search", "$expand"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
+      "required": ["path"],
+      "visible": ["path", "query"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__LIST_MAIL_FOLDERS",
     "description": "Get the mail folder collection directly under the root folder of the signed-in user. Includes mail search folders and can optionally include hidden folders.",
-    "tags": [
-      "email",
-      "folders",
-      "mailbox"
-    ],
+    "tags": ["email", "folders", "mailbox"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -197,32 +161,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "includeHiddenFolders",
-            "$top",
-            "$skip",
-            "$filter",
-            "$orderby",
-            "$select"
-          ],
+          "visible": ["includeHiddenFolders", "$top", "$skip", "$filter", "$orderby", "$select"],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": [
-        "query"
-      ],
+      "visible": ["query"],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_OUTLOOK__MAIL_FOLDER_GET_MAILFOLDERS",
+    "name": "MICROSOFT_OUTLOOK__GET_MAIL_FOLDER",
     "description": "Retrieve the properties and relationships of a specific mail folder object by its ID. Returns detailed folder information including permissions and relationships.",
-    "tags": [
-      "email",
-      "folders",
-      "mailbox"
-    ],
+    "tags": ["email", "folders", "mailbox"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -243,12 +194,8 @@
               "description": "The unique identifier of the mail folder to retrieve"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "query": {
@@ -265,32 +212,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "$select",
-            "$expand"
-          ],
+          "visible": ["$select", "$expand"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
+      "required": ["path"],
+      "visible": ["path", "query"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__UPDATE_MAIL_FOLDER",
     "description": "Update the properties of a mail folder object. Currently supports updating the display name of the folder. This allows you to rename folders for better organization.",
-    "tags": [
-      "email",
-      "folders",
-      "update",
-      "rename"
-    ],
+    "tags": ["email", "folders", "update", "rename"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -311,12 +245,8 @@
               "description": "The unique identifier of the mail folder to update"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "body": {
@@ -328,36 +258,20 @@
               "description": "The new display name for the mail folder. This will be the name shown in the user's mailbox."
             }
           },
-          "required": [
-            "displayName"
-          ],
-          "visible": [
-            "displayName"
-          ],
+          "required": ["displayName"],
+          "visible": ["displayName"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__LIST_CHILD_FOLDERS",
     "description": "Get the collection of child folders under a specified mail folder. By default, hidden folders are excluded unless explicitly requested. Supports OData query parameters for filtering and customization.",
-    "tags": [
-      "email",
-      "folders",
-      "list",
-      "hierarchy",
-      "children"
-    ],
+    "tags": ["email", "folders", "list", "hierarchy", "children"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -378,12 +292,8 @@
               "description": "The unique identifier of the parent mail folder whose child folders to retrieve"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "query": {
@@ -416,36 +326,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "includeHiddenFolders",
-            "$select",
-            "$filter",
-            "$orderby",
-            "$top",
-            "$skip"
-          ],
+          "visible": ["includeHiddenFolders", "$select", "$filter", "$orderby", "$top", "$skip"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
+      "required": ["path"],
+      "visible": ["path", "query"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_MESSAGE_IN_FOLDER",
     "description": "Create a new message directly in a specific mail folder. This creates an actual message in the folder, not a draft. The message will appear in the specified folder immediately.",
-    "tags": [
-      "email",
-      "messages",
-      "create",
-      "folders"
-    ],
+    "tags": ["email", "messages", "create", "folders"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -466,12 +359,8 @@
               "description": "The unique identifier of the mail folder where the message will be created"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "body": {
@@ -495,14 +384,8 @@
                   "description": "The content of the message body"
                 }
               },
-              "required": [
-                "contentType",
-                "content"
-              ],
-              "visible": [
-                "contentType",
-                "content"
-              ],
+              "required": ["contentType", "content"],
+              "visible": ["contentType", "content"],
               "additionalProperties": false
             },
             "toRecipients": {
@@ -523,22 +406,13 @@
                         "description": "The display name of the recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -560,22 +434,13 @@
                         "description": "The display name of the recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -597,32 +462,19 @@
                         "description": "The display name of the recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
             "importance": {
               "type": "string",
-              "enum": [
-                "low",
-                "normal",
-                "high"
-              ],
+              "enum": ["low", "normal", "high"],
               "description": "The importance of the message. Values: low, normal, high"
             },
             "isRead": {
@@ -630,42 +482,20 @@
               "description": "Indicates whether the message has been read"
             }
           },
-          "required": [
-            "subject",
-            "body"
-          ],
-          "visible": [
-            "subject",
-            "body",
-            "toRecipients",
-            "ccRecipients",
-            "bccRecipients",
-            "importance",
-            "isRead"
-          ],
+          "required": ["subject", "body"],
+          "visible": ["subject", "body", "toRecipients", "ccRecipients", "bccRecipients", "importance", "isRead"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_MAIL_FOLDER",
     "description": "Create a new mail folder in the root folder of the user's mailbox. You can set the folder name and whether it should be hidden. Hidden folders cannot be unhidden later.",
-    "tags": [
-      "email",
-      "folders",
-      "create",
-      "organization"
-    ],
+    "tags": ["email", "folders", "create", "organization"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -690,36 +520,20 @@
               "description": "Indicates whether the new folder should be hidden. Default is false. Once set to true, this property cannot be changed later."
             }
           },
-          "required": [
-            "displayName"
-          ],
-          "visible": [
-            "displayName",
-            "isHidden"
-          ],
+          "required": ["displayName"],
+          "visible": ["displayName", "isHidden"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
+      "required": ["body"],
+      "visible": ["body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_CHILD_FOLDER",
     "description": "Create a new child mail folder under a specific parent folder. You can set the folder name and whether it should be hidden. Hidden folders cannot be unhidden later. This is useful for organizing emails in a hierarchical structure.",
-    "tags": [
-      "email",
-      "folders",
-      "create",
-      "child",
-      "hierarchy",
-      "organization"
-    ],
+    "tags": ["email", "folders", "create", "child", "hierarchy", "organization"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -740,12 +554,8 @@
               "description": "The unique identifier of the parent mail folder under which to create the child folder"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "body": {
@@ -761,34 +571,20 @@
               "description": "Indicates whether the new child folder should be hidden. Default is false. Once set to true, this property cannot be changed later."
             }
           },
-          "required": [
-            "displayName"
-          ],
-          "visible": [
-            "displayName",
-            "isHidden"
-          ],
+          "required": ["displayName"],
+          "visible": ["displayName", "isHidden"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_OUTLOOK__MESSAGE_GET_MESSAGES",
+    "name": "MICROSOFT_OUTLOOK__GET_MESSAGE",
     "description": "Get a specific email message by its ID with detailed information including sender, recipients, subject, body, and attachments.",
-    "tags": [
-      "email",
-      "messages"
-    ],
+    "tags": ["email", "messages"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -809,12 +605,8 @@
               "description": "The unique identifier of the message to retrieve"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "query": {
@@ -831,31 +623,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "$select",
-            "$expand"
-          ],
+          "visible": ["$select", "$expand"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
+      "required": ["path"],
+      "visible": ["path", "query"],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_OUTLOOK__MESSAGE_DELETE_MESSAGES",
+    "name": "MICROSOFT_OUTLOOK__DELETE_MESSAGE",
     "description": "Delete a specific email message by its ID. This operation moves the message to the Deleted Items folder.",
-    "tags": [
-      "email",
-      "messages",
-      "delete"
-    ],
+    "tags": ["email", "messages", "delete"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -876,33 +656,20 @@
               "description": "The unique identifier of the message to delete"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__PERMANENT_DELETE",
     "description": "Permanently delete a message and place it in the purges folder in the dumpster. Unlike regular delete, this cannot be recovered by email clients and items are permanently deleted after a set period.",
-    "tags": [
-      "email",
-      "messages",
-      "delete",
-      "permanent"
-    ],
+    "tags": ["email", "messages", "delete", "permanent"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -923,32 +690,20 @@
               "description": "The unique identifier of the message to permanently delete"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__COPY_MESSAGE",
     "description": "Copy a message to a folder within the user's mailbox. You can specify a destination folder ID or use well-known folder names like 'inbox', 'drafts', 'sentitems', 'deleteditems'.",
-    "tags": [
-      "email",
-      "messages",
-      "copy"
-    ],
+    "tags": ["email", "messages", "copy"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -969,12 +724,8 @@
               "description": "The unique identifier of the message to copy"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "body": {
@@ -986,35 +737,20 @@
               "description": "The destination folder ID, or a well-known folder name (e.g., 'inbox', 'drafts', 'sentitems', 'deleteditems', 'archive', 'junkfolder')"
             }
           },
-          "required": [
-            "destinationId"
-          ],
-          "visible": [
-            "destinationId"
-          ],
+          "required": ["destinationId"],
+          "visible": ["destinationId"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_FORWARD",
     "description": "Create a draft to forward an existing message. You can optionally add a comment and specify recipients. The draft can be updated later or sent in a subsequent operation.",
-    "tags": [
-      "email",
-      "messages",
-      "forward",
-      "draft"
-    ],
+    "tags": ["email", "messages", "forward", "draft"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1035,12 +771,8 @@
               "description": "The unique identifier of the message to forward"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "body": {
@@ -1069,22 +801,13 @@
                         "description": "The display name of the recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -1098,10 +821,7 @@
                   "properties": {
                     "contentType": {
                       "type": "string",
-                      "enum": [
-                        "text",
-                        "html"
-                      ],
+                      "enum": ["text", "html"],
                       "description": "The content type of the message body"
                     },
                     "content": {
@@ -1109,14 +829,8 @@
                       "description": "The actual content of the message body"
                     }
                   },
-                  "required": [
-                    "contentType",
-                    "content"
-                  ],
-                  "visible": [
-                    "contentType",
-                    "content"
-                  ],
+                  "required": ["contentType", "content"],
+                  "visible": ["contentType", "content"],
                   "additionalProperties": false
                 },
                 "toRecipients": {
@@ -1137,62 +851,36 @@
                             "description": "The display name of the recipient"
                           }
                         },
-                        "required": [
-                          "address"
-                        ],
-                        "visible": [
-                          "address",
-                          "name"
-                        ],
+                        "required": ["address"],
+                        "visible": ["address", "name"],
                         "additionalProperties": false
                       }
                     },
-                    "required": [
-                      "emailAddress"
-                    ],
-                    "visible": [
-                      "emailAddress"
-                    ],
+                    "required": ["emailAddress"],
+                    "visible": ["emailAddress"],
                     "additionalProperties": false
                   }
                 }
               },
               "required": [],
-              "visible": [
-                "body",
-                "toRecipients"
-              ],
+              "visible": ["body", "toRecipients"],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": [
-            "comment",
-            "toRecipients",
-            "message"
-          ],
+          "visible": ["comment", "toRecipients", "message"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_REPLY",
     "description": "Create a draft reply to an existing message. The reply will automatically include the original sender as the recipient and reference the original message.",
-    "tags": [
-      "email",
-      "messages",
-      "reply",
-      "draft"
-    ],
+    "tags": ["email", "messages", "reply", "draft"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1213,34 +901,20 @@
               "description": "The unique identifier of the message to reply to"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_REPLY_ALL",
     "description": "Create a draft to reply to the sender and all recipients of a message. The reply will automatically include all original recipients (To, CC) and follow proper reply-to logic.",
-    "tags": [
-      "email",
-      "messages",
-      "reply",
-      "reply-all",
-      "draft"
-    ],
+    "tags": ["email", "messages", "reply", "reply-all", "draft"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1261,33 +935,20 @@
               "description": "The unique identifier of the message to reply to all recipients"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__FORWARD",
     "description": "Forward a message immediately (not as draft). The message will be sent right away and saved in the Sent Items folder. You can add a comment and specify recipients.",
-    "tags": [
-      "email",
-      "messages",
-      "forward",
-      "send"
-    ],
+    "tags": ["email", "messages", "forward", "send"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1308,12 +969,8 @@
               "description": "The unique identifier of the message to forward"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "body": {
@@ -1342,22 +999,13 @@
                         "description": "The display name for the email address"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -1371,10 +1019,7 @@
                   "properties": {
                     "contentType": {
                       "type": "string",
-                      "enum": [
-                        "text",
-                        "html"
-                      ],
+                      "enum": ["text", "html"],
                       "description": "The content type of the body"
                     },
                     "content": {
@@ -1383,10 +1028,7 @@
                     }
                   },
                   "required": [],
-                  "visible": [
-                    "contentType",
-                    "content"
-                  ],
+                  "visible": ["contentType", "content"],
                   "additionalProperties": false
                 },
                 "toRecipients": {
@@ -1407,63 +1049,36 @@
                             "description": "The display name"
                           }
                         },
-                        "required": [
-                          "address"
-                        ],
-                        "visible": [
-                          "address",
-                          "name"
-                        ],
+                        "required": ["address"],
+                        "visible": ["address", "name"],
                         "additionalProperties": false
                       }
                     },
-                    "required": [
-                      "emailAddress"
-                    ],
-                    "visible": [
-                      "emailAddress"
-                    ],
+                    "required": ["emailAddress"],
+                    "visible": ["emailAddress"],
                     "additionalProperties": false
                   }
                 }
               },
               "required": [],
-              "visible": [
-                "body",
-                "toRecipients"
-              ],
+              "visible": ["body", "toRecipients"],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": [
-            "comment",
-            "toRecipients",
-            "message"
-          ],
+          "visible": ["comment", "toRecipients", "message"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__REPLY",
     "description": "Reply to the sender of a message immediately (not as draft). The reply will be sent right away and saved in the Sent Items folder. You can add a comment or custom body.",
-    "tags": [
-      "email",
-      "messages",
-      "reply",
-      "send"
-    ],
+    "tags": ["email", "messages", "reply", "send"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1484,12 +1099,8 @@
               "description": "The unique identifier of the message to reply to"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "body": {
@@ -1510,10 +1121,7 @@
                   "properties": {
                     "contentType": {
                       "type": "string",
-                      "enum": [
-                        "text",
-                        "html"
-                      ],
+                      "enum": ["text", "html"],
                       "description": "The content type of the body"
                     },
                     "content": {
@@ -1522,49 +1130,29 @@
                     }
                   },
                   "required": [],
-                  "visible": [
-                    "contentType",
-                    "content"
-                  ],
+                  "visible": ["contentType", "content"],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": [
-                "body"
-              ],
+              "visible": ["body"],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": [
-            "comment",
-            "message"
-          ],
+          "visible": ["comment", "message"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__REPLY_ALL",
     "description": "Reply to all recipients of a message immediately (not as draft). The reply will be sent right away to all original recipients and saved in the Sent Items folder. You can add a comment or custom body.",
-    "tags": [
-      "email",
-      "messages",
-      "reply",
-      "reply-all",
-      "send"
-    ],
+    "tags": ["email", "messages", "reply", "reply-all", "send"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1585,12 +1173,8 @@
               "description": "The unique identifier of the message to reply all to"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         },
         "body": {
@@ -1611,10 +1195,7 @@
                   "properties": {
                     "contentType": {
                       "type": "string",
-                      "enum": [
-                        "text",
-                        "html"
-                      ],
+                      "enum": ["text", "html"],
                       "description": "The content type of the body"
                     },
                     "content": {
@@ -1623,48 +1204,29 @@
                     }
                   },
                   "required": [],
-                  "visible": [
-                    "contentType",
-                    "content"
-                  ],
+                  "visible": ["contentType", "content"],
                   "additionalProperties": false
                 }
               },
               "required": [],
-              "visible": [
-                "body"
-              ],
+              "visible": ["body"],
               "additionalProperties": false
             }
           },
           "required": [],
-          "visible": [
-            "comment",
-            "message"
-          ],
+          "visible": ["comment", "message"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__SEND",
     "description": "Send an existing draft message. The draft can be a new message draft, reply draft, reply-all draft, or forward draft. This saves the message in the Sent Items folder.",
-    "tags": [
-      "email",
-      "messages",
-      "send",
-      "draft"
-    ],
+    "tags": ["email", "messages", "send", "draft"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1685,32 +1247,20 @@
               "description": "The unique identifier of the draft message to send"
             }
           },
-          "required": [
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
+          "required": ["message_id"],
+          "visible": ["message_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__CREATE_DRAFT_MESSAGE",
     "description": "Create a draft of a new message in JSON format. By default, this operation saves the draft in the Drafts folder. You can update the draft later to add content or change properties, or send it in a subsequent operation.",
-    "tags": [
-      "email",
-      "messages",
-      "draft"
-    ],
+    "tags": ["email", "messages", "draft"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1732,11 +1282,7 @@
             },
             "importance": {
               "type": "string",
-              "enum": [
-                "low",
-                "normal",
-                "high"
-              ],
+              "enum": ["low", "normal", "high"],
               "description": "The importance level of the message"
             },
             "body": {
@@ -1745,10 +1291,7 @@
               "properties": {
                 "contentType": {
                   "type": "string",
-                  "enum": [
-                    "text",
-                    "html"
-                  ],
+                  "enum": ["text", "html"],
                   "description": "The content type of the message body"
                 },
                 "content": {
@@ -1756,14 +1299,8 @@
                   "description": "The actual content of the message body"
                 }
               },
-              "required": [
-                "contentType",
-                "content"
-              ],
-              "visible": [
-                "contentType",
-                "content"
-              ],
+              "required": ["contentType", "content"],
+              "visible": ["contentType", "content"],
               "additionalProperties": false
             },
             "toRecipients": {
@@ -1784,22 +1321,13 @@
                         "description": "The display name of the recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -1821,22 +1349,13 @@
                         "description": "The display name of the CC recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             },
@@ -1858,58 +1377,31 @@
                         "description": "The display name of the BCC recipient"
                       }
                     },
-                    "required": [
-                      "address"
-                    ],
-                    "visible": [
-                      "address",
-                      "name"
-                    ],
+                    "required": ["address"],
+                    "visible": ["address", "name"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "emailAddress"
-                ],
-                "visible": [
-                  "emailAddress"
-                ],
+                "required": ["emailAddress"],
+                "visible": ["emailAddress"],
                 "additionalProperties": false
               }
             }
           },
           "required": [],
-          "visible": [
-            "subject",
-            "importance",
-            "body",
-            "toRecipients",
-            "ccRecipients",
-            "bccRecipients"
-          ],
+          "visible": ["subject", "importance", "body", "toRecipients", "ccRecipients", "bccRecipients"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
+      "required": ["body"],
+      "visible": ["body"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__DELTA_MAIL_FOLDERS",
     "description": "Get incremental changes (added, deleted, or updated) in mail folders since the last delta query. This allows efficient synchronization by tracking only changes rather than fetching all folders every time. Use deltatoken for completed rounds and skiptoken for pagination.",
-    "tags": [
-      "email",
-      "folders",
-      "delta",
-      "sync",
-      "incremental",
-      "changes"
-    ],
+    "tags": ["email", "folders", "delta", "sync", "incremental", "changes"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1939,31 +1431,19 @@
             }
           },
           "required": [],
-          "visible": [
-            "$deltatoken",
-            "$skiptoken",
-            "$select"
-          ],
+          "visible": ["$deltatoken", "$skiptoken", "$select"],
           "additionalProperties": false
         }
       },
       "required": [],
-      "visible": [
-        "query"
-      ],
+      "visible": ["query"],
       "additionalProperties": false
     }
   },
   {
     "name": "MICROSOFT_OUTLOOK__COPY_MAIL_FOLDER",
     "description": "Copy a mail folder and its contents to another mail folder. You can specify a destination folder ID or use well-known folder names like 'inbox', 'drafts', 'sentitems', 'deleteditems'. The entire folder structure and contents will be duplicated.",
-    "tags": [
-      "email",
-      "folders",
-      "copy",
-      "duplicate",
-      "organize"
-    ],
+    "tags": ["email", "folders", "copy", "duplicate", "organize"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -1984,12 +1464,8 @@
               "description": "The unique identifier of the mail folder to copy"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         },
         "body": {
@@ -2001,34 +1477,20 @@
               "description": "The destination folder ID, or a well-known folder name (e.g., 'inbox', 'drafts', 'sentitems', 'deleteditems', 'archive', 'junkfolder')"
             }
           },
-          "required": [
-            "destinationId"
-          ],
-          "visible": [
-            "destinationId"
-          ],
+          "required": ["destinationId"],
+          "visible": ["destinationId"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
+      "required": ["path", "body"],
+      "visible": ["path", "body"],
       "additionalProperties": false
     }
   },
   {
-    "name": "MICROSOFT_OUTLOOK__MAIL_FOLDER_DELETE_MAILFOLDERS",
+    "name": "MICROSOFT_OUTLOOK__DELETE_MAIL_FOLDER",
     "description": "Delete a mail folder by its ID. The folder can be a mailSearchFolder. You can specify a mail folder by its folder ID, or by its well-known folder name. Note: You may not be able to delete items in the recoverable items deletions folder.",
-    "tags": [
-      "email",
-      "folders",
-      "delete"
-    ],
+    "tags": ["email", "folders", "delete"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -2049,21 +1511,13 @@
               "description": "The unique identifier of the mail folder to delete, or a well-known folder name"
             }
           },
-          "required": [
-            "folder_id"
-          ],
-          "visible": [
-            "folder_id"
-          ],
+          "required": ["folder_id"],
+          "visible": ["folder_id"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "required": ["path"],
+      "visible": ["path"],
       "additionalProperties": false
     }
   }

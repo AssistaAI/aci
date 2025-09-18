@@ -4,17 +4,17 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/breezy.svg",
   "provider": "Breezy HR",
   "version": "aipolabs_0.0.1",
-  "description": "\"Post jobs, manage candidates, and schedule interviews effortlessly to simplify your hiring process.\"",
+  "description": "Post jobs, manage candidates, and schedule interviews effortlessly to simplify your hiring process.",
   "security_schemes": {
-    "api_key": {
-      "location": "header",
-      "name": "Authorization",
-      "prefix": null
-    }
+      "api_key": {
+          "location": "header",
+          "name": "Authorization",
+          "prefix": null
+      }
   },
   "default_security_credentials_by_scheme": {},
   "categories": [
-    "HR"
+      "HR"
   ],
   "visibility": "public",
   "active": true
