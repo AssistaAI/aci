@@ -534,7 +534,7 @@
                 "viewedByMeTime"
               ],
               "description": "Sort order for results",
-              "default": "modifiedTime desc"
+              "default": "modifiedTime"
             },
             "fields": {
               "type": "string",
