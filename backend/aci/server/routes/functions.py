@@ -21,6 +21,10 @@ from aci.common.exceptions import (
     LinkedAccountNotFound,
 )
 from aci.common.logging_setup import get_logger
+from aci.common.schemas.feedback import (
+    FunctionSearchFeedbackCreate,
+    FunctionSearchFeedbackResponse,
+)
 from aci.common.schemas.function import (
     AnthropicFunctionDefinition,
     BasicFunctionDefinition,
@@ -37,6 +41,7 @@ from aci.server import config, custom_instructions, utils
 from aci.server import dependencies as deps
 from aci.server import security_credentials_manager as scm
 from aci.server.function_executors import get_executor
+from aci.server.reranker import rerank_with_context
 from aci.server.security_credentials_manager import SecurityCredentialsResponse
 
 router = APIRouter()
@@ -88,21 +93,20 @@ async def search_functions(
         if query_params.intent
         else None
     )
-    logger.debug(
-        f"Generated intent embedding, intent={query_params.intent}, intent_embedding={intent_embedding}"
+    # Generated intent embedding for search
+
+    # Determine apps to filter based on query params
+    apps_to_filter = _determine_apps_to_filter(
+        query_params.allowed_apps_only,
+        query_params.app_names,
+        context.agent.allowed_apps if hasattr(context.agent, "allowed_apps") else [],
     )
 
-    # get the apps to filter (or not) based on the allowed_apps_only and app_names query params
-    if query_params.allowed_apps_only:
-        if query_params.app_names is None:
-            apps_to_filter = context.agent.allowed_apps
-        else:
-            apps_to_filter = list(set(query_params.app_names) & set(context.agent.allowed_apps))
-    else:
-        if query_params.app_names is None:
-            apps_to_filter = None
-        else:
-            apps_to_filter = query_params.app_names
+    # Determine if we need reranking
+    needs_reranking = query_params.intent and len(query_params.intent.strip()) > 5
+
+    # Only fetch extra results if we're actually going to rerank
+    fetch_limit = min(query_params.limit * 2, 200) if needs_reranking else query_params.limit
 
     functions = crud.functions.search_functions(
         context.db_session,
@@ -110,9 +114,29 @@ async def search_functions(
         True,
         apps_to_filter,
         intent_embedding,
-        query_params.limit,
+        fetch_limit,
         query_params.offset,
+        intent_text=query_params.intent,
     )
+
+    # Apply LLM reranking only for substantial queries
+    if needs_reranking and functions and len(functions) > 1:
+        functions = rerank_with_context(
+            functions,
+            query_params.intent,
+            openai_client,
+            agent_context={
+                "allowed_apps": context.agent.allowed_apps if hasattr(context.agent, "allowed_apps") else None,
+            },
+        )
+        # Apply the original limit after reranking
+        functions = functions[: query_params.limit]
+
+    # Store search results in context for potential implicit feedback
+    # This will be used to track which function was actually executed
+    if query_params.intent:
+        context.db_session.info["last_search_intent"] = query_params.intent
+        context.db_session.info["last_search_results"] = [f.name for f in functions]
 
     logger.info(
         "Search functions result",
@@ -120,6 +144,7 @@ async def search_functions(
             "search_functions": {
                 "query_params_json": query_params.model_dump_json(),
                 "function_names": [function.name for function in functions],
+                "reranked": bool(query_params.intent),
             }
         },
     )
@@ -444,7 +469,124 @@ async def execute_function(
             f"error={execution_result.error}"
         )
 
+    # Record implicit feedback if this function was part of a recent search
+    if hasattr(db_session, "info") and "last_search_results" in db_session.info:
+        last_results = db_session.info.get("last_search_results", [])
+        if function_name in last_results:
+            # Import here to avoid circular dependency
+            from aci.common.db.crud import feedback as feedback_crud
+            from aci.common.schemas.feedback import FunctionSearchFeedbackCreate
+
+            implicit_feedback = FunctionSearchFeedbackCreate(
+                intent=db_session.info.get("last_search_intent"),
+                returned_function_names=last_results,
+                selected_function_name=function_name,
+                was_helpful=execution_result.success,  # Assume successful execution means helpful
+                feedback_type="implicit_execution",
+                search_metadata={
+                    "execution_success": execution_result.success,
+                    "execution_error": execution_result.error if not execution_result.success else None,
+                },
+            )
+
+            try:
+                # Only record feedback for successful executions to reduce noise
+                if execution_result.success:
+                    feedback_crud.create_search_feedback(
+                        db_session,
+                        agent.id,
+                        project.id,
+                        implicit_feedback,
+                    )
+                    db_session.commit()
+                    # Recorded implicit feedback
+            except Exception:
+                # Don't fail the execution due to feedback recording failure
+                db_session.rollback()
+
+            # Always clear the search context to prevent memory leaks
+            db_session.info.pop("last_search_intent", None)
+            db_session.info.pop("last_search_results", None)
+    else:
+        # Clean up session.info even if feedback wasn't recorded
+        if hasattr(db_session, "info"):
+            db_session.info.pop("last_search_intent", None)
+            db_session.info.pop("last_search_results", None)
+
     return execution_result
+
+
+@router.post("/search/feedback", response_model=FunctionSearchFeedbackResponse)
+async def provide_search_feedback(
+    context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
+    feedback: FunctionSearchFeedbackCreate,
+) -> FunctionSearchFeedbackResponse:
+    """
+    Provide feedback on function search quality.
+    This helps improve search relevance over time.
+
+    Rate limited to prevent spam: Max 10 feedback entries per agent per hour.
+    """
+    # Import here to avoid circular dependency
+    from datetime import UTC, datetime, timedelta
+    from sqlalchemy import and_, func, select
+
+    from aci.common.db.crud import feedback as feedback_crud
+    from aci.common.db.sql_models import FunctionSearchFeedback
+
+    # Simple rate limiting check (proper implementation should be in middleware)
+    one_hour_ago = datetime.now(UTC) - timedelta(hours=1)
+    recent_feedback_count = context.db_session.scalar(
+        select(func.count(FunctionSearchFeedback.id))
+        .where(
+            and_(
+                FunctionSearchFeedback.agent_id == context.agent.id,
+                FunctionSearchFeedback.created_at > one_hour_ago,
+            )
+        )
+    )
+
+    if recent_feedback_count and recent_feedback_count >= 10:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=429, detail="Rate limit exceeded: Max 10 feedback entries per hour")
+
+    # Create the feedback entry
+    db_feedback = feedback_crud.create_search_feedback(
+        context.db_session,
+        context.agent.id,
+        context.project.id,
+        feedback,
+    )
+
+    context.db_session.commit()
+
+    logger.info(
+        "Search feedback recorded",
+        extra={
+            "feedback": {
+                "id": str(db_feedback.id),
+                "was_helpful": feedback.was_helpful,
+                "feedback_type": feedback.feedback_type,
+                "intent": feedback.intent[:50] if feedback.intent else None,
+                "selected_function": feedback.selected_function_name,
+            }
+        },
+    )
+
+    return FunctionSearchFeedbackResponse(
+        id=db_feedback.id,
+        agent_id=db_feedback.agent_id,
+        project_id=db_feedback.project_id,
+        intent=db_feedback.intent,
+        returned_function_names=db_feedback.returned_function_names,
+        selected_function_name=db_feedback.selected_function_name,
+        was_helpful=db_feedback.was_helpful,
+        feedback_type=db_feedback.feedback_type,
+        feedback_comment=db_feedback.feedback_comment,
+        search_metadata=db_feedback.search_metadata,
+        created_at=db_feedback.created_at,
+    )
 
 
 async def get_functions_definitions(
@@ -478,3 +620,16 @@ async def get_functions_definitions(
         function_definitions.append(function_definition)
 
     return function_definitions
+
+
+def _determine_apps_to_filter(
+    allowed_apps_only: bool,
+    app_names: list[str] | None,
+    agent_allowed_apps: list[str],
+) -> list[str] | None:
+    """Determine which apps to filter based on query parameters and agent permissions."""
+    if allowed_apps_only:
+        if app_names is None:
+            return agent_allowed_apps
+        return list(set(app_names) & set(agent_allowed_apps))
+    return app_names
