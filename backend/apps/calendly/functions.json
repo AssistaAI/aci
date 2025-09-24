@@ -466,10 +466,7 @@
   {
     "name": "CALENDLY__CURRENT_USER",
     "description": "Get basic information about your user account",
-    "tags": [
-      "calendar",
-      "details"
-    ],
+    "tags": ["calendar", "details", "link", "url", "profile", "scheduling"],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
