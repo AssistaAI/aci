@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 from uuid import UUID
 
@@ -150,7 +151,11 @@ def update_app_helper(
 def _render_template_to_string(template_path: Path, secrets: dict[str, str]) -> str:
     """
     Render a Jinja2 template with the provided secrets and return as string.
+    If secrets are not provided, falls back to environment variables.
     """
+    # Merge provided secrets with environment variables (secrets take precedence)
+    template_vars = {**os.environ, **secrets}
+
     env = Environment(
         loader=FileSystemLoader(template_path.parent),
         undefined=StrictUndefined,  # Raise error if any placeholders are missing
@@ -160,7 +165,7 @@ def _render_template_to_string(template_path: Path, secrets: dict[str, str]) -> 
     )
 
     template: Template = env.get_template(template_path.name)
-    rendered_content: str = template.render(secrets)
+    rendered_content: str = template.render(template_vars)
     return rendered_content
 
 

@@ -44,7 +44,8 @@ class LinkedAccountOAuth2CreateState(BaseModel):
     # because we support custom client ID, and user may have changed the client ID after the flow starts.
     # (e.g., delete and recreate app configuration. Even though this is rare.)
     client_id: str
-    code_verifier: str
+    # Optional for apps that don't support PKCE (e.g., LinkedIn)
+    code_verifier: str | None = None
     after_oauth2_link_redirect_url: str | None = None
 
 

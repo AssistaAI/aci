@@ -56,7 +56,7 @@ class OAuth2Manager:
             client_id=client_id,
             client_secret=client_secret,
             token_endpoint_auth_method=token_endpoint_auth_method,
-            code_challenge_method="S256",  # only S256 is supported
+            code_challenge_method=None if app_name == "LINKEDIN" else "S256",
             # TODO: use update_token callback to save tokens to the database
             update_token=None,
         )
@@ -94,20 +94,30 @@ class OAuth2Manager:
                 f"Adding app specific params, app_name={self.app_name}, "
                 f"params={app_specific_params}"
             )
+
+        # Base parameters for authorization URL
+        auth_url_kwargs = {
+            "url": self.authorize_url,
+            "redirect_uri": redirect_uri,
+            "state": state,
+            "scope": self.scope,
+            **app_specific_params,
+        }
+
+        # LinkedIn doesn't support PKCE or Google-specific params
+        if self.app_name == "LINKEDIN":
+            # LinkedIn doesn't support access_type and prompt parameters
+            pass
+        else:
+            auth_url_kwargs["code_verifier"] = code_verifier
+            auth_url_kwargs["access_type"] = access_type
+            auth_url_kwargs["prompt"] = prompt
+
         # NOTE:
         # - "scope" can be specified here
         # - "response_type" can be specified here (default is "code")
         # - and additional options can be specified here (like access_type, prompt, etc.)
-        authorization_url, _ = self.oauth2_client.create_authorization_url(
-            url=self.authorize_url,
-            redirect_uri=redirect_uri,
-            state=state,
-            code_verifier=code_verifier,
-            access_type=access_type,
-            prompt=prompt,
-            scope=self.scope,
-            **app_specific_params,
-        )
+        authorization_url, _ = self.oauth2_client.create_authorization_url(**auth_url_kwargs)
 
         return str(authorization_url)
 
@@ -130,14 +140,33 @@ class OAuth2Manager:
             Token response dictionary
         """
         try:
+            # LinkedIn doesn't support PKCE and doesn't need scope in token exchange
+            fetch_token_kwargs = {
+                "redirect_uri": redirect_uri,
+                "code": code,
+            }
+
+            if self.app_name == "LINKEDIN":
+                # LinkedIn requires explicit grant_type in the token request
+                # Note: client_id and client_secret are added automatically by authlib
+                # via token_endpoint_auth_method=client_secret_post
+                fetch_token_kwargs["grant_type"] = "authorization_code"
+            else:
+                fetch_token_kwargs["code_verifier"] = code_verifier
+                fetch_token_kwargs["scope"] = self.scope
+
+            logger.info(
+                f"Fetching access token, app_name={self.app_name}, "
+                f"access_token_url={self.access_token_url}, "
+                f"token_endpoint_auth_method={self.token_endpoint_auth_method}, "
+                f"kwargs={list(fetch_token_kwargs.keys())}"
+            )
+
             token = cast(
                 dict[str, Any],
                 await self.oauth2_client.fetch_token(
                     self.access_token_url,
-                    redirect_uri=redirect_uri,
-                    code=code,
-                    code_verifier=code_verifier,
-                    scope=self.scope,
+                    **fetch_token_kwargs,
                 ),
             )
             return token

@@ -365,12 +365,15 @@ async def link_oauth2_account(
     # create and encode the state payload.
     # NOTE: the state payload is jwt encoded (signed), but it's not encrypted, anyone can decode it
     # TODO: add expiration check to the state payload for extra security
+    # LinkedIn doesn't support PKCE, so don't generate code_verifier for it
+    code_verifier = None if query_params.app_name == "LINKEDIN" else OAuth2Manager.generate_code_verifier()
+
     oauth2_state = LinkedAccountOAuth2CreateState(
         app_name=query_params.app_name,
         project_id=context.project.id,
         linked_account_owner_id=query_params.linked_account_owner_id,
         client_id=oauth2_scheme.client_id,
-        code_verifier=OAuth2Manager.generate_code_verifier(),
+        code_verifier=code_verifier,
         after_oauth2_link_redirect_url=query_params.after_oauth2_link_redirect_url,
     )
 
@@ -385,7 +388,7 @@ async def link_oauth2_account(
     authorization_url = await oauth2_manager.create_authorization_url(
         redirect_uri=redirect_uri,
         state=oauth2_state_jwt,
-        code_verifier=oauth2_state.code_verifier,
+        code_verifier=code_verifier or "",  # Pass empty string if None to avoid issues
     )
 
     # rewrite the authorization url for some apps that need special handling
@@ -507,7 +510,7 @@ async def linked_accounts_oauth2_callback(
     token_response = await oauth2_manager.fetch_token(
         redirect_uri=redirect_uri,
         code=code,
-        code_verifier=state.code_verifier,
+        code_verifier=state.code_verifier or "",  # Pass empty string if None for apps that don't support PKCE
     )
     security_credentials = oauth2_manager.parse_fetch_token_response(token_response)
 
