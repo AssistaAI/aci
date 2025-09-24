@@ -465,7 +465,7 @@
   },
   {
     "name": "CALENDLY__CURRENT_USER",
-    "description": "Get basic information about your user account",
+    "description": "Get current user account information including scheduling link and profile details",
     "tags": ["calendar", "details", "link", "url", "profile", "scheduling"],
     "visibility": "public",
     "active": true,
