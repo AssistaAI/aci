@@ -13,7 +13,7 @@
       "client_id": "{{ AIPOLABS_LINKEDIN_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_LINKEDIN_CLIENT_SECRET }}",
       "scope": "openid profile email w_member_social",
-      "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
+      "authorize_url": "https://www.linkedin.com/oauth/v2/authorization?response_type=code",
       "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
       "refresh_token_url": "",
       "token_endpoint_auth_method": "client_secret_post",
