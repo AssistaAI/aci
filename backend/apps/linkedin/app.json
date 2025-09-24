@@ -4,7 +4,7 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/linkedin.svg",
   "provider": "LinkedIn Corporation",
   "version": "2.0.0",
-  "description": "\"Post updates, manage company pages, and expand your professional network effortlessly through chat commands.\"",
+  "description": "Post updates, manage company pages, and expand your professional network effortlessly through chat commands.",
   "security_schemes": {
     "oauth2": {
       "location": "header",
@@ -12,7 +12,7 @@
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_LINKEDIN_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_LINKEDIN_CLIENT_SECRET }}",
-      "scope": "openid profile w_member_social email",
+      "scope": "r_liteprofile r_emailaddress w_member_social",
       "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
       "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
       "refresh_token_url": "",
