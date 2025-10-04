@@ -94,20 +94,26 @@ class OAuth2Manager:
                 f"Adding app specific params, app_name={self.app_name}, "
                 f"params={app_specific_params}"
             )
+
+        # LinkedIn doesn't support PKCE, so we skip code_verifier for it
+        auth_url_kwargs = {
+            "url": self.authorize_url,
+            "redirect_uri": redirect_uri,
+            "state": state,
+            "access_type": access_type,
+            "prompt": prompt,
+            "scope": self.scope,
+            **app_specific_params,
+        }
+
+        if self.app_name != "LINKEDIN":
+            auth_url_kwargs["code_verifier"] = code_verifier
+
         # NOTE:
         # - "scope" can be specified here
         # - "response_type" can be specified here (default is "code")
         # - and additional options can be specified here (like access_type, prompt, etc.)
-        authorization_url, _ = self.oauth2_client.create_authorization_url(
-            url=self.authorize_url,
-            redirect_uri=redirect_uri,
-            state=state,
-            code_verifier=code_verifier,
-            access_type=access_type,
-            prompt=prompt,
-            scope=self.scope,
-            **app_specific_params,
-        )
+        authorization_url, _ = self.oauth2_client.create_authorization_url(**auth_url_kwargs)
 
         return str(authorization_url)
 
@@ -130,14 +136,21 @@ class OAuth2Manager:
             Token response dictionary
         """
         try:
+            # LinkedIn doesn't support PKCE and doesn't need scope in token exchange
+            fetch_token_kwargs = {
+                "redirect_uri": redirect_uri,
+                "code": code,
+            }
+
+            if self.app_name != "LINKEDIN":
+                fetch_token_kwargs["code_verifier"] = code_verifier
+                fetch_token_kwargs["scope"] = self.scope
+
             token = cast(
                 dict[str, Any],
                 await self.oauth2_client.fetch_token(
                     self.access_token_url,
-                    redirect_uri=redirect_uri,
-                    code=code,
-                    code_verifier=code_verifier,
-                    scope=self.scope,
+                    **fetch_token_kwargs,
                 ),
             )
             return token
