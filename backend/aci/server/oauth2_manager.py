@@ -159,7 +159,16 @@ class OAuth2Manager:
                 f"Fetching access token, app_name={self.app_name}, "
                 f"access_token_url={self.access_token_url}, "
                 f"token_endpoint_auth_method={self.token_endpoint_auth_method}, "
-                f"kwargs={list(fetch_token_kwargs.keys())}"
+                f"kwargs={list(fetch_token_kwargs.keys())}, "
+                f"client_id={self.client_id[:10]}..."
+            )
+
+            # Log the actual request parameters (without exposing secrets)
+            logger.info(
+                f"Token request params for {self.app_name}: "
+                f"redirect_uri={fetch_token_kwargs.get('redirect_uri')}, "
+                f"grant_type={fetch_token_kwargs.get('grant_type')}, "
+                f"code_length={len(fetch_token_kwargs.get('code', ''))}"
             )
 
             token = cast(
@@ -169,9 +178,27 @@ class OAuth2Manager:
                     **fetch_token_kwargs,
                 ),
             )
+
+            logger.info(
+                f"Successfully fetched access token for {self.app_name}, "
+                f"token_keys={list(token.keys())}"
+            )
             return token
         except Exception as e:
-            logger.error(f"Failed to fetch access token, app_name={self.app_name}, error={e}")
+            logger.error(
+                f"Failed to fetch access token, app_name={self.app_name}, "
+                f"error={e}, "
+                f"error_type={type(e).__name__}"
+            )
+
+            # Try to extract more details from the error
+            if hasattr(e, 'description'):
+                logger.error(f"OAuth2 error description: {e.description}")
+            if hasattr(e, 'error'):
+                logger.error(f"OAuth2 error code: {e.error}")
+            if hasattr(e, 'error_description'):
+                logger.error(f"OAuth2 error_description: {e.error_description}")
+
             raise OAuth2Error("failed to fetch access token") from e
 
     async def refresh_token(

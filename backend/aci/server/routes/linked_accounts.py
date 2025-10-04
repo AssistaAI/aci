@@ -494,6 +494,15 @@ async def linked_accounts_oauth2_callback(
         )
         raise OAuth2Error("client_id mismatch during account linking")
 
+    logger.info(
+        f"Creating OAuth2Manager for callback, "
+        f"app_name={state.app_name}, "
+        f"client_id={oauth2_scheme.client_id[:10]}..., "
+        f"client_secret_length={len(oauth2_scheme.client_secret)}, "
+        f"token_endpoint_auth_method={oauth2_scheme.token_endpoint_auth_method}, "
+        f"access_token_url={oauth2_scheme.access_token_url}"
+    )
+
     oauth2_manager = OAuth2Manager(
         app_name=state.app_name,
         client_id=oauth2_scheme.client_id,
@@ -507,6 +516,13 @@ async def linked_accounts_oauth2_callback(
 
     path = request.url_for(LINKED_ACCOUNTS_OAUTH2_CALLBACK_ROUTE_NAME).path
     redirect_uri = oauth2_scheme.redirect_url or f"{config.REDIRECT_URI_BASE}{path}"
+
+    logger.info(
+        f"About to fetch token for {state.app_name}, "
+        f"redirect_uri={redirect_uri}, "
+        f"code_verifier={'<none>' if not state.code_verifier else '<present>'}"
+    )
+
     token_response = await oauth2_manager.fetch_token(
         redirect_uri=redirect_uri,
         code=code,
