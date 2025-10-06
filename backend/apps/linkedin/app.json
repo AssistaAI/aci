@@ -3,7 +3,7 @@
   "display_name": "LinkedIn",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/linkedin.svg",
   "provider": "LinkedIn Corporation",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Post updates, manage company pages, and expand your professional network effortlessly through chat commands.",
   "security_schemes": {
     "oauth2": {
