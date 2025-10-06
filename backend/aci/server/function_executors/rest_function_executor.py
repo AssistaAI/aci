@@ -56,6 +56,10 @@ class RestFunctionExecutor(FunctionExecutor[TScheme, TCred], Generic[TScheme, TC
             for path_param_name, path_param_value in path.items():
                 url = url.replace(f"{{{path_param_name}}}", str(path_param_value))
 
+        # Merge protocol_data headers with function_input headers (function_input headers take precedence)
+        if protocol_data.headers:
+            headers = {**protocol_data.headers, **headers}
+
         self._inject_credentials(
             security_scheme, security_credentials, headers, query, body, cookies
         )

@@ -23,6 +23,7 @@ class RestMetadata(BaseModel):
     method: HttpMethod
     path: str
     server_url: str
+    headers: dict[str, str] | None = None
 
 
 class ConnectorMetadata(RootModel[dict]):
