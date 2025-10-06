@@ -141,35 +141,15 @@
     "protocol_data": {
       "method": "POST",
       "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com"
+      "server_url": "https://api.linkedin.com",
+      "headers": {
+        "Content-Type": "application/json",
+        "LinkedIn-Version": "202405"
+      }
     },
     "parameters": {
       "type": "object",
       "properties": {
-        "header": {
-          "type": "object",
-          "description": "HTTP headers",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "default": "application/json"
-            },
-            "LinkedIn-Version": {
-              "type": "string",
-              "default": "202405"
-            }
-          },
-          "required": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "visible": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "additionalProperties": false,
-          "default": {}
-        },
         "body": {
           "type": "object",
           "description": "Post content and settings",
@@ -245,7 +225,6 @@
         }
       },
       "required": [
-        "header",
         "body"
       ],
       "visible": [
@@ -268,29 +247,14 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/rest/posts/{share_id}",
-      "server_url": "https://api.linkedin.com"
+      "server_url": "https://api.linkedin.com",
+      "headers": {
+        "LinkedIn-Version": "202405"
+      }
     },
     "parameters": {
       "type": "object",
       "properties": {
-        "header": {
-          "type": "object",
-          "description": "HTTP headers",
-          "properties": {
-            "LinkedIn-Version": {
-              "type": "string",
-              "default": "202405"
-            }
-          },
-          "required": [
-            "LinkedIn-Version"
-          ],
-          "visible": [
-            "LinkedIn-Version"
-          ],
-          "additionalProperties": false,
-          "default": {}
-        },
         "path": {
           "type": "object",
           "description": "Path parameters",
@@ -396,35 +360,15 @@
     "protocol_data": {
       "method": "POST",
       "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com"
+      "server_url": "https://api.linkedin.com",
+      "headers": {
+        "Content-Type": "application/json",
+        "LinkedIn-Version": "202405"
+      }
     },
     "parameters": {
       "type": "object",
       "properties": {
-        "header": {
-          "type": "object",
-          "description": "HTTP headers",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "default": "application/json"
-            },
-            "LinkedIn-Version": {
-              "type": "string",
-              "default": "202405"
-            }
-          },
-          "required": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "visible": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "additionalProperties": false,
-          "default": {}
-        },
         "body": {
           "type": "object",
           "description": "Company post content and settings",
@@ -490,7 +434,6 @@
         }
       },
       "required": [
-        "header",
         "body"
       ],
       "visible": [
@@ -752,35 +695,15 @@
     "protocol_data": {
       "method": "POST",
       "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com"
+      "server_url": "https://api.linkedin.com",
+      "headers": {
+        "Content-Type": "application/json",
+        "LinkedIn-Version": "202405"
+      }
     },
     "parameters": {
       "type": "object",
       "properties": {
-        "header": {
-          "type": "object",
-          "description": "HTTP headers",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "default": "application/json"
-            },
-            "LinkedIn-Version": {
-              "type": "string",
-              "default": "202405"
-            }
-          },
-          "required": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "visible": [
-            "Content-Type",
-            "LinkedIn-Version"
-          ],
-          "additionalProperties": false,
-          "default": {}
-        },
         "body": {
           "type": "object",
           "description": "Article sharing content and settings",
@@ -888,7 +811,6 @@
         }
       },
       "required": [
-        "header",
         "body"
       ],
       "visible": [
