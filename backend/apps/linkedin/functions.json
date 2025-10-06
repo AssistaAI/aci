@@ -1,11 +1,12 @@
 [
   {
     "name": "LINKEDIN__USER_PROFILE",
-    "description": "Get the authenticated user's profile information including name, email, profile picture, and other basic details using OpenID Connect.",
+    "description": "Get the authenticated user's profile information including the author URN (required for creating posts). Returns sub, name, email, and picture. Use the 'sub' field to construct the author URN as 'urn:li:person:{sub}'.",
     "tags": [
       "profile",
       "user",
-      "personal"
+      "personal",
+      "author"
     ],
     "visibility": "public",
     "active": true,
@@ -48,8 +49,86 @@
     }
   },
   {
+    "name": "LINKEDIN__GET_COMPANY_INFO",
+    "description": "Get organizations where the authenticated user has specific roles (Administrator or Content Poster), to determine management or content posting capabilities for LinkedIn company pages.",
+    "tags": [
+      "company",
+      "organization",
+      "admin",
+      "roles"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/organizationAcls",
+      "server_url": "https://api.linkedin.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query parameters for filtering organization ACLs",
+          "properties": {
+            "q": {
+              "type": "string",
+              "description": "Query type for organization ACLs",
+              "default": "roleAssignee"
+            },
+            "role": {
+              "type": "string",
+              "description": "The specific role to filter by",
+              "default": "ADMINISTRATOR",
+              "enum": [
+                "ADMINISTRATOR",
+                "DIRECT_SPONSORED_CONTENT_POSTER"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "description": "The approval state of the role",
+              "default": "APPROVED",
+              "enum": [
+                "APPROVED",
+                "REQUESTED"
+              ]
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of results to return per page",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "start": {
+              "type": "integer",
+              "description": "Starting index for pagination",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          "required": [],
+          "visible": [
+            "role",
+            "state",
+            "count",
+            "start"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
     "name": "LINKEDIN__CREATE_POST",
-    "description": "Create and publish a post on LinkedIn. Supports text content with optional visibility settings.",
+    "description": "Create and publish a post on LinkedIn. Supports text content with visibility settings and distribution options. Use USER_PROFILE to get the author URN.",
     "tags": [
       "posts",
       "create",
@@ -74,6 +153,10 @@
             "Content-Type": {
               "type": "string",
               "default": "application/json"
+            },
+            "LinkedIn-Version": {
+              "type": "string",
+              "default": "202405"
             }
           },
           "required": [
@@ -91,28 +174,30 @@
           "properties": {
             "author": {
               "type": "string",
-              "description": "Author URN (e.g., 'urn:li:person:123456789')"
+              "description": "The URN of the LinkedIn member or organization creating the post (e.g., 'urn:li:person:123456789' or 'urn:li:organization:987654321'). Use USER_PROFILE action to get the author URN."
             },
             "commentary": {
               "type": "string",
-              "description": "The text content of the post"
+              "description": "The main text content of the post. Supports plain text and @-mentions (e.g., @[Name](urn:li:person:xxxx))."
             },
             "visibility": {
               "type": "string",
-              "description": "Post visibility",
+              "description": "Controls who can see the post. PUBLIC (visible to everyone), CONNECTIONS (connections only), LOGGED_IN (signed-in members), CONTAINER (for group/event posts)",
               "default": "PUBLIC",
               "enum": [
                 "PUBLIC",
-                "CONNECTIONS"
+                "CONNECTIONS",
+                "LOGGED_IN",
+                "CONTAINER"
               ]
             },
             "distribution": {
               "type": "object",
-              "description": "Distribution settings",
+              "description": "Distribution settings for the post",
               "properties": {
                 "feedDistribution": {
                   "type": "string",
-                  "description": "Feed distribution type",
+                  "description": "Feed distribution type. MAIN_FEED distributes to main feed, NONE does not distribute automatically",
                   "default": "MAIN_FEED",
                   "enum": [
                     "MAIN_FEED",
@@ -128,12 +213,18 @@
             },
             "lifecycleState": {
               "type": "string",
-              "description": "Post lifecycle state",
+              "description": "The state of the post. PUBLISHED (post directly), DRAFT (save as draft), PUBLISH_REQUESTED (requires review)",
               "default": "PUBLISHED",
               "enum": [
                 "PUBLISHED",
-                "DRAFT"
+                "DRAFT",
+                "PUBLISH_REQUESTED"
               ]
+            },
+            "isReshareDisabledByAuthor": {
+              "type": "boolean",
+              "description": "Set to true to prevent others from resharing this post",
+              "default": false
             }
           },
           "required": [
@@ -145,7 +236,8 @@
             "commentary",
             "visibility",
             "distribution",
-            "lifecycleState"
+            "lifecycleState",
+            "isReshareDisabledByAuthor"
           ],
           "additionalProperties": false
         }
@@ -156,6 +248,66 @@
       ],
       "visible": [
         "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "LINKEDIN__DELETE_POST",
+    "description": "Delete a specific LinkedIn post (share) by its unique share ID.",
+    "tags": [
+      "posts",
+      "delete",
+      "remove"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/rest/posts/{share_id}",
+      "server_url": "https://api.linkedin.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "HTTP headers",
+          "properties": {
+            "LinkedIn-Version": {
+              "type": "string",
+              "default": "202405"
+            }
+          },
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "share_id": {
+              "type": "string",
+              "description": "Unique identifier of the LinkedIn share (post) to be deleted"
+            }
+          },
+          "required": [
+            "share_id"
+          ],
+          "visible": [
+            "share_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
       ],
       "additionalProperties": false
     }
