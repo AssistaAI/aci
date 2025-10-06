@@ -1,7 +1,7 @@
 [
   {
     "name": "LINKEDIN__USER_PROFILE",
-    "description": "Get the authenticated user's profile information including name, email, profile picture, and other basic details.",
+    "description": "Get the authenticated user's profile information including name, email, profile picture, and other basic details using OpenID Connect.",
     "tags": [
       "profile",
       "user",
@@ -12,39 +12,20 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/people/~",
+      "path": "/v2/userinfo",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
       "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "projection": {
-              "type": "string",
-              "description": "Fields to include in the response",
-              "default": "(id,firstName,lastName,profilePicture(displayImage~:playableStreams),vanityName)"
-            }
-          },
-          "required": [],
-          "visible": [
-            "projection"
-          ],
-          "additionalProperties": false
-        }
-      },
+      "properties": {},
       "required": [],
-      "visible": [
-        "query"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__USER_EMAIL",
-    "description": "Get the authenticated user's primary email address.",
+    "description": "Get the authenticated user's primary email address using OpenID Connect userinfo endpoint.",
     "tags": [
       "profile",
       "email",
@@ -55,44 +36,20 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/emailAddress",
+      "path": "/v2/userinfo",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
       "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Query type for email lookup",
-              "default": "members"
-            },
-            "projection": {
-              "type": "string",
-              "description": "Fields to include in the response",
-              "default": "(elements*(handle~))"
-            }
-          },
-          "required": [],
-          "visible": [
-            "projection"
-          ],
-          "additionalProperties": false
-        }
-      },
+      "properties": {},
       "required": [],
-      "visible": [
-        "query"
-      ],
+      "visible": [],
       "additionalProperties": false
     }
   },
   {
     "name": "LINKEDIN__CREATE_POST",
-    "description": "Create and publish a post on LinkedIn. Supports text content with optional visibility settings and targeting.",
+    "description": "Create and publish a post on LinkedIn. Supports text content with optional visibility settings.",
     "tags": [
       "posts",
       "create",
@@ -104,7 +61,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
-      "path": "/v2/ugcPosts",
+      "path": "/rest/posts",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -134,7 +91,40 @@
           "properties": {
             "author": {
               "type": "string",
-              "description": "Author URN (e.g., 'urn:li:person:123456789'). Use authenticated user's profile URN."
+              "description": "Author URN (e.g., 'urn:li:person:123456789')"
+            },
+            "commentary": {
+              "type": "string",
+              "description": "The text content of the post"
+            },
+            "visibility": {
+              "type": "string",
+              "description": "Post visibility",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC",
+                "CONNECTIONS"
+              ]
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
             },
             "lifecycleState": {
               "type": "string",
@@ -144,93 +134,18 @@
                 "PUBLISHED",
                 "DRAFT"
               ]
-            },
-            "specificContent": {
-              "type": "object",
-              "description": "Content specific to the share type",
-              "properties": {
-                "com.linkedin.ugc.ShareContent": {
-                  "type": "object",
-                  "description": "Share content details",
-                  "properties": {
-                    "shareCommentary": {
-                      "type": "object",
-                      "description": "Commentary text for the post",
-                      "properties": {
-                        "text": {
-                          "type": "string",
-                          "description": "The text content of the post"
-                        }
-                      },
-                      "required": [
-                        "text"
-                      ],
-                      "visible": [
-                        "text"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "shareMediaCategory": {
-                      "type": "string",
-                      "description": "Media category for the share",
-                      "default": "NONE",
-                      "enum": [
-                        "NONE",
-                        "ARTICLE",
-                        "IMAGE"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "shareCommentary",
-                    "shareMediaCategory"
-                  ],
-                  "visible": [
-                    "shareCommentary",
-                    "shareMediaCategory"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "visible": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "additionalProperties": false
-            },
-            "visibility": {
-              "type": "object",
-              "description": "Post visibility settings",
-              "properties": {
-                "com.linkedin.ugc.MemberNetworkVisibility": {
-                  "type": "string",
-                  "description": "Visibility level",
-                  "default": "PUBLIC",
-                  "enum": [
-                    "PUBLIC",
-                    "CONNECTIONS"
-                  ]
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "visible": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "additionalProperties": false
             }
           },
           "required": [
             "author",
-            "specificContent"
+            "commentary"
           ],
           "visible": [
             "author",
-            "specificContent",
-            "visibility"
+            "commentary",
+            "visibility",
+            "distribution",
+            "lifecycleState"
           ],
           "additionalProperties": false
         }
@@ -322,7 +237,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
-      "path": "/v2/ugcPosts",
+      "path": "/rest/posts",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -354,6 +269,38 @@
               "type": "string",
               "description": "Organization URN (e.g., 'urn:li:organization:123456789')"
             },
+            "commentary": {
+              "type": "string",
+              "description": "The text content of the company post"
+            },
+            "visibility": {
+              "type": "string",
+              "description": "Post visibility",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC"
+              ]
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
+            },
             "lifecycleState": {
               "type": "string",
               "description": "Post lifecycle state",
@@ -362,92 +309,18 @@
                 "PUBLISHED",
                 "DRAFT"
               ]
-            },
-            "specificContent": {
-              "type": "object",
-              "description": "Content specific to the share type",
-              "properties": {
-                "com.linkedin.ugc.ShareContent": {
-                  "type": "object",
-                  "description": "Share content details",
-                  "properties": {
-                    "shareCommentary": {
-                      "type": "object",
-                      "description": "Commentary text for the post",
-                      "properties": {
-                        "text": {
-                          "type": "string",
-                          "description": "The text content of the company post"
-                        }
-                      },
-                      "required": [
-                        "text"
-                      ],
-                      "visible": [
-                        "text"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "shareMediaCategory": {
-                      "type": "string",
-                      "description": "Media category for the share",
-                      "default": "NONE",
-                      "enum": [
-                        "NONE",
-                        "ARTICLE",
-                        "IMAGE"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "shareCommentary",
-                    "shareMediaCategory"
-                  ],
-                  "visible": [
-                    "shareCommentary",
-                    "shareMediaCategory"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "visible": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "additionalProperties": false
-            },
-            "visibility": {
-              "type": "object",
-              "description": "Post visibility settings",
-              "properties": {
-                "com.linkedin.ugc.MemberNetworkVisibility": {
-                  "type": "string",
-                  "description": "Visibility level for company posts",
-                  "default": "PUBLIC",
-                  "enum": [
-                    "PUBLIC"
-                  ]
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "visible": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "additionalProperties": false
             }
           },
           "required": [
             "author",
-            "specificContent"
+            "commentary"
           ],
           "visible": [
             "author",
-            "specificContent",
-            "visibility"
+            "commentary",
+            "visibility",
+            "distribution",
+            "lifecycleState"
           ],
           "additionalProperties": false
         }
@@ -536,7 +409,7 @@
   },
   {
     "name": "LINKEDIN__SEARCH_COMPANIES",
-    "description": "Search for companies on LinkedIn using keywords, with optional filtering by industry and location.",
+    "description": "Search for companies on LinkedIn using keywords. Returns company profiles matching the search query.",
     "tags": [
       "search",
       "companies",
@@ -547,7 +420,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/organizationSearch",
+      "path": "/v2/organizations",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -559,12 +432,12 @@
           "properties": {
             "q": {
               "type": "string",
-              "description": "Search query type",
-              "default": "universalName"
+              "description": "Query type for organization search",
+              "default": "search"
             },
             "keywords": {
               "type": "string",
-              "description": "Keywords to search for in company names and descriptions"
+              "description": "Keywords to search for in company names"
             },
             "start": {
               "type": "integer",
@@ -573,9 +446,9 @@
             },
             "count": {
               "type": "integer",
-              "description": "Number of results to return (max 200)",
-              "default": 20,
-              "maximum": 200
+              "description": "Number of results to return (max 50)",
+              "default": 10,
+              "maximum": 50
             }
           },
           "required": [
@@ -611,7 +484,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/people-search",
+      "path": "/v2/connections",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -619,22 +492,12 @@
       "properties": {
         "query": {
           "type": "object",
-          "description": "Search parameters for connections",
+          "description": "Query parameters for connections",
           "properties": {
             "q": {
               "type": "string",
-              "description": "Query type for people search",
-              "default": "people"
-            },
-            "network": {
-              "type": "string",
-              "description": "Network degree filter",
-              "default": "F",
-              "enum": [
-                "F",
-                "S",
-                "O"
-              ]
+              "description": "Query type for connections",
+              "default": "viewer"
             },
             "start": {
               "type": "integer",
@@ -643,14 +506,13 @@
             },
             "count": {
               "type": "integer",
-              "description": "Number of results to return (max 25)",
-              "default": 10,
-              "maximum": 25
+              "description": "Number of results to return (max 100)",
+              "default": 50,
+              "maximum": 100
             }
           },
           "required": [],
           "visible": [
-            "network",
             "start",
             "count"
           ],
@@ -678,7 +540,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/v2/ugcPostsStatistics/{ugcPostId}",
+      "path": "/v2/socialActions/{shareUrn}/statistics",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -688,16 +550,16 @@
           "type": "object",
           "description": "Path parameters",
           "properties": {
-            "ugcPostId": {
+            "shareUrn": {
               "type": "string",
-              "description": "UGC Post ID to get analytics for"
+              "description": "Share URN to get analytics for (e.g., 'urn:li:share:123456789')"
             }
           },
           "required": [
-            "ugcPostId"
+            "shareUrn"
           ],
           "visible": [
-            "ugcPostId"
+            "shareUrn"
           ],
           "additionalProperties": false
         }
@@ -713,7 +575,7 @@
   },
   {
     "name": "LINKEDIN__SHARE_ARTICLE",
-    "description": "Share an external article or URL as a LinkedIn post with title, description, and thumbnail.",
+    "description": "Share an external article or URL as a LinkedIn post with title and description.",
     "tags": [
       "share",
       "article",
@@ -725,7 +587,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
-      "path": "/v2/ugcPosts",
+      "path": "/rest/posts",
       "server_url": "https://api.linkedin.com"
     },
     "parameters": {
@@ -757,6 +619,79 @@
               "type": "string",
               "description": "Author URN (e.g., 'urn:li:person:123456789' for personal or 'urn:li:organization:123456789' for company)"
             },
+            "commentary": {
+              "type": "string",
+              "description": "Optional commentary text to accompany the shared article"
+            },
+            "visibility": {
+              "type": "string",
+              "description": "Post visibility",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC",
+                "CONNECTIONS"
+              ]
+            },
+            "content": {
+              "type": "object",
+              "description": "Article content details",
+              "properties": {
+                "article": {
+                  "type": "object",
+                  "description": "Article details",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "description": "URL of the article being shared"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Article title"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Article description or summary"
+                    }
+                  },
+                  "required": [
+                    "source"
+                  ],
+                  "visible": [
+                    "source",
+                    "title",
+                    "description"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "article"
+              ],
+              "visible": [
+                "article"
+              ],
+              "additionalProperties": false
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
+            },
             "lifecycleState": {
               "type": "string",
               "description": "Post lifecycle state",
@@ -765,144 +700,19 @@
                 "PUBLISHED",
                 "DRAFT"
               ]
-            },
-            "specificContent": {
-              "type": "object",
-              "description": "Content specific to article sharing",
-              "properties": {
-                "com.linkedin.ugc.ShareContent": {
-                  "type": "object",
-                  "description": "Share content with article details",
-                  "properties": {
-                    "shareCommentary": {
-                      "type": "object",
-                      "description": "Commentary text for the post",
-                      "properties": {
-                        "text": {
-                          "type": "string",
-                          "description": "Optional commentary text to accompany the shared article"
-                        }
-                      },
-                      "required": [],
-                      "visible": [
-                        "text"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "shareMediaCategory": {
-                      "type": "string",
-                      "description": "Media category for article sharing",
-                      "default": "ARTICLE"
-                    },
-                    "media": {
-                      "type": "array",
-                      "description": "Media content array for the article",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "string",
-                            "default": "READY"
-                          },
-                          "description": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string",
-                                "description": "Article description or summary",
-                                "default": ""
-                              }
-                            },
-                            "required": [
-                              "text"
-                            ],
-                            "additionalProperties": false,
-                            "visible": []
-                          },
-                          "originalUrl": {
-                            "type": "string",
-                            "description": "URL of the article being shared",
-                            "default": ""
-                          },
-                          "title": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string",
-                                "description": "Article title",
-                                "default": ""
-                              }
-                            },
-                            "required": [
-                              "text"
-                            ],
-                            "additionalProperties": false,
-                            "visible": [],
-                            "default": {}
-                          }
-                        },
-                        "required": [
-                          "status",
-                          "originalUrl",
-                          "title"
-                        ],
-                        "additionalProperties": false,
-                        "visible": []
-                      },
-                      "minItems": 1,
-                      "maxItems": 1
-                    }
-                  },
-                  "required": [
-                    "shareMediaCategory",
-                    "media"
-                  ],
-                  "visible": [
-                    "shareCommentary",
-                    "media"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "visible": [
-                "com.linkedin.ugc.ShareContent"
-              ],
-              "additionalProperties": false
-            },
-            "visibility": {
-              "type": "object",
-              "description": "Post visibility settings",
-              "properties": {
-                "com.linkedin.ugc.MemberNetworkVisibility": {
-                  "type": "string",
-                  "description": "Visibility level",
-                  "default": "PUBLIC",
-                  "enum": [
-                    "PUBLIC",
-                    "CONNECTIONS"
-                  ]
-                }
-              },
-              "required": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "visible": [
-                "com.linkedin.ugc.MemberNetworkVisibility"
-              ],
-              "additionalProperties": false
             }
           },
           "required": [
             "author",
-            "specificContent"
+            "content"
           ],
           "visible": [
             "author",
-            "specificContent",
-            "visibility"
+            "commentary",
+            "content",
+            "visibility",
+            "distribution",
+            "lifecycleState"
           ],
           "additionalProperties": false
         }

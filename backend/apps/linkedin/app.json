@@ -12,7 +12,7 @@
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_LINKEDIN_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_LINKEDIN_CLIENT_SECRET }}",
-      "scope": "openid profile email w_organization_social r_organization_social w_member_social r_member_social",
+      "scope": "openid profile email w_organization_social r_organization_social w_member_social",
       "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
       "access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
       "refresh_token_url": "",
