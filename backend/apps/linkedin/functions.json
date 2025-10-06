@@ -144,7 +144,7 @@
       "server_url": "https://api.linkedin.com",
       "headers": {
         "Content-Type": "application/json",
-        "LinkedIn-Version": "202405"
+        "LinkedIn-Version": "202411"
       }
     },
     "parameters": {
@@ -249,7 +249,7 @@
       "path": "/rest/posts/{share_id}",
       "server_url": "https://api.linkedin.com",
       "headers": {
-        "LinkedIn-Version": "202405"
+        "LinkedIn-Version": "202411"
       }
     },
     "parameters": {
@@ -363,7 +363,7 @@
       "server_url": "https://api.linkedin.com",
       "headers": {
         "Content-Type": "application/json",
-        "LinkedIn-Version": "202405"
+        "LinkedIn-Version": "202411"
       }
     },
     "parameters": {
@@ -698,7 +698,7 @@
       "server_url": "https://api.linkedin.com",
       "headers": {
         "Content-Type": "application/json",
-        "LinkedIn-Version": "202405"
+        "LinkedIn-Version": "202411"
       }
     },
     "parameters": {
