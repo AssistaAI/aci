@@ -20,10 +20,10 @@ ACI_SEARCH_FUNCTIONS_SCHEMA = {
             },
             "limit": {
                 "type": "integer",
-                "default": 20,
+                "default": 5,
                 "description": "The maximum number of functions to return from the search per response. Controls the size of the result set.",
-                "minimum": 1,
-                "maximum": 1000,
+                "minimum": 0,
+                "maximum": 20,
             },
             "offset": {
                 "type": "integer",

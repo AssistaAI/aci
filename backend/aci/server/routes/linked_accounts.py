@@ -366,7 +366,9 @@ async def link_oauth2_account(
     # NOTE: the state payload is jwt encoded (signed), but it's not encrypted, anyone can decode it
     # TODO: add expiration check to the state payload for extra security
     # LinkedIn doesn't support PKCE, so don't generate code_verifier for it
-    code_verifier = None if query_params.app_name == "LINKEDIN" else OAuth2Manager.generate_code_verifier()
+    code_verifier = (
+        None if query_params.app_name == "LINKEDIN" else OAuth2Manager.generate_code_verifier()
+    )
 
     oauth2_state = LinkedAccountOAuth2CreateState(
         app_name=query_params.app_name,
@@ -526,7 +528,8 @@ async def linked_accounts_oauth2_callback(
     token_response = await oauth2_manager.fetch_token(
         redirect_uri=redirect_uri,
         code=code,
-        code_verifier=state.code_verifier or "",  # Pass empty string if None for apps that don't support PKCE
+        code_verifier=state.code_verifier
+        or "",  # Pass empty string if None for apps that don't support PKCE
     )
     security_credentials = oauth2_manager.parse_fetch_token_response(token_response)
 

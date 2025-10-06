@@ -104,10 +104,9 @@ class OAuth2Manager:
             **app_specific_params,
         }
 
-        # LinkedIn doesn't support PKCE or Google-specific params
-        if self.app_name == "LINKEDIN":
-            # LinkedIn doesn't support access_type and prompt parameters
-            pass
+        if self.app_name in ["LINKEDIN", "X"]:
+            if self.app_name == "X":
+                auth_url_kwargs["code_verifier"] = code_verifier
         else:
             auth_url_kwargs["code_verifier"] = code_verifier
             auth_url_kwargs["access_type"] = access_type
@@ -192,11 +191,11 @@ class OAuth2Manager:
             )
 
             # Try to extract more details from the error
-            if hasattr(e, 'description'):
+            if hasattr(e, "description"):
                 logger.error(f"OAuth2 error description: {e.description}")
-            if hasattr(e, 'error'):
+            if hasattr(e, "error"):
                 logger.error(f"OAuth2 error code: {e.error}")
-            if hasattr(e, 'error_description'):
+            if hasattr(e, "error_description"):
                 logger.error(f"OAuth2 error_description: {e.error_description}")
 
             raise OAuth2Error("failed to fetch access token") from e
