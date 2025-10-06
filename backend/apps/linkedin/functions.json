@@ -160,10 +160,12 @@
             }
           },
           "required": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "visible": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "additionalProperties": false,
           "default": {}
@@ -280,8 +282,12 @@
               "default": "202405"
             }
           },
-          "required": [],
-          "visible": [],
+          "required": [
+            "LinkedIn-Version"
+          ],
+          "visible": [
+            "LinkedIn-Version"
+          ],
           "additionalProperties": false,
           "default": {}
         },
@@ -402,13 +408,19 @@
             "Content-Type": {
               "type": "string",
               "default": "application/json"
+            },
+            "LinkedIn-Version": {
+              "type": "string",
+              "default": "202405"
             }
           },
           "required": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "visible": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "additionalProperties": false,
           "default": {}
@@ -752,13 +764,19 @@
             "Content-Type": {
               "type": "string",
               "default": "application/json"
+            },
+            "LinkedIn-Version": {
+              "type": "string",
+              "default": "202405"
             }
           },
           "required": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "visible": [
-            "Content-Type"
+            "Content-Type",
+            "LinkedIn-Version"
           ],
           "additionalProperties": false,
           "default": {}
