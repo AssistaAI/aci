@@ -47,9 +47,9 @@ export default function HomePage() {
             </div>
             <div>
               <h3 className="font-medium inline-flex items-center gap-2">
-                ACI.dev account:
+                Assista account:
                 <span className="text-sm text-muted-foreground">
-                  Sign up at platform.aci.dev with your sign up code
+                  Sign up at aci.assista.dev with your sign up code
                 </span>
               </h3>
             </div>
@@ -57,7 +57,7 @@ export default function HomePage() {
               <h3 className="font-medium inline-flex items-center gap-2">
                 An API key:
                 <span className="text-sm text-muted-foreground">
-                  Can be created in project settings on the ACI.dev developer
+                  Can be created in project settings on the Assista developer
                   portal
                 </span>
               </h3>
@@ -71,13 +71,13 @@ export default function HomePage() {
               <BiArchiveIn />
             </div>
             <div>
-              <CardTitle>Install and Use the Aipolabs ACI</CardTitle>
+              <CardTitle>Install and Use Assista</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="pt-4">
             <div className="mb-6">
               <h3 className="font-semibold  mb-3">
-                1. Install Aipolabs ACI Python Client
+                1. Install Assista Python Client
               </h3>
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">
@@ -96,7 +96,7 @@ export default function HomePage() {
 
             <div className="mb-6">
               <h3 className="font-semibold  mb-3">
-                2. Set up your Aipolabs ACI Client
+                2. Set up your Assista Client
               </h3>
               <CodeBlock
                 code={`from aipolabs import ACI
@@ -122,7 +122,7 @@ response = openai.chat.completions.create(
     model="gpt-4o",
     messages=[
         {"role": "system", "content": "You are a helpful assistant with access to a variety of tools."},
-        {"role": "user", "content": "What is aipolabs ACI?"}
+        {"role": "user", "content": "What is Assista?"}
     ],
     tools=[function_definition],
     tool_choice="Required"

@@ -25,15 +25,15 @@ const faqs = [
     answer: (
       <>
         <a
-          href="https://platform.aci.dev/linked-accounts"
+          href="https://aci.assista.dev/linked-accounts"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
         >
-          ACI.dev
+          Assista
         </a>{" "}
         allows developers to manage their own end users&apos; authentication to
-        various applications on the ACI.dev platform. So each unique user
+        various applications on the Assista platform. So each unique user
         connecting an account to some application on the platform is counted as
         a unique end user. Each unique end user might link multiple accounts
         (e.g. a linked account with Gmail, a linked account with Notion, a
@@ -51,7 +51,7 @@ const faqs = [
     value: "faq-5",
     question: "What are custom OAuth2 clients?",
     answer:
-      "Custom OAuth2 clients are specific applications you’ve registered with an authorization server (e.g., Google or a third-party platform) to access protected resources on behalf of your users. For example, they let your end users sign into Google through your own OAuth2 client rather than ACI.dev’s default client.",
+      "Custom OAuth2 clients are specific applications you've registered with an authorization server (e.g., Google or a third-party platform) to access protected resources on behalf of your users. For example, they let your end users sign into Google through your own OAuth2 client rather than Assista's default client.",
   },
   {
     value: "faq-6",

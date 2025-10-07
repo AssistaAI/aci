@@ -1,13 +1,13 @@
-# Aipolabs Developer Portal
+# Assista Developer Portal
 
 ![CI](https://github.com/aipotheosis-labs/aci/actions/workflows/devportal.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-The [developer portal](https://platform.aci.dev/) for Aipolabs, a platform for developers to manage and configure the apps and functions used by their agents.
+The [developer portal](https://aci.assista.dev/) for Assista, a platform for developers to manage and configure the apps and functions used by their agents.
 
 ## Table of Contents
 
-- [Aipolabs Developer Portal](#aipolabs-developer-portal)
+- [Assista Developer Portal](#assista-developer-portal)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Development Setup](#development-setup)
@@ -112,8 +112,8 @@ src
 ├── hooks
 │   └── use-mobile.tsx
 └── lib
-│   ├── api          (functions for interacting with the Aipolabs backend API)
-│   ├── types        (types of the Aipolabs backend API response)
+│   ├── api          (functions for interacting with the Assista backend API)
+│   ├── types        (types of the Assista backend API response)
 │   └── utils.ts
 └── __test__ (test files, the structure of this folder should be the same as the structure of the src/app folder)
     ├── apps
@@ -135,8 +135,8 @@ The environment variables need to be set correctly on Vercel: <https://vercel.co
 For example, for the Vercel production environment, we set the following environment variables:
 
 ```sh
-NEXT_PUBLIC_API_URL=https://api.aci.dev
-NEXT_PUBLIC_DEV_PORTAL_URL=https://platform.aci.dev
+NEXT_PUBLIC_API_URL=https://aci-api.assista.dev
+NEXT_PUBLIC_DEV_PORTAL_URL=https://aci.assista.dev
 NEXT_PUBLIC_ENVIRONMENT=production
 NEXT_PUBLIC_AUTH_URL=<actual_production_propelauth_endpoint>
 ```
