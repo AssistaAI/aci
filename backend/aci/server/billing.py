@@ -1,48 +1,59 @@
+from copy import deepcopy
 from uuid import UUID
 
 from sqlalchemy.orm import Session
 
 from aci.common.db import crud
 from aci.common.db.sql_models import Plan, Project
-from aci.common.exceptions import MonthlyQuotaExceeded, SubscriptionPlanNotFound
 from aci.common.logging_setup import get_logger
+from aci.common.schemas.plans import PlanFeatures
 
 logger = get_logger(__name__)
 
-
-def get_active_plan_by_org_id(db_session: Session, org_id: UUID) -> Plan:
-    subscription = crud.subscriptions.get_subscription_by_org_id(db_session, org_id)
-    if not subscription:
-        active_plan = crud.plans.get_by_name(db_session, "free")
-    else:
-        active_plan = crud.plans.get_by_id(db_session, subscription.plan_id)
-
-    if not active_plan:
-        raise SubscriptionPlanNotFound("Plan not found")
-    return active_plan
+_UNLIMITED_PLAN_FEATURES = PlanFeatures(
+    linked_accounts=1_000_000,
+    api_calls_monthly=1_000_000_000,
+    agent_credentials=1_000_000,
+    developer_seats=1_000_000,
+    custom_oauth=True,
+    log_retention_days=3650,
+    projects=1_000_000,
+).model_dump()
 
 
-def increment_quota(db_session: Session, project: Project, monthly_quota_limit: int) -> None:
-    """Increment quota usage or raise error if limit exceeded."""
-    success = crud.projects.increment_api_monthly_quota_usage(
-        db_session, project, monthly_quota_limit
+def _build_unlimited_plan(name: str = "unlimited") -> Plan:
+    """Return a Plan-like object with effectively no limits."""
+    return Plan(
+        name=name,
+        stripe_product_id=f"local-{name}-product",
+        stripe_monthly_price_id=f"local-{name}-monthly",
+        stripe_yearly_price_id=f"local-{name}-yearly",
+        features=deepcopy(_UNLIMITED_PLAN_FEATURES),
+        is_public=False,
     )
 
-    if not success:
-        total_monthly_usage = crud.projects.get_total_monthly_quota_usage_for_org(
-            db_session, project.org_id
-        )
 
-        logger.warning(
-            "monthly quota exceeded",
-            extra={
-                "project_id": project.id,
-                "org_id": project.org_id,
-                "total_monthly_usage": total_monthly_usage,
-                "monthly_quota_limit": monthly_quota_limit,
-            },
-        )
-        raise MonthlyQuotaExceeded(
-            f"monthly quota exceeded for org={project.org_id}, "
-            f"usage={total_monthly_usage}, limit={monthly_quota_limit}"
-        )
+def get_active_plan_by_org_id(db_session: Session, org_id: UUID) -> Plan:
+    """
+    Always serve an unlimited local plan so development environments are never blocked.
+    """
+    subscription = crud.subscriptions.get_subscription_by_org_id(db_session, org_id)
+    plan_name = "unlimited"
+    if subscription:
+        existing_plan = crud.plans.get_by_id(db_session, subscription.plan_id)
+        if existing_plan:
+            plan_name = existing_plan.name
+
+    return _build_unlimited_plan(plan_name)
+
+
+def increment_quota(
+    db_session: Session, project: Project, monthly_quota_limit: int | None = None
+) -> None:
+    """
+    Quota usage tracking is disabled for local unlimited mode.
+    """
+    logger.debug(
+        "Skipping monthly quota increment",
+        extra={"project_id": project.id, "org_id": project.org_id},
+    )
