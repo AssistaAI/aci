@@ -8,6 +8,7 @@ class PlanInfo(BaseModel):
 
     name: str
     features: PlanFeatures
+    is_unlimited: bool = True
 
 
 class QuotaUsageResponse(BaseModel):

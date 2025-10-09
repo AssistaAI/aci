@@ -56,6 +56,8 @@ const QuotaItem: React.FC<QuotaItemProps> = ({ title, used, limit }) => {
 export const QuotaUsageDisplay: React.FC<QuotaUsageDisplayProps> = ({
   quotaUsage,
 }) => {
+  const isUnlimited = quotaUsage.plan.is_unlimited;
+
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="flex flex-row items-center justify-between p-4">
@@ -64,31 +66,26 @@ export const QuotaUsageDisplay: React.FC<QuotaUsageDisplayProps> = ({
       </CardHeader>
       <Separator />
       <CardContent className="p-4 space-y-6">
-        <QuotaItem
-          title="Projects"
-          used={quotaUsage.projects_used}
-          limit={quotaUsage.plan.features.projects}
-        />
+        {isUnlimited ? (
+          <p className="text-sm text-muted-foreground">
+            Unlimited plan active. Usage tracking is disabled in this
+            environment.
+          </p>
+        ) : (
+          <>
+            <QuotaItem
+              title="Projects"
+              used={quotaUsage.projects_used}
+              limit={quotaUsage.plan.features.projects}
+            />
 
-        <QuotaItem
-          title="Unique Linked Account Owner Ids"
-          used={quotaUsage.linked_accounts_used}
-          limit={quotaUsage.plan.features.linked_accounts}
-        />
-
-        {/* Not displaying the agent credentials and API calls limit for now */}
-        {/* Refer to the prod DB for the actual limits */}
-        {/* <QuotaItem
-          title="Agent Credentials"
-          used={quotaUsage.agent_credentials_used}
-          limit={quotaUsage.plan.features.agent_credentials}
-        />
-
-        <QuotaItem
-          title="API Calls (Across All Projects,Reset Monthly)"
-          used={quotaUsage.api_calls_used}
-          limit={quotaUsage.plan.features.api_calls_monthly}
-        /> */}
+            <QuotaItem
+              title="Unique Linked Account Owner Ids"
+              used={quotaUsage.linked_accounts_used}
+              limit={quotaUsage.plan.features.linked_accounts}
+            />
+          </>
+        )}
       </CardContent>
     </Card>
   );

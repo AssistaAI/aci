@@ -5,6 +5,7 @@ export interface QuotaUsage {
   api_calls_used: number;
   plan: {
     name: string;
+    is_unlimited?: boolean;
     features: {
       projects: number;
       linked_accounts: number;

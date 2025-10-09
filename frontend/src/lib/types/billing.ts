@@ -18,6 +18,7 @@ export enum Plan {
   Free = "free",
   Starter = "starter",
   Team = "team",
+  Unlimited = "unlimited",
 }
 
 export interface Subscription {

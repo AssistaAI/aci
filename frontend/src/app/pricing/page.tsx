@@ -94,6 +94,32 @@ export default function PricingPage() {
   const [isYearly, setIsYearly] = useState(false);
   const router = useRouter();
 
+  if (subscription?.plan === Plan.Unlimited) {
+    return (
+      <div className="relative bg-background text-foreground py-10 sm:py-14 min-h-screen">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-6 right-6 text-muted-foreground hover:text-foreground"
+          onClick={() => router.back()}
+          aria-label="Close pricing page"
+        >
+          <X className="h-6 w-6" />
+        </Button>
+        <div className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center gap-4 px-6 text-center">
+          <h1 className="text-3xl font-semibold">Unlimited plan enabled</h1>
+          <p className="text-muted-foreground">
+            Billing and usage limits are fully unlocked in this environment. No
+            further action is required.
+          </p>
+          <Button onClick={() => router.back()} variant="default">
+            Go back
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative bg-background text-foreground py-10 sm:py-14 min-h-screen">
       <Button

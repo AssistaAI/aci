@@ -34,26 +34,20 @@ def _build_unlimited_plan(name: str = "unlimited") -> Plan:
 
 
 def get_active_plan_by_org_id(db_session: Session, org_id: UUID) -> Plan:
-    """
-    Always serve an unlimited local plan so development environments are never blocked.
-    """
     subscription = crud.subscriptions.get_subscription_by_org_id(db_session, org_id)
-    plan_name = "unlimited"
+    plan_label = "unlimited"
     if subscription:
         existing_plan = crud.plans.get_by_id(db_session, subscription.plan_id)
         if existing_plan:
-            plan_name = existing_plan.name
-
-    return _build_unlimited_plan(plan_name)
+            plan_label = f"unlimited ({existing_plan.name})"
+    return _build_unlimited_plan(plan_label)
 
 
 def increment_quota(
     db_session: Session, project: Project, monthly_quota_limit: int | None = None
 ) -> None:
-    """
-    Quota usage tracking is disabled for local unlimited mode.
-    """
+    """Quotas are disabled - retain method for compatibility but perform no work."""
     logger.debug(
-        "Skipping monthly quota increment",
+        "Quota increment skipped (quotas disabled)",
         extra={"project_id": project.id, "org_id": project.org_id},
     )

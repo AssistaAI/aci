@@ -22,6 +22,8 @@ export function SubscriptionDisplay({
   isLoading,
   onManageSubscription,
 }: SubscriptionDisplayProps) {
+  const isUnlimited = subscription?.plan === Plan.Unlimited;
+
   return (
     <SettingsItem
       icon={BsStars}
@@ -36,7 +38,7 @@ export function SubscriptionDisplay({
           <div className="mt-1">
             <div className="flex items-center justify-between">
               <UpgradeButton size="sm" />
-              {subscription.plan !== Plan.Free && (
+              {!isUnlimited && subscription.plan !== Plan.Free && (
                 <Button
                   variant="default"
                   className="gap-2 ml-2"
@@ -47,16 +49,22 @@ export function SubscriptionDisplay({
                 </Button>
               )}
             </div>
-            {subscription.plan !== Plan.Free && (
+            {isUnlimited ? (
               <p className="text-sm text-muted-foreground mt-2">
-                Need help with your subscription?{" "}
-                <Link
-                  href="mailto:support@aipolabs.xyz"
-                  className="text-primary hover:underline"
-                >
-                  Contact support
-                </Link>
+                Unlimited plan active. No billing actions required.
               </p>
+            ) : (
+              subscription.plan !== Plan.Free && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  Need help with your subscription?{" "}
+                  <Link
+                    href="mailto:support@aipolabs.xyz"
+                    className="text-primary hover:underline"
+                  >
+                    Contact support
+                  </Link>
+                </p>
+              )
             )}
           </div>
         ) : null

@@ -14,6 +14,8 @@ export function getUpgradeButtonText(planName: Plan): string {
       return "Starter Plan";
     case Plan.Team:
       return "Team Plan";
+    case Plan.Unlimited:
+      return "Unlimited Plan";
     default:
       return "Upgrade Plan";
   }
@@ -34,6 +36,22 @@ export function UpgradeButton({
     return null;
   }
 
+  const planName = (quotaData.plan.name as Plan) ?? Plan.Unlimited;
+
+  if (planName === Plan.Unlimited) {
+    return (
+      <Button
+        size={size}
+        className={`gap-2 ${className?.includes("w-full") ? "w-full" : ""} ${className ?? ""}`}
+        variant="outline"
+        disabled
+      >
+        <BsStars className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} />
+        {getUpgradeButtonText(planName)}
+      </Button>
+    );
+  }
+
   return (
     <Link href="/pricing" className={className}>
       <Button
@@ -41,7 +59,7 @@ export function UpgradeButton({
         className={`gap-2 transition-all duration-200 hover:scale-105 ${className?.includes("w-full") ? "w-full" : ""}`}
       >
         <BsStars className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} />
-        {getUpgradeButtonText(quotaData.plan.name as Plan)}
+        {getUpgradeButtonText(planName)}
       </Button>
     </Link>
   );

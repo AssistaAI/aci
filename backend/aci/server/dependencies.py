@@ -88,7 +88,7 @@ def validate_project_quota(
         raise ProjectNotFound(f"Project not found, api_key_id={api_key_id}")
 
     logger.info(
-        "Project quota validation skipped (unlimited mode active)",
+        "Project quota validation skipped (quotas disabled)",
         extra={"project_id": project.id},
     )
     return project
@@ -116,7 +116,7 @@ def validate_monthly_api_quota(
         return
 
     logger.debug(
-        "Monthly API quota enforcement skipped (unlimited mode active)",
+        "Monthly API quota enforcement skipped (quotas disabled)",
         extra={"project_id": project.id},
     )
 

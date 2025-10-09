@@ -45,27 +45,10 @@ async def get_subscription(
 ) -> SubscriptionPublic:
     acl.require_org_member(user, org_id)
 
-    active_subscription = crud.subscriptions.get_subscription_by_org_id(db_session, org_id)
-    if not active_subscription:
-        logger.info(
-            "no active subscription found, the org is on the free plan",
-            extra={"org_id": org_id},
-        )
-        return SubscriptionPublic(
-            plan="free",
-            status=StripeSubscriptionStatus.ACTIVE,
-        )
-
-    plan = crud.plans.get_by_id(db_session, active_subscription.plan_id)
-    if not plan:
-        logger.error(
-            "plan not found",
-            extra={"plan_id": active_subscription.plan_id},
-        )
-        raise SubscriptionPlanNotFound(f"plan={active_subscription.plan_id} not found")
+    logger.info("Returning unlimited subscription response", extra={"org_id": org_id})
     return SubscriptionPublic(
-        plan=plan.name,
-        status=active_subscription.status,
+        plan="unlimited",
+        status=StripeSubscriptionStatus.ACTIVE,
     )
 
 
@@ -78,25 +61,26 @@ async def get_quota_usage(
     acl.require_org_member(user, org_id)
 
     active_plan = billing.get_active_plan_by_org_id(db_session, org_id)
-    logger.info(f"Getting quota usage, org_id={org_id}, plan={active_plan.name}")
+    logger.info(
+        "Returning unlimited quota usage response",
+        extra={"org_id": org_id, "plan": active_plan.name},
+    )
 
-    projects_used = len(crud.projects.get_projects_by_org(db_session, org_id))
-    agent_credentials_used = crud.secret.get_total_number_of_agent_secrets_for_org(
-        db_session, org_id
-    )
-    linked_accounts_used = crud.linked_accounts.get_total_number_of_unique_linked_account_owner_ids(
-        db_session, org_id
-    )
-    total_monthly_api_calls_used_of_org = crud.projects.get_total_monthly_quota_usage_for_org(
-        db_session, org_id
-    )
+    projects_used = 0
+    agent_credentials_used = 0
+    linked_accounts_used = 0
+    total_monthly_api_calls_used_of_org = 0
 
     return QuotaUsageResponse(
         projects_used=projects_used,
         linked_accounts_used=linked_accounts_used,
         agent_credentials_used=agent_credentials_used,
         api_calls_used=total_monthly_api_calls_used_of_org,
-        plan=PlanInfo(name=active_plan.name, features=PlanFeatures(**active_plan.features)),
+        plan=PlanInfo(
+            name="unlimited",
+            features=PlanFeatures(**active_plan.features),
+            is_unlimited=True,
+        ),
     )
 
 
