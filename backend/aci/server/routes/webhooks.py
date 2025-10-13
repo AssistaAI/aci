@@ -1,15 +1,17 @@
 import secrets
 import string
+from datetime import UTC, datetime, timedelta
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy.orm import Session
 from svix import Webhook, WebhookVerificationError
 
 from aci.common.db import crud
 from aci.common.enums import OrganizationRole
 from aci.common.logging_setup import get_logger
+from aci.common.schemas.trigger import WebhookReceivedResponse, WebhookVerificationChallenge
 from aci.server import config
 from aci.server import dependencies as deps
 from aci.server.acl import get_propelauth
@@ -138,3 +140,175 @@ def _convert_org_id_to_uuid(org_id: str | UUID) -> UUID:
         return org_id
     else:
         raise TypeError(f"org_id must be a str or UUID, got {type(org_id).__name__}")
+
+
+# ============================================================================
+# Third-Party Webhook Receiver Endpoints
+# ============================================================================
+
+
+@router.get("/{app_name}/{trigger_id}", response_model=WebhookVerificationChallenge)
+async def webhook_challenge_verification(
+    app_name: str,
+    trigger_id: UUID,
+    request: Request,
+    db_session: Annotated[Session, Depends(deps.yield_db_session)],
+) -> dict:
+    """
+    Handle challenge-response verification for webhook registration.
+
+    Used by services like Slack, Stripe, etc. that send a challenge parameter
+    during webhook subscription setup.
+    """
+    # Verify trigger exists and is active
+    trigger = crud.triggers.get_trigger(db_session, trigger_id)
+    if not trigger or trigger.app_name != app_name.upper():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Trigger not found for app {app_name}",
+        )
+
+    if trigger.status != "active":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Trigger is not active, status={trigger.status}",
+        )
+
+    # Get challenge parameter from query string
+    challenge = request.query_params.get("challenge")
+    if not challenge:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing challenge parameter",
+        )
+
+    logger.info(
+        f"Webhook challenge verification successful, "
+        f"app={app_name}, trigger_id={trigger_id}"
+    )
+
+    # Echo back the challenge
+    return {"challenge": challenge}
+
+
+@router.post("/{app_name}/{trigger_id}", response_model=WebhookReceivedResponse)
+async def receive_webhook(
+    app_name: str,
+    trigger_id: UUID,
+    request: Request,
+    db_session: Annotated[Session, Depends(deps.yield_db_session)],
+) -> WebhookReceivedResponse:
+    """
+    Receive and store webhooks from third-party services.
+
+    This endpoint:
+    1. Validates the trigger exists and is active
+    2. Verifies the webhook signature (TODO: Phase 2 - per-app verification)
+    3. Stores the event in the database
+    4. Returns success response
+
+    Webhook signature verification will be handled by TriggerConnectors in Phase 2.
+    """
+    # Get trigger and validate
+    trigger = crud.triggers.get_trigger(db_session, trigger_id)
+    if not trigger or trigger.app_name != app_name.upper():
+        logger.error(
+            f"Webhook received for non-existent trigger, "
+            f"app={app_name}, trigger_id={trigger_id}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Trigger not found for app {app_name}",
+        )
+
+    if trigger.status != "active":
+        logger.warning(
+            f"Webhook received for inactive trigger, "
+            f"app={app_name}, trigger_id={trigger_id}, status={trigger.status}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Trigger is not active, status={trigger.status}",
+        )
+
+    # Parse webhook payload
+    try:
+        payload = await request.json()
+    except Exception as e:
+        logger.error(f"Failed to parse webhook payload, error={e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid JSON payload",
+        )
+
+    # TODO Phase 2: Verify webhook signature using TriggerConnector
+    # try:
+    #     connector = get_trigger_connector(app_name, trigger.linked_account)
+    #     is_valid = connector.verify_webhook(request)
+    #     if not is_valid:
+    #         logger.error(f"Webhook signature verification failed, trigger_id={trigger_id}")
+    #         raise HTTPException(status_code=401, detail="Invalid webhook signature")
+    # except Exception as e:
+    #     logger.error(f"Webhook verification error: {e}")
+    #     raise HTTPException(status_code=401, detail="Webhook verification failed")
+
+    # Extract event type and external event ID for deduplication
+    event_type = payload.get("type") or payload.get("event_type") or trigger.trigger_type
+    external_event_id = (
+        payload.get("id")
+        or payload.get("event_id")
+        or payload.get("message_id")
+        or None
+    )
+
+    # Check for duplicate events
+    if external_event_id:
+        is_duplicate = crud.trigger_events.check_duplicate_event(
+            db_session, trigger_id, external_event_id
+        )
+        if is_duplicate:
+            logger.info(
+                f"Duplicate webhook event received, skipping, "
+                f"trigger_id={trigger_id}, external_event_id={external_event_id}"
+            )
+            # Return success to avoid retries from provider
+            existing_event = db_session.query(crud.trigger_events.TriggerEvent).filter_by(
+                trigger_id=trigger_id, external_event_id=external_event_id
+            ).first()
+            return WebhookReceivedResponse(
+                event_id=existing_event.id,
+                trigger_id=trigger.id,
+                event_type=event_type,
+                status=existing_event.status,
+                received_at=existing_event.received_at,
+            )
+
+    # Store event
+    event = crud.trigger_events.create_trigger_event(
+        db_session,
+        trigger_id=trigger.id,
+        event_type=event_type,
+        event_data=payload,
+        external_event_id=external_event_id,
+        status="pending",
+        expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention
+    )
+
+    # Update trigger's last_triggered_at
+    crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.now(UTC))
+
+    db_session.commit()
+
+    logger.info(
+        f"Webhook received and stored, "
+        f"app={app_name}, trigger_id={trigger_id}, event_id={event.id}, "
+        f"event_type={event_type}, external_event_id={external_event_id}"
+    )
+
+    return WebhookReceivedResponse(
+        event_id=event.id,
+        trigger_id=trigger.id,
+        event_type=event_type,
+        status=event.status,
+        received_at=event.received_at,
+    )

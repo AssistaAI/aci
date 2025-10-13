@@ -9,6 +9,8 @@ from . import (
     projects,
     secret,
     subscriptions,
+    trigger_events,
+    triggers,
 )
 
 __all__ = [
@@ -22,4 +24,6 @@ __all__ = [
     "projects",
     "secret",
     "subscriptions",
+    "trigger_events",
+    "triggers",
 ]

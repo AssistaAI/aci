@@ -31,6 +31,7 @@ from aci.server.routes import (
     linked_accounts,
     organizations,
     projects,
+    triggers,
     webhooks,
 )
 from aci.server.sentry import setup_sentry
@@ -178,6 +179,13 @@ app.include_router(
     webhooks.router,
     prefix=config.ROUTER_PREFIX_WEBHOOKS,
     tags=[config.ROUTER_PREFIX_WEBHOOKS.split("/")[-1]],
+)
+
+app.include_router(
+    triggers.router,
+    prefix=config.ROUTER_PREFIX_TRIGGERS,
+    tags=[config.ROUTER_PREFIX_TRIGGERS.split("/")[-1]],
+    dependencies=[Depends(deps.validate_api_key), Depends(deps.validate_project_quota)],
 )
 
 app.include_router(

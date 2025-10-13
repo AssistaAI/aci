@@ -606,6 +606,136 @@ class ProcessedStripeEvent(Base):
     )
 
 
+class Trigger(Base):
+    """
+    Subscription to a specific event/trigger from an integrated app.
+    Each trigger represents an active webhook subscription with a third-party service.
+    """
+
+    __tablename__ = "triggers"
+
+    id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), primary_key=True, default_factory=uuid4, init=False
+    )
+    project_id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), ForeignKey("projects.id"), nullable=False
+    )
+    app_id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), ForeignKey("apps.id"), nullable=False
+    )
+    linked_account_id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), ForeignKey("linked_accounts.id"), nullable=False
+    )
+
+    # Trigger identification
+    trigger_name: Mapped[str] = mapped_column(String(MAX_STRING_LENGTH), nullable=False)
+    trigger_type: Mapped[str] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=False
+    )  # e.g., "gmail.message_received"
+    description: Mapped[str] = mapped_column(Text, nullable=False)
+
+    # Webhook configuration
+    webhook_url: Mapped[str] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=False
+    )  # ACI's callback URL
+    external_webhook_id: Mapped[str | None] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=True
+    )  # ID from third-party service
+    verification_token: Mapped[str] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=False
+    )  # For verifying incoming webhooks
+
+    # Trigger configuration and filters
+    config: Mapped[dict] = mapped_column(
+        MutableDict.as_mutable(JSONB), nullable=False
+    )  # App-specific config (filters, etc.)
+
+    # Status and lifecycle
+    status: Mapped[str] = mapped_column(
+        String(MAX_ENUM_LENGTH), nullable=False
+    )  # active, paused, error, expired
+    last_triggered_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, init=False
+    )
+    expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, init=False
+    )  # For Gmail push notifications
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now(), nullable=False, init=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False,
+        init=False,
+    )
+
+    # Relationships
+    app: Mapped[App] = relationship("App", lazy="select", init=False)
+    linked_account: Mapped[LinkedAccount] = relationship("LinkedAccount", lazy="select", init=False)
+
+    @property
+    def app_name(self) -> str:
+        return str(self.app.name)
+
+
+class TriggerEvent(Base):
+    """
+    Log of webhook events received from third-party services.
+    Stores raw event data for client retrieval via polling or push.
+    """
+
+    __tablename__ = "trigger_events"
+
+    id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), primary_key=True, default_factory=uuid4, init=False
+    )
+    trigger_id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), ForeignKey("triggers.id"), nullable=False
+    )
+
+    # Event data
+    event_type: Mapped[str] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=False
+    )  # e.g., "message.received"
+    event_data: Mapped[dict] = mapped_column(
+        MutableDict.as_mutable(JSONB), nullable=False
+    )  # Raw webhook payload
+    external_event_id: Mapped[str | None] = mapped_column(
+        String(MAX_STRING_LENGTH), nullable=True
+    )  # Deduplication ID from provider
+
+    # Processing status
+    status: Mapped[str] = mapped_column(
+        String(MAX_ENUM_LENGTH), nullable=False
+    )  # pending, delivered, failed, expired
+    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    # Timestamps
+    received_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now(), nullable=False, init=False
+    )
+    processed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, init=False
+    )
+    delivered_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, init=False
+    )
+    expires_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), nullable=False
+    )  # Auto-delete after N days
+
+    # Relationships
+    trigger: Mapped[Trigger] = relationship("Trigger", lazy="select", init=False)
+
+    __table_args__ = (
+        # Prevent duplicate event processing
+        UniqueConstraint("trigger_id", "external_event_id", name="uc_trigger_external_event"),
+    )
+
+
 __all__ = [
     "APIKey",
     "Agent",
@@ -616,4 +746,6 @@ __all__ = [
     "LinkedAccount",
     "Project",
     "Secret",
+    "Trigger",
+    "TriggerEvent",
 ]
