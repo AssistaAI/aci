@@ -22,17 +22,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -77,13 +77,18 @@
             },
             "after": {
               "type": "string",
-              "description": "The fullname of a thing to use as the anchor point for pagination"
+              "description": "The fullname of a thing to use as the anchor point for pagination (next page)"
+            },
+            "before": {
+              "type": "string",
+              "description": "The fullname of a thing to use as the anchor point for pagination (previous page)"
             }
           },
           "required": [],
           "visible": [
             "limit",
-            "after"
+            "after",
+            "before"
           ],
           "additionalProperties": false
         }
@@ -101,7 +106,7 @@
   },
   {
     "name": "REDDIT__POST_COMMENTS",
-    "description": "Retrieves comments for a specific post",
+    "description": "Retrieves comments for a specific post. The article ID should be the full post ID (e.g., 't3_abc123' or just 'abc123').",
     "tags": [
       "comments",
       "post",
@@ -112,7 +117,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/comments/{article}",
+      "path": "/r/{subreddit}/comments/{article}",
       "server_url": "https://oauth.reddit.com"
     },
     "parameters": {
@@ -122,17 +127,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -141,15 +146,21 @@
           "type": "object",
           "description": "Path parameters for the http request",
           "properties": {
+            "subreddit": {
+              "type": "string",
+              "description": "The name of the subreddit where the post is located"
+            },
             "article": {
               "type": "string",
-              "description": "The ID of the post to get comments for"
+              "description": "The ID of the post to get comments for (without t3_ prefix)"
             }
           },
           "required": [
+            "subreddit",
             "article"
           ],
           "visible": [
+            "subreddit",
             "article"
           ],
           "additionalProperties": false
@@ -219,17 +230,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -284,17 +295,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -382,17 +393,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -448,10 +459,10 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             },
             "Content-Type": {
               "type": "string",
@@ -460,11 +471,11 @@
             }
           },
           "required": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "visible": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "additionalProperties": false,
@@ -566,10 +577,10 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             },
             "Content-Type": {
               "type": "string",
@@ -578,11 +589,11 @@
             }
           },
           "required": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "visible": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "additionalProperties": false,
@@ -651,10 +662,10 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             },
             "Content-Type": {
               "type": "string",
@@ -663,11 +674,11 @@
             }
           },
           "required": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "visible": [
-            "user-agent",
+            "User-Agent",
             "Content-Type"
           ],
           "additionalProperties": false,
@@ -735,17 +746,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -849,17 +860,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
@@ -963,17 +974,17 @@
           "type": "object",
           "description": "Headers for the http request",
           "properties": {
-            "user-agent": {
+            "User-Agent": {
               "type": "string",
-              "description": "User-Agent header",
-              "default": "ACI::REDDIT"
+              "description": "User-Agent header (required by Reddit API)",
+              "default": "web:aci.dev:v1.0.0 (by /u/aci_platform)"
             }
           },
           "required": [
-            "user-agent"
+            "User-Agent"
           ],
           "visible": [
-            "user-agent"
+            "User-Agent"
           ],
           "additionalProperties": false,
           "default": {}
