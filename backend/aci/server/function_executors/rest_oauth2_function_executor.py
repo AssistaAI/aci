@@ -50,3 +50,19 @@ class RestOAuth2FunctionExecutor(RestFunctionExecutor[OAuth2Scheme, OAuth2Scheme
                 raise NoImplementationFound(
                     f"Unsupported OAuth2 location, location={security_scheme.location}"
                 )
+
+        # Inject additional headers if specified
+        if security_scheme.additional_headers:
+            metadata = security_credentials.metadata or {}
+            for header_name, header_value_template in security_scheme.additional_headers.items():
+                # Resolve template variables from metadata
+                # e.g., "{{orgId}}" -> "2389290"
+                header_value = header_value_template
+                for key, value in metadata.items():
+                    header_value = header_value.replace(f"{{{{{key}}}}}", value)
+
+                headers[header_name] = header_value
+                logger.debug(
+                    f"Injected additional header, header_name={header_name}, "
+                    f"template={header_value_template}, resolved_value={header_value}"
+                )

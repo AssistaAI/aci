@@ -79,6 +79,13 @@ class OAuth2Scheme(BaseModel):
     redirect_url: str | None = Field(
         default=None, min_length=1, max_length=2048, description="Redirect URL for OAuth2 callback."
     )
+    additional_headers: dict[str, str] | None = Field(
+        default=None,
+        description="Additional headers to include in every API request. "
+        "Header values can use template variables that will be resolved at runtime: "
+        "{{orgId}} for Zoho apps (fetched from user's organizations during OAuth). "
+        "Example: {'orgId': '{{orgId}}'} for Zoho Desk",
+    )
 
 
 # NOTE: need to show these fields for custom oauth2 app feature.
@@ -187,6 +194,9 @@ class OAuth2SchemeCredentials(BaseModel):
     expires_at: int | None = None
     refresh_token: str | None = None
     raw_token_response: dict | None = None
+    # App-specific metadata for resolving template variables in additional_headers
+    # e.g., {"orgId": "2389290"} for Zoho apps
+    metadata: dict[str, str] | None = None
 
 
 class OAuth2SchemeCredentialsLimited(BaseModel):
