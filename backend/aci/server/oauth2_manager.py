@@ -3,6 +3,7 @@ import string
 import time
 from typing import Any, cast
 
+import httpx
 from authlib.integrations.httpx_client import AsyncOAuth2Client
 
 from aci.common.exceptions import OAuth2Error
@@ -104,9 +105,12 @@ class OAuth2Manager:
             **app_specific_params,
         }
 
-        if self.app_name in ["LINKEDIN", "X"]:
-            if self.app_name == "X":
-                auth_url_kwargs["code_verifier"] = code_verifier
+        if self.app_name == "LINKEDIN":
+            # LinkedIn doesn't support PKCE
+            pass
+        elif self.app_name == "X":
+            # X (Twitter) uses PKCE but doesn't use access_type/prompt
+            auth_url_kwargs["code_verifier"] = code_verifier
         else:
             auth_url_kwargs["code_verifier"] = code_verifier
             auth_url_kwargs["access_type"] = access_type
@@ -150,6 +154,9 @@ class OAuth2Manager:
                 # Note: client_id and client_secret are added automatically by authlib
                 # via token_endpoint_auth_method=client_secret_post
                 fetch_token_kwargs["grant_type"] = "authorization_code"
+            elif self.app_name == "X":
+                # X (Twitter) uses PKCE but doesn't require scope in token exchange
+                fetch_token_kwargs["code_verifier"] = code_verifier
             else:
                 fetch_token_kwargs["code_verifier"] = code_verifier
                 fetch_token_kwargs["scope"] = self.scope
@@ -216,7 +223,53 @@ class OAuth2Manager:
             logger.error(f"Failed to refresh access token, app_name={self.app_name}, error={e}")
             raise OAuth2Error("Failed to refresh access token") from e
 
-    def parse_fetch_token_response(self, token: dict) -> OAuth2SchemeCredentials:
+    async def _fetch_zoho_org_id(self, access_token: str, api_domain: str) -> str | None:
+        """
+        Fetch the organization ID for Zoho apps using the access token.
+
+        Args:
+            access_token: The OAuth2 access token
+            api_domain: The API domain from the token response (e.g., https://desk.zoho.com)
+
+        Returns:
+            The organization ID if found, None otherwise
+        """
+        try:
+            # Zoho returns the api_domain in the token response, but for Desk we need desk.zoho.com
+            # The myOrganizations endpoint returns the user's organizations
+            url = f"{api_domain}/api/v1/myOrganizations"
+
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    url,
+                    headers={"Authorization": f"Zoho-oauthtoken {access_token}"},
+                    timeout=10.0,
+                )
+                response.raise_for_status()
+
+                orgs_data = response.json()
+                logger.info(f"Fetched Zoho organizations, app_name={self.app_name}, count={len(orgs_data.get('data', []))}")
+
+                # Get the first (default) organization ID
+                if "data" in orgs_data and len(orgs_data["data"]) > 0:
+                    org_id = orgs_data["data"][0].get("id")
+                    if org_id:
+                        logger.info(f"Successfully fetched Zoho orgId, app_name={self.app_name}, orgId={org_id}")
+                        return str(org_id)
+
+                logger.warning(f"No organizations found in Zoho response, app_name={self.app_name}")
+                return None
+
+        except Exception as e:
+            logger.error(
+                f"Failed to fetch Zoho organization ID, app_name={self.app_name}, "
+                f"error={e}, error_type={type(e).__name__}"
+            )
+            # Don't fail the OAuth flow if we can't fetch orgId
+            # User can manually configure it later
+            return None
+
+    async def parse_fetch_token_response(self, token: dict) -> OAuth2SchemeCredentials:
         """
         Parse OAuth2SchemeCredentials from token response with app-specific handling.
 
@@ -249,6 +302,15 @@ class OAuth2Manager:
 
         # TODO: if scope is present, check if it matches the scope in the App Configuration
 
+        # Handle Zoho-specific metadata (orgId)
+        metadata: dict[str, str] | None = None
+        if self.app_name == "ZOHO_DESK":
+            # Zoho returns api_domain in the token response
+            api_domain = data.get("api_domain", "https://desk.zoho.com")
+            org_id = await self._fetch_zoho_org_id(data["access_token"], api_domain)
+            if org_id:
+                metadata = {"orgId": org_id}
+
         return OAuth2SchemeCredentials(
             client_id=self.client_id,
             client_secret=self.client_secret,
@@ -258,6 +320,7 @@ class OAuth2Manager:
             expires_at=expires_at,
             refresh_token=data.get("refresh_token"),
             raw_token_response=token,
+            metadata=metadata,
         )
 
     @staticmethod
