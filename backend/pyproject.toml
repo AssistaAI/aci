@@ -105,6 +105,8 @@ warn_unused_configs = true
 warn_redundant_casts = true
 warn_unreachable = true
 strict_equality = true
+# Exclude test directories
+exclude = ["apps/app_tests/"]
 
 # Ignore missing type stubs for specific modules
 [[tool.mypy.overrides]]
