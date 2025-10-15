@@ -531,7 +531,7 @@ async def linked_accounts_oauth2_callback(
         code_verifier=state.code_verifier
         or "",  # Pass empty string if None for apps that don't support PKCE
     )
-    security_credentials = oauth2_manager.parse_fetch_token_response(token_response)
+    security_credentials = await oauth2_manager.parse_fetch_token_response(token_response)
 
     # if the linked account already exists, update it, otherwise create a new one
     # TODO: consider separating the logic for updating and creating a linked account or give warning to clients
