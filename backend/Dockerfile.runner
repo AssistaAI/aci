@@ -10,4 +10,6 @@ RUN uv sync --no-install-project
 ENV PATH="/workdir/.venv/bin:$PATH"
 ENV PYTHONPATH=/workdir
 
-RUN playwright install chromium --with-deps --no-shell
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /var/cache/apt/archives/partial && \
+    playwright install chromium --with-deps --no-shell || true

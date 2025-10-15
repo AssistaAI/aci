@@ -1,0 +1,104 @@
+name: aci
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d local_db"]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 10s
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: local_db
+    ports:
+      - "5432:5432"
+    restart: no
+    # Limit resources
+    mem_limit: 512m
+    cpus: 1.0
+    shm_size: 128m
+
+  aws:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - DEBUG=0  # Disable debug mode to save resources
+      - DATA_DIR=/var/lib/localstack/data
+      - SERVICES=kms
+      - LS_LOG=error  # Only show errors
+    volumes:
+      - ./scripts/create-kms-encryption-key.sh:/etc/localstack/init/ready.d/create-kms-encryption-key.sh
+    # Limit resources
+    mem_limit: 512m
+    cpus: 0.5
+
+  propelauth_mock:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    ports:
+      - "12800:12800"
+    working_dir: /workdir
+    volumes:
+      - ./mock/propelauth_mock_server.py:/workdir/propelauth_mock_server.py
+    command: uvicorn propelauth_mock_server:app --proxy-headers --forwarded-allow-ips=* --host 0.0.0.0 --port 12800
+    # Limit resources
+    mem_limit: 256m
+    cpus: 0.5
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    healthcheck:
+      test: ["CMD-SHELL", "curl localhost:8000/v1/health"]
+      interval: 30s  # Less frequent checks
+      retries: 3
+      start_period: 10s
+      timeout: 10s
+    env_file:
+      - .env.local
+    volumes:
+      - ./aci/server:/workdir/aci/server
+      - ./aci/common:/workdir/aci/common
+      - ./mock/propelauth_fastapi_mock.py:/workdir/.venv/lib/python3.12/site-packages/propelauth_fastapi/__init__.py
+    ports:
+      - "8000:8000"
+    command: uvicorn aci.server.main:app --proxy-headers --forwarded-allow-ips=* --host 0.0.0.0 --port 8000 --reload --no-access-log
+    depends_on:
+      db:
+        condition: service_healthy
+      aws:
+        condition: service_healthy
+    restart: no
+    # Limit resources
+    mem_limit: 1g
+    cpus: 1.0
+
+  # Runner - pornește doar când ai nevoie de CLI sau migrații
+  # Folosește: docker-compose -f compose.minimal.yml run --rm runner /bin/bash
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    env_file:
+      - .env.local
+    volumes:
+      - ./aci:/workdir/aci
+      - ./apps:/workdir/apps
+      - ./scripts:/workdir/scripts
+      - ./evals:/workdir/evals
+      - ./alembic.ini:/workdir/alembic.ini
+      - ./mock/propelauth_fastapi_mock.py:/workdir/.venv/lib/python3.12/site-packages/propelauth_fastapi/__init__.py
+    command: /bin/sh -c "alembic upgrade head && echo 'Migrations complete. Runner container will exit.' && exit 0"
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - tools  # Nu pornește automat, doar când specificat
+    mem_limit: 512m
+    cpus: 0.5

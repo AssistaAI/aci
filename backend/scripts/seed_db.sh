@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 set -euo pipefail
@@ -6,7 +7,7 @@ set -euo pipefail
 declare -a temp_files=()
 
 # Set up trap to clean up temporary files
-trap 'rm -f "${temp_files[@]}"' EXIT
+trap 'if [ ${#temp_files[@]} -gt 0 ]; then rm -f "${temp_files[@]}"; fi' EXIT
 
 function usage() {
   cat <<EOF
@@ -75,13 +76,13 @@ EOF
 seed_test_apps() {
   gmail_secrets_file="$(create_mock_secrets "./apps/gmail/")"
 
-  python -m aci.cli upsert-app --app-file "./apps/brave_search/app.json" --skip-dry-run
-  python -m aci.cli upsert-app --app-file "./apps/hackernews/app.json" --skip-dry-run
-  python -m aci.cli upsert-app --app-file "./apps/gmail/app.json" --secrets-file "$gmail_secrets_file" --skip-dry-run
+  python3 -m aci.cli upsert-app --app-file "./apps/brave_search/app.json" --skip-dry-run
+  python3 -m aci.cli upsert-app --app-file "./apps/hackernews/app.json" --skip-dry-run
+  python3 -m aci.cli upsert-app --app-file "./apps/gmail/app.json" --secrets-file "$gmail_secrets_file" --skip-dry-run
 
-  python -m aci.cli upsert-functions --functions-file "./apps/brave_search/functions.json" --skip-dry-run
-  python -m aci.cli upsert-functions --functions-file "./apps/hackernews/functions.json" --skip-dry-run
-  python -m aci.cli upsert-functions --functions-file "./apps/gmail/functions.json" --skip-dry-run
+  python3 -m aci.cli upsert-functions --functions-file "./apps/brave_search/functions.json" --skip-dry-run
+  python3 -m aci.cli upsert-functions --functions-file "./apps/hackernews/functions.json" --skip-dry-run
+  python3 -m aci.cli upsert-functions --functions-file "./apps/gmail/functions.json" --skip-dry-run
 }
 
 seed_all_apps() {
@@ -97,12 +98,12 @@ seed_all_apps() {
 
     # Check if secrets file exists and construct command accordingly
     if [ -f "$secrets_file" ]; then
-      python -m aci.cli upsert-app \
+      python3 -m aci.cli upsert-app \
         --app-file "$app_file" \
         --secrets-file "$secrets_file" \
         --skip-dry-run
     else
-      python -m aci.cli upsert-app \
+      python3 -m aci.cli upsert-app \
         --app-file "$app_file" \
         --skip-dry-run
     fi
@@ -110,7 +111,7 @@ seed_all_apps() {
 
   # Seed the database with Functions
   for functions_file in ./apps/*/functions.json; do
-    python -m aci.cli upsert-functions \
+    python3 -m aci.cli upsert-functions \
       --functions-file "$functions_file" \
       --skip-dry-run
   done
@@ -118,11 +119,11 @@ seed_all_apps() {
 
 seed_required_data() {
   # Seed the database with Plans
-  python -m aci.cli populate-subscription-plans --skip-dry-run
+  python3 -m aci.cli populate-subscription-plans --skip-dry-run
 
   # Seed the database with a default project and a default agent. The command will
   # output the API key of that agent that can be used in the swagger UI.
-  python -m aci.cli create-random-api-key --visibility-access public --org-id 107e06da-e857-4864-bc1d-4adcba02ab76
+  python3 -m aci.cli create-random-api-key --visibility-access public --org-id 107e06da-e857-4864-bc1d-4adcba02ab76
 }
 
 # Execute the script functions
