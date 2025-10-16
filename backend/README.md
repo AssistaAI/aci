@@ -9,7 +9,7 @@ The backend component of ACI.dev provides the server infrastructure, API endpoin
 
 - [ACI.dev Backend](#acidev-backend)
   - [Overview](#overview)
-  - [Code Structure](#code-structure)
+  - [Code Structures](#code-structures)
   - [Development Setup](#development-setup)
     - [Prerequisites](#prerequisites)
     - [Code Style](#code-style)
@@ -19,13 +19,22 @@ The backend component of ACI.dev provides the server infrastructure, API endpoin
   - [Database Management](#database-management)
     - [Working with Migrations](#working-with-migrations)
   - [PropelAuth Configuration](#propelauth-configuration)
+    - [Values to be filled](#values-to-be-filled)
+    - [Setup Steps](#setup-steps)
+      - [1. Set Up Ngrok](#1-set-up-ngrok)
+      - [2. Configure PropelAuth Settings](#2-configure-propelauth-settings)
+      - [3. Set Up Webhooks](#3-set-up-webhooks)
+      - [4. Update Docker Configuration](#4-update-docker-configuration)
+      - [5. Restart the Docker container](#5-restart-the-docker-container)
+      - [6. Verify Your Setup](#6-verify-your-setup)
   - [Stripe Webhooks](#stripe-webhooks)
   - [Admin CLI](#admin-cli)
   - [Running Evaluations](#running-evaluations)
+    - [Running the Evaluation Pipeline](#running-the-evaluation-pipeline)
   - [Contributing](#contributing)
   - [License](#license)
 
-## Code Structure
+## Code Structures
 
 The backend consists of several main components:
 
