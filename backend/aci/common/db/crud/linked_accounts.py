@@ -2,7 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from sqlalchemy import distinct, exists, func, select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from aci.common import validators
 from aci.common.db.sql_models import App, LinkedAccount, Project
@@ -23,15 +23,35 @@ def get_linked_accounts(
     project_id: UUID,
     app_name: str | None,
     linked_account_owner_id: str | None,
+    limit: int | None = None,
+    offset: int | None = None,
+    load_app: bool = True,
 ) -> list[LinkedAccount]:
-    """Get all linked accounts under a project, with optional filters"""
+    """
+    Get all linked accounts under a project, with optional filters.
+
+    Args:
+        load_app: If True, eagerly load the app relationship in one query (default: True).
+                 This eliminates N+1 queries when app data is needed.
+        limit: Maximum number of results to return.
+        offset: Number of results to skip before returning.
+    """
     statement = select(LinkedAccount).filter_by(project_id=project_id)
+
+    if load_app:
+        statement = statement.options(joinedload(LinkedAccount.app))
+
     if app_name:
         statement = statement.join(App, LinkedAccount.app_id == App.id).filter(App.name == app_name)
     if linked_account_owner_id:
         statement = statement.filter(
             LinkedAccount.linked_account_owner_id == linked_account_owner_id
         )
+
+    if offset is not None:
+        statement = statement.offset(offset)
+    if limit is not None:
+        statement = statement.limit(limit)
 
     return list(db_session.execute(statement).scalars().all())
 

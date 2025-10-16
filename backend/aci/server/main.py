@@ -30,6 +30,7 @@ from aci.server.routes import (
     health,
     linked_accounts,
     organizations,
+    playground,
     projects,
     webhooks,
 )
@@ -196,4 +197,11 @@ app.include_router(
     docs.router,
     prefix=config.ROUTER_PREFIX_DOCS,
     tags=[config.ROUTER_PREFIX_DOCS.split("/")[-1]],
+)
+
+app.include_router(
+    playground.router,
+    prefix=config.ROUTER_PREFIX_PLAYGROUND,
+    tags=[config.ROUTER_PREFIX_PLAYGROUND.split("/")[-1]],
+    dependencies=[Depends(deps.validate_api_key)],
 )

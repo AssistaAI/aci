@@ -5,10 +5,10 @@ import { Project } from "../types/project";
 import { LinkedAccount } from "../types/linkedaccount";
 import { Agent } from "../types/project";
 import { getAllLinkedAccounts } from "../api/linkedaccount";
-import { getApps } from "../api/app";
 import { App } from "../types/app";
 import { AppFunction } from "../types/appfunction";
 import { searchFunctions } from "../api/appfunction";
+import type { PlaygroundAppSummary, PlaygroundLinkedAccountOwner } from "../api/playground";
 
 interface AgentState {
   allowedApps: string[];
@@ -21,6 +21,9 @@ interface AgentState {
   apps: App[];
   appFunctions: AppFunction[];
   loadingFunctions: boolean;
+  // Lightweight playground data
+  playgroundApps: PlaygroundAppSummary[];
+  playgroundOwners: PlaygroundLinkedAccountOwner[];
   setSelectedApps: (apps: string[]) => void;
   setSelectedLinkedAccountOwnerId: (id: string) => void;
   setAllowedApps: (apps: string[]) => void;
@@ -32,6 +35,8 @@ interface AgentState {
   getUniqueLinkedAccounts: () => LinkedAccount[];
   fetchApps: (apiKey: string) => Promise<App[]>;
   getAvailableApps: () => App[];
+  // Lazy load functions only when needed
+  fetchAppFunctionsLazy: (apiKey: string, appNames: string[]) => Promise<AppFunction[]>;
   fetchAppFunctions: (apiKey: string) => Promise<AppFunction[]>;
   getAvailableAppFunctions: () => AppFunction[];
   initializeFromProject: (project: Project) => void;
@@ -50,6 +55,8 @@ export const useAgentStore = create<AgentState>()(
       apps: [],
       appFunctions: [],
       loadingFunctions: false,
+      playgroundApps: [],
+      playgroundOwners: [],
       setSelectedApps: (apps: string[]) =>
         set((state) => ({ ...state, selectedApps: apps })),
       setSelectedLinkedAccountOwnerId: (id: string) =>
@@ -140,6 +147,46 @@ export const useAgentStore = create<AgentState>()(
         }
         return filteredApps;
       },
+      /**
+       * Lazy load functions only for specific apps (more efficient)
+       * Use this when you know which apps the user selected
+       */
+      fetchAppFunctionsLazy: async (apiKey: string, appNames: string[]) => {
+        if (appNames.length === 0) return [];
+
+        set((state) => ({ ...state, loadingFunctions: true }));
+        try {
+          let functionsData = await searchFunctions(
+            {
+              app_names: appNames,
+              allowed_apps_only: true,
+              limit: 1000,
+            },
+            apiKey,
+          );
+          functionsData = functionsData.sort((a, b) =>
+            a.name.localeCompare(b.name),
+          );
+
+          // Merge with existing functions (deduplicate by name)
+          const existingFunctions = get().appFunctions;
+          const functionMap = new Map(existingFunctions.map((f) => [f.name, f]));
+          functionsData.forEach((f) => functionMap.set(f.name, f));
+          const mergedFunctions = Array.from(functionMap.values());
+
+          set((state) => ({ ...state, appFunctions: mergedFunctions }));
+          return functionsData;
+        } catch (error) {
+          console.error("Failed to fetch functions:", error);
+          throw error;
+        } finally {
+          set((state) => ({ ...state, loadingFunctions: false }));
+        }
+      },
+      /**
+       * Fetch all functions (legacy method - avoid using for performance)
+       * Prefer fetchAppFunctionsLazy when possible
+       */
       fetchAppFunctions: async (apiKey: string) => {
         set((state) => ({ ...state, loadingFunctions: true }));
         try {

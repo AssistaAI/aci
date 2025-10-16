@@ -126,7 +126,7 @@ class AppsList(BaseModel):
 
     app_names: list[str] | None = Field(default=None, description="List of app names to filter by.")
     limit: int = Field(
-        default=100, ge=1, le=1000, description="Maximum number of Apps per response."
+        default=50, ge=1, le=1000, description="Maximum number of Apps per response (default: 50 for performance)."
     )
     offset: int = Field(default=0, ge=0, description="Pagination offset.")
 

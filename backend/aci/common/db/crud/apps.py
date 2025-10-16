@@ -3,7 +3,7 @@ CRUD operations for apps. (not including app_configurations)
 """
 
 from sqlalchemy import select, update
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from aci.common.db.sql_models import App
 from aci.common.enums import SecurityScheme, Visibility
@@ -66,8 +66,20 @@ def update_app_default_security_credentials(
     app.default_security_credentials_by_scheme[security_scheme] = security_credentials
 
 
-def get_app(db_session: Session, app_name: str, public_only: bool, active_only: bool) -> App | None:
+def get_app(
+    db_session: Session, app_name: str, public_only: bool, active_only: bool, load_functions: bool = True
+) -> App | None:
+    """
+    Get a single app by name.
+
+    Args:
+        load_functions: If True, eagerly load all functions in one query (default: True).
+                       Set to False if you don't need functions to avoid loading them.
+    """
     statement = select(App).filter_by(name=app_name)
+
+    if load_functions:
+        statement = statement.options(joinedload(App.functions))
 
     if active_only:
         statement = statement.filter(App.active)
@@ -84,8 +96,21 @@ def get_apps(
     app_names: list[str] | None,
     limit: int | None,
     offset: int | None,
+    load_functions: bool = True,
 ) -> list[App]:
+    """
+    Get multiple apps with optional filtering.
+
+    Args:
+        load_functions: If True, eagerly load all functions in one query (default: True).
+                       Set to False if you don't need functions to avoid loading them.
+                       This eliminates N+1 queries when functions are needed.
+    """
     statement = select(App)
+
+    if load_functions:
+        statement = statement.options(joinedload(App.functions))
+
     if public_only:
         statement = statement.filter(App.visibility == Visibility.PUBLIC)
     if active_only:
@@ -108,9 +133,19 @@ def search_apps(
     intent_embedding: list[float] | None,
     limit: int,
     offset: int,
+    load_functions: bool = False,
 ) -> list[tuple[App, float | None]]:
-    """Get a list of apps with optional filtering by categories and sorting by vector similarity to intent. and pagination."""
+    """
+    Get a list of apps with optional filtering by categories and sorting by vector similarity to intent.
+
+    Args:
+        load_functions: If True, eagerly load all functions (default: False for search).
+                       Search typically doesn't need function details.
+    """
     statement = select(App)
+
+    if load_functions:
+        statement = statement.options(joinedload(App.functions))
 
     # filter out private apps
     if public_only:

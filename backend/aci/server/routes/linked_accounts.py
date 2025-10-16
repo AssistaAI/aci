@@ -599,6 +599,7 @@ async def list_linked_accounts(
     - Optionally filter by app_name and linked_account_owner_id.
     - app_name + linked_account_owner_id can uniquely identify a linked account.
     - This can be an alternatively way to GET /linked-accounts/{linked_account_id} for getting a specific linked account.
+    - Supports pagination via limit and offset parameters.
     """
 
     linked_accounts = crud.linked_accounts.get_linked_accounts(
@@ -606,6 +607,8 @@ async def list_linked_accounts(
         context.project.id,
         query_params.app_name,
         query_params.linked_account_owner_id,
+        limit=query_params.limit,
+        offset=query_params.offset,
     )
 
     return linked_accounts

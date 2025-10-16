@@ -65,6 +65,7 @@ ROUTER_PREFIX_WEBHOOKS = "/v1/webhooks"
 ROUTER_PREFIX_BILLING = "/v1/billing"
 ROUTER_PREFIX_ORGANIZATIONS = "/v1/organizations"
 ROUTER_PREFIX_DOCS = "/v1/docs"
+ROUTER_PREFIX_PLAYGROUND = "/v1/playground"
 
 # DEV PORTAL
 DEV_PORTAL_URL = check_and_get_env_variable("SERVER_DEV_PORTAL_URL")

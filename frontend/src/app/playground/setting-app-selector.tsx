@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Wrench, Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useMetaInfo } from "@/components/context/metainfo";
 import {
   Command,
   CommandEmpty,
@@ -41,6 +42,8 @@ export function AppMultiSelector() {
     selectedFunctions,
     setSelectedFunctions,
     appFunctions,
+    fetchAppFunctionsLazy,
+    getApiKey,
   } = useAgentStore(
     useShallow((state) => ({
       selectedApps: state.selectedApps,
@@ -49,6 +52,8 @@ export function AppMultiSelector() {
       selectedFunctions: state.selectedFunctions,
       setSelectedFunctions: state.setSelectedFunctions,
       appFunctions: state.appFunctions,
+      fetchAppFunctionsLazy: state.fetchAppFunctionsLazy,
+      getApiKey: state.getApiKey,
     })),
   );
 
@@ -74,7 +79,8 @@ export function AppMultiSelector() {
     ),
   }));
 
-  const handleAppChange = (appId: string) => {
+  const handleAppChange = async (appId: string) => {
+    const { activeProject } = useMetaInfo();
     if (selectedApps.includes(appId)) {
       setSelectedApps(selectedApps.filter((id) => id !== appId));
       // also remove all functions related to the app
@@ -91,7 +97,19 @@ export function AppMultiSelector() {
         toast.error(`You can only select up to ${MAX_APPS} apps at a time`);
         return;
       }
-      setSelectedApps([...selectedApps, appId]);
+      const newSelectedApps = [...selectedApps, appId];
+      setSelectedApps(newSelectedApps);
+
+      // Lazy load functions for the newly selected app
+      if (activeProject) {
+        try {
+          const apiKey = getApiKey(activeProject);
+          await fetchAppFunctionsLazy(apiKey, [appId]);
+        } catch (error) {
+          console.error("Failed to load functions for app:", appId, error);
+          // Don't show error toast, silently fail - functions will load later if needed
+        }
+      }
     }
   };
 

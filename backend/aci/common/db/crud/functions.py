@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
 from sqlalchemy.orm import Session
 
 from aci.common import utils
@@ -178,3 +178,29 @@ def set_function_visibility(
 ) -> None:
     statement = update(Function).filter_by(name=function_name).values(visibility=visibility)
     db_session.execute(statement)
+
+
+def count_functions(
+    db_session: Session,
+    public_only: bool,
+    active_only: bool,
+    app_names: list[str] | None,
+) -> int:
+    """
+    Count total functions with optional filtering - lightweight query for performance.
+    Used by playground to show total function count without loading all function data.
+    """
+    statement = select(func.count(Function.id)).join(App, Function.app_id == App.id)
+
+    if app_names is not None:
+        statement = statement.filter(App.name.in_(app_names))
+
+    if public_only:
+        statement = statement.filter(App.visibility == Visibility.PUBLIC).filter(
+            Function.visibility == Visibility.PUBLIC
+        )
+
+    if active_only:
+        statement = statement.filter(App.active).filter(Function.active)
+
+    return db_session.execute(statement).scalar_one()

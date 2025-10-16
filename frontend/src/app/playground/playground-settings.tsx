@@ -41,10 +41,12 @@ export function SettingsSidebar({ status, setMessages }: SettingsSidebarProps) {
       try {
         initializeFromProject(activeProject);
         const apiKey = getApiKey(activeProject);
-        // Initialize settings data (agents, linked accounts, apps, app functions)
+        // Only load linked accounts and apps upfront
+        // Functions will be loaded lazily when apps are selected
         await fetchLinkedAccounts(apiKey);
         await fetchApps(apiKey);
-        await fetchAppFunctions(apiKey);
+        // DON'T load all functions - they'll be loaded when user selects apps
+        // await fetchAppFunctions(apiKey); // REMOVED for performance
       } catch (error) {
         console.error("Error initializing data:", error);
         toast.error("Failed to initialize data");
@@ -57,7 +59,7 @@ export function SettingsSidebar({ status, setMessages }: SettingsSidebarProps) {
     initializeFromProject,
     fetchLinkedAccounts,
     fetchApps,
-    fetchAppFunctions,
+    // fetchAppFunctions removed
     getApiKey,
   ]);
   return (
