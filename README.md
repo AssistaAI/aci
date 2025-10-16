@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="frontend/public/aci-dev-full-logo-light-bg.svg" alt="ACI.dev Logo" width="100%">
 </p>
