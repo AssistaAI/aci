@@ -39,7 +39,7 @@ class PlaygroundInitResponse(BaseModel):
 
 
 @router.get("/init", response_model=PlaygroundInitResponse)
-async def initialize_playground(
+def initialize_playground(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
     linked_account_owner_id: str | None = None,
 ) -> PlaygroundInitResponse:
@@ -52,6 +52,8 @@ async def initialize_playground(
     - Function count: Total number of functions available
 
     If linked_account_owner_id is provided, only return apps for that owner.
+
+    Security: Only returns public apps and functions to prevent exposure of private integrations.
     """
     # Get linked accounts (with app relationship loaded efficiently)
     linked_accounts = crud.linked_accounts.get_linked_accounts(
@@ -79,9 +81,10 @@ async def initialize_playground(
     ]
 
     # Get apps (without functions to reduce payload size)
+    # Security: Only return public apps to prevent exposure of private integrations
     apps_data = crud.apps.get_apps(
         context.db_session,
-        public_only=False,
+        public_only=True,
         active_only=True,
         app_names=list(app_names) if app_names else None,
         limit=None,
@@ -89,19 +92,23 @@ async def initialize_playground(
         load_functions=False,  # Don't load functions - they're not needed yet
     )
 
-    apps = [
-        PlaygroundAppSummary(
-            name=app.name,
-            display_name=app.display_name,
-            logo=app.logo,
-        )
-        for app in apps_data
-    ]
+    apps = sorted(
+        [
+            PlaygroundAppSummary(
+                name=app.name,
+                display_name=app.display_name,
+                logo=app.logo,
+            )
+            for app in apps_data
+        ],
+        key=lambda x: x.display_name,
+    )
 
     # Get total function count for selected apps (lightweight query)
+    # Security: Only count public functions
     total_function_count = crud.functions.count_functions(
         context.db_session,
-        public_only=False,
+        public_only=True,
         active_only=True,
         app_names=list(app_names) if app_names else None,
     )

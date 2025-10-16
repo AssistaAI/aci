@@ -223,21 +223,19 @@ class OAuth2Manager:
             logger.error(f"Failed to refresh access token, app_name={self.app_name}, error={e}")
             raise OAuth2Error("Failed to refresh access token") from e
 
-    async def _fetch_zoho_org_id(self, access_token: str, api_domain: str) -> str | None:
+    async def _fetch_zoho_org_id(self, access_token: str) -> str | None:
         """
-        Fetch the organization ID for Zoho apps using the access token.
+        Fetch the organization ID for Zoho Desk using the access token.
 
         Args:
             access_token: The OAuth2 access token
-            api_domain: The API domain from the token response (e.g., https://desk.zoho.com)
 
         Returns:
             The organization ID if found, None otherwise
         """
         try:
-            # Zoho returns the api_domain in the token response, but for Desk we need desk.zoho.com
-            # The myOrganizations endpoint returns the user's organizations
-            url = f"{api_domain}/api/v1/myOrganizations"
+            # Zoho Desk uses desk.zoho.com for organization endpoints
+            url = "https://desk.zoho.com/api/v1/myOrganizations"
 
             async with httpx.AsyncClient() as client:
                 response = await client.get(
@@ -248,22 +246,36 @@ class OAuth2Manager:
                 response.raise_for_status()
 
                 orgs_data = response.json()
-                logger.info(f"Fetched Zoho organizations, app_name={self.app_name}, count={len(orgs_data.get('data', []))}")
+                org_count = len(orgs_data.get("data", []))
+                logger.info(f"Fetched Zoho organizations, app_name={self.app_name}, count={org_count}")
 
                 # Get the first (default) organization ID
                 if "data" in orgs_data and len(orgs_data["data"]) > 0:
                     org_id = orgs_data["data"][0].get("id")
                     if org_id:
-                        logger.info(f"Successfully fetched Zoho orgId, app_name={self.app_name}, orgId={org_id}")
+                        # Don't log orgId at info level - treat as potentially sensitive
+                        logger.debug(f"Successfully fetched Zoho orgId for app_name={self.app_name}")
                         return str(org_id)
 
                 logger.warning(f"No organizations found in Zoho response, app_name={self.app_name}")
                 return None
 
+        except httpx.HTTPStatusError as e:
+            logger.error(
+                f"HTTP error fetching Zoho organization ID, app_name={self.app_name}, "
+                f"status={e.response.status_code}"
+            )
+            return None
+        except httpx.RequestError as e:
+            logger.error(
+                f"Network error fetching Zoho organization ID, app_name={self.app_name}, "
+                f"error_type={type(e).__name__}"
+            )
+            return None
         except Exception as e:
             logger.error(
-                f"Failed to fetch Zoho organization ID, app_name={self.app_name}, "
-                f"error={e}, error_type={type(e).__name__}"
+                f"Unexpected error fetching Zoho organization ID, app_name={self.app_name}, "
+                f"error_type={type(e).__name__}"
             )
             # Don't fail the OAuth flow if we can't fetch orgId
             # User can manually configure it later
@@ -305,9 +317,8 @@ class OAuth2Manager:
         # Handle Zoho-specific metadata (orgId)
         metadata: dict[str, str] | None = None
         if self.app_name == "ZOHO_DESK":
-            # Zoho returns api_domain in the token response
-            api_domain = data.get("api_domain", "https://desk.zoho.com")
-            org_id = await self._fetch_zoho_org_id(data["access_token"], api_domain)
+            # Fetch Zoho Desk organization ID
+            org_id = await self._fetch_zoho_org_id(data["access_token"])
             if org_id:
                 metadata = {"orgId": org_id}
 

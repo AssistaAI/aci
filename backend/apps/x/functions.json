@@ -13,7 +13,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/tweets/{id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -87,7 +87,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/tweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -150,7 +150,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/tweets/search/recent",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -221,7 +221,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/tweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -292,7 +292,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/tweets/{id}/retweeted_by",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -363,7 +363,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -426,7 +426,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -478,7 +478,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/by/username/{username}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -541,7 +541,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/by",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -593,7 +593,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/lists/{id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -667,7 +667,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/owned_lists",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -738,7 +738,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/lists/{id}/tweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -820,7 +820,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/lists/{id}/members",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -891,7 +891,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/list_memberships",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -973,7 +973,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/followed_lists",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1055,7 +1055,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/spaces/{id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1129,7 +1129,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/spaces",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1192,7 +1192,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/spaces/by/creator_ids",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1255,7 +1255,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/spaces/search",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1327,7 +1327,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/tweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1523,7 +1523,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/tweets/{id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1569,7 +1569,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/mentions",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1651,7 +1651,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/liked_tweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1733,7 +1733,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/tweets/{id}/liking_users",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1804,7 +1804,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/likes",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1888,7 +1888,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/likes/{tweet_id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -1941,7 +1941,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/retweets",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2026,7 +2026,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/retweets/{source_tweet_id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2078,7 +2078,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/following",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2149,7 +2149,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/followers",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2220,7 +2220,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/following",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2304,7 +2304,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/following/{target_user_id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2356,7 +2356,7 @@
     "protocol_data": {
       "method": "GET",
       "path": "/2/users/{id}/bookmarks",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2438,7 +2438,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/bookmarks",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2522,7 +2522,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/bookmarks/{tweet_id}",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
@@ -2575,7 +2575,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/media/upload",
-      "server_url": "https://api.twitter.com"
+      "server_url": "https://api.x.com"
     },
     "parameters": {
       "type": "object",
