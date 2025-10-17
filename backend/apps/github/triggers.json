@@ -1,0 +1,271 @@
+[
+  {
+    "name": "GITHUB__PUSH",
+    "description": "Triggered when code is pushed to a repository",
+    "trigger_type": "push",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "push",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "delivery_header": "X-GitHub-Delivery"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner (username or organization)",
+          "examples": ["octocat", "github"]
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name",
+          "examples": ["Hello-World"]
+        },
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name to filter push events",
+          "examples": ["main", "develop"]
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__PULL_REQUEST_OPENED",
+    "description": "Triggered when a pull request is opened",
+    "trigger_type": "pull_request",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "pull_request",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "opened"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner (username or organization)",
+          "examples": ["octocat"]
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name",
+          "examples": ["Hello-World"]
+        },
+        "action": {
+          "type": "string",
+          "description": "Pull request action to filter",
+          "enum": ["opened", "closed", "reopened", "edited", "synchronize"],
+          "default": "opened"
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__PULL_REQUEST_MERGED",
+    "description": "Triggered when a pull request is merged",
+    "trigger_type": "pull_request",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "pull_request",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "closed",
+      "merged_filter": true
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__ISSUE_OPENED",
+    "description": "Triggered when a new issue is opened",
+    "trigger_type": "issues",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "issues",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "opened"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        },
+        "label": {
+          "type": "string",
+          "description": "Optional label to filter issues",
+          "examples": ["bug", "enhancement"]
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__ISSUE_CLOSED",
+    "description": "Triggered when an issue is closed",
+    "trigger_type": "issues",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "issues",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "closed"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__STAR_ADDED",
+    "description": "Triggered when a repository is starred",
+    "trigger_type": "star",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "star",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "created"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__RELEASE_PUBLISHED",
+    "description": "Triggered when a new release is published",
+    "trigger_type": "release",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "release",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "published"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        },
+        "prerelease": {
+          "type": "boolean",
+          "description": "Include pre-releases",
+          "default": true
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  },
+  {
+    "name": "GITHUB__WORKFLOW_RUN_COMPLETED",
+    "description": "Triggered when a GitHub Actions workflow run is completed",
+    "trigger_type": "workflow_run",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GitHub REST API",
+      "api_endpoint": "/repos/{owner}/{repo}/hooks",
+      "event_type": "workflow_run",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Hub-Signature-256",
+      "event_header": "X-GitHub-Event",
+      "action_filter": "completed"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name"
+        },
+        "workflow_name": {
+          "type": "string",
+          "description": "Optional workflow name to filter",
+          "examples": ["CI", "Deploy"]
+        },
+        "conclusion": {
+          "type": "string",
+          "description": "Optional workflow conclusion to filter",
+          "enum": ["success", "failure", "cancelled", "skipped"],
+          "examples": ["failure"]
+        }
+      },
+      "required": ["owner", "repo"]
+    }
+  }
+]

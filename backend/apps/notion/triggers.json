@@ -1,0 +1,89 @@
+{
+  "triggers": [
+    {
+      "type": "page.created",
+      "display_name": "Page Created",
+      "description": "Triggers when a new page is created in any database or workspace"
+    },
+    {
+      "type": "page.content_updated",
+      "display_name": "Page Content Updated",
+      "description": "Triggers when page content is modified (aggregated events)"
+    },
+    {
+      "type": "page.properties_updated",
+      "display_name": "Page Properties Updated",
+      "description": "Triggers when page properties are changed"
+    },
+    {
+      "type": "page.moved",
+      "display_name": "Page Moved",
+      "description": "Triggers when a page is moved to a different parent"
+    },
+    {
+      "type": "page.deleted",
+      "display_name": "Page Deleted",
+      "description": "Triggers when a page is deleted"
+    },
+    {
+      "type": "page.undeleted",
+      "display_name": "Page Restored",
+      "description": "Triggers when a deleted page is restored"
+    },
+    {
+      "type": "page.locked",
+      "display_name": "Page Locked",
+      "description": "Triggers when a page is locked for editing"
+    },
+    {
+      "type": "page.unlocked",
+      "display_name": "Page Unlocked",
+      "description": "Triggers when a page is unlocked"
+    },
+    {
+      "type": "data_source.created",
+      "display_name": "Database Created",
+      "description": "Triggers when a new database is created"
+    },
+    {
+      "type": "data_source.content_updated",
+      "display_name": "Database Content Updated",
+      "description": "Triggers when database content is modified"
+    },
+    {
+      "type": "data_source.schema_updated",
+      "display_name": "Database Schema Updated",
+      "description": "Triggers when database schema/structure changes"
+    },
+    {
+      "type": "data_source.moved",
+      "display_name": "Database Moved",
+      "description": "Triggers when a database is moved"
+    },
+    {
+      "type": "data_source.deleted",
+      "display_name": "Database Deleted",
+      "description": "Triggers when a database is deleted"
+    },
+    {
+      "type": "data_source.undeleted",
+      "display_name": "Database Restored",
+      "description": "Triggers when a deleted database is restored"
+    },
+    {
+      "type": "comment.created",
+      "display_name": "Comment Created",
+      "description": "Triggers when a new comment is added"
+    },
+    {
+      "type": "comment.updated",
+      "display_name": "Comment Updated",
+      "description": "Triggers when a comment is edited"
+    },
+    {
+      "type": "comment.deleted",
+      "display_name": "Comment Deleted",
+      "description": "Triggers when a comment is removed"
+    }
+  ]
+}
