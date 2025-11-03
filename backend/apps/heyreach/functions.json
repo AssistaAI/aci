@@ -1,0 +1,157 @@
+[
+  {
+    "name": "HEYREACH__CHECK_API_KEY",
+    "description": "Test API key authentication by validating the provided API key",
+    "tags": ["heyreach", "authentication"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/public/auth/CheckApiKey",
+      "server_url": "https://api.heyreach.io",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "HEYREACH__GET_NETWORK_FOR_SENDER",
+    "description": "Retrieve a paginated list of network connections for a specified sender",
+    "tags": ["heyreach", "network", "connections"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/public/MyNetwork/GetMyNetworkForSender",
+      "server_url": "https://api.heyreach.io",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "description": "The page number to retrieve (0-indexed)",
+          "visibility": "public",
+          "in": "body",
+          "default": 0
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "Number of items per page",
+          "visibility": "public",
+          "in": "body",
+          "default": 100
+        },
+        "senderId": {
+          "type": "integer",
+          "description": "The ID of the sender account",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["senderId"]
+    }
+  },
+  {
+    "name": "HEYREACH__IS_CONNECTION",
+    "description": "Check if a lead is a connection for a specific sender account",
+    "tags": ["heyreach", "network", "connections"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/public/MyNetwork/IsConnection",
+      "server_url": "https://api.heyreach.io",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "senderAccountId": {
+          "type": "integer",
+          "description": "The ID of the sender account",
+          "visibility": "public",
+          "in": "body"
+        },
+        "leadProfileUrl": {
+          "type": "string",
+          "description": "The LinkedIn profile URL of the lead",
+          "visibility": "public",
+          "in": "body"
+        },
+        "leadLinkedInId": {
+          "type": "string",
+          "description": "The LinkedIn ID of the lead (alternative to profileUrl)",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["senderAccountId"]
+    }
+  },
+  {
+    "name": "HEYREACH__CREATE_WEBHOOK",
+    "description": "Create a new webhook to receive HeyReach events",
+    "tags": ["heyreach", "webhooks"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/public/webhooks/CreateWebhook",
+      "server_url": "https://api.heyreach.io",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The webhook callback URL",
+          "visibility": "public",
+          "in": "body"
+        },
+        "events": {
+          "type": "array",
+          "description": "List of event types to subscribe to",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["url", "events"]
+    }
+  },
+  {
+    "name": "HEYREACH__DELETE_WEBHOOK",
+    "description": "Delete an existing webhook by its ID",
+    "tags": ["heyreach", "webhooks"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/api/public/webhooks/DeleteWebhook",
+      "server_url": "https://api.heyreach.io",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "webhookId": {
+          "type": "string",
+          "description": "The ID of the webhook to delete",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["webhookId"]
+    }
+  }
+]

@@ -3,19 +3,19 @@
   "display_name": "X",
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/x.svg",
   "provider": "X Corp",
-  "version": "1.0.0",
-  "description": "\"Access posts, engage with users, and analyze trends instantly through chat to stay connected and informed.\"",
+  "version": "v2",
+  "description": "\"Post tweets, manage timelines, search content, and engage with followers through the X (Twitter) API v2.\"",
   "security_schemes": {
     "oauth2": {
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_X_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_X_CLIENT_SECRET }}",
-      "scope": "tweet.read tweet.write users.read",
-      "authorize_url": "https://x.com/i/oauth2/authorize",
-      "access_token_url": "https://api.x.com/2/oauth2/token",
-      "refresh_token_url": "https://api.x.com/2/oauth2/token"
+      "client_id": "{{ X_CLIENT_ID }}",
+      "client_secret": "{{ X_CLIENT_SECRET }}",
+      "scope": "tweet.read tweet.write users.read follows.read follows.write offline.access",
+      "authorize_url": "https://twitter.com/i/oauth2/authorize",
+      "access_token_url": "https://api.twitter.com/2/oauth2/token",
+      "refresh_token_url": "https://api.twitter.com/2/oauth2/token"
     }
   },
   "default_security_credentials_by_scheme": {},

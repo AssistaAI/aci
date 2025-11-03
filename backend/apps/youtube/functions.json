@@ -1,6 +1,6 @@
 [
   {
-    "name": "YOUTUBE__SEARCH",
+    "name": "YOUTUBE__SEARCH_VIDEOS",
     "description": "Search for YouTube resources including videos, channels, and playlists using various criteria. Quota impact: 100 units per call.",
     "tags": [
       "youtube",
@@ -271,7 +271,7 @@
     }
   },
   {
-    "name": "YOUTUBE__VIDEO_DETAILS",
+    "name": "YOUTUBE__GET_VIDEO_DETAILS",
     "description": "Get detailed information about specific YouTube videos by ID. Quota impact: 1 unit per call.",
     "tags": [
       "youtube",
@@ -463,7 +463,7 @@
     }
   },
   {
-    "name": "YOUTUBE__VIDEO_CATEGORIES",
+    "name": "YOUTUBE__GET_VIDEO_CATEGORIES",
     "description": "Retrieve a list of video categories that can be associated with YouTube videos. Quota impact: 1 unit per call.",
     "tags": [
       "youtube",

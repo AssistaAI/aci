@@ -1,0 +1,25 @@
+{
+  "name": "INSTANTLY",
+  "display_name": "Instantly",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/instantly.svg",
+  "provider": "Instantly AI",
+  "version": "v2",
+  "description": "\"Automate email outreach campaigns, manage email accounts, track leads, and analyze campaign performance through Instantly API.\"",
+  "security_schemes": {
+    "api_key": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "api_key": "{{ INSTANTLY_API_KEY }}"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Sales",
+    "Marketing",
+    "Email Automation",
+    "Outreach"
+  ],
+  "visibility": "public",
+  "active": true
+}

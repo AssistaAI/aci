@@ -6,10 +6,16 @@
   "version": "2023.10",
   "description": "\"Manage products, process orders, track inventory, and grow your online store effortlessly through simple chat commands.\"",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
       "location": "header",
-      "name": "X-Shopify-Access-Token",
-      "prefix": null
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ SHOPIFY_CLIENT_ID }}",
+      "client_secret": "{{ SHOPIFY_CLIENT_SECRET }}",
+      "scope": "read_products,write_products,read_orders,write_orders,read_customers,write_customers,read_inventory,write_inventory,read_fulfillments,write_fulfillments,read_shipping,write_shipping,read_discounts,write_discounts,read_price_rules,write_price_rules,read_content,write_content,read_themes,write_themes,read_analytics,read_checkouts,write_checkouts,read_reports,read_locations",
+      "authorize_url": "https://{shop}.myshopify.com/admin/oauth/authorize",
+      "access_token_url": "https://{shop}.myshopify.com/admin/oauth/access_token",
+      "refresh_token_url": null
     }
   },
   "default_security_credentials_by_scheme": {},

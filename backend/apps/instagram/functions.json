@@ -1,7 +1,7 @@
 [
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_MEDIA_GET_MEDIA",
-    "description": "Get Instagram media posts",
+    "name": "INSTAGRAM__GET_MEDIA",
+    "description": "Get Instagram media posts from an Instagram Business Account",
     "tags": [
       "instagram"
     ],
@@ -60,8 +60,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_MEDIA_POST_MEDIA",
-    "description": "Create Instagram media post",
+    "name": "INSTAGRAM__CREATE_MEDIA_CONTAINER",
+    "description": "Create Instagram media container for publishing (first step of 2-step publishing process)",
     "tags": [
       "instagram"
     ],
@@ -152,8 +152,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_MEDIA_PUBLISH",
-    "description": "Publish created media",
+    "name": "INSTAGRAM__PUBLISH_MEDIA",
+    "description": "Publish a created media container to Instagram feed (second step of 2-step publishing process)",
     "tags": [
       "instagram"
     ],
@@ -210,8 +210,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__MEDIA_ID_GET_3",
-    "description": "Get media details",
+    "name": "INSTAGRAM__GET_MEDIA_DETAILS",
+    "description": "Get detailed information about a specific Instagram media object",
     "tags": [
       "instagram"
     ],
@@ -266,8 +266,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__MEDIA_ID_DELETE_4",
-    "description": "Delete Instagram post",
+    "name": "INSTAGRAM__DELETE_MEDIA",
+    "description": "Delete an Instagram media object (post, reel, story)",
     "tags": [
       "instagram"
     ],
@@ -309,8 +309,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__MEDIA_BY_ID_COMMENTS",
-    "description": "Get post comments",
+    "name": "INSTAGRAM__GET_COMMENTS",
+    "description": "Get comments on an Instagram media object",
     "tags": [
       "instagram"
     ],
@@ -365,8 +365,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__COMMENT_BY_ID_REPLIES",
-    "description": "Reply to comment",
+    "name": "INSTAGRAM__REPLY_TO_COMMENT",
+    "description": "Reply to an Instagram comment",
     "tags": [
       "instagram"
     ],
@@ -423,8 +423,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__COMMENT_ID",
-    "description": "Delete comment or reply",
+    "name": "INSTAGRAM__DELETE_COMMENT",
+    "description": "Delete an Instagram comment or reply",
     "tags": [
       "instagram"
     ],
@@ -466,8 +466,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_STORIES",
-    "description": "Create Instagram story",
+    "name": "INSTAGRAM__CREATE_STORY",
+    "description": "Create and publish an Instagram Story",
     "tags": [
       "instagram"
     ],
@@ -537,8 +537,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_ID",
-    "description": "Get Instagram account info",
+    "name": "INSTAGRAM__GET_ACCOUNT_INFO",
+    "description": "Get Instagram Business Account information and metadata",
     "tags": [
       "instagram"
     ],
@@ -593,8 +593,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_INSIGHTS",
-    "description": "Get account insights",
+    "name": "INSTAGRAM__GET_ACCOUNT_INSIGHTS",
+    "description": "Get Instagram Business Account analytics and insights metrics",
     "tags": [
       "instagram"
     ],
@@ -661,8 +661,8 @@
     }
   },
   {
-    "name": "INSTAGRAM__MEDIA_BY_ID_INSIGHTS",
-    "description": "Get post insights",
+    "name": "INSTAGRAM__GET_MEDIA_INSIGHTS",
+    "description": "Get analytics and insights for a specific Instagram media object",
     "tags": [
       "instagram"
     ],
@@ -717,7 +717,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_CONVERSATIONS",
+    "name": "INSTAGRAM__GET_CONVERSATIONS",
     "description": "Get Instagram direct message conversations",
     "tags": [
       "instagram"
@@ -773,7 +773,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__CONVERSATION_BY_ID_MESSAGES_GET_MESSAGES",
+    "name": "INSTAGRAM__GET_MESSAGES",
     "description": "Get conversation messages",
     "tags": [
       "instagram"
@@ -829,7 +829,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__CONVERSATION_BY_ID_MESSAGES_POST_MESSAGES",
+    "name": "INSTAGRAM__SEND_MESSAGE",
     "description": "Send direct message",
     "tags": [
       "instagram"
@@ -911,7 +911,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_CONTENT_PUBLISHING_LIMIT",
+    "name": "INSTAGRAM__GET_PUBLISHING_LIMIT",
     "description": "Get publishing rate limits",
     "tags": [
       "instagram"
@@ -954,7 +954,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_TAGS",
+    "name": "INSTAGRAM__GET_TAGGED_MEDIA",
     "description": "Get tagged media",
     "tags": [
       "instagram"
@@ -1010,7 +1010,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_PRODUCT_CATALOG",
+    "name": "INSTAGRAM__GET_PRODUCT_CATALOG",
     "description": "Get product catalog",
     "tags": [
       "instagram"
@@ -1066,7 +1066,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__CATALOG_BY_ID_PRODUCTS",
+    "name": "INSTAGRAM__LIST_CATALOG_PRODUCTS",
     "description": "List catalog products",
     "tags": [
       "instagram"
@@ -1122,7 +1122,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_LIVE_MEDIA",
+    "name": "INSTAGRAM__CREATE_LIVE_VIDEO",
     "description": "Create live video",
     "tags": [
       "instagram"
@@ -1188,7 +1188,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_AVAILABLE_CATALOGS",
+    "name": "INSTAGRAM__GET_AVAILABLE_CATALOGS",
     "description": "Get available catalogs",
     "tags": [
       "instagram"
@@ -1231,7 +1231,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_MENTIONS",
+    "name": "INSTAGRAM__GET_MENTIONS",
     "description": "Get mention notifications",
     "tags": [
       "instagram"
@@ -1287,7 +1287,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_BUSINESS_DISCOVERY",
+    "name": "INSTAGRAM__DISCOVER_BUSINESS_ACCOUNT",
     "description": "Discover competitor accounts",
     "tags": [
       "instagram"
@@ -1352,7 +1352,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_HASHTAG_SEARCH",
+    "name": "INSTAGRAM__SEARCH_HASHTAGS",
     "description": "Search hashtags",
     "tags": [
       "instagram"
@@ -1413,7 +1413,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__HASHTAG_BY_ID_TOP_MEDIA",
+    "name": "INSTAGRAM__GET_HASHTAG_TOP_MEDIA",
     "description": "Get hashtag top posts",
     "tags": [
       "instagram"
@@ -1478,7 +1478,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_WEBHOOKS",
+    "name": "INSTAGRAM__CONFIGURE_WEBHOOKS",
     "description": "Configure Instagram webhooks",
     "tags": [
       "instagram"
@@ -1557,7 +1557,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__PAGE_BY_ID_INSTAGRAM_ACCOUNTS",
+    "name": "INSTAGRAM__GET_CONNECTED_ACCOUNTS",
     "description": "Get connected Instagram accounts",
     "tags": [
       "instagram"
@@ -1600,7 +1600,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_MEDIA_UPLOAD",
+    "name": "INSTAGRAM__UPLOAD_MEDIA",
     "description": "Upload media to Instagram",
     "tags": [
       "instagram"
@@ -1643,7 +1643,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_STORIES_ARCHIVE",
+    "name": "INSTAGRAM__GET_ARCHIVED_STORIES",
     "description": "Get archived stories",
     "tags": [
       "instagram"
@@ -1699,7 +1699,7 @@
     }
   },
   {
-    "name": "INSTAGRAM__INSTAGRAM_ACCOUNT_BY_ID_REELS",
+    "name": "INSTAGRAM__GET_REELS",
     "description": "Get Instagram Reels",
     "tags": [
       "instagram"

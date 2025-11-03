@@ -1,0 +1,2511 @@
+[
+  {
+    "name": "BITBUCKET__REPOSITORIES",
+    "description": "List repositories for a workspace with filtering and pagination options.",
+    "tags": [
+      "repositories",
+      "list",
+      "workspace"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            }
+          },
+          "required": [
+            "workspace"
+          ],
+          "visible": [
+            "workspace"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "q": {
+              "type": "string",
+              "description": "Query string for filtering"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Field to sort by"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number for pagination"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Number of items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "q",
+            "sort",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_REPOSITORY",
+    "description": "Get detailed information about a specific repository.",
+    "tags": [
+      "repositories",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__CREATE_REPOSITORY",
+    "description": "Create a new repository in a workspace with specified configuration.",
+    "tags": [
+      "repositories",
+      "create"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "scm": {
+              "type": "string",
+              "enum": [
+                "git"
+              ],
+              "default": "git",
+              "description": "Source control management type"
+            },
+            "is_private": {
+              "type": "boolean",
+              "default": false,
+              "description": "Whether the repository is private"
+            },
+            "description": {
+              "type": "string",
+              "description": "Repository description"
+            },
+            "fork_policy": {
+              "type": "string",
+              "enum": [
+                "allow_forks",
+                "no_public_forks",
+                "no_forks"
+              ],
+              "default": "allow_forks",
+              "description": "Fork policy for the repository"
+            },
+            "language": {
+              "type": "string",
+              "description": "Primary programming language"
+            },
+            "has_issues": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable issue tracker"
+            },
+            "has_wiki": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable wiki"
+            }
+          },
+          "required": [],
+          "visible": [
+            "scm",
+            "is_private",
+            "description",
+            "fork_policy",
+            "language",
+            "has_issues",
+            "has_wiki"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__UPDATE_REPOSITORY",
+    "description": "Update repository settings and configuration.",
+    "tags": [
+      "repositories",
+      "update",
+      "settings"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/repositories/{workspace}/{repo_slug}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Repository description"
+            },
+            "is_private": {
+              "type": "boolean",
+              "description": "Whether the repository is private"
+            },
+            "fork_policy": {
+              "type": "string",
+              "enum": [
+                "allow_forks",
+                "no_public_forks",
+                "no_forks"
+              ],
+              "description": "Fork policy for the repository"
+            },
+            "language": {
+              "type": "string",
+              "description": "Primary programming language"
+            },
+            "has_issues": {
+              "type": "boolean",
+              "description": "Enable issue tracker"
+            },
+            "has_wiki": {
+              "type": "boolean",
+              "description": "Enable wiki"
+            }
+          },
+          "required": [],
+          "visible": [
+            "description",
+            "is_private",
+            "fork_policy",
+            "language",
+            "has_issues",
+            "has_wiki"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__DELETE_REPOSITORY",
+    "description": "Delete a repository permanently from the workspace.",
+    "tags": [
+      "repositories",
+      "delete",
+      "remove"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/repositories/{workspace}/{repo_slug}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__PULL_REQUESTS",
+    "description": "List pull requests for a repository with filtering and state options.",
+    "tags": [
+      "pull_requests",
+      "list",
+      "code_review"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "enum": [
+                "OPEN",
+                "MERGED",
+                "DECLINED",
+                "SUPERSEDED"
+              ],
+              "description": "Filter by pull request state"
+            },
+            "q": {
+              "type": "string",
+              "description": "Query string for filtering"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Field to sort by"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "state",
+            "q",
+            "sort",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_PULL_REQUEST",
+    "description": "Get detailed information about a specific pull request.",
+    "tags": [
+      "pull_requests",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "pull_request_id": {
+              "type": "string",
+              "description": "Pull request ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__CREATE_PULL_REQUEST",
+    "description": "Create a new pull request with source and destination branches.",
+    "tags": [
+      "pull_requests",
+      "create",
+      "code_review"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Pull request title"
+            },
+            "description": {
+              "type": "string",
+              "description": "Pull request description"
+            },
+            "source": {
+              "type": "object",
+              "properties": {
+                "branch": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Source branch name"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "branch"
+              ],
+              "visible": [
+                "branch"
+              ],
+              "additionalProperties": false
+            },
+            "destination": {
+              "type": "object",
+              "properties": {
+                "branch": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Destination branch name"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "visible": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "branch"
+              ],
+              "visible": [
+                "branch"
+              ],
+              "additionalProperties": false
+            },
+            "close_source_branch": {
+              "type": "boolean",
+              "default": false,
+              "description": "Close source branch after merge"
+            }
+          },
+          "required": [
+            "title",
+            "source",
+            "destination"
+          ],
+          "visible": [
+            "title",
+            "description",
+            "source",
+            "destination",
+            "close_source_branch"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__UPDATE_PULL_REQUEST",
+    "description": "Update pull request title, description, or reviewers.",
+    "tags": [
+      "pull_requests",
+      "update",
+      "edit"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "pull_request_id": {
+              "type": "string",
+              "description": "Pull request ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Pull request title"
+            },
+            "description": {
+              "type": "string",
+              "description": "Pull request description"
+            }
+          },
+          "required": [],
+          "visible": [
+            "title",
+            "description"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__MERGE_PULL_REQUEST",
+    "description": "Merge a pull request into the destination branch.",
+    "tags": [
+      "pull_requests",
+      "merge",
+      "approve"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "pull_request_id": {
+              "type": "string",
+              "description": "Pull request ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Merge commit message"
+            },
+            "close_source_branch": {
+              "type": "boolean",
+              "default": false,
+              "description": "Close source branch after merge"
+            },
+            "merge_strategy": {
+              "type": "string",
+              "enum": [
+                "merge_commit",
+                "squash",
+                "fast_forward"
+              ],
+              "default": "merge_commit",
+              "description": "Merge strategy to use"
+            }
+          },
+          "required": [],
+          "visible": [
+            "message",
+            "close_source_branch",
+            "merge_strategy"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__DECLINE_PULL_REQUEST",
+    "description": "Decline a pull request without merging it.",
+    "tags": [
+      "pull_requests",
+      "decline",
+      "reject"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/decline",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "pull_request_id": {
+              "type": "string",
+              "description": "Pull request ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "pull_request_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__BRANCHES",
+    "description": "List all branches in a repository with filtering and sorting options.",
+    "tags": [
+      "branches",
+      "list",
+      "git"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/refs/branches",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "q": {
+              "type": "string",
+              "description": "Query string for filtering"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Field to sort by"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "q",
+            "sort",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_BRANCH",
+    "description": "Get detailed information about a specific branch.",
+    "tags": [
+      "branches",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/refs/branches/{name}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "name": {
+              "type": "string",
+              "description": "Branch name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "name"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__CREATE_BRANCH",
+    "description": "Create a new branch from an existing commit or branch.",
+    "tags": [
+      "branches",
+      "create",
+      "git"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/refs/branches",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "New branch name"
+            },
+            "target": {
+              "type": "object",
+              "properties": {
+                "hash": {
+                  "type": "string",
+                  "description": "Commit hash to branch from"
+                }
+              },
+              "required": [
+                "hash"
+              ],
+              "visible": [
+                "hash"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "name",
+            "target"
+          ],
+          "visible": [
+            "name",
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__DELETE_BRANCH",
+    "description": "Delete a branch from the repository.",
+    "tags": [
+      "branches",
+      "delete",
+      "remove"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/repositories/{workspace}/{repo_slug}/refs/branches/{name}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "name": {
+              "type": "string",
+              "description": "Branch name to delete"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "name"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__COMMITS",
+    "description": "List commits in a repository with filtering and pagination.",
+    "tags": [
+      "commits",
+      "list",
+      "history"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/commits",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "include": {
+              "type": "string",
+              "description": "Branch or commit to include"
+            },
+            "exclude": {
+              "type": "string",
+              "description": "Branch or commit to exclude"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "include",
+            "exclude",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_COMMIT",
+    "description": "Get detailed information about a specific commit.",
+    "tags": [
+      "commits",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/commit/{commit}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "commit": {
+              "type": "string",
+              "description": "Commit hash or SHA"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "commit"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "commit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__ISSUES",
+    "description": "List issues in a repository with filtering and sorting options.",
+    "tags": [
+      "issues",
+      "list",
+      "tracker"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/issues",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "q": {
+              "type": "string",
+              "description": "Query string for filtering"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Field to sort by"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "q",
+            "sort",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_ISSUE",
+    "description": "Get detailed information about a specific issue.",
+    "tags": [
+      "issues",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "issue_id": {
+              "type": "string",
+              "description": "Issue ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__CREATE_ISSUE",
+    "description": "Create a new issue in the repository with title, description, and metadata.",
+    "tags": [
+      "issues",
+      "create",
+      "tracker"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/issues",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Issue title"
+            },
+            "content": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "string",
+                  "description": "Issue description in markdown"
+                }
+              },
+              "required": [
+                "raw"
+              ],
+              "visible": [
+                "raw"
+              ],
+              "additionalProperties": false
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "trivial",
+                "minor",
+                "major",
+                "critical",
+                "blocker"
+              ],
+              "description": "Issue priority"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "bug",
+                "enhancement",
+                "proposal",
+                "task"
+              ],
+              "description": "Issue kind/type"
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "visible": [
+            "title",
+            "content",
+            "priority",
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__UPDATE_ISSUE",
+    "description": "Update an existing issue's title, description, or metadata.",
+    "tags": [
+      "issues",
+      "update",
+      "edit"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "issue_id": {
+              "type": "string",
+              "description": "Issue ID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Issue title"
+            },
+            "content": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "string",
+                  "description": "Issue description in markdown"
+                }
+              },
+              "required": [],
+              "visible": [
+                "raw"
+              ],
+              "additionalProperties": false
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "trivial",
+                "minor",
+                "major",
+                "critical",
+                "blocker"
+              ],
+              "description": "Issue priority"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "bug",
+                "enhancement",
+                "proposal",
+                "task"
+              ],
+              "description": "Issue kind/type"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "new",
+                "open",
+                "resolved",
+                "on hold",
+                "invalid",
+                "duplicate",
+                "wontfix",
+                "closed"
+              ],
+              "description": "Issue state"
+            }
+          },
+          "required": [],
+          "visible": [
+            "title",
+            "content",
+            "priority",
+            "kind",
+            "state"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__DELETE_ISSUE",
+    "description": "Delete an issue from the repository.",
+    "tags": [
+      "issues",
+      "delete",
+      "remove"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "issue_id": {
+              "type": "string",
+              "description": "Issue ID to delete"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "issue_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__WEBHOOKS",
+    "description": "List all webhooks configured for the repository.",
+    "tags": [
+      "webhooks",
+      "list",
+      "integrations"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/hooks",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__CREATE_WEBHOOK",
+    "description": "Create a new webhook for the repository to receive event notifications.",
+    "tags": [
+      "webhooks",
+      "create",
+      "integrations"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/hooks",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Webhook description"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Webhook URL endpoint"
+            },
+            "active": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether webhook is active"
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Event types to trigger webhook (e.g., repo:push, pullrequest:created)"
+            }
+          },
+          "required": [
+            "url",
+            "events"
+          ],
+          "visible": [
+            "description",
+            "url",
+            "active",
+            "events"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__DELETE_WEBHOOK",
+    "description": "Delete a webhook from the repository.",
+    "tags": [
+      "webhooks",
+      "delete",
+      "remove"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/repositories/{workspace}/{repo_slug}/hooks/{uid}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "uid": {
+              "type": "string",
+              "description": "Webhook UID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "uid"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "uid"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__PIPELINES",
+    "description": "List CI/CD pipelines for the repository with filtering options.",
+    "tags": [
+      "pipelines",
+      "list",
+      "cicd"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/pipelines",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "sort": {
+              "type": "string",
+              "description": "Field to sort by"
+            },
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "sort",
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_PIPELINE",
+    "description": "Get detailed information about a specific pipeline execution.",
+    "tags": [
+      "pipelines",
+      "details",
+      "get"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            },
+            "pipeline_uuid": {
+              "type": "string",
+              "description": "Pipeline UUID"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug",
+            "pipeline_uuid"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug",
+            "pipeline_uuid"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__TRIGGER_PIPELINE",
+    "description": "Trigger a new pipeline execution for a specific branch or commit.",
+    "tags": [
+      "pipelines",
+      "trigger",
+      "cicd"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/repositories/{workspace}/{repo_slug}/pipelines",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace ID or username"
+            },
+            "repo_slug": {
+              "type": "string",
+              "description": "Repository slug or name"
+            }
+          },
+          "required": [
+            "workspace",
+            "repo_slug"
+          ],
+          "visible": [
+            "workspace",
+            "repo_slug"
+          ],
+          "additionalProperties": false
+        },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "application/json"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "target": {
+              "type": "object",
+              "properties": {
+                "ref_type": {
+                  "type": "string",
+                  "enum": [
+                    "branch",
+                    "tag",
+                    "bookmark"
+                  ],
+                  "description": "Type of reference"
+                },
+                "ref_name": {
+                  "type": "string",
+                  "description": "Name of branch, tag, or bookmark"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "pipeline_ref_target",
+                  "description": "Target type"
+                },
+                "selector": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "default": "custom",
+                      "description": "Selector type"
+                    },
+                    "pattern": {
+                      "type": "string",
+                      "description": "Pipeline pattern name"
+                    }
+                  },
+                  "required": [],
+                  "visible": [
+                    "type",
+                    "pattern"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "ref_type",
+                "ref_name",
+                "type"
+              ],
+              "visible": [
+                "ref_type",
+                "ref_name",
+                "type",
+                "selector"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "target"
+          ],
+          "visible": [
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "header",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_USER",
+    "description": "Get information about a Bitbucket user by username.",
+    "tags": [
+      "users",
+      "get",
+      "profile"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/users/{username}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username to retrieve"
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "visible": [
+            "username"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__GET_WORKSPACE",
+    "description": "Get information about a workspace by slug.",
+    "tags": [
+      "workspaces",
+      "get",
+      "details"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/workspaces/{workspace}",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "properties": {
+            "workspace": {
+              "type": "string",
+              "description": "Workspace slug"
+            }
+          },
+          "required": [
+            "workspace"
+          ],
+          "visible": [
+            "workspace"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "BITBUCKET__WORKSPACES",
+    "description": "List all workspaces the authenticated user has access to.",
+    "tags": [
+      "workspaces",
+      "list"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/workspaces",
+      "server_url": "https://api.bitbucket.org/2.0"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "integer",
+              "default": 1,
+              "description": "Page number"
+            },
+            "pagelen": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100,
+              "description": "Items per page"
+            }
+          },
+          "required": [],
+          "visible": [
+            "page",
+            "pagelen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

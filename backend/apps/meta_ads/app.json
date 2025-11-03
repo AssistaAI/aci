@@ -1,0 +1,30 @@
+{
+  "name": "META_ADS",
+  "display_name": "Meta Ads",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/meta.svg",
+  "provider": "Meta Platforms, Inc.",
+  "version": "v24.0",
+  "description": "\"Create and manage Facebook and Instagram advertising campaigns, ad sets, ads, audiences, and insights through the Marketing API.\"",
+  "security_schemes": {
+    "oauth2": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ META_ADS_CLIENT_ID }}",
+      "client_secret": "{{ META_ADS_CLIENT_SECRET }}",
+      "scope": "ads_management ads_read business_management pages_read_engagement pages_manage_ads pages_manage_metadata",
+      "authorize_url": "https://www.facebook.com/v24.0/dialog/oauth",
+      "access_token_url": "https://graph.facebook.com/v24.0/oauth/access_token",
+      "refresh_token_url": "https://graph.facebook.com/v24.0/oauth/access_token"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Advertising",
+    "Marketing",
+    "Social Media",
+    "Analytics"
+  ],
+  "visibility": "public",
+  "active": true
+}

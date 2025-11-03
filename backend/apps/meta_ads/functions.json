@@ -1,0 +1,774 @@
+[
+  {
+    "name": "META_ADS__GET_AD_ACCOUNT",
+    "description": "Retrieve details of a specific ad account",
+    "tags": ["meta_ads", "ad_account"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_CAMPAIGNS",
+    "description": "List all campaigns for an ad account",
+    "tags": ["meta_ads", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/campaigns",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of results to return",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_CAMPAIGN",
+    "description": "Create a new advertising campaign",
+    "tags": ["meta_ads", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/act_{ad_account_id}/campaigns",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the campaign",
+          "visibility": "public",
+          "in": "body"
+        },
+        "objective": {
+          "type": "string",
+          "description": "The campaign objective (e.g., OUTCOME_TRAFFIC, OUTCOME_LEADS, OUTCOME_SALES)",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The campaign status (ACTIVE, PAUSED, ARCHIVED)",
+          "visibility": "public",
+          "in": "body"
+        },
+        "special_ad_categories": {
+          "type": "array",
+          "description": "Special ad category declarations",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_account_id", "name", "objective"]
+    }
+  },
+  {
+    "name": "META_ADS__UPDATE_CAMPAIGN",
+    "description": "Update an existing campaign",
+    "tags": ["meta_ads", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/{campaign_id}",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "campaign_id": {
+          "type": "string",
+          "description": "The ID of the campaign",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The updated name of the campaign",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The updated campaign status",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["campaign_id"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_AD_SETS",
+    "description": "List all ad sets for a campaign or ad account",
+    "tags": ["meta_ads", "ad_sets"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/adsets",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of results to return",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_AD_SET",
+    "description": "Create a new ad set within a campaign",
+    "tags": ["meta_ads", "ad_sets"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/act_{ad_account_id}/adsets",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ad set",
+          "visibility": "public",
+          "in": "body"
+        },
+        "campaign_id": {
+          "type": "string",
+          "description": "The ID of the parent campaign",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The ad set status (ACTIVE, PAUSED)",
+          "visibility": "public",
+          "in": "body"
+        },
+        "targeting": {
+          "type": "object",
+          "description": "Targeting specifications for the ad set",
+          "visibility": "public",
+          "in": "body"
+        },
+        "bid_amount": {
+          "type": "integer",
+          "description": "Bid amount in cents",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_account_id", "name", "campaign_id", "targeting"]
+    }
+  },
+  {
+    "name": "META_ADS__UPDATE_AD_SET",
+    "description": "Update an existing ad set",
+    "tags": ["meta_ads", "ad_sets"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/{ad_set_id}",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_set_id": {
+          "type": "string",
+          "description": "The ID of the ad set",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The updated name of the ad set",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The updated ad set status",
+          "visibility": "public",
+          "in": "body"
+        },
+        "targeting": {
+          "type": "object",
+          "description": "Updated targeting specifications",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_set_id"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_ADS",
+    "description": "List all ads for an ad account or ad set",
+    "tags": ["meta_ads", "ads"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/ads",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of results to return",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_AD",
+    "description": "Create a new ad",
+    "tags": ["meta_ads", "ads"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/act_{ad_account_id}/ads",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ad",
+          "visibility": "public",
+          "in": "body"
+        },
+        "adset_id": {
+          "type": "string",
+          "description": "The ID of the parent ad set",
+          "visibility": "public",
+          "in": "body"
+        },
+        "creative": {
+          "type": "object",
+          "description": "The creative specification for the ad",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The ad status (ACTIVE, PAUSED)",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_account_id", "name", "adset_id", "creative"]
+    }
+  },
+  {
+    "name": "META_ADS__UPDATE_AD",
+    "description": "Update an existing ad",
+    "tags": ["meta_ads", "ads"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/{ad_id}",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_id": {
+          "type": "string",
+          "description": "The ID of the ad",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The updated name of the ad",
+          "visibility": "public",
+          "in": "body"
+        },
+        "status": {
+          "type": "string",
+          "description": "The updated ad status",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_id"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_INSIGHTS",
+    "description": "Retrieve insights and performance metrics for campaigns, ad sets, or ads",
+    "tags": ["meta_ads", "insights", "analytics"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/insights",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of metrics (e.g., impressions, clicks, spend)",
+          "visibility": "public",
+          "in": "query"
+        },
+        "time_range": {
+          "type": "object",
+          "description": "Time range for the insights (since, until)",
+          "visibility": "public",
+          "in": "query"
+        },
+        "level": {
+          "type": "string",
+          "description": "The level at which to retrieve insights (account, campaign, adset, ad)",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_CAMPAIGN_INSIGHTS",
+    "description": "Retrieve insights for a specific campaign",
+    "tags": ["meta_ads", "insights", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/{campaign_id}/insights",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "campaign_id": {
+          "type": "string",
+          "description": "The ID of the campaign",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of metrics to retrieve",
+          "visibility": "public",
+          "in": "query"
+        },
+        "time_range": {
+          "type": "object",
+          "description": "Time range for the insights",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["campaign_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_CUSTOM_AUDIENCE",
+    "description": "Create a new custom audience for targeting",
+    "tags": ["meta_ads", "audiences"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/act_{ad_account_id}/customaudiences",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the custom audience",
+          "visibility": "public",
+          "in": "body"
+        },
+        "subtype": {
+          "type": "string",
+          "description": "The subtype of the custom audience (e.g., CUSTOM, LOOKALIKE)",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_account_id", "name", "subtype"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_CUSTOM_AUDIENCES",
+    "description": "List all custom audiences for an ad account",
+    "tags": ["meta_ads", "audiences"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/customaudiences",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__SEARCH_TARGETING",
+    "description": "Search for targeting options like interests, demographics, or behaviors",
+    "tags": ["meta_ads", "targeting", "search"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/search",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of targeting to search (e.g., adinterest, adworkposition)",
+          "visibility": "public",
+          "in": "query"
+        },
+        "q": {
+          "type": "string",
+          "description": "The search query",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["type", "q"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_AD_CREATIVES",
+    "description": "List all ad creatives for an ad account",
+    "tags": ["meta_ads", "creatives"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/act_{ad_account_id}/adcreatives",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["ad_account_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_AD_CREATIVE",
+    "description": "Create a new ad creative",
+    "tags": ["meta_ads", "creatives"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/act_{ad_account_id}/adcreatives",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ad_account_id": {
+          "type": "string",
+          "description": "The ID of the ad account",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ad creative",
+          "visibility": "public",
+          "in": "body"
+        },
+        "object_story_spec": {
+          "type": "object",
+          "description": "The creative specification",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["ad_account_id", "object_story_spec"]
+    }
+  },
+  {
+    "name": "META_ADS__SEND_CONVERSION_EVENT",
+    "description": "Send conversion events to the Conversions API",
+    "tags": ["meta_ads", "conversions"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/{pixel_id}/events",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "pixel_id": {
+          "type": "string",
+          "description": "The Pixel ID from Events Manager",
+          "visibility": "public",
+          "in": "path"
+        },
+        "data": {
+          "type": "array",
+          "description": "Array of event data objects",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["pixel_id", "data"]
+    }
+  },
+  {
+    "name": "META_ADS__GET_BUSINESS",
+    "description": "Retrieve details of a Business Manager account",
+    "tags": ["meta_ads", "business"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v24.0/{business_id}",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "business_id": {
+          "type": "string",
+          "description": "The ID of the business",
+          "visibility": "public",
+          "in": "path"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Comma-separated list of fields to retrieve",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["business_id"]
+    }
+  },
+  {
+    "name": "META_ADS__CREATE_BUSINESS",
+    "description": "Create a new Business Manager account",
+    "tags": ["meta_ads", "business"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v24.0/business",
+      "server_url": "https://graph.facebook.com",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the business entity",
+          "visibility": "public",
+          "in": "body"
+        },
+        "timezone_id": {
+          "type": "integer",
+          "description": "The timezone ID for the business",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["name", "timezone_id"]
+    }
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "name": "GOOGLE_ADS",
+  "display_name": "Google Ads",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_ads.svg",
+  "provider": "Google",
+  "version": "v21",
+  "description": "\"Create and manage advertising campaigns, ad groups, ads, keywords, and reports through the Google Ads API.\"",
+  "security_schemes": {
+    "oauth2": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ GOOGLE_ADS_CLIENT_ID }}",
+      "client_secret": "{{ GOOGLE_ADS_CLIENT_SECRET }}",
+      "scope": "https://www.googleapis.com/auth/adwords",
+      "authorize_url": "https://accounts.google.com/o/oauth2/v2/auth",
+      "access_token_url": "https://oauth2.googleapis.com/token",
+      "refresh_token_url": "https://oauth2.googleapis.com/token"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Advertising",
+    "Marketing",
+    "Analytics"
+  ],
+  "visibility": "public",
+  "active": true
+}

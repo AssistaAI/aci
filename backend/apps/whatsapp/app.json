@@ -4,9 +4,9 @@
   "logo": "https://logo.clearbit.com/whatsapp.com",
   "provider": "Meta Platforms, Inc.",
   "version": "v20.0",
-  "description": "\"Send and receive messages, manage customer chats, and automate support tasks to improve communication and streamline your business.\"",
+  "description": "Send and receive messages, manage customer chats, and automate support tasks to improve communication and streamline your business using the WhatsApp Cloud API.",
   "security_schemes": {
-    "http_bearer": {
+    "bearer_token": {
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer"
@@ -16,7 +16,8 @@
   "categories": [
     "Communication",
     "Customer Support",
-    "Marketing"
+    "Marketing",
+    "Messaging"
   ],
   "visibility": "public",
   "active": true

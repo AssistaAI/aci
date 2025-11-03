@@ -1,0 +1,24 @@
+{
+  "name": "HEYREACH",
+  "display_name": "HeyReach",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/heyreach.svg",
+  "provider": "HeyReach",
+  "version": "1.0",
+  "description": "\"Automate LinkedIn outreach campaigns, manage network connections, and track inbox conversations through HeyReach API.\"",
+  "security_schemes": {
+    "api_key": {
+      "location": "header",
+      "name": "X-API-KEY",
+      "api_key": "{{ HEYREACH_API_KEY }}"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Sales",
+    "Marketing",
+    "LinkedIn Automation",
+    "Outreach"
+  ],
+  "visibility": "public",
+  "active": true
+}

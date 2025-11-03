@@ -1,0 +1,30 @@
+{
+  "name": "BITBUCKET",
+  "display_name": "Bitbucket",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/bitbucket.svg",
+  "provider": "Atlassian",
+  "version": "2.0",
+  "description": "\"Manage repositories, pull requests, issues, and pipelines in Bitbucket through collaborative code review and version control.\"",
+  "security_schemes": {
+    "oauth2": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ BITBUCKET_CLIENT_ID }}",
+      "client_secret": "{{ BITBUCKET_CLIENT_SECRET }}",
+      "scope": "repository repository:write pullrequest pullrequest:write issue issue:write webhook pipeline pipeline:write account email",
+      "authorize_url": "https://bitbucket.org/site/oauth2/authorize",
+      "access_token_url": "https://bitbucket.org/site/oauth2/access_token",
+      "refresh_token_url": "https://bitbucket.org/site/oauth2/access_token"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Developer Tools",
+    "Version Control",
+    "CI/CD",
+    "Code Collaboration"
+  ],
+  "visibility": "public",
+  "active": true
+}

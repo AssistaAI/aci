@@ -1,0 +1,501 @@
+[
+  {
+    "name": "INSTANTLY__CREATE_API_KEY",
+    "description": "Creates a new API key for authentication",
+    "tags": ["instantly", "api_keys"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/v2/api-keys",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for the API key",
+          "visibility": "public",
+          "in": "body"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "List of permission scopes for the API key",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["name"]
+    }
+  },
+  {
+    "name": "INSTANTLY__LIST_API_KEYS",
+    "description": "Retrieves a list of all API keys associated with the account",
+    "tags": ["instantly", "api_keys"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/api-keys",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "INSTANTLY__DELETE_API_KEY",
+    "description": "Deletes a specific API key by its ID",
+    "tags": ["instantly", "api_keys"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/api/v2/api-keys/{id}",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the API key to delete",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  {
+    "name": "INSTANTLY__GET_ACCOUNT",
+    "description": "Retrieve details of a specific email account",
+    "tags": ["instantly", "accounts"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/accounts/{email}",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The account email address",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  {
+    "name": "INSTANTLY__LIST_ACCOUNTS",
+    "description": "List all email accounts",
+    "tags": ["instantly", "accounts"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/accounts",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Number of accounts to return",
+          "visibility": "public",
+          "in": "query"
+        },
+        "skip": {
+          "type": "integer",
+          "description": "Number of accounts to skip",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "INSTANTLY__PAUSE_ACCOUNT",
+    "description": "Pause an email account to stop sending",
+    "tags": ["instantly", "accounts"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/v2/accounts/{email}/pause",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The account email address",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  {
+    "name": "INSTANTLY__RESUME_ACCOUNT",
+    "description": "Resume a paused email account",
+    "tags": ["instantly", "accounts"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/v2/accounts/{email}/resume",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The account email address",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  {
+    "name": "INSTANTLY__GET_WARMUP_ANALYTICS",
+    "description": "Get warmup analytics for an email account",
+    "tags": ["instantly", "accounts", "analytics"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/accounts/{email}/warmup/analytics",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The account email address",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  {
+    "name": "INSTANTLY__CREATE_CAMPAIGN",
+    "description": "Create a new email outreach campaign",
+    "tags": ["instantly", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/v2/campaigns",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Campaign name",
+          "visibility": "public",
+          "in": "body"
+        },
+        "from_email": {
+          "type": "string",
+          "description": "Sender email address",
+          "visibility": "public",
+          "in": "body"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Email subject line",
+          "visibility": "public",
+          "in": "body"
+        },
+        "body": {
+          "type": "string",
+          "description": "Email body content",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["name", "from_email", "subject", "body"]
+    }
+  },
+  {
+    "name": "INSTANTLY__LIST_CAMPAIGNS",
+    "description": "List all campaigns",
+    "tags": ["instantly", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/campaigns",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Number of campaigns to return",
+          "visibility": "public",
+          "in": "query"
+        },
+        "skip": {
+          "type": "integer",
+          "description": "Number of campaigns to skip",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "INSTANTLY__GET_CAMPAIGN",
+    "description": "Get details of a specific campaign",
+    "tags": ["instantly", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/campaigns/{id}",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  {
+    "name": "INSTANTLY__UPDATE_CAMPAIGN",
+    "description": "Update an existing campaign",
+    "tags": ["instantly", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PATCH",
+      "path": "/api/v2/campaigns/{id}",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        },
+        "name": {
+          "type": "string",
+          "description": "Updated campaign name",
+          "visibility": "public",
+          "in": "body"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Updated email subject",
+          "visibility": "public",
+          "in": "body"
+        },
+        "body": {
+          "type": "string",
+          "description": "Updated email body",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  {
+    "name": "INSTANTLY__DELETE_CAMPAIGN",
+    "description": "Delete a campaign",
+    "tags": ["instantly", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/api/v2/campaigns/{id}",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  {
+    "name": "INSTANTLY__ADD_LEAD_TO_CAMPAIGN",
+    "description": "Add a lead to a campaign",
+    "tags": ["instantly", "leads", "campaigns"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/api/v2/campaigns/{id}/leads",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        },
+        "email": {
+          "type": "string",
+          "description": "Lead email address",
+          "visibility": "public",
+          "in": "body"
+        },
+        "first_name": {
+          "type": "string",
+          "description": "Lead first name",
+          "visibility": "public",
+          "in": "body"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "Lead last name",
+          "visibility": "public",
+          "in": "body"
+        },
+        "company": {
+          "type": "string",
+          "description": "Lead company",
+          "visibility": "public",
+          "in": "body"
+        }
+      },
+      "required": ["id", "email"]
+    }
+  },
+  {
+    "name": "INSTANTLY__LIST_LEADS",
+    "description": "List all leads in a campaign",
+    "tags": ["instantly", "leads"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/campaigns/{id}/leads",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of leads to return",
+          "visibility": "public",
+          "in": "query"
+        },
+        "skip": {
+          "type": "integer",
+          "description": "Number of leads to skip",
+          "visibility": "public",
+          "in": "query"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  {
+    "name": "INSTANTLY__GET_CAMPAIGN_ANALYTICS",
+    "description": "Get analytics for a specific campaign",
+    "tags": ["instantly", "campaigns", "analytics"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/api/v2/campaigns/{id}/analytics",
+      "server_url": "https://api.instantly.ai",
+      "content_type": "application/json"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Campaign ID",
+          "visibility": "public",
+          "in": "path"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+]

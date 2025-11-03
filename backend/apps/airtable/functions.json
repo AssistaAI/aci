@@ -897,10 +897,7 @@
                   "fields": {
                     "type": "object",
                     "description": "Field values to update",
-                    "additionalProperties": false,
-                    "properties": {},
-                    "required": [],
-                    "visible": []
+                    "additionalProperties": true
                   }
                 },
                 "required": [
@@ -944,7 +941,7 @@
     }
   },
   {
-    "name": "AIRTABLE__RECORDS",
+    "name": "AIRTABLE__DELETE_RECORDS",
     "description": "Delete one or more records from a table by their record IDs.",
     "tags": [
       "records",
@@ -1016,7 +1013,7 @@
     }
   },
   {
-    "name": "AIRTABLE__RECORD",
+    "name": "AIRTABLE__GET_RECORD",
     "description": "Retrieve a specific record from a table by its ID.",
     "tags": [
       "records",
@@ -1073,7 +1070,7 @@
     }
   },
   {
-    "name": "AIRTABLE__TABLE",
+    "name": "AIRTABLE__DELETE_TABLE",
     "description": "Delete a table from a specific base in Airtable permanently.",
     "tags": [
       "table",
@@ -1443,7 +1440,7 @@
     }
   },
   {
-    "name": "AIRTABLE__WEBHOOK",
+    "name": "AIRTABLE__DELETE_WEBHOOK",
     "description": "Delete an existing webhook from a base to stop receiving notifications.",
     "tags": [
       "webhook",
@@ -1811,7 +1808,7 @@
     }
   },
   {
-    "name": "AIRTABLE__VIEW",
+    "name": "AIRTABLE__DELETE_VIEW",
     "description": "Delete a view from a table to remove custom data organization and filters.",
     "tags": [
       "view",
@@ -1924,10 +1921,7 @@
                   "fields": {
                     "type": "object",
                     "description": "Field values to update",
-                    "additionalProperties": false,
-                    "properties": {},
-                    "required": [],
-                    "visible": []
+                    "additionalProperties": true
                   }
                 },
                 "required": [
@@ -1970,7 +1964,7 @@
     }
   },
   {
-    "name": "AIRTABLE__ATTACHMENTS",
+    "name": "AIRTABLE__GET_ATTACHMENTS",
     "description": "Retrieve file attachments from records in a table for document and media management.",
     "tags": [
       "attachments",
@@ -2255,7 +2249,7 @@
     }
   },
   {
-    "name": "AIRTABLE__COMMENT",
+    "name": "AIRTABLE__DELETE_COMMENT",
     "description": "Delete a comment from a record to remove collaboration notes.",
     "tags": [
       "comments",
@@ -2470,7 +2464,7 @@
     }
   },
   {
-    "name": "AIRTABLE__WORKSPACE",
+    "name": "AIRTABLE__GET_WORKSPACE",
     "description": "Retrieve workspace information including access permissions and base organization.",
     "tags": [
       "workspace",

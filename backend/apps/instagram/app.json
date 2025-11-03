@@ -4,15 +4,15 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/instagram.svg",
   "provider": "Meta Platforms, Inc.",
   "version": "v20.0",
-  "description": "\"Post content, manage stories, analyze engagement, and boost your Instagram business effortlessly through chat commands.\"",
+  "description": "Post content, manage stories, analyze engagement, and boost your Instagram business effortlessly through chat commands.",
   "security_schemes": {
     "oauth2": {
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ INSTAGRAM_CLIENT_ID }}",
-      "client_secret": "{{ INSTAGRAM_CLIENT_SECRET }}",
-      "scope": "instagram_basic user_profile user_media",
+      "client_id": "{{ AIPOLABS_INSTAGRAM_CLIENT_ID }}",
+      "client_secret": "{{ AIPOLABS_INSTAGRAM_CLIENT_SECRET }}",
+      "scope": "instagram_basic instagram_manage_comments instagram_manage_insights instagram_content_publish instagram_manage_messages pages_read_engagement pages_manage_metadata",
       "authorize_url": "https://www.facebook.com/v20.0/dialog/oauth",
       "access_token_url": "https://graph.facebook.com/v20.0/oauth/access_token",
       "refresh_token_url": "https://graph.facebook.com/v20.0/oauth/access_token"

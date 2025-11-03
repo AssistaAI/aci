@@ -4,8 +4,29 @@
   "logo": "https://logo.clearbit.com/webflow.com",
   "provider": "Webflow, Inc.",
   "version": "2.0.0",
-  "description": "\"Build websites, manage content, create forms, and streamline e-commerce effortlessly through simple chat commands.\"",
+  "description": "Build websites, manage content, create forms, and streamline e-commerce effortlessly through simple chat commands.",
   "security_schemes": {
+    "oauth2": {
+      "type": "oauth2",
+      "authorization_url": "https://webflow.com/oauth/authorize",
+      "token_url": "https://api.webflow.com/oauth/access_token",
+      "scopes": {
+        "sites:read": "Read site information",
+        "sites:write": "Modify site settings",
+        "cms:read": "Read CMS collections and items",
+        "cms:write": "Create and modify CMS content",
+        "forms:read": "Read form submissions",
+        "forms:write": "Manage forms",
+        "assets:read": "Read site assets",
+        "assets:write": "Upload and manage assets",
+        "ecommerce:read": "Read e-commerce data",
+        "ecommerce:write": "Manage e-commerce operations",
+        "pages:read": "Read page data",
+        "pages:write": "Modify pages",
+        "users:read": "Read user data",
+        "users:write": "Manage users"
+      }
+    },
     "api_key": {
       "location": "header",
       "name": "Authorization",
