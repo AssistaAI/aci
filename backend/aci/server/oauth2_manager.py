@@ -140,16 +140,37 @@ class OAuth2Manager:
         """
         try:
             # LinkedIn doesn't support PKCE and doesn't need scope in token exchange
+            # Microsoft apps support PKCE but don't want scope in token exchange
             fetch_token_kwargs = {
                 "redirect_uri": redirect_uri,
                 "code": code,
             }
+
+            # List of Microsoft apps that use Microsoft Graph OAuth2
+            microsoft_apps = [
+                "MICROSOFT_OUTLOOK",
+                "MICROSOFT_ONEDRIVE",
+                "MICROSOFT_TEAMS",
+                "MICROSOFT_CALENDAR",
+                "SHARE_POINT",
+            ]
+
+            # List of Zoho apps that use Zoho OAuth2
+            zoho_apps = [
+                "ZOHO_DESK",
+            ]
+
+            # Apps that support PKCE but don't want scope in token exchange
+            apps_without_scope_in_token_exchange = microsoft_apps + zoho_apps
 
             if self.app_name == "LINKEDIN":
                 # LinkedIn requires explicit grant_type in the token request
                 # Note: client_id and client_secret are added automatically by authlib
                 # via token_endpoint_auth_method=client_secret_post
                 fetch_token_kwargs["grant_type"] = "authorization_code"
+            elif self.app_name in apps_without_scope_in_token_exchange:
+                # These apps support PKCE but don't want scope in token exchange
+                fetch_token_kwargs["code_verifier"] = code_verifier
             else:
                 fetch_token_kwargs["code_verifier"] = code_verifier
                 fetch_token_kwargs["scope"] = self.scope
