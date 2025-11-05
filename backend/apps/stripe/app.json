@@ -6,10 +6,20 @@
   "version": "1.0.0",
   "description": "\"Process payments, manage subscriptions, handle refunds, and track finances effortlessly through chat commands.\"",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
+      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ STRIPE_CLIENT_ID }}",
+      "client_secret": "{{ STRIPE_CLIENT_SECRET }}",
+      "authorization_url": "https://connect.stripe.com/oauth/authorize",
+      "token_url": "https://connect.stripe.com/oauth/token",
+      "refresh_token_url": "https://connect.stripe.com/oauth/token",
+      "scopes": {
+        "read_write": "Full read and write access to account data",
+        "read_only": "Read-only access to account data"
+      }
     }
   },
   "default_security_credentials_by_scheme": {},

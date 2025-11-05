@@ -1,0 +1,371 @@
+[
+  {
+    "name": "CANVA__GET_USER_PROFILE",
+    "description": "Get the authenticated user's profile information including ID, display name, email, and team ID.",
+    "tags": ["user", "profile"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/users/me/profile",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "visible": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__LIST_DESIGNS",
+    "description": "List all designs accessible by the user. Supports pagination and filtering by ownership type.",
+    "tags": ["design", "list"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/designs",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query parameters for filtering and pagination",
+          "properties": {
+            "continuation": {
+              "type": "string",
+              "description": "Token for pagination to retrieve the next page of results"
+            },
+            "ownership": {
+              "type": "string",
+              "enum": ["owned", "shared"],
+              "description": "Filter by ownership type: 'owned' for designs owned by the user, 'shared' for designs shared with the user"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of designs to return per page (default: 10, max: 100)"
+            }
+          },
+          "required": [],
+          "visible": ["continuation", "ownership", "limit"],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": ["query"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__GET_DESIGN",
+    "description": "Get metadata for a specific design including title, thumbnail URLs, and ownership information.",
+    "tags": ["design", "metadata"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/designs/{design_id}",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "design_id": {
+              "type": "string",
+              "description": "The unique identifier of the design"
+            }
+          },
+          "required": ["design_id"],
+          "visible": ["design_id"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["path"],
+      "visible": ["path"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__CREATE_DESIGN",
+    "description": "Create a new design from a template or brand template on behalf of the user.",
+    "tags": ["design", "create"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v1/designs",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Design creation parameters",
+          "properties": {
+            "design_type": {
+              "type": "string",
+              "description": "The type of design to create (e.g., 'presentation', 'document', 'social-media-post')"
+            },
+            "asset_id": {
+              "type": "string",
+              "description": "The ID of a template or brand template to use as the basis for the new design"
+            },
+            "title": {
+              "type": "string",
+              "description": "The title for the new design"
+            }
+          },
+          "required": [],
+          "visible": ["design_type", "asset_id", "title"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["body"],
+      "visible": ["body"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__LIST_FOLDERS",
+    "description": "List all folders accessible by the user with support for pagination.",
+    "tags": ["folder", "list"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/folders",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query parameters for pagination",
+          "properties": {
+            "continuation": {
+              "type": "string",
+              "description": "Token for pagination to retrieve the next page of results"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of folders to return per page (default: 10, max: 100)"
+            }
+          },
+          "required": [],
+          "visible": ["continuation", "limit"],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": ["query"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__CREATE_FOLDER",
+    "description": "Create a new folder in the user's account.",
+    "tags": ["folder", "create"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v1/folders",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Folder creation parameters",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the folder to create"
+            },
+            "parent_folder_id": {
+              "type": "string",
+              "description": "The ID of the parent folder (optional, defaults to root folder)"
+            }
+          },
+          "required": ["name"],
+          "visible": ["name", "parent_folder_id"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["body"],
+      "visible": ["body"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__LIST_ASSETS",
+    "description": "List all assets (images, videos, audio) uploaded by the user with support for filtering and pagination.",
+    "tags": ["asset", "list"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/assets",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query parameters for filtering and pagination",
+          "properties": {
+            "continuation": {
+              "type": "string",
+              "description": "Token for pagination to retrieve the next page of results"
+            },
+            "asset_type": {
+              "type": "string",
+              "enum": ["image", "video", "audio"],
+              "description": "Filter by asset type"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of assets to return per page (default: 10, max: 100)"
+            }
+          },
+          "required": [],
+          "visible": ["continuation", "asset_type", "limit"],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": ["query"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__UPLOAD_ASSET",
+    "description": "Upload a new asset (image, video, or audio file) to the user's Canva account.",
+    "tags": ["asset", "upload"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v1/assets",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Asset upload parameters",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the asset"
+            },
+            "url": {
+              "type": "string",
+              "description": "A publicly accessible URL where Canva can download the asset from"
+            },
+            "asset_type": {
+              "type": "string",
+              "enum": ["image", "video", "audio"],
+              "description": "The type of asset being uploaded"
+            }
+          },
+          "required": ["name", "url", "asset_type"],
+          "visible": ["name", "url", "asset_type"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["body"],
+      "visible": ["body"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__GET_ASSET",
+    "description": "Get metadata for a specific asset including name, type, thumbnail, and upload date.",
+    "tags": ["asset", "metadata"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/assets/{asset_id}",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "description": "The unique identifier of the asset"
+            }
+          },
+          "required": ["asset_id"],
+          "visible": ["asset_id"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["path"],
+      "visible": ["path"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CANVA__DELETE_ASSET",
+    "description": "Delete an asset from the user's Canva account.",
+    "tags": ["asset", "delete"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/v1/assets/{asset_id}",
+      "server_url": "https://api.canva.com/rest"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "description": "The unique identifier of the asset to delete"
+            }
+          },
+          "required": ["asset_id"],
+          "visible": ["asset_id"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["path"],
+      "visible": ["path"],
+      "additionalProperties": false
+    }
+  }
+]

@@ -6,10 +6,21 @@
   "version": "1.0.0",
   "description": "\"Manage contacts, track deals, and strengthen customer relationships effortlessly through easy chat commands.\"",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
+      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ ATTIO_CLIENT_ID }}",
+      "client_secret": "{{ ATTIO_CLIENT_SECRET }}",
+      "authorization_url": "https://app.attio.com/authorize",
+      "token_url": "https://app.attio.com/oauth/token",
+      "scopes": {
+        "record_permission": "Access and manage records",
+        "object_configuration_permission": "Read and modify object configurations",
+        "user_management": "Manage users and permissions",
+        "workspace_permission": "Access workspace information"
+      }
     }
   },
   "default_security_credentials_by_scheme": {},

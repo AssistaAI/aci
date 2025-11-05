@@ -1,0 +1,46 @@
+{
+  "name": "CANVA",
+  "display_name": "Canva",
+  "logo": "https://logo.clearbit.com/canva.com",
+  "provider": "Canva Pty Ltd",
+  "version": "1.0.0",
+  "description": "Create stunning designs, manage assets, collaborate on projects, and access brand templates using simple chat commands.",
+  "security_schemes": {
+    "oauth2": {
+      "type": "oauth2",
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ CANVA_CLIENT_ID }}",
+      "client_secret": "{{ CANVA_CLIENT_SECRET }}",
+      "authorization_url": "https://www.canva.com/api/oauth/authorize",
+      "token_url": "https://api.canva.com/rest/v1/oauth/token",
+      "refresh_token_url": "https://api.canva.com/rest/v1/oauth/token",
+      "scopes": {
+        "asset:read": "View the metadata for the user's assets, such as uploaded images",
+        "asset:write": "Upload, update, or delete assets on the user's behalf",
+        "brandtemplate:content:read": "Read the content of the brand templates associated with the user's brand",
+        "brandtemplate:meta:read": "View the metadata of the brand templates associated with the user's brand",
+        "collaboration:event": "Receive webhook notifications about events relevant to the user",
+        "comment:read": "View the comments on the user's designs, and the associated metadata",
+        "comment:write": "Create comments and replies on the user's designs",
+        "design:content:read": "View the contents of the user's designs",
+        "design:content:write": "Create designs on the user's behalf",
+        "design:meta:read": "View the metadata of the user's designs",
+        "folder:permission:write": "Set, update, or remove permissions assigned to the user's folders",
+        "folder:read": "View the metadata and contents of the user's folders",
+        "folder:write": "Add, move, or remove the user's folders",
+        "profile:read": "Read a user's profile and account information"
+      }
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Design",
+    "Collaboration",
+    "Productivity",
+    "Marketing"
+  ],
+  "visibility": "public",
+  "active": true
+}

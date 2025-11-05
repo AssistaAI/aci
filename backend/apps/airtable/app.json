@@ -6,10 +6,25 @@
   "version": "1.0.0",
   "description": "Build databases, track records, and organize information effortlessly using easy chat commands.",
   "security_schemes": {
-    "api_key": {
+    "oauth2": {
+      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
-      "prefix": "Bearer"
+      "prefix": "Bearer",
+      "client_id": "{{ AIRTABLE_CLIENT_ID }}",
+      "client_secret": "{{ AIRTABLE_CLIENT_SECRET }}",
+      "authorization_url": "https://airtable.com/oauth2/v1/authorize",
+      "token_url": "https://airtable.com/oauth2/v1/token",
+      "scopes": {
+        "data.records:read": "Read records from bases",
+        "data.records:write": "Create and update records in bases",
+        "data.recordComments:read": "Read comments on records",
+        "data.recordComments:write": "Create and update comments on records",
+        "schema.bases:read": "Read base schema (tables, fields, views)",
+        "schema.bases:write": "Create and update base schema",
+        "webhook:manage": "Create and manage webhooks",
+        "user.email:read": "Read user email address"
+      }
     }
   },
   "default_security_credentials_by_scheme": {},

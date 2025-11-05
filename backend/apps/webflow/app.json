@@ -8,6 +8,11 @@
   "security_schemes": {
     "oauth2": {
       "type": "oauth2",
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ WEBFLOW_CLIENT_ID }}",
+      "client_secret": "{{ WEBFLOW_CLIENT_SECRET }}",
       "authorization_url": "https://webflow.com/oauth/authorize",
       "token_url": "https://api.webflow.com/oauth/access_token",
       "scopes": {
@@ -26,11 +31,6 @@
         "users:read": "Read user data",
         "users:write": "Manage users"
       }
-    },
-    "api_key": {
-      "location": "header",
-      "name": "Authorization",
-      "prefix": "Bearer"
     }
   },
   "default_security_credentials_by_scheme": {},
