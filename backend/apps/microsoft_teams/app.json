@@ -12,7 +12,7 @@
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_MICROSOFT_TEAMS_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_MICROSOFT_TEAMS_CLIENT_SECRET }}",
-      "scope": "https://graph.microsoft.com/Chat.ReadWrite",
+      "scope": "Chat.ReadWrite User.Read offline_access",
       "authorize_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "access_token_url": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
       "refresh_token_url": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
