@@ -170,7 +170,9 @@ class OAuth2Manager:
                 fetch_token_kwargs["grant_type"] = "authorization_code"
             elif self.app_name in apps_without_scope_in_token_exchange:
                 # These apps support PKCE but don't want scope in token exchange
+                # Microsoft and Zoho also require explicit grant_type
                 fetch_token_kwargs["code_verifier"] = code_verifier
+                fetch_token_kwargs["grant_type"] = "authorization_code"
             else:
                 fetch_token_kwargs["code_verifier"] = code_verifier
                 fetch_token_kwargs["scope"] = self.scope
