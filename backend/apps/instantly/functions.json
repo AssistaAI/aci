@@ -2,7 +2,10 @@
   {
     "name": "INSTANTLY__CREATE_API_KEY",
     "description": "Creates a new API key for authentication",
-    "tags": ["instantly", "api_keys"],
+    "tags": [
+      "instantly",
+      "api_keys"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -15,26 +18,44 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name for the API key",
-          "visibility": "public",
-          "in": "body"
-        },
-        "scopes": {
-          "type": "array",
-          "description": "List of permission scopes for the API key",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name for the API key"
+            },
+            "scopes": {
+              "type": "array",
+              "description": "List of permission scopes for the API key"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "visible": [
+            "name",
+            "scopes"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["name"]
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__LIST_API_KEYS",
     "description": "Retrieves a list of all API keys associated with the account",
-    "tags": ["instantly", "api_keys"],
+    "tags": [
+      "instantly",
+      "api_keys"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -47,13 +68,18 @@
     "parameters": {
       "type": "object",
       "properties": {},
-      "required": []
+      "required": [],
+      "visible": [],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__DELETE_API_KEY",
     "description": "Deletes a specific API key by its ID",
-    "tags": ["instantly", "api_keys"],
+    "tags": [
+      "instantly",
+      "api_keys"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -66,20 +92,39 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the API key to delete",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The unique identifier of the API key to delete"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__GET_ACCOUNT",
     "description": "Retrieve details of a specific email account",
-    "tags": ["instantly", "accounts"],
+    "tags": [
+      "instantly",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -92,20 +137,39 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string",
-          "description": "The account email address",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "The account email address"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["email"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__LIST_ACCOUNTS",
     "description": "List all email accounts",
-    "tags": ["instantly", "accounts"],
+    "tags": [
+      "instantly",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -118,26 +182,42 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "limit": {
-          "type": "integer",
-          "description": "Number of accounts to return",
-          "visibility": "public",
-          "in": "query"
-        },
-        "skip": {
-          "type": "integer",
-          "description": "Number of accounts to skip",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of accounts to return"
+            },
+            "skip": {
+              "type": "integer",
+              "description": "Number of accounts to skip"
+            }
+          },
+          "required": [],
+          "visible": [
+            "limit",
+            "skip"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": []
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__PAUSE_ACCOUNT",
     "description": "Pause an email account to stop sending",
-    "tags": ["instantly", "accounts"],
+    "tags": [
+      "instantly",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -150,20 +230,39 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string",
-          "description": "The account email address",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "The account email address"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["email"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__RESUME_ACCOUNT",
     "description": "Resume a paused email account",
-    "tags": ["instantly", "accounts"],
+    "tags": [
+      "instantly",
+      "accounts"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -176,20 +275,40 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string",
-          "description": "The account email address",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "The account email address"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["email"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__GET_WARMUP_ANALYTICS",
     "description": "Get warmup analytics for an email account",
-    "tags": ["instantly", "accounts", "analytics"],
+    "tags": [
+      "instantly",
+      "accounts",
+      "analytics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -202,20 +321,39 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string",
-          "description": "The account email address",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "The account email address"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["email"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__CREATE_CAMPAIGN",
     "description": "Create a new email outreach campaign",
-    "tags": ["instantly", "campaigns"],
+    "tags": [
+      "instantly",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -228,38 +366,57 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Campaign name",
-          "visibility": "public",
-          "in": "body"
-        },
-        "from_email": {
-          "type": "string",
-          "description": "Sender email address",
-          "visibility": "public",
-          "in": "body"
-        },
-        "subject": {
-          "type": "string",
-          "description": "Email subject line",
-          "visibility": "public",
-          "in": "body"
-        },
         "body": {
-          "type": "string",
-          "description": "Email body content",
-          "visibility": "public",
-          "in": "body"
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Campaign name"
+            },
+            "from_email": {
+              "type": "string",
+              "description": "Sender email address"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Email subject line"
+            },
+            "body": {
+              "type": "string",
+              "description": "Email body content"
+            }
+          },
+          "required": [
+            "name",
+            "from_email",
+            "subject",
+            "body"
+          ],
+          "visible": [
+            "name",
+            "from_email",
+            "subject",
+            "body"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["name", "from_email", "subject", "body"]
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__LIST_CAMPAIGNS",
     "description": "List all campaigns",
-    "tags": ["instantly", "campaigns"],
+    "tags": [
+      "instantly",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -272,26 +429,42 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "limit": {
-          "type": "integer",
-          "description": "Number of campaigns to return",
-          "visibility": "public",
-          "in": "query"
-        },
-        "skip": {
-          "type": "integer",
-          "description": "Number of campaigns to skip",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of campaigns to return"
+            },
+            "skip": {
+              "type": "integer",
+              "description": "Number of campaigns to skip"
+            }
+          },
+          "required": [],
+          "visible": [
+            "limit",
+            "skip"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": []
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__GET_CAMPAIGN",
     "description": "Get details of a specific campaign",
-    "tags": ["instantly", "campaigns"],
+    "tags": [
+      "instantly",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -304,20 +477,39 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__UPDATE_CAMPAIGN",
     "description": "Update an existing campaign",
-    "tags": ["instantly", "campaigns"],
+    "tags": [
+      "instantly",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -330,38 +522,65 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
-        },
-        "name": {
-          "type": "string",
-          "description": "Updated campaign name",
-          "visibility": "public",
-          "in": "body"
-        },
-        "subject": {
-          "type": "string",
-          "description": "Updated email subject",
-          "visibility": "public",
-          "in": "body"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         },
         "body": {
-          "type": "string",
-          "description": "Updated email body",
-          "visibility": "public",
-          "in": "body"
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Updated campaign name"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Updated email subject"
+            },
+            "body": {
+              "type": "string",
+              "description": "Updated email body"
+            }
+          },
+          "required": [],
+          "visible": [
+            "name",
+            "subject",
+            "body"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__DELETE_CAMPAIGN",
     "description": "Delete a campaign",
-    "tags": ["instantly", "campaigns"],
+    "tags": [
+      "instantly",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -374,20 +593,40 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__ADD_LEAD_TO_CAMPAIGN",
     "description": "Add a lead to a campaign",
-    "tags": ["instantly", "leads", "campaigns"],
+    "tags": [
+      "instantly",
+      "leads",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -400,44 +639,72 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         },
-        "email": {
-          "type": "string",
-          "description": "Lead email address",
-          "visibility": "public",
-          "in": "body"
-        },
-        "first_name": {
-          "type": "string",
-          "description": "Lead first name",
-          "visibility": "public",
-          "in": "body"
-        },
-        "last_name": {
-          "type": "string",
-          "description": "Lead last name",
-          "visibility": "public",
-          "in": "body"
-        },
-        "company": {
-          "type": "string",
-          "description": "Lead company",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "Lead email address"
+            },
+            "first_name": {
+              "type": "string",
+              "description": "Lead first name"
+            },
+            "last_name": {
+              "type": "string",
+              "description": "Lead last name"
+            },
+            "company": {
+              "type": "string",
+              "description": "Lead company"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "visible": [
+            "email",
+            "first_name",
+            "last_name",
+            "company"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id", "email"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__LIST_LEADS",
     "description": "List all leads in a campaign",
-    "tags": ["instantly", "leads"],
+    "tags": [
+      "instantly",
+      "leads"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -450,32 +717,61 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         },
-        "limit": {
-          "type": "integer",
-          "description": "Number of leads to return",
-          "visibility": "public",
-          "in": "query"
-        },
-        "skip": {
-          "type": "integer",
-          "description": "Number of leads to skip",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Number of leads to return"
+            },
+            "skip": {
+              "type": "integer",
+              "description": "Number of leads to skip"
+            }
+          },
+          "required": [],
+          "visible": [
+            "limit",
+            "skip"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "INSTANTLY__GET_CAMPAIGN_ANALYTICS",
     "description": "Get analytics for a specific campaign",
-    "tags": ["instantly", "campaigns", "analytics"],
+    "tags": [
+      "instantly",
+      "campaigns",
+      "analytics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -488,14 +784,30 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Campaign ID",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Campaign ID"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "visible": [
+            "id"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["id"]
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   }
 ]

@@ -441,7 +441,10 @@
             "fieldData": {
               "type": "object",
               "description": "Field data for the collection item (key-value pairs matching collection schema)",
-              "additionalProperties": true
+              "additionalProperties": true,
+              "properties": {},
+              "required": [],
+              "visible": []
             },
             "isDraft": {
               "type": "boolean",
@@ -532,7 +535,10 @@
             "fieldData": {
               "type": "object",
               "description": "Updated field data for the collection item",
-              "additionalProperties": true
+              "additionalProperties": true,
+              "properties": {},
+              "required": [],
+              "visible": []
             },
             "isDraft": {
               "type": "boolean",
@@ -993,7 +999,10 @@
             "filter": {
               "type": "object",
               "description": "Optional filters to limit when webhook fires (only for form_submission trigger type)",
-              "additionalProperties": true
+              "additionalProperties": true,
+              "properties": {},
+              "required": [],
+              "visible": []
             }
           },
           "required": [

@@ -6,7 +6,7 @@
   "version": "3.23",
   "description": "\"Create dashboards, generate reports, and share insights effortlessly to make data-driven decisions with simple chat commands.\"",
   "security_schemes": {
-    "http_bearer": {
+    "api_key": {
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer"

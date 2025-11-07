@@ -7,30 +7,15 @@
   "description": "Build websites, manage content, create forms, and streamline e-commerce effortlessly through simple chat commands.",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ WEBFLOW_CLIENT_ID }}",
       "client_secret": "{{ WEBFLOW_CLIENT_SECRET }}",
-      "authorization_url": "https://webflow.com/oauth/authorize",
-      "token_url": "https://api.webflow.com/oauth/access_token",
-      "scopes": {
-        "sites:read": "Read site information",
-        "sites:write": "Modify site settings",
-        "cms:read": "Read CMS collections and items",
-        "cms:write": "Create and modify CMS content",
-        "forms:read": "Read form submissions",
-        "forms:write": "Manage forms",
-        "assets:read": "Read site assets",
-        "assets:write": "Upload and manage assets",
-        "ecommerce:read": "Read e-commerce data",
-        "ecommerce:write": "Manage e-commerce operations",
-        "pages:read": "Read page data",
-        "pages:write": "Modify pages",
-        "users:read": "Read user data",
-        "users:write": "Manage users"
-      }
+      "scope": "sites:read sites:write cms:read cms:write forms:read forms:write assets:read assets:write ecommerce:read ecommerce:write pages:read pages:write users:read users:write",
+      "authorize_url": "https://webflow.com/oauth/authorize",
+      "access_token_url": "https://api.webflow.com/oauth/access_token",
+      "refresh_token_url": "https://api.webflow.com/oauth/access_token"
     }
   },
   "default_security_credentials_by_scheme": {},

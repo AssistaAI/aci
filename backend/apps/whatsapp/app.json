@@ -6,7 +6,7 @@
   "version": "v20.0",
   "description": "Send and receive messages, manage customer chats, and automate support tasks to improve communication and streamline your business using the WhatsApp Cloud API.",
   "security_schemes": {
-    "bearer_token": {
+    "api_key": {
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer"

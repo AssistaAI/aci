@@ -7,22 +7,15 @@
   "description": "\"Find prospects, enrich data, manage accounts, and track sales activities using simple chat commands to boost your sales efforts.\"",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ APOLLO_CLIENT_ID }}",
       "client_secret": "{{ APOLLO_CLIENT_SECRET }}",
-      "authorization_url": "https://app.apollo.io/#/oauth/authorize",
-      "token_url": "https://app.apollo.io/api/v1/oauth/token",
-      "refresh_token_url": "https://app.apollo.io/api/v1/oauth/token",
-      "scopes": {
-        "read_user_profile": "Read user profile information",
-        "contacts_search": "Search and access contact data",
-        "person_read": "Read person details",
-        "opportunity_write": "Create and update opportunities",
-        "app_scopes": "Access to app-specific features"
-      }
+      "scope": "read_user_profile contacts_search person_read opportunity_write app_scopes",
+      "authorize_url": "https://app.apollo.io/#/oauth/authorize",
+      "access_token_url": "https://app.apollo.io/api/v1/oauth/token",
+      "refresh_token_url": "https://app.apollo.io/api/v1/oauth/token"
     }
   },
   "default_security_credentials_by_scheme": {},
