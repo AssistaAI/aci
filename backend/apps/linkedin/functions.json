@@ -163,6 +163,47 @@
               "type": "string",
               "description": "The main text content of the post. Supports plain text and @-mentions (e.g., @[Name](urn:li:person:xxxx))."
             },
+            "visibility": {
+              "type": "string",
+              "description": "Controls who can see the post. PUBLIC (visible to everyone), CONNECTIONS (connections only), LOGGED_IN (signed-in members), CONTAINER (for group/event posts)",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC",
+                "CONNECTIONS",
+                "LOGGED_IN",
+                "CONTAINER"
+              ]
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings for the post",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type. MAIN_FEED distributes to main feed, NONE does not distribute automatically",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
+            },
+            "lifecycleState": {
+              "type": "string",
+              "description": "The state of the post. PUBLISHED (post directly), DRAFT (save as draft), PUBLISH_REQUESTED (requires review)",
+              "default": "PUBLISHED",
+              "enum": [
+                "PUBLISHED",
+                "DRAFT",
+                "PUBLISH_REQUESTED"
+              ]
+            },
             "isReshareDisabledByAuthor": {
               "type": "boolean",
               "description": "Set to true to prevent others from resharing this post",
@@ -176,60 +217,19 @@
           "visible": [
             "author",
             "commentary",
+            "visibility",
+            "distribution",
+            "lifecycleState",
             "isReshareDisabledByAuthor"
           ],
           "additionalProperties": false
-        },
-        "visibility": {
-          "type": "string",
-          "description": "Controls who can see the post. PUBLIC (visible to everyone), CONNECTIONS (connections only), LOGGED_IN (signed-in members), CONTAINER (for group/event posts)",
-          "default": "PUBLIC",
-          "enum": [
-            "PUBLIC",
-            "CONNECTIONS",
-            "LOGGED_IN",
-            "CONTAINER"
-          ]
-        },
-        "distribution": {
-          "type": "object",
-          "description": "Distribution settings for the post",
-          "properties": {
-            "feedDistribution": {
-              "type": "string",
-              "description": "Feed distribution type. MAIN_FEED distributes to main feed, NONE does not distribute automatically",
-              "default": "MAIN_FEED",
-              "enum": [
-                "MAIN_FEED",
-                "NONE"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "feedDistribution"
-          ],
-          "additionalProperties": false
-        },
-        "lifecycleState": {
-          "type": "string",
-          "description": "The state of the post. PUBLISHED (post directly), DRAFT (save as draft), PUBLISH_REQUESTED (requires review)",
-          "default": "PUBLISHED",
-          "enum": [
-            "PUBLISHED",
-            "DRAFT",
-            "PUBLISH_REQUESTED"
-          ]
         }
       },
       "required": [
         "body"
       ],
       "visible": [
-        "body",
-        "visibility",
-        "distribution",
-        "lifecycleState"
+        "body"
       ],
       "additionalProperties": false
     }
@@ -383,6 +383,43 @@
             "commentary": {
               "type": "string",
               "description": "The text content of the company post"
+            },
+            "visibility": {
+              "type": "string",
+              "description": "Post visibility",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC"
+              ]
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
+            },
+            "lifecycleState": {
+              "type": "string",
+              "description": "Post lifecycle state",
+              "default": "PUBLISHED",
+              "enum": [
+                "PUBLISHED",
+                "DRAFT"
+              ]
             }
           },
           "required": [
@@ -391,56 +428,19 @@
           ],
           "visible": [
             "author",
-            "commentary"
+            "commentary",
+            "visibility",
+            "distribution",
+            "lifecycleState"
           ],
           "additionalProperties": false
-        },
-        "visibility": {
-          "type": "string",
-          "description": "Post visibility",
-          "default": "PUBLIC",
-          "enum": [
-            "PUBLIC"
-          ]
-        },
-        "distribution": {
-          "type": "object",
-          "description": "Distribution settings",
-          "properties": {
-            "feedDistribution": {
-              "type": "string",
-              "description": "Feed distribution type",
-              "default": "MAIN_FEED",
-              "enum": [
-                "MAIN_FEED",
-                "NONE"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "feedDistribution"
-          ],
-          "additionalProperties": false
-        },
-        "lifecycleState": {
-          "type": "string",
-          "description": "Post lifecycle state",
-          "default": "PUBLISHED",
-          "enum": [
-            "PUBLISHED",
-            "DRAFT"
-          ]
         }
       },
       "required": [
         "body"
       ],
       "visible": [
-        "body",
-        "visibility",
-        "distribution",
-        "lifecycleState"
+        "body"
       ],
       "additionalProperties": false
     }
@@ -759,6 +759,44 @@
                 "article"
               ],
               "additionalProperties": false
+            },
+            "visibility": {
+              "type": "string",
+              "description": "Post visibility",
+              "default": "PUBLIC",
+              "enum": [
+                "PUBLIC",
+                "CONNECTIONS"
+              ]
+            },
+            "distribution": {
+              "type": "object",
+              "description": "Distribution settings",
+              "properties": {
+                "feedDistribution": {
+                  "type": "string",
+                  "description": "Feed distribution type",
+                  "default": "MAIN_FEED",
+                  "enum": [
+                    "MAIN_FEED",
+                    "NONE"
+                  ]
+                }
+              },
+              "required": [],
+              "visible": [
+                "feedDistribution"
+              ],
+              "additionalProperties": false
+            },
+            "lifecycleState": {
+              "type": "string",
+              "description": "Post lifecycle state",
+              "default": "PUBLISHED",
+              "enum": [
+                "PUBLISHED",
+                "DRAFT"
+              ]
             }
           },
           "required": [
@@ -768,57 +806,19 @@
           "visible": [
             "author",
             "commentary",
-            "content"
+            "content",
+            "visibility",
+            "distribution",
+            "lifecycleState"
           ],
           "additionalProperties": false
-        },
-        "visibility": {
-          "type": "string",
-          "description": "Post visibility",
-          "default": "PUBLIC",
-          "enum": [
-            "PUBLIC",
-            "CONNECTIONS"
-          ]
-        },
-        "distribution": {
-          "type": "object",
-          "description": "Distribution settings",
-          "properties": {
-            "feedDistribution": {
-              "type": "string",
-              "description": "Feed distribution type",
-              "default": "MAIN_FEED",
-              "enum": [
-                "MAIN_FEED",
-                "NONE"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "feedDistribution"
-          ],
-          "additionalProperties": false
-        },
-        "lifecycleState": {
-          "type": "string",
-          "description": "Post lifecycle state",
-          "default": "PUBLISHED",
-          "enum": [
-            "PUBLISHED",
-            "DRAFT"
-          ]
         }
       },
       "required": [
         "body"
       ],
       "visible": [
-        "body",
-        "visibility",
-        "distribution",
-        "lifecycleState"
+        "body"
       ],
       "additionalProperties": false
     }
