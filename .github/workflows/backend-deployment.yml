@@ -25,7 +25,7 @@ jobs:
         if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
           BRANCH_NAME="prod"
           NAMESPACE="aci-prod"
-          REPLICAS="1"
+          REPLICAS="3"
           POSTGRES_INSTANCES="2"
           DOMAIN="aci-api.assista.dev"
           APPLY_HPA="true"
