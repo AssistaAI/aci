@@ -1,10 +1,9 @@
+from typing import Any
+
 from openai import OpenAI
 
-from aci.common.logging_setup import get_logger
 from aci.common.schemas.app import AppEmbeddingFields
 from aci.common.schemas.function import FunctionEmbeddingFields
-
-logger = get_logger(__name__)
 
 
 def generate_app_embedding(
@@ -13,17 +12,26 @@ def generate_app_embedding(
     embedding_model: str,
     embedding_dimension: int,
 ) -> list[float]:
-    """
-    Generate embedding for app.
-    TODO: what else should be included or not in the embedding?
-    """
-    logger.debug(f"Generating embedding for app: {app.name}...")
-    # generate app embeddings based on app config's name, display_name, provider, description, categories
-    text_for_embedding = app.model_dump_json()
-    logger.debug(f"Text for app embedding: {text_for_embedding}")
+    """Generate embedding for app using clean, semantic text representation."""
     return generate_embedding(
-        openai_client, embedding_model, embedding_dimension, text_for_embedding
+        openai_client, embedding_model, embedding_dimension, _build_app_embedding_text(app)
     )
+
+
+def _build_app_embedding_text(app: AppEmbeddingFields) -> str:
+    """Build a clean, human-readable text representation of an app for embedding."""
+    parts = [f"App: {app.name}"]
+
+    # Add optional fields if present
+    _add_field_if_exists(parts, app, "display_name", "Display")
+    _add_field_if_exists(parts, app, "description", "Description")
+
+    if hasattr(app, "categories") and app.categories:
+        parts.append(f"Categories: {', '.join(app.categories)}")
+
+    _add_field_if_exists(parts, app, "provider", "Provider")
+
+    return " | ".join(parts)
 
 
 # TODO: batch generate function embeddings
@@ -34,7 +42,7 @@ def generate_function_embeddings(
     embedding_model: str,
     embedding_dimension: int,
 ) -> list[list[float]]:
-    logger.debug(f"Generating embeddings for {len(functions)} functions...")
+    # Generate embeddings for functions
     function_embeddings: list[list[float]] = []
     for function in functions:
         function_embeddings.append(
@@ -52,12 +60,49 @@ def generate_function_embedding(
     embedding_model: str,
     embedding_dimension: int,
 ) -> list[float]:
-    logger.debug(f"Generating embedding for function: {function.name}...")
-    text_for_embedding = function.model_dump_json()
-    logger.debug(f"Text for function embedding: {text_for_embedding}")
+    """Generate embedding for function using clean, semantic text representation."""
     return generate_embedding(
-        openai_client, embedding_model, embedding_dimension, text_for_embedding
+        openai_client, embedding_model, embedding_dimension, _build_function_embedding_text(function)
     )
+
+
+def _build_function_embedding_text(function: FunctionEmbeddingFields) -> str:
+    """Build a clean, human-readable text representation of a function for embedding."""
+    parts = []
+
+    # Clean function name
+    clean_name = function.name.split("__")[-1] if "__" in function.name else function.name
+    parts.append(f"Function: {clean_name}")
+    parts.append(f"Description: {function.description}")
+
+    # Add parameters if available
+    _add_function_parameters(parts, function.parameters)
+
+    # Add service name if present
+    if "__" in function.name:
+        parts.append(f"Service: {function.name.split('__')[0]}")
+
+    return " | ".join(parts)
+
+
+def _add_field_if_exists(parts: list[str], obj: Any, field: str, label: str) -> None:
+    """Helper to add field to parts list if it exists and has value."""
+    if hasattr(obj, field) and getattr(obj, field):
+        parts.append(f"{label}: {getattr(obj, field)}")
+
+
+def _add_function_parameters(parts: list[str], parameters: dict) -> None:
+    """Helper to add function parameters to parts list."""
+    if not parameters or "properties" not in parameters:
+        return
+
+    param_descriptions = [
+        f"{name}: {schema.get('description', '')}" if "description" in schema else name
+        for name, schema in list(parameters["properties"].items())[:10]  # Limit to 10
+    ]
+
+    if param_descriptions:
+        parts.append(f"Parameters: {', '.join(param_descriptions)}")
 
 
 # TODO: allow different inference providers
@@ -68,7 +113,7 @@ def generate_embedding(
     """
     Generate an embedding for the given text using OpenAI's model.
     """
-    logger.debug(f"Generating embedding for text: {text}")
+    # Generate embedding for text
     try:
         response = openai_client.embeddings.create(
             input=[text],
@@ -78,5 +123,5 @@ def generate_embedding(
         embedding: list[float] = response.data[0].embedding
         return embedding
     except Exception:
-        logger.error("Error generating embedding", exc_info=True)
+        # Error generating embedding
         raise
