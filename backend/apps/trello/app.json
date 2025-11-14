@@ -6,16 +6,10 @@
   "version": "1.0.0",
   "description": "\"Organize projects, manage tasks, and collaborate visually to streamline your workflow and boost team productivity.\"",
   "security_schemes": {
-    "oauth2": {
-      "location": "header",
-      "name": "Authorization",
-      "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_TRELLO_APP_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_TRELLO_APP_CLIENT_SECRET }}",
-      "scope": "read,write",
-      "authorize_url": "https://trello.com/1/authorize",
-      "access_token_url": "https://trello.com/1/OAuthGetAccessToken",
-      "refresh_token_url": "https://trello.com/1/OAuthGetAccessToken"
+    "api_key": {
+      "location": "query",
+      "name": "token",
+      "prefix": null
     }
   },
   "default_security_credentials_by_scheme": {},
