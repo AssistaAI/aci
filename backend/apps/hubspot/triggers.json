@@ -1,0 +1,434 @@
+[
+  {
+    "name": "HUBSPOT__CONTACT_CREATED",
+    "description": "Triggered when a new contact is created in HubSpot",
+    "trigger_type": "contact.creation",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "contact.creation",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "description": "The ID of the contact that was created"
+        },
+        "eventId": {
+          "type": "integer",
+          "description": "Unique ID for this event"
+        },
+        "subscriptionId": {
+          "type": "integer",
+          "description": "ID of the subscription that triggered this webhook"
+        },
+        "portalId": {
+          "type": "integer",
+          "description": "HubSpot portal (account) ID"
+        },
+        "occurredAt": {
+          "type": "integer",
+          "description": "Timestamp (milliseconds) when the event occurred"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["contact.creation"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "description": "No additional filters available for contact creation events"
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__CONTACT_DELETED",
+    "description": "Triggered when a contact is deleted in HubSpot",
+    "trigger_type": "contact.deletion",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "contact.deletion",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "description": "The ID of the contact that was deleted"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["contact.deletion"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {}
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__CONTACT_PROPERTY_CHANGED",
+    "description": "Triggered when a specific contact property is changed in HubSpot",
+    "trigger_type": "contact.propertyChange",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "contact.propertyChange",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature",
+      "requires_property_name": true
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "description": "The ID of the contact"
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "Name of the property that changed (e.g., 'email', 'firstname')"
+        },
+        "propertyValue": {
+          "type": "string",
+          "description": "New value of the property"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["contact.propertyChange"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "property_name": {
+          "type": "string",
+          "description": "Specific property to watch (e.g., 'email', 'firstname', 'lastname')",
+          "examples": ["email", "firstname", "lastname", "phone", "company"]
+        }
+      },
+      "required": ["property_name"],
+      "description": "REQUIRED: Must specify which property to watch for changes"
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__DEAL_CREATED",
+    "description": "Triggered when a new deal is created in HubSpot",
+    "trigger_type": "deal.creation",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "deal.creation",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "description": "The ID of the deal that was created"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["deal.creation"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {}
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__DEAL_DELETED",
+    "description": "Triggered when a deal is deleted in HubSpot",
+    "trigger_type": "deal.deletion",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "deal.deletion",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["deal.deletion"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {}
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__DEAL_PROPERTY_CHANGED",
+    "description": "Triggered when a specific deal property is changed in HubSpot",
+    "trigger_type": "deal.propertyChange",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "deal.propertyChange",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature",
+      "requires_property_name": true
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer"
+        },
+        "propertyName": {
+          "type": "string"
+        },
+        "propertyValue": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["deal.propertyChange"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "property_name": {
+          "type": "string",
+          "description": "Specific deal property to watch (e.g., 'dealstage', 'amount', 'closedate')",
+          "examples": ["dealstage", "amount", "closedate", "dealname"]
+        }
+      },
+      "required": ["property_name"]
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__COMPANY_CREATED",
+    "description": "Triggered when a new company is created in HubSpot",
+    "trigger_type": "company.creation",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "company.creation",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["company.creation"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {}
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__COMPANY_DELETED",
+    "description": "Triggered when a company is deleted in HubSpot",
+    "trigger_type": "company.deletion",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "company.deletion",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature"
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["company.deletion"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {}
+    },
+    "visibility": "public",
+    "active": true
+  },
+  {
+    "name": "HUBSPOT__COMPANY_PROPERTY_CHANGED",
+    "description": "Triggered when a specific company property is changed in HubSpot",
+    "trigger_type": "company.propertyChange",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "https://api.hubapi.com/webhooks/v3/{appId}/subscriptions",
+      "event_type": "company.propertyChange",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-HubSpot-Signature",
+      "requires_property_name": true
+    },
+    "event_schema": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "integer"
+        },
+        "propertyName": {
+          "type": "string"
+        },
+        "propertyValue": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "integer"
+        },
+        "subscriptionId": {
+          "type": "integer"
+        },
+        "portalId": {
+          "type": "integer"
+        },
+        "occurredAt": {
+          "type": "integer"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["company.propertyChange"]
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "property_name": {
+          "type": "string",
+          "description": "Specific company property to watch (e.g., 'name', 'domain', 'industry')",
+          "examples": ["name", "domain", "industry", "city", "state"]
+        }
+      },
+      "required": ["property_name"]
+    },
+    "visibility": "public",
+    "active": true
+  }
+]

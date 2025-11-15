@@ -7,7 +7,15 @@ COPY ./pyproject.toml ./uv.lock /workdir/
 
 RUN uv sync --no-install-project
 
+# Copy source code and install the project
+COPY ./aci /workdir/aci
+COPY ./alembic /workdir/alembic
+COPY ./alembic.ini /workdir/alembic.ini
+COPY ./scripts /workdir/scripts
+RUN uv sync
+
 ENV PATH="/workdir/.venv/bin:$PATH"
 ENV PYTHONPATH=/workdir
 
-RUN playwright install chromium --with-deps --no-shell
+# Skip Playwright installation - only needed for browser automation tests
+# RUN playwright install chromium --with-deps
