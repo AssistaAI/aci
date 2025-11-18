@@ -106,6 +106,10 @@
           "visible": [],
           "additionalProperties": false
         },
+        "channel": {
+          "type": "string",
+          "description": "The ID of the conversation to fetch members for (alias for query.channel)"
+        },
         "query": {
           "type": "object",
           "description": "Query parameters for the http request",
@@ -140,6 +144,7 @@
         "query"
       ],
       "visible": [
+        "channel",
         "query"
       ],
       "additionalProperties": false
@@ -2484,7 +2489,7 @@
           "properties": {
             "Content-Type": {
               "type": "string",
-              "description": "Content type for the request",
+              "description": "Content type of the request",
               "default": "application/x-www-form-urlencoded"
             }
           },
