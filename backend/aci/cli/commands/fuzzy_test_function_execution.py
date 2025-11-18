@@ -71,8 +71,9 @@ def fuzzy_test_function_execution_helper(
     model: str,
     linked_account_owner_id: UUID,
     prompt: str | None = None,
-) -> None:
-    """Test function execution with GPT-generated inputs."""
+    test_context: dict | None = None,
+) -> dict:
+    """Test function execution with GPT-generated inputs. Returns the execution result."""
     # Get function definition
     response = httpx.get(
         f"{config.SERVER_URL}/v1/functions/{function_name}/definition",
@@ -89,7 +90,7 @@ def fuzzy_test_function_execution_helper(
     # Use OpenAI function calling to generate a random input
     openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
     function_args = _generate_fuzzy_function_call_arguments(
-        openai_client, model, function_definition, prompt=prompt
+        openai_client, model, function_definition, prompt=prompt, test_context=test_context
     )
     console.rule("[bold green]Generated Function Call Arguments[/bold green]")
     console.print(function_args)
@@ -112,15 +113,19 @@ def fuzzy_test_function_execution_helper(
     console.rule(f"[bold green]Execution Result for {function_name}[/bold green]")
     console.print(result)
 
+    return result
+
 
 def _generate_fuzzy_function_call_arguments(
     openai_client: OpenAI,
     model: str,
     function_definition: dict,
     prompt: str | None = None,
+    test_context: dict | None = None,
 ) -> Any:
     """
     Generate fuzzy input arguments for a function with LLM.
+    Uses context from previous successful API calls when available.
     """
     messages = [
         {
@@ -137,6 +142,17 @@ def _generate_fuzzy_function_call_arguments(
             {
                 "role": "user",
                 "content": prompt,
+            }
+        )
+
+    # Add context data as additional guidance if available
+    if test_context:
+        import json as json_module
+        context_str = json_module.dumps(test_context, indent=2)
+        messages.append(
+            {
+                "role": "user",
+                "content": f"Additional context from previous API responses:\n```json\n{context_str}\n```\n\nPlease use real IDs and values from this context when generating parameters.",
             }
         )
     response = openai_client.chat.completions.create(

@@ -100,11 +100,11 @@ seed_all_apps() {
       python -m aci.cli upsert-app \
         --app-file "$app_file" \
         --secrets-file "$secrets_file" \
-        --skip-dry-run
+        --skip-dry-run || echo "Failed to upsert app: $app_dir"
     else
       python -m aci.cli upsert-app \
         --app-file "$app_file" \
-        --skip-dry-run
+        --skip-dry-run || echo "Failed to upsert app: $app_dir"
     fi
   done
 
@@ -112,7 +112,7 @@ seed_all_apps() {
   for functions_file in ./apps/*/functions.json; do
     python -m aci.cli upsert-functions \
       --functions-file "$functions_file" \
-      --skip-dry-run
+      --skip-dry-run || echo "Failed to upsert functions: $functions_file"
   done
 }
 
