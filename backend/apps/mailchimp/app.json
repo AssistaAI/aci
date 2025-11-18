@@ -7,14 +7,15 @@
   "description": "\"Design email campaigns, manage contacts, and automate marketing to boost engagement and save time with easy chat commands.\"",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ MAILCHIMP_CLIENT_ID }}",
       "client_secret": "{{ MAILCHIMP_CLIENT_SECRET }}",
-      "authorization_url": "https://login.mailchimp.com/oauth2/authorize",
-      "token_url": "https://login.mailchimp.com/oauth2/token"
+      "scope": "",
+      "authorize_url": "https://login.mailchimp.com/oauth2/authorize",
+      "access_token_url": "https://login.mailchimp.com/oauth2/token",
+      "refresh_token_url": "https://login.mailchimp.com/oauth2/token"
     }
   },
   "default_security_credentials_by_scheme": {},

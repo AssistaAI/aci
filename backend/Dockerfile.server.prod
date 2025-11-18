@@ -8,6 +8,7 @@ RUN uv sync --no-dev --no-install-project
 
 ENV PATH="/workdir/.venv/bin:$PATH"
 ENV PYTHONPATH=/workdir
+ENV UVICORN_WORKERS=10
 
 RUN playwright install chromium --with-deps --no-shell
 
@@ -26,4 +27,4 @@ RUN rm -rf /workdir/aci/server/tests
 
 COPY .env.prod .env
 
-CMD ["uvicorn", "aci.server.main:app", "--proxy-headers", "--forwarded-allow-ips=*", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+CMD ["sh", "-c", "uvicorn aci.server.main:app --proxy-headers --forwarded-allow-ips=* --host 0.0.0.0 --port 8000 --no-access-log --workers ${UVICORN_WORKERS}"]

@@ -7,35 +7,15 @@
   "description": "\"Organize projects, track tasks, and streamline team workflows using easy chat commands for better collaboration.\"",
   "security_schemes": {
     "oauth2": {
-      "type": "oauth2",
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
       "client_id": "{{ MONDAY_CLIENT_ID }}",
       "client_secret": "{{ MONDAY_CLIENT_SECRET }}",
-      "authorization_url": "https://auth.monday.com/oauth2/authorize",
-      "token_url": "https://auth.monday.com/oauth2/token",
-      "scopes": {
-        "account:read": "Access general account information",
-        "assets:read": "Read accessible asset data",
-        "boards:read": "View board data",
-        "boards:write": "Modify board data",
-        "docs:read": "Access user documents",
-        "docs:write": "Edit user documents",
-        "me:read": "Read profile information",
-        "notifications:write": "Send notifications on user's behalf",
-        "tags:read": "Access account tags",
-        "teams:read": "View team information",
-        "teams:write": "Modify team data",
-        "updates:read": "View updates and replies",
-        "updates:write": "Post or edit updates",
-        "users:read": "Access user profile data",
-        "users:write": "Modify user profiles",
-        "webhooks:read": "View webhook configuration",
-        "webhooks:write": "Create and modify webhooks",
-        "workspaces:read": "Access workspace data",
-        "workspaces:write": "Modify workspace data"
-      }
+      "scope": "account:read assets:read boards:read boards:write docs:read docs:write me:read notifications:write tags:read teams:read teams:write updates:read updates:write users:read users:write webhooks:read webhooks:write workspaces:read workspaces:write",
+      "authorize_url": "https://auth.monday.com/oauth2/authorize",
+      "access_token_url": "https://auth.monday.com/oauth2/token",
+      "refresh_token_url": "https://auth.monday.com/oauth2/token"
     }
   },
   "default_security_credentials_by_scheme": {},

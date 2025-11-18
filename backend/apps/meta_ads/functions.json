@@ -2,7 +2,10 @@
   {
     "name": "META_ADS__GET_AD_ACCOUNT",
     "description": "Retrieve details of a specific ad account",
-    "tags": ["meta_ads", "ad_account"],
+    "tags": [
+      "meta_ads",
+      "ad_account"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -15,26 +18,55 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_CAMPAIGNS",
     "description": "List all campaigns for an ad account",
-    "tags": ["meta_ads", "campaigns"],
+    "tags": [
+      "meta_ads",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -47,32 +79,60 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
-        },
-        "limit": {
-          "type": "integer",
-          "description": "Number of results to return",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of results to return"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields",
+            "limit"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_CAMPAIGN",
     "description": "Create a new advertising campaign",
-    "tags": ["meta_ads", "campaigns"],
+    "tags": [
+      "meta_ads",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -85,44 +145,73 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "name": {
-          "type": "string",
-          "description": "The name of the campaign",
-          "visibility": "public",
-          "in": "body"
-        },
-        "objective": {
-          "type": "string",
-          "description": "The campaign objective (e.g., OUTCOME_TRAFFIC, OUTCOME_LEADS, OUTCOME_SALES)",
-          "visibility": "public",
-          "in": "body"
-        },
-        "status": {
-          "type": "string",
-          "description": "The campaign status (ACTIVE, PAUSED, ARCHIVED)",
-          "visibility": "public",
-          "in": "body"
-        },
-        "special_ad_categories": {
-          "type": "array",
-          "description": "Special ad category declarations",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the campaign"
+            },
+            "objective": {
+              "type": "string",
+              "description": "The campaign objective (e.g., OUTCOME_TRAFFIC, OUTCOME_LEADS, OUTCOME_SALES)"
+            },
+            "status": {
+              "type": "string",
+              "description": "The campaign status (ACTIVE, PAUSED, ARCHIVED)"
+            },
+            "special_ad_categories": {
+              "type": "array",
+              "description": "Special ad category declarations"
+            }
+          },
+          "required": [
+            "name",
+            "objective"
+          ],
+          "visible": [
+            "name",
+            "objective",
+            "status",
+            "special_ad_categories"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id", "name", "objective"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__UPDATE_CAMPAIGN",
     "description": "Update an existing campaign",
-    "tags": ["meta_ads", "campaigns"],
+    "tags": [
+      "meta_ads",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -135,32 +224,60 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "campaign_id": {
-          "type": "string",
-          "description": "The ID of the campaign",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "description": "The ID of the campaign"
+            }
+          },
+          "required": [
+            "campaign_id"
+          ],
+          "visible": [
+            "campaign_id"
+          ],
+          "additionalProperties": false
         },
-        "name": {
-          "type": "string",
-          "description": "The updated name of the campaign",
-          "visibility": "public",
-          "in": "body"
-        },
-        "status": {
-          "type": "string",
-          "description": "The updated campaign status",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The updated name of the campaign"
+            },
+            "status": {
+              "type": "string",
+              "description": "The updated campaign status"
+            }
+          },
+          "required": [],
+          "visible": [
+            "name",
+            "status"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["campaign_id"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_AD_SETS",
     "description": "List all ad sets for a campaign or ad account",
-    "tags": ["meta_ads", "ad_sets"],
+    "tags": [
+      "meta_ads",
+      "ad_sets"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -173,32 +290,60 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
-        },
-        "limit": {
-          "type": "integer",
-          "description": "Number of results to return",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of results to return"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields",
+            "limit"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_AD_SET",
     "description": "Create a new ad set within a campaign",
-    "tags": ["meta_ads", "ad_sets"],
+    "tags": [
+      "meta_ads",
+      "ad_sets"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -211,50 +356,83 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ad set",
-          "visibility": "public",
-          "in": "body"
-        },
-        "campaign_id": {
-          "type": "string",
-          "description": "The ID of the parent campaign",
-          "visibility": "public",
-          "in": "body"
-        },
-        "status": {
-          "type": "string",
-          "description": "The ad set status (ACTIVE, PAUSED)",
-          "visibility": "public",
-          "in": "body"
-        },
-        "targeting": {
+        "path": {
           "type": "object",
-          "description": "Targeting specifications for the ad set",
-          "visibility": "public",
-          "in": "body"
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "bid_amount": {
-          "type": "integer",
-          "description": "Bid amount in cents",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the ad set"
+            },
+            "campaign_id": {
+              "type": "string",
+              "description": "The ID of the parent campaign"
+            },
+            "status": {
+              "type": "string",
+              "description": "The ad set status (ACTIVE, PAUSED)"
+            },
+            "targeting": {
+              "type": "object",
+              "description": "Targeting specifications for the ad set",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            },
+            "bid_amount": {
+              "type": "integer",
+              "description": "Bid amount in cents"
+            }
+          },
+          "required": [
+            "name",
+            "campaign_id",
+            "targeting"
+          ],
+          "visible": [
+            "name",
+            "campaign_id",
+            "status",
+            "targeting",
+            "bid_amount"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id", "name", "campaign_id", "targeting"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__UPDATE_AD_SET",
     "description": "Update an existing ad set",
-    "tags": ["meta_ads", "ad_sets"],
+    "tags": [
+      "meta_ads",
+      "ad_sets"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -267,38 +445,69 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_set_id": {
-          "type": "string",
-          "description": "The ID of the ad set",
-          "visibility": "public",
-          "in": "path"
-        },
-        "name": {
-          "type": "string",
-          "description": "The updated name of the ad set",
-          "visibility": "public",
-          "in": "body"
-        },
-        "status": {
-          "type": "string",
-          "description": "The updated ad set status",
-          "visibility": "public",
-          "in": "body"
-        },
-        "targeting": {
+        "path": {
           "type": "object",
-          "description": "Updated targeting specifications",
-          "visibility": "public",
-          "in": "body"
+          "properties": {
+            "ad_set_id": {
+              "type": "string",
+              "description": "The ID of the ad set"
+            }
+          },
+          "required": [
+            "ad_set_id"
+          ],
+          "visible": [
+            "ad_set_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The updated name of the ad set"
+            },
+            "status": {
+              "type": "string",
+              "description": "The updated ad set status"
+            },
+            "targeting": {
+              "type": "object",
+              "description": "Updated targeting specifications",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            }
+          },
+          "required": [],
+          "visible": [
+            "name",
+            "status",
+            "targeting"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_set_id"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_ADS",
     "description": "List all ads for an ad account or ad set",
-    "tags": ["meta_ads", "ads"],
+    "tags": [
+      "meta_ads",
+      "ads"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -311,32 +520,60 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
-        },
-        "limit": {
-          "type": "integer",
-          "description": "Number of results to return",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of results to return"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields",
+            "limit"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_AD",
     "description": "Create a new ad",
-    "tags": ["meta_ads", "ads"],
+    "tags": [
+      "meta_ads",
+      "ads"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -349,44 +586,78 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ad",
-          "visibility": "public",
-          "in": "body"
-        },
-        "adset_id": {
-          "type": "string",
-          "description": "The ID of the parent ad set",
-          "visibility": "public",
-          "in": "body"
-        },
-        "creative": {
+        "path": {
           "type": "object",
-          "description": "The creative specification for the ad",
-          "visibility": "public",
-          "in": "body"
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "status": {
-          "type": "string",
-          "description": "The ad status (ACTIVE, PAUSED)",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the ad"
+            },
+            "adset_id": {
+              "type": "string",
+              "description": "The ID of the parent ad set"
+            },
+            "creative": {
+              "type": "object",
+              "description": "The creative specification for the ad",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            },
+            "status": {
+              "type": "string",
+              "description": "The ad status (ACTIVE, PAUSED)"
+            }
+          },
+          "required": [
+            "name",
+            "adset_id",
+            "creative"
+          ],
+          "visible": [
+            "name",
+            "adset_id",
+            "creative",
+            "status"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id", "name", "adset_id", "creative"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__UPDATE_AD",
     "description": "Update an existing ad",
-    "tags": ["meta_ads", "ads"],
+    "tags": [
+      "meta_ads",
+      "ads"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -399,32 +670,61 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_id": {
-          "type": "string",
-          "description": "The ID of the ad",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_id": {
+              "type": "string",
+              "description": "The ID of the ad"
+            }
+          },
+          "required": [
+            "ad_id"
+          ],
+          "visible": [
+            "ad_id"
+          ],
+          "additionalProperties": false
         },
-        "name": {
-          "type": "string",
-          "description": "The updated name of the ad",
-          "visibility": "public",
-          "in": "body"
-        },
-        "status": {
-          "type": "string",
-          "description": "The updated ad status",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The updated name of the ad"
+            },
+            "status": {
+              "type": "string",
+              "description": "The updated ad status"
+            }
+          },
+          "required": [],
+          "visible": [
+            "name",
+            "status"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_id"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_INSIGHTS",
     "description": "Retrieve insights and performance metrics for campaigns, ad sets, or ads",
-    "tags": ["meta_ads", "insights", "analytics"],
+    "tags": [
+      "meta_ads",
+      "insights",
+      "analytics"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -437,38 +737,70 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
-        },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of metrics (e.g., impressions, clicks, spend)",
-          "visibility": "public",
-          "in": "query"
-        },
-        "time_range": {
+        "path": {
           "type": "object",
-          "description": "Time range for the insights (since, until)",
-          "visibility": "public",
-          "in": "query"
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "level": {
-          "type": "string",
-          "description": "The level at which to retrieve insights (account, campaign, adset, ad)",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of metrics (e.g., impressions, clicks, spend)"
+            },
+            "time_range": {
+              "type": "object",
+              "description": "Time range for the insights (since, until)",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            },
+            "level": {
+              "type": "string",
+              "description": "The level at which to retrieve insights (account, campaign, adset, ad)"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields",
+            "time_range",
+            "level"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_CAMPAIGN_INSIGHTS",
     "description": "Retrieve insights for a specific campaign",
-    "tags": ["meta_ads", "insights", "campaigns"],
+    "tags": [
+      "meta_ads",
+      "insights",
+      "campaigns"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -481,32 +813,64 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "campaign_id": {
-          "type": "string",
-          "description": "The ID of the campaign",
-          "visibility": "public",
-          "in": "path"
-        },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of metrics to retrieve",
-          "visibility": "public",
-          "in": "query"
-        },
-        "time_range": {
+        "path": {
           "type": "object",
-          "description": "Time range for the insights",
-          "visibility": "public",
-          "in": "query"
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "description": "The ID of the campaign"
+            }
+          },
+          "required": [
+            "campaign_id"
+          ],
+          "visible": [
+            "campaign_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of metrics to retrieve"
+            },
+            "time_range": {
+              "type": "object",
+              "description": "Time range for the insights",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields",
+            "time_range"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["campaign_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_CUSTOM_AUDIENCE",
     "description": "Create a new custom audience for targeting",
-    "tags": ["meta_ads", "audiences"],
+    "tags": [
+      "meta_ads",
+      "audiences"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -519,32 +883,63 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "name": {
-          "type": "string",
-          "description": "The name of the custom audience",
-          "visibility": "public",
-          "in": "body"
-        },
-        "subtype": {
-          "type": "string",
-          "description": "The subtype of the custom audience (e.g., CUSTOM, LOOKALIKE)",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom audience"
+            },
+            "subtype": {
+              "type": "string",
+              "description": "The subtype of the custom audience (e.g., CUSTOM, LOOKALIKE)"
+            }
+          },
+          "required": [
+            "name",
+            "subtype"
+          ],
+          "visible": [
+            "name",
+            "subtype"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id", "name", "subtype"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_CUSTOM_AUDIENCES",
     "description": "List all custom audiences for an ad account",
-    "tags": ["meta_ads", "audiences"],
+    "tags": [
+      "meta_ads",
+      "audiences"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -557,26 +952,56 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__SEARCH_TARGETING",
     "description": "Search for targeting options like interests, demographics, or behaviors",
-    "tags": ["meta_ads", "targeting", "search"],
+    "tags": [
+      "meta_ads",
+      "targeting",
+      "search"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -589,26 +1014,45 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of targeting to search (e.g., adinterest, adworkposition)",
-          "visibility": "public",
-          "in": "query"
-        },
-        "q": {
-          "type": "string",
-          "description": "The search query",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of targeting to search (e.g., adinterest, adworkposition)"
+            },
+            "q": {
+              "type": "string",
+              "description": "The search query"
+            }
+          },
+          "required": [
+            "type",
+            "q"
+          ],
+          "visible": [
+            "type",
+            "q"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["type", "q"]
+      "required": [
+        "query"
+      ],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_AD_CREATIVES",
     "description": "List all ad creatives for an ad account",
-    "tags": ["meta_ads", "creatives"],
+    "tags": [
+      "meta_ads",
+      "creatives"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -621,26 +1065,55 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_AD_CREATIVE",
     "description": "Create a new ad creative",
-    "tags": ["meta_ads", "creatives"],
+    "tags": [
+      "meta_ads",
+      "creatives"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -653,32 +1126,66 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "ad_account_id": {
-          "type": "string",
-          "description": "The ID of the ad account",
-          "visibility": "public",
-          "in": "path"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ad creative",
-          "visibility": "public",
-          "in": "body"
-        },
-        "object_story_spec": {
+        "path": {
           "type": "object",
-          "description": "The creative specification",
-          "visibility": "public",
-          "in": "body"
+          "properties": {
+            "ad_account_id": {
+              "type": "string",
+              "description": "The ID of the ad account"
+            }
+          },
+          "required": [
+            "ad_account_id"
+          ],
+          "visible": [
+            "ad_account_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the ad creative"
+            },
+            "object_story_spec": {
+              "type": "object",
+              "description": "The creative specification",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "object_story_spec"
+          ],
+          "visible": [
+            "name",
+            "object_story_spec"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["ad_account_id", "object_story_spec"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__SEND_CONVERSION_EVENT",
     "description": "Send conversion events to the Conversions API",
-    "tags": ["meta_ads", "conversions"],
+    "tags": [
+      "meta_ads",
+      "conversions"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -691,26 +1198,57 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "pixel_id": {
-          "type": "string",
-          "description": "The Pixel ID from Events Manager",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "pixel_id": {
+              "type": "string",
+              "description": "The Pixel ID from Events Manager"
+            }
+          },
+          "required": [
+            "pixel_id"
+          ],
+          "visible": [
+            "pixel_id"
+          ],
+          "additionalProperties": false
         },
-        "data": {
-          "type": "array",
-          "description": "Array of event data objects",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of event data objects"
+            }
+          },
+          "required": [
+            "data"
+          ],
+          "visible": [
+            "data"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["pixel_id", "data"]
+      "required": [
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__GET_BUSINESS",
     "description": "Retrieve details of a Business Manager account",
-    "tags": ["meta_ads", "business"],
+    "tags": [
+      "meta_ads",
+      "business"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -723,26 +1261,55 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "business_id": {
-          "type": "string",
-          "description": "The ID of the business",
-          "visibility": "public",
-          "in": "path"
+        "path": {
+          "type": "object",
+          "properties": {
+            "business_id": {
+              "type": "string",
+              "description": "The ID of the business"
+            }
+          },
+          "required": [
+            "business_id"
+          ],
+          "visible": [
+            "business_id"
+          ],
+          "additionalProperties": false
         },
-        "fields": {
-          "type": "string",
-          "description": "Comma-separated list of fields to retrieve",
-          "visibility": "public",
-          "in": "query"
+        "query": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string",
+              "description": "Comma-separated list of fields to retrieve"
+            }
+          },
+          "required": [],
+          "visible": [
+            "fields"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["business_id"]
+      "required": [
+        "path",
+        "query"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
     }
   },
   {
     "name": "META_ADS__CREATE_BUSINESS",
     "description": "Create a new Business Manager account",
-    "tags": ["meta_ads", "business"],
+    "tags": [
+      "meta_ads",
+      "business"
+    ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
@@ -755,20 +1322,36 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the business entity",
-          "visibility": "public",
-          "in": "body"
-        },
-        "timezone_id": {
-          "type": "integer",
-          "description": "The timezone ID for the business",
-          "visibility": "public",
-          "in": "body"
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the business entity"
+            },
+            "timezone_id": {
+              "type": "integer",
+              "description": "The timezone ID for the business"
+            }
+          },
+          "required": [
+            "name",
+            "timezone_id"
+          ],
+          "visible": [
+            "name",
+            "timezone_id"
+          ],
+          "additionalProperties": false
         }
       },
-      "required": ["name", "timezone_id"]
+      "required": [
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
     }
   }
 ]

@@ -61,9 +61,16 @@
               "type": "string",
               "default": "name,displayName",
               "description": "Organization fields to include"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",
@@ -205,10 +212,16 @@
               ],
               "default": "regular",
               "description": "Card aging power-up setting"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
-            "name"
+            "name",
+            "key"
           ],
           "visible": [
             "name",
@@ -308,9 +321,16 @@
               "type": "string",
               "default": "name,closed,id,pos",
               "description": "Fields to include for cards if included"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",
@@ -365,11 +385,17 @@
               "type": "string",
               "default": "bottom",
               "description": "Position of list (top, bottom, or number)"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
             "name",
-            "idBoard"
+            "idBoard",
+            "key"
           ],
           "visible": [
             "name",
@@ -477,9 +503,16 @@
               "type": "string",
               "default": "name,pos",
               "description": "Checklist fields to include"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",
@@ -578,11 +611,17 @@
               "type": "string",
               "default": "all",
               "description": "What to copy from source card"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
             "name",
-            "idList"
+            "idList",
+            "key"
           ],
           "visible": [
             "name",
@@ -689,9 +728,16 @@
             "dueComplete": {
               "type": "boolean",
               "description": "Updated completion status"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "name",
             "desc",
@@ -777,9 +823,16 @@
               "type": "boolean",
               "default": false,
               "description": "Include recent activity"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",
@@ -857,9 +910,16 @@
               "type": "boolean",
               "default": false,
               "description": "Allow billable guest access"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "type",
             "allowBillableGuest"
@@ -934,9 +994,16 @@
               "type": "string",
               "default": "name,state,pos",
               "description": "Fields to include for checklist items"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "fields",
             "checkItems",
@@ -994,11 +1061,17 @@
             "idChecklistSource": {
               "type": "string",
               "description": "Checklist ID to copy from"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
             "idCard",
-            "name"
+            "name",
+            "key"
           ],
           "visible": [
             "idCard",
@@ -1070,10 +1143,16 @@
               "type": "boolean",
               "default": false,
               "description": "Whether the item is checked"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
-            "name"
+            "name",
+            "key"
           ],
           "visible": [
             "name",
@@ -1154,9 +1233,16 @@
             "pos": {
               "type": "string",
               "description": "Updated position of item"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "name",
             "state",
@@ -1224,9 +1310,16 @@
               "default": 50,
               "maximum": 1000,
               "description": "Maximum number of labels to return"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "fields",
             "limit"
@@ -1290,12 +1383,18 @@
             "idBoard": {
               "type": "string",
               "description": "Board ID to create label in"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
             "name",
             "color",
-            "idBoard"
+            "idBoard",
+            "key"
           ],
           "visible": [
             "name",
@@ -1356,10 +1455,16 @@
             "text": {
               "type": "string",
               "description": "Text content of the comment"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
-            "text"
+            "text",
+            "key"
           ],
           "visible": [
             "text"
@@ -1426,9 +1531,16 @@
               "type": "string",
               "default": "all",
               "description": "Filter attachments by type"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "fields",
             "filter"
@@ -1506,9 +1618,16 @@
               "type": "boolean",
               "default": false,
               "description": "Set this attachment as card cover"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "name",
             "url",
@@ -1618,9 +1737,16 @@
               "type": "string",
               "default": "fullName,username",
               "description": "Creator fields to include"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",
@@ -1689,9 +1815,16 @@
               "type": "boolean",
               "default": true,
               "description": "Set to true to archive card, false to restore"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "value"
           ],
@@ -1750,10 +1883,16 @@
             "value": {
               "type": "string",
               "description": "List ID to move card to"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
-            "value"
+            "value",
+            "key"
           ],
           "visible": [
             "value"
@@ -1894,10 +2033,16 @@
               "type": "boolean",
               "default": false,
               "description": "Return partial matches"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
           "required": [
-            "query"
+            "query",
+            "key"
           ],
           "visible": [
             "query",
@@ -1976,9 +2121,16 @@
               "type": "boolean",
               "default": false,
               "description": "Include paid account information"
+            },
+            "key": {
+              "type": "string",
+              "default": "{{ AIPOLABS_TRELLO_APP_API_KEY }}",
+              "description": "Trello API key (auto-injected)"
             }
           },
-          "required": [],
+          "required": [
+            "key"
+          ],
           "visible": [
             "filter",
             "fields",

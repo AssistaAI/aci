@@ -122,7 +122,10 @@
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "additionalProperties": true
+                    "additionalProperties": true,
+                    "properties": {},
+                    "required": [],
+                    "visible": []
                   },
                   "description": "Template component parameters"
                 }
@@ -160,7 +163,8 @@
                 "link",
                 "id",
                 "caption"
-              ]
+              ],
+              "required": []
             },
             "document": {
               "type": "object",
@@ -189,7 +193,8 @@
                 "id",
                 "filename",
                 "caption"
-              ]
+              ],
+              "required": []
             },
             "audio": {
               "type": "object",
@@ -208,7 +213,8 @@
               "visible": [
                 "link",
                 "id"
-              ]
+              ],
+              "required": []
             },
             "video": {
               "type": "object",
@@ -232,7 +238,8 @@
                 "link",
                 "id",
                 "caption"
-              ]
+              ],
+              "required": []
             },
             "location": {
               "type": "object",
@@ -270,7 +277,10 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "additionalProperties": true
+                "additionalProperties": true,
+                "properties": {},
+                "required": [],
+                "visible": []
               },
               "description": "Contact cards to send"
             }
@@ -646,7 +656,10 @@
                   "example": {
                     "type": "object",
                     "additionalProperties": true,
-                    "description": "Example values for placeholders"
+                    "description": "Example values for placeholders",
+                    "properties": {},
+                    "required": [],
+                    "visible": []
                   },
                   "buttons": {
                     "type": "array",
@@ -671,11 +684,15 @@
                           "type": "string"
                         }
                       },
-                      "additionalProperties": false
+                      "additionalProperties": false,
+                      "required": [],
+                      "visible": []
                     }
                   }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "required": [],
+                "visible": []
               },
               "description": "Template components (header, body, footer, buttons)"
             }
@@ -970,7 +987,9 @@
               "default": "whatsapp"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [],
+          "visible": []
         }
       },
       "required": [
