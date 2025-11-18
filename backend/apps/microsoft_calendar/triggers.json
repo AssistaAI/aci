@@ -1,0 +1,100 @@
+{
+  "triggers": [
+    {
+      "trigger_type": "calendar.event.created",
+      "display_name": "Event Created",
+      "description": "Triggered when a new calendar event is created",
+      "protocol": "webhook",
+      "protocol_data": {
+        "subscription_endpoint": "https://graph.microsoft.com/v1.0/subscriptions",
+        "resource": "/me/events",
+        "change_types": ["created"],
+        "verification_method": "validation_token",
+        "expiration_max_minutes": 4230,
+        "client_state_required": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "subscriptionId": {"type": "string"},
+          "changeType": {"type": "string"},
+          "clientState": {"type": "string"},
+          "resource": {"type": "string"},
+          "resourceData": {
+            "type": "object",
+            "properties": {
+              "@odata.type": {"type": "string"},
+              "@odata.id": {"type": "string"},
+              "@odata.etag": {"type": "string"},
+              "id": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "trigger_type": "calendar.event.updated",
+      "display_name": "Event Updated",
+      "description": "Triggered when a calendar event is modified",
+      "protocol": "webhook",
+      "protocol_data": {
+        "subscription_endpoint": "https://graph.microsoft.com/v1.0/subscriptions",
+        "resource": "/me/events",
+        "change_types": ["updated"],
+        "verification_method": "validation_token",
+        "expiration_max_minutes": 4230,
+        "client_state_required": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "subscriptionId": {"type": "string"},
+          "changeType": {"type": "string"},
+          "clientState": {"type": "string"},
+          "resource": {"type": "string"},
+          "resourceData": {
+            "type": "object",
+            "properties": {
+              "@odata.type": {"type": "string"},
+              "@odata.id": {"type": "string"},
+              "@odata.etag": {"type": "string"},
+              "id": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "trigger_type": "calendar.event.deleted",
+      "display_name": "Event Deleted",
+      "description": "Triggered when a calendar event is deleted",
+      "protocol": "webhook",
+      "protocol_data": {
+        "subscription_endpoint": "https://graph.microsoft.com/v1.0/subscriptions",
+        "resource": "/me/events",
+        "change_types": ["deleted"],
+        "verification_method": "validation_token",
+        "expiration_max_minutes": 4230,
+        "client_state_required": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "subscriptionId": {"type": "string"},
+          "changeType": {"type": "string"},
+          "clientState": {"type": "string"},
+          "resource": {"type": "string"},
+          "resourceData": {
+            "type": "object",
+            "properties": {
+              "@odata.type": {"type": "string"},
+              "@odata.id": {"type": "string"},
+              "@odata.etag": {"type": "string"},
+              "id": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

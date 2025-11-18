@@ -205,6 +205,40 @@ const TRIGGER_TYPES = {
       description: "When a new comment is added",
     },
   ],
+  GOOGLE_CALENDAR: [
+    {
+      value: "calendar.event.created",
+      label: "Event Created",
+      description: "When a new calendar event is created",
+    },
+    {
+      value: "calendar.event.updated",
+      label: "Event Updated",
+      description: "When a calendar event is modified",
+    },
+    {
+      value: "calendar.event.deleted",
+      label: "Event Deleted",
+      description: "When a calendar event is deleted",
+    },
+  ],
+  MICROSOFT_CALENDAR: [
+    {
+      value: "calendar.event.created",
+      label: "Event Created",
+      description: "When a new calendar event is created",
+    },
+    {
+      value: "calendar.event.updated",
+      label: "Event Updated",
+      description: "When a calendar event is modified",
+    },
+    {
+      value: "calendar.event.deleted",
+      label: "Event Deleted",
+      description: "When a calendar event is deleted",
+    },
+  ],
 };
 
 export function CreateTriggerDialog({
@@ -335,6 +369,8 @@ export function CreateTriggerDialog({
                                 "SHOPIFY",
                                 "SLACK",
                                 "GITHUB",
+                                "GOOGLE_CALENDAR",
+                                "MICROSOFT_CALENDAR",
                               ].includes(app.name),
                             )
                             .map((app) => (

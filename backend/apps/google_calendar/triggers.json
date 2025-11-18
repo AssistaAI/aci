@@ -1,0 +1,107 @@
+{
+  "triggers": [
+    {
+      "trigger_type": "calendar.event.created",
+      "display_name": "Event Created",
+      "description": "Triggered when a new calendar event is created",
+      "protocol": "push_notification",
+      "protocol_data": {
+        "watch_endpoint": "https://www.googleapis.com/calendar/v3/calendars/{calendarId}/events/watch",
+        "stop_endpoint": "https://www.googleapis.com/calendar/v3/channels/stop",
+        "verification_method": "header_token",
+        "expiration_ttl_days": 7,
+        "requires_calendar_id": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "kind": {"type": "string"},
+          "id": {"type": "string"},
+          "status": {"type": "string"},
+          "htmlLink": {"type": "string"},
+          "created": {"type": "string", "format": "date-time"},
+          "updated": {"type": "string", "format": "date-time"},
+          "summary": {"type": "string"},
+          "description": {"type": "string"},
+          "location": {"type": "string"},
+          "creator": {"type": "object"},
+          "organizer": {"type": "object"},
+          "start": {"type": "object"},
+          "end": {"type": "object"},
+          "attendees": {"type": "array"}
+        }
+      },
+      "filters": {
+        "calendar_id": {
+          "type": "string",
+          "description": "The calendar ID to watch (use 'primary' for main calendar)"
+        }
+      }
+    },
+    {
+      "trigger_type": "calendar.event.updated",
+      "display_name": "Event Updated",
+      "description": "Triggered when a calendar event is modified",
+      "protocol": "push_notification",
+      "protocol_data": {
+        "watch_endpoint": "https://www.googleapis.com/calendar/v3/calendars/{calendarId}/events/watch",
+        "stop_endpoint": "https://www.googleapis.com/calendar/v3/channels/stop",
+        "verification_method": "header_token",
+        "expiration_ttl_days": 7,
+        "requires_calendar_id": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "kind": {"type": "string"},
+          "id": {"type": "string"},
+          "status": {"type": "string"},
+          "htmlLink": {"type": "string"},
+          "created": {"type": "string", "format": "date-time"},
+          "updated": {"type": "string", "format": "date-time"},
+          "summary": {"type": "string"},
+          "description": {"type": "string"},
+          "location": {"type": "string"},
+          "creator": {"type": "object"},
+          "organizer": {"type": "object"},
+          "start": {"type": "object"},
+          "end": {"type": "object"},
+          "attendees": {"type": "array"}
+        }
+      },
+      "filters": {
+        "calendar_id": {
+          "type": "string",
+          "description": "The calendar ID to watch (use 'primary' for main calendar)"
+        }
+      }
+    },
+    {
+      "trigger_type": "calendar.event.deleted",
+      "display_name": "Event Deleted",
+      "description": "Triggered when a calendar event is deleted",
+      "protocol": "push_notification",
+      "protocol_data": {
+        "watch_endpoint": "https://www.googleapis.com/calendar/v3/calendars/{calendarId}/events/watch",
+        "stop_endpoint": "https://www.googleapis.com/calendar/v3/channels/stop",
+        "verification_method": "header_token",
+        "expiration_ttl_days": 7,
+        "requires_calendar_id": true
+      },
+      "event_schema": {
+        "type": "object",
+        "properties": {
+          "kind": {"type": "string"},
+          "id": {"type": "string"},
+          "status": {"type": "string", "enum": ["cancelled"]}
+        }
+      },
+      "filters": {
+        "calendar_id": {
+          "type": "string",
+          "description": "The calendar ID to watch (use 'primary' for main calendar)"
+        }
+      }
+    }
+  ]
+}

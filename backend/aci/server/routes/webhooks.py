@@ -230,32 +230,86 @@ async def receive_webhook(
             detail=f"Trigger is not active, status={trigger.status}",
         )
 
-    # Parse webhook payload
+    # Import connector
+    from aci.server.trigger_connectors import get_trigger_connector
+
+    # Parse webhook payload based on app type
+    # Google Calendar and Microsoft Calendar send notifications via headers with empty body
+    if app_name.upper() in ["GOOGLE_CALENDAR", "MICROSOFT_CALENDAR"]:
+        # For calendar services, extract data from headers
+        payload_dict = dict(request.headers)
+        logger.info(
+            f"Calendar webhook received with headers, "
+            f"app={app_name}, trigger_id={trigger_id}, headers={list(payload_dict.keys())}"
+        )
+    else:
+        # For other services, parse JSON body
+        try:
+            payload_dict = await request.json()
+        except Exception as e:
+            logger.error(f"Failed to parse webhook payload, error={e}")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid JSON payload",
+            ) from e
+
+    # Verify webhook signature using TriggerConnector
     try:
-        payload = await request.json()
+        connector = get_trigger_connector(app_name.upper())
+        verification_result = await connector.verify_webhook(request, trigger)
+        if not verification_result.is_valid:
+            logger.error(
+                f"Webhook signature verification failed, "
+                f"trigger_id={trigger_id}, error={verification_result.error_message}"
+            )
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=f"Invalid webhook signature: {verification_result.error_message}",
+            )
     except Exception as e:
-        logger.error(f"Failed to parse webhook payload, error={e}")
+        logger.error(f"Webhook verification error, trigger_id={trigger_id}, error={e}")
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid JSON payload",
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Webhook verification failed",
         ) from e
 
-    # TODO Phase 2: Verify webhook signature using TriggerConnector
-    # try:
-    #     connector = get_trigger_connector(app_name, trigger.linked_account)
-    #     is_valid = connector.verify_webhook(request)
-    #     if not is_valid:
-    #         logger.error(f"Webhook signature verification failed, trigger_id={trigger_id}")
-    #         raise HTTPException(status_code=401, detail="Invalid webhook signature")
-    # except Exception as e:
-    #     logger.error(f"Webhook verification error: {e}")
-    #     raise HTTPException(status_code=401, detail="Webhook verification failed")
+    # Parse event using TriggerConnector
+    try:
+        parsed_event = connector.parse_event(payload_dict)
+        event_type = parsed_event.event_type
+        external_event_id = parsed_event.external_event_id
+        event_data = parsed_event.event_data
+        event_timestamp = parsed_event.timestamp
+    except Exception as e:
+        logger.error(f"Failed to parse webhook event, trigger_id={trigger_id}, error={e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Failed to parse webhook event",
+        ) from e
 
-    # Extract event type and external event ID for deduplication
-    event_type = payload.get("type") or payload.get("event_type") or trigger.trigger_type
-    external_event_id = (
-        payload.get("id") or payload.get("event_id") or payload.get("message_id") or None
-    )
+    # For Google Calendar and Microsoft Calendar, fetch actual event details
+    # The webhook notification only contains metadata, not the actual calendar events
+    if app_name.upper() in ["GOOGLE_CALENDAR", "MICROSOFT_CALENDAR"]:
+        # Skip sync notifications (initial setup) - these don't contain event data
+        if event_data.get("resource_state") != "sync":
+            try:
+                calendar_id = trigger.config.get("calendar_id", "primary")
+                calendar_events = await connector.fetch_calendar_events(trigger, calendar_id)
+
+                # Add the fetched calendar events to event_data
+                event_data["calendar_events"] = calendar_events
+                event_data["event_count"] = len(calendar_events)
+
+                logger.info(
+                    f"Fetched {len(calendar_events)} calendar events for webhook, "
+                    f"trigger_id={trigger_id}, calendar_id={calendar_id}"
+                )
+            except Exception as e:
+                logger.warning(
+                    f"Failed to fetch calendar events for webhook (continuing with metadata only), "
+                    f"trigger_id={trigger_id}, error={e}"
+                )
+                # Continue processing even if event fetch fails - at least we have metadata
 
     # Check for duplicate events
     if external_event_id:
@@ -287,7 +341,7 @@ async def receive_webhook(
             db_session,
             trigger_id=trigger.id,
             event_type=event_type,
-            event_data=payload,
+            event_data=event_data,
             external_event_id=external_event_id,
             status="pending",
             expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention

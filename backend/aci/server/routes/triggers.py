@@ -16,9 +16,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
-from aci.common import validators
 from aci.common.db import crud
-from aci.common.db.sql_models import App, LinkedAccount, Trigger, TriggerEvent
+from aci.common.db.sql_models import Trigger, TriggerEvent
 from aci.common.exceptions import (
     AppConfigurationNotFound,
     AppNotFound,
@@ -31,12 +30,13 @@ from aci.common.schemas.trigger import (
     TriggerEventsListQuery,
     TriggerHealthCheck,
     TriggerPublic,
-    TriggerStats,
     TriggersListQuery,
+    TriggerStats,
     TriggerUpdate,
     TriggerWithToken,
 )
-from aci.server import config, dependencies as deps
+from aci.server import config
+from aci.server import dependencies as deps
 
 router = APIRouter()
 logger = get_logger(__name__)
@@ -49,8 +49,9 @@ logger = get_logger(__name__)
 
 def generate_webhook_url(trigger_id: UUID, app_name: str) -> str:
     """Generate the webhook callback URL for a trigger"""
-    # Use the configured base URL (should be publicly accessible)
-    base_url = config.DEV_PORTAL_URL.replace("localhost", "your-domain.com")  # TODO: use proper webhook domain
+    # Use the configured webhook base URL (should be publicly accessible)
+    # Set SERVER_WEBHOOK_BASE_URL environment variable to your ngrok URL for local dev
+    base_url = config.WEBHOOK_BASE_URL
     return f"{base_url}/v1/webhooks/{app_name}/{trigger_id}"
 
 
@@ -59,9 +60,7 @@ def generate_verification_token() -> str:
     return secrets.token_urlsafe(32)
 
 
-def get_trigger_or_404(
-    db_session: Session, trigger_id: UUID, project_id: UUID
-) -> Trigger:
+def get_trigger_or_404(db_session: Session, trigger_id: UUID, project_id: UUID) -> Trigger:
     """Get trigger by ID or raise 404"""
     trigger = crud.triggers.get_trigger_under_project(db_session, trigger_id, project_id)
     if not trigger:
@@ -97,7 +96,7 @@ async def create_trigger(
     project_id = context.project.id
 
     # Validate app exists
-    app = crud.apps.get_app(db_session, body.app_name)
+    app = crud.apps.get_app(db_session, body.app_name, public_only=False, active_only=True)
     if not app:
         raise AppNotFound(f"App {body.app_name} not found")
 
@@ -113,18 +112,18 @@ async def create_trigger(
     if not linked_account.enabled:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Linked account is disabled",
+            detail="Linked account is disabled",
         )
 
     # Check app configuration exists
-    app_config = crud.app_configurations.get_app_configuration(db_session, project_id, body.app_name)
+    app_config = crud.app_configurations.get_app_configuration(
+        db_session, project_id, body.app_name
+    )
     if not app_config:
-        raise AppConfigurationNotFound(
-            f"App {body.app_name} not configured for this project"
-        )
+        raise AppConfigurationNotFound(f"App {body.app_name} not configured for this project")
 
     # Generate webhook URL and verification token
-    temp_trigger_id = UUID('00000000-0000-0000-0000-000000000000')  # Placeholder
+    temp_trigger_id = UUID("00000000-0000-0000-0000-000000000000")  # Placeholder
     webhook_url = generate_webhook_url(temp_trigger_id, body.app_name)
     verification_token = generate_verification_token()
 
@@ -137,7 +136,7 @@ async def create_trigger(
         trigger_name=body.trigger_name,
         trigger_type=body.trigger_type,
         description=body.description,
-        webhook_url=webhook_url.replace(str(temp_trigger_id), str(trigger.id) if hasattr(trigger, 'id') else str(temp_trigger_id)),  # Will fix after creation
+        webhook_url=webhook_url,  # Will be updated after creation with actual trigger ID
         verification_token=verification_token,
         config=body.config,
         status=body.status,
@@ -148,16 +147,43 @@ async def create_trigger(
     trigger.webhook_url = generate_webhook_url(trigger.id, body.app_name)
     db_session.commit()
 
-    # TODO Phase 2: Register webhook with third-party service using TriggerConnector
-    # try:
-    #     connector = get_trigger_connector(body.app_name, linked_account)
-    #     external_id = await connector.register_webhook(trigger)
-    #     crud.triggers.update_trigger_external_id(db_session, trigger, external_id)
-    #     db_session.commit()
-    # except Exception as e:
-    #     logger.error(f"Failed to register webhook: {e}")
-    #     crud.triggers.update_trigger_status(db_session, trigger, "error")
-    #     db_session.commit()
+    # Register webhook with third-party service using TriggerConnector
+    try:
+        from aci.server.trigger_connectors import get_trigger_connector
+
+        connector = get_trigger_connector(body.app_name)
+        result = await connector.register_webhook(trigger)
+
+        if result.success:
+            # Update trigger with external webhook details
+            if result.external_webhook_id:
+                crud.triggers.update_trigger_external_id(
+                    db_session, trigger, result.external_webhook_id
+                )
+            if result.expires_at:
+                trigger.expires_at = result.expires_at
+            db_session.commit()
+
+            logger.info(
+                f"Webhook registered successfully for trigger {trigger.id}, "
+                f"external_id={result.external_webhook_id}"
+            )
+        else:
+            logger.error(
+                f"Failed to register webhook for trigger {trigger.id}: {result.error_message}"
+            )
+            crud.triggers.update_trigger_status(db_session, trigger, "error")
+            db_session.commit()
+
+    except ValueError as e:
+        # App doesn't have trigger connector support yet
+        logger.warning(f"Trigger connector not available for {body.app_name}: {e}")
+        # Keep trigger in active state - it was created successfully, just without auto-registration
+
+    except Exception as e:
+        logger.error(f"Unexpected error registering webhook: {e}", exc_info=True)
+        crud.triggers.update_trigger_status(db_session, trigger, "error")
+        db_session.commit()
 
     logger.info(
         f"Created trigger {trigger.id} for {body.app_name}, type={body.trigger_type}, "

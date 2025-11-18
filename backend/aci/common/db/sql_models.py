@@ -711,7 +711,7 @@ class TriggerEvent(Base):
     status: Mapped[str] = mapped_column(
         String(MAX_ENUM_LENGTH), nullable=False
     )  # pending, delivered, failed, expired
-    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    error_message: Mapped[str | None] = mapped_column(Text, nullable=True, default=None)
 
     # Timestamps
     received_at: Mapped[datetime] = mapped_column(
@@ -723,8 +723,8 @@ class TriggerEvent(Base):
     delivered_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=False), nullable=True, init=False
     )
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=False), nullable=False
+    expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, default=None
     )  # Auto-delete after N days
 
     # Relationships

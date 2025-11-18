@@ -10,12 +10,17 @@ Documentation: https://developers.notion.com/reference/webhooks
 import hashlib
 import hmac
 import logging
+from datetime import UTC, datetime
 from typing import Any
+
+from fastapi import Request
 
 from aci.common.db.sql_models import Trigger
 from aci.server.trigger_connectors.base import (
+    ParsedWebhookEvent,
     TriggerConnectorBase,
     WebhookRegistrationResult,
+    WebhookVerificationResult,
 )
 
 logger = logging.getLogger(__name__)
@@ -30,15 +35,10 @@ class NotionTriggerConnector(TriggerConnectorBase):
     and provides setup instructions.
     """
 
-    def __init__(self, access_token: str):
-        """
-        Initialize Notion trigger connector.
-
-        Args:
-            access_token: OAuth2 access token (not used for webhook creation,
-                         but kept for consistency with other connectors)
-        """
-        self.access_token = access_token
+    def __init__(self):
+        """Initialize Notion trigger connector without required auth parameters."""
+        # We'll get auth from the trigger's linked_account directly
+        pass
 
     async def register_webhook(self, trigger: Trigger) -> WebhookRegistrationResult:
         """
@@ -111,6 +111,77 @@ class NotionTriggerConnector(TriggerConnectorBase):
             True if configuration looks valid
         """
         return bool(trigger.webhook_url and trigger.verification_token)
+
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
+        """
+        Verify Notion webhook authenticity using HMAC-SHA256 signature.
+
+        Args:
+            request: The incoming webhook request
+            trigger: Trigger that should receive this webhook
+
+        Returns:
+            WebhookVerificationResult indicating if webhook is valid
+        """
+        try:
+            # Get signature from header
+            signature = request.headers.get("X-Notion-Signature")
+            if not signature:
+                return WebhookVerificationResult(
+                    is_valid=False, error_message="Missing X-Notion-Signature header"
+                )
+
+            # Get raw body
+            body = await request.body()
+
+            # Verify signature
+            is_valid = self.verify_webhook_signature(body, signature, trigger)
+
+            if not is_valid:
+                return WebhookVerificationResult(is_valid=False, error_message="Invalid signature")
+
+            return WebhookVerificationResult(is_valid=True)
+
+        except Exception as e:
+            logger.error(f"Notion webhook verification failed: {e!s}")
+            return WebhookVerificationResult(
+                is_valid=False, error_message=f"Verification error: {e!s}"
+            )
+
+    def parse_event(self, payload: dict[str, Any]) -> ParsedWebhookEvent:
+        """
+        Parse Notion webhook payload into standardized event format.
+
+        Args:
+            payload: Raw webhook JSON payload
+
+        Returns:
+            ParsedWebhookEvent with standardized fields
+        """
+        # Parse using the existing helper method
+        parsed_data = self.parse_webhook_payload(payload)
+
+        # Extract key fields for the standardized format
+        event_type = payload.get("type", "unknown")
+        event_id = payload.get("id")
+        timestamp_str = payload.get("timestamp")
+
+        # Parse timestamp if available
+        timestamp = None
+        if timestamp_str:
+            try:
+                timestamp = datetime.fromisoformat(timestamp_str.replace("Z", "+00:00"))
+            except Exception:
+                timestamp = datetime.now(UTC)
+        else:
+            timestamp = datetime.now(UTC)
+
+        return ParsedWebhookEvent(
+            event_type=event_type,
+            event_data=parsed_data,
+            external_event_id=event_id,
+            timestamp=timestamp,
+        )
 
     def verify_webhook_signature(self, payload: bytes, signature: str, trigger: Trigger) -> bool:
         """

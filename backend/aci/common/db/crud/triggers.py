@@ -1,10 +1,10 @@
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import and_, func, or_, select
+from sqlalchemy import and_, func, select
 from sqlalchemy.orm import Session
 
-from aci.common.db.sql_models import App, LinkedAccount, Trigger, TriggerEvent
+from aci.common.db.sql_models import App, Trigger
 from aci.common.logging_setup import get_logger
 
 logger = get_logger(__name__)
@@ -38,10 +38,15 @@ def create_trigger(
         config=config,
         status=status,
         external_webhook_id=external_webhook_id,
-        expires_at=expires_at,
     )
     db_session.add(trigger)
     db_session.flush()
+
+    # Set expires_at after creation since it has init=False in the model
+    if expires_at:
+        trigger.expires_at = expires_at
+        db_session.flush()
+
     logger.info(
         f"Created trigger, trigger_id={trigger.id}, trigger_name={trigger_name}, "
         f"trigger_type={trigger_type}, project_id={project_id}"
@@ -124,9 +129,7 @@ def get_expiring_triggers(
     return list(db_session.execute(statement).scalars().all())
 
 
-def update_trigger_status(
-    db_session: Session, trigger: Trigger, status: str
-) -> Trigger:
+def update_trigger_status(db_session: Session, trigger: Trigger, status: str) -> Trigger:
     """Update trigger status (active, paused, error, expired)"""
     trigger.status = status
     db_session.flush()
@@ -166,9 +169,7 @@ def update_trigger_last_triggered_at(
     return trigger
 
 
-def update_trigger_config(
-    db_session: Session, trigger: Trigger, config: dict
-) -> Trigger:
+def update_trigger_config(db_session: Session, trigger: Trigger, config: dict) -> Trigger:
     """Update trigger configuration/filters"""
     trigger.config = config
     db_session.flush()

@@ -47,6 +47,7 @@ export function useCreateTrigger() {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useMutation({
+    mutationKey: ["create-trigger", activeProject?.id],
     mutationFn: async (request: CreateTriggerRequest) => {
       if (!apiKey) {
         throw new Error("No API key available");
@@ -70,6 +71,7 @@ export function useUpdateTrigger() {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useMutation({
+    mutationKey: ["update-trigger", activeProject?.id],
     mutationFn: async ({
       triggerId,
       request,
@@ -113,6 +115,7 @@ export function useDeleteTrigger() {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useMutation({
+    mutationKey: ["delete-trigger", activeProject?.id],
     mutationFn: async (triggerId: string) => {
       if (!apiKey) {
         throw new Error("No API key available");
