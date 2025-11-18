@@ -10,12 +10,28 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/users/me/calendarList",
+      "path": "/users/{userId}/calendarList",
       "server_url": "https://www.googleapis.com/calendar/v3"
     },
     "parameters": {
       "type": "object",
       "properties": {
+        "path": {
+          "type": "object",
+          "description": "Path parameters",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "description": "User's email address. Use the value 'me' to indicate the authenticated user.",
+              "default": "me"
+            }
+          },
+          "required": [],
+          "visible": [
+            "userId"
+          ],
+          "additionalProperties": false
+        },
         "query": {
           "type": "object",
           "description": "query parameters",
@@ -68,6 +84,7 @@
       },
       "required": [],
       "visible": [
+        "path",
         "query"
       ],
       "additionalProperties": false
