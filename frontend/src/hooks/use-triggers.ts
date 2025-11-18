@@ -54,7 +54,9 @@ export function useCreateTrigger() {
       return createTrigger(request, apiKey);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["triggers"] });
+      queryClient.invalidateQueries({
+        queryKey: ["triggers", activeProject?.id],
+      });
     },
   });
 }
@@ -80,8 +82,24 @@ export function useUpdateTrigger() {
       }
       return updateTrigger(triggerId, request, apiKey);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["triggers"] });
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["triggers", activeProject?.id],
+      });
+      if (variables?.triggerId) {
+        queryClient.invalidateQueries({
+          queryKey: ["trigger", activeProject?.id, variables.triggerId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["trigger-events", activeProject?.id, variables.triggerId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["trigger-stats", activeProject?.id, variables.triggerId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["trigger-health", activeProject?.id, variables.triggerId],
+        });
+      }
     },
   });
 }
@@ -101,8 +119,25 @@ export function useDeleteTrigger() {
       }
       return deleteTrigger(triggerId, apiKey);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["triggers"] });
+    onSuccess: (_data, triggerId) => {
+      queryClient.invalidateQueries({
+        queryKey: ["triggers", activeProject?.id],
+      });
+      if (triggerId) {
+        // Remove all caches for the deleted trigger
+        queryClient.removeQueries({
+          queryKey: ["trigger", activeProject?.id, triggerId],
+        });
+        queryClient.removeQueries({
+          queryKey: ["trigger-events", activeProject?.id, triggerId],
+        });
+        queryClient.removeQueries({
+          queryKey: ["trigger-stats", activeProject?.id, triggerId],
+        });
+        queryClient.removeQueries({
+          queryKey: ["trigger-health", activeProject?.id, triggerId],
+        });
+      }
     },
   });
 }
@@ -115,7 +150,7 @@ export function useTrigger(triggerId: string) {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useQuery<Trigger>({
-    queryKey: ["trigger", triggerId],
+    queryKey: ["trigger", activeProject?.id, triggerId],
     queryFn: async () => {
       if (!apiKey) {
         throw new Error("No API key available");
@@ -134,7 +169,7 @@ export function useTriggerEvents(triggerId: string, status?: string) {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useQuery<TriggerEvent[]>({
-    queryKey: ["trigger-events", triggerId, status],
+    queryKey: ["trigger-events", activeProject?.id, triggerId, status],
     queryFn: async () => {
       if (!apiKey) {
         throw new Error("No API key available");
@@ -153,7 +188,7 @@ export function useTriggerStats(triggerId: string) {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useQuery<TriggerStats>({
-    queryKey: ["trigger-stats", triggerId],
+    queryKey: ["trigger-stats", activeProject?.id, triggerId],
     queryFn: async () => {
       if (!apiKey) {
         throw new Error("No API key available");
@@ -172,7 +207,7 @@ export function useTriggerHealth(triggerId: string) {
   const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
 
   return useQuery<TriggerHealthCheck>({
-    queryKey: ["trigger-health", triggerId],
+    queryKey: ["trigger-health", activeProject?.id, triggerId],
     queryFn: async () => {
       if (!apiKey) {
         throw new Error("No API key available");

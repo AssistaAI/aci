@@ -19,6 +19,25 @@ interface TriggerEventsTableProps {
   events: TriggerEvent[];
 }
 
+const EVENT_STATUS_CONFIG = {
+  pending: {
+    variant: "secondary" as const,
+    className: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
+  },
+  delivered: {
+    variant: "default" as const,
+    className: "bg-green-100 text-green-800 hover:bg-green-100",
+  },
+  failed: {
+    variant: "destructive" as const,
+    className: "",
+  },
+  expired: {
+    variant: "outline" as const,
+    className: "bg-gray-100 text-gray-800 hover:bg-gray-100",
+  },
+} as const;
+
 export function TriggerEventsTable({ events }: TriggerEventsTableProps) {
   if (events.length === 0) {
     return (
@@ -56,14 +75,10 @@ export function TriggerEventsTable({ events }: TriggerEventsTableProps) {
 function EventRow({ event }: { event: TriggerEvent }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const statusConfig = {
-    pending: { variant: "secondary" as const, color: "text-yellow-600" },
-    delivered: { variant: "default" as const, color: "text-green-600" },
-    failed: { variant: "destructive" as const, color: "text-red-600" },
-    expired: { variant: "outline" as const, color: "text-gray-600" },
+  const config = EVENT_STATUS_CONFIG[event.status] ?? {
+    variant: "secondary" as const,
+    className: "",
   };
-
-  const config = statusConfig[event.status];
 
   return (
     <>
@@ -74,7 +89,9 @@ function EventRow({ event }: { event: TriggerEvent }) {
           </code>
         </TableCell>
         <TableCell>
-          <Badge variant={config.variant}>{event.status}</Badge>
+          <Badge variant={config.variant} className={config.className}>
+            {event.status}
+          </Badge>
         </TableCell>
         <TableCell>
           <span className="text-sm">
@@ -84,7 +101,13 @@ function EventRow({ event }: { event: TriggerEvent }) {
           </span>
         </TableCell>
         <TableCell className="text-right">
-          <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls={`event-details-${event.id}`}
+          >
             <ChevronDown
               className={`h-4 w-4 transition-transform ${
                 isOpen ? "transform rotate-180" : ""
@@ -97,59 +120,57 @@ function EventRow({ event }: { event: TriggerEvent }) {
       {isOpen && (
         <TableRow>
           <TableCell colSpan={4} className="bg-muted/30">
-            <div className="p-4 space-y-3">
-                {event.external_event_id && (
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">
-                      Event ID
-                    </label>
-                    <div className="mt-1">
-                      <code className="text-xs bg-background px-2 py-1 rounded">
-                        {event.external_event_id}
-                      </code>
-                    </div>
-                  </div>
-                )}
-
-                {event.error_message && (
-                  <div>
-                    <label className="text-xs font-medium text-destructive">
-                      Error Message
-                    </label>
-                    <div className="mt-1 text-xs text-destructive">
-                      {event.error_message}
-                    </div>
-                  </div>
-                )}
-
+            <div id={`event-details-${event.id}`} className="p-4 space-y-3">
+              {event.external_event_id && (
                 <div>
                   <label className="text-xs font-medium text-muted-foreground">
-                    Event Data
+                    Event ID
                   </label>
                   <div className="mt-1">
-                    <pre className="text-xs bg-background p-3 rounded border overflow-x-auto max-h-96">
-                      {JSON.stringify(event.event_data, null, 2)}
-                    </pre>
+                    <code className="text-xs bg-background px-2 py-1 rounded">
+                      {event.external_event_id}
+                    </code>
                   </div>
                 </div>
+              )}
 
-                <div className="flex gap-4 text-xs text-muted-foreground">
-                  {event.processed_at && (
-                    <div>
-                      Processed:{" "}
-                      {new Date(event.processed_at).toLocaleString()}
-                    </div>
-                  )}
-                  {event.delivered_at && (
-                    <div>
-                      Delivered:{" "}
-                      {new Date(event.delivered_at).toLocaleString()}
-                    </div>
-                  )}
+              {event.error_message && (
+                <div>
+                  <label className="text-xs font-medium text-destructive">
+                    Error Message
+                  </label>
+                  <div className="mt-1 text-xs text-destructive">
+                    {event.error_message}
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <label className="text-xs font-medium text-muted-foreground">
+                  Event Data
+                </label>
+                <div className="mt-1">
+                  <pre className="text-xs bg-background p-3 rounded border overflow-x-auto max-h-96">
+                    {JSON.stringify(event.event_data, null, 2)}
+                  </pre>
                 </div>
               </div>
-            </TableCell>
-          </TableRow>
+
+              <div className="flex gap-4 text-xs text-muted-foreground">
+                {event.processed_at && (
+                  <div>
+                    Processed: {new Date(event.processed_at).toLocaleString()}
+                  </div>
+                )}
+                {event.delivered_at && (
+                  <div>
+                    Delivered: {new Date(event.delivered_at).toLocaleString()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </TableCell>
+        </TableRow>
       )}
     </>
   );

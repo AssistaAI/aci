@@ -13,6 +13,10 @@ interface TriggerStatsCardsProps {
 }
 
 export function TriggerStatsCards({ stats }: TriggerStatsCardsProps) {
+  // Calculate success rate locally to avoid backend mismatch
+  const successRate =
+    stats.total_events > 0 ? stats.delivered_events / stats.total_events : 0;
+
   const cards = [
     {
       title: "Total Events",
@@ -48,11 +52,12 @@ export function TriggerStatsCards({ stats }: TriggerStatsCardsProps) {
     },
     {
       title: "Success Rate",
-      value: `${Math.round(stats.success_rate * 100)}%`,
+      value: `${Math.round(successRate * 100)}%`,
       icon: TrendingUp,
-      description: stats.total_events > 0 ? "Delivery success" : "No events yet",
-      color: stats.success_rate > 0.8 ? "text-green-600" : "text-orange-600",
-      bgColor: stats.success_rate > 0.8 ? "bg-green-100" : "bg-orange-100",
+      description:
+        stats.total_events > 0 ? "Delivery success" : "No events yet",
+      color: successRate > 0.8 ? "text-green-600" : "text-orange-600",
+      bgColor: successRate > 0.8 ? "bg-green-100" : "bg-orange-100",
     },
   ];
 

@@ -10,7 +10,6 @@ Documentation: https://developers.notion.com/reference/webhooks
 import hashlib
 import hmac
 import logging
-from dataclasses import dataclass
 from typing import Any
 
 from aci.common.db.sql_models import Trigger
@@ -20,15 +19,6 @@ from aci.server.trigger_connectors.base import (
 )
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class NotionWebhookVerification:
-    """Notion webhook verification token for manual setup"""
-
-    verification_token: str
-    webhook_url: str
-    setup_instructions: str
 
 
 class NotionTriggerConnector(TriggerConnectorBase):
@@ -67,14 +57,12 @@ class NotionTriggerConnector(TriggerConnectorBase):
             # Generate verification token for this trigger
             verification_token = trigger.verification_token
 
-            # Build detailed setup instructions
-            instructions = self._build_setup_instructions(
+            # Build detailed setup instructions (for documentation/logging purposes)
+            self._build_setup_instructions(
                 trigger.webhook_url, trigger.trigger_type, verification_token
             )
 
-            logger.info(
-                f"Generated Notion webhook setup instructions for trigger {trigger.id}"
-            )
+            logger.info(f"Generated Notion webhook setup instructions for trigger {trigger.id}")
 
             # Return success with external_webhook_id as "manual" to indicate
             # this was not programmatically created
@@ -85,11 +73,11 @@ class NotionTriggerConnector(TriggerConnectorBase):
             )
 
         except Exception as e:
-            logger.error(f"Failed to prepare Notion webhook setup: {str(e)}")
+            logger.error(f"Failed to prepare Notion webhook setup: {e!s}")
             return WebhookRegistrationResult(
                 success=False,
                 external_webhook_id=None,
-                error_message=f"Setup preparation failed: {str(e)}",
+                error_message=f"Setup preparation failed: {e!s}",
             )
 
     async def unregister_webhook(self, trigger: Trigger) -> bool:
@@ -124,9 +112,7 @@ class NotionTriggerConnector(TriggerConnectorBase):
         """
         return bool(trigger.webhook_url and trigger.verification_token)
 
-    def verify_webhook_signature(
-        self, payload: bytes, signature: str, trigger: Trigger
-    ) -> bool:
+    def verify_webhook_signature(self, payload: bytes, signature: str, trigger: Trigger) -> bool:
         """
         Verify Notion webhook signature using HMAC-SHA256.
 
@@ -152,7 +138,7 @@ class NotionTriggerConnector(TriggerConnectorBase):
             return hmac.compare_digest(computed_signature, signature)
 
         except Exception as e:
-            logger.error(f"Notion signature verification failed: {str(e)}")
+            logger.error(f"Notion signature verification failed: {e!s}")
             return False
 
     def parse_webhook_payload(self, payload: dict[str, Any]) -> dict[str, Any]:

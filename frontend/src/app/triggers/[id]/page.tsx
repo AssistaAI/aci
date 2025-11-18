@@ -1,13 +1,23 @@
 "use client";
 
-import { useTrigger, useTriggerEvents, useTriggerStats } from "@/hooks/use-triggers";
+import {
+  useTrigger,
+  useTriggerEvents,
+  useTriggerStats,
+} from "@/hooks/use-triggers";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { AlertCircle, ArrowLeft, Loader2 } from "lucide-react";
 import { TriggerStatusBadge } from "@/components/triggers/trigger-status-badge";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { TriggerEventsTable } from "@/components/triggers/trigger-events-table";
 import { TriggerStatsCards } from "@/components/triggers/trigger-stats-cards";
 
@@ -16,8 +26,13 @@ export default function TriggerDetailsPage() {
   const router = useRouter();
   const triggerId = params.id as string;
 
-  const { data: trigger, isPending: triggerLoading, isError: triggerError } = useTrigger(triggerId);
-  const { data: events, isPending: eventsLoading } = useTriggerEvents(triggerId);
+  const {
+    data: trigger,
+    isPending: triggerLoading,
+    isError: triggerError,
+  } = useTrigger(triggerId);
+  const { data: events, isPending: eventsLoading } =
+    useTriggerEvents(triggerId);
   const { data: stats } = useTriggerStats(triggerId);
 
   if (triggerLoading) {

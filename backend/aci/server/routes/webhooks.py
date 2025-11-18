@@ -5,6 +5,7 @@ from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from svix import Webhook, WebhookVerificationError
 
@@ -183,8 +184,7 @@ async def webhook_challenge_verification(
         )
 
     logger.info(
-        f"Webhook challenge verification successful, "
-        f"app={app_name}, trigger_id={trigger_id}"
+        f"Webhook challenge verification successful, app={app_name}, trigger_id={trigger_id}"
     )
 
     # Echo back the challenge
@@ -213,8 +213,7 @@ async def receive_webhook(
     trigger = crud.triggers.get_trigger(db_session, trigger_id)
     if not trigger or trigger.app_name != app_name.upper():
         logger.error(
-            f"Webhook received for non-existent trigger, "
-            f"app={app_name}, trigger_id={trigger_id}"
+            f"Webhook received for non-existent trigger, app={app_name}, trigger_id={trigger_id}"
         )
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -239,7 +238,7 @@ async def receive_webhook(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid JSON payload",
-        )
+        ) from e
 
     # TODO Phase 2: Verify webhook signature using TriggerConnector
     # try:
@@ -255,10 +254,7 @@ async def receive_webhook(
     # Extract event type and external event ID for deduplication
     event_type = payload.get("type") or payload.get("event_type") or trigger.trigger_type
     external_event_id = (
-        payload.get("id")
-        or payload.get("event_id")
-        or payload.get("message_id")
-        or None
+        payload.get("id") or payload.get("event_id") or payload.get("message_id") or None
     )
 
     # Check for duplicate events
@@ -272,9 +268,11 @@ async def receive_webhook(
                 f"trigger_id={trigger_id}, external_event_id={external_event_id}"
             )
             # Return success to avoid retries from provider
-            existing_event = db_session.query(crud.trigger_events.TriggerEvent).filter_by(
-                trigger_id=trigger_id, external_event_id=external_event_id
-            ).first()
+            existing_event = (
+                db_session.query(crud.trigger_events.TriggerEvent)
+                .filter_by(trigger_id=trigger_id, external_event_id=external_event_id)
+                .first()
+            )
             return WebhookReceivedResponse(
                 event_id=existing_event.id,
                 trigger_id=trigger.id,
@@ -283,32 +281,56 @@ async def receive_webhook(
                 received_at=existing_event.received_at,
             )
 
-    # Store event
-    event = crud.trigger_events.create_trigger_event(
-        db_session,
-        trigger_id=trigger.id,
-        event_type=event_type,
-        event_data=payload,
-        external_event_id=external_event_id,
-        status="pending",
-        expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention
-    )
+    # Store event with race condition protection
+    try:
+        event = crud.trigger_events.create_trigger_event(
+            db_session,
+            trigger_id=trigger.id,
+            event_type=event_type,
+            event_data=payload,
+            external_event_id=external_event_id,
+            status="pending",
+            expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention
+        )
 
-    # Update trigger's last_triggered_at
-    crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.now(UTC))
+        # Update trigger's last_triggered_at
+        crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.now(UTC))
 
-    db_session.commit()
+        db_session.commit()
 
-    logger.info(
-        f"Webhook received and stored, "
-        f"app={app_name}, trigger_id={trigger_id}, event_id={event.id}, "
-        f"event_type={event_type}, external_event_id={external_event_id}"
-    )
+        logger.info(
+            f"Webhook received and stored, "
+            f"app={app_name}, trigger_id={trigger_id}, event_id={event.id}, "
+            f"event_type={event_type}, external_event_id={external_event_id}"
+        )
 
-    return WebhookReceivedResponse(
-        event_id=event.id,
-        trigger_id=trigger.id,
-        event_type=event_type,
-        status=event.status,
-        received_at=event.received_at,
-    )
+        return WebhookReceivedResponse(
+            event_id=event.id,
+            trigger_id=trigger.id,
+            event_type=event_type,
+            status=event.status,
+            received_at=event.received_at,
+        )
+    except IntegrityError:
+        # Handle race condition: two concurrent webhooks with same external_event_id
+        db_session.rollback()
+        if external_event_id:
+            existing_event = (
+                db_session.query(crud.trigger_events.TriggerEvent)
+                .filter_by(trigger_id=trigger_id, external_event_id=external_event_id)
+                .first()
+            )
+            if existing_event:
+                logger.info(
+                    f"Race condition on webhook event creation, returning existing event, "
+                    f"trigger_id={trigger_id}, external_event_id={external_event_id}"
+                )
+                return WebhookReceivedResponse(
+                    event_id=existing_event.id,
+                    trigger_id=trigger.id,
+                    event_type=event_type,
+                    status=existing_event.status,
+                    received_at=existing_event.received_at,
+                )
+        # If we land here without an existing event, re-raise
+        raise

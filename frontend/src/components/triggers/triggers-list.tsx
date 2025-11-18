@@ -37,7 +37,9 @@ export function TriggersList({
   setIsCreateDialogOpen,
 }: TriggersListProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<TriggerStatus | "all">("all");
+  const [statusFilter, setStatusFilter] = useState<TriggerStatus | "all">(
+    "all",
+  );
   const [appFilter, setAppFilter] = useState<string>("all");
 
   // Get unique app names for filter
@@ -52,8 +54,12 @@ export function TriggersList({
       // Search filter
       const matchesSearch =
         searchQuery === "" ||
-        trigger.trigger_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        trigger.trigger_type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        trigger.trigger_name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        trigger.trigger_type
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
         trigger.description?.toLowerCase().includes(searchQuery.toLowerCase());
 
       // Status filter
@@ -75,8 +81,8 @@ export function TriggersList({
           </div>
           <h3 className="text-lg font-semibold mb-2">No triggers yet</h3>
           <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-            Get started by creating your first trigger to receive real-time events
-            from your connected apps.
+            Get started by creating your first trigger to receive real-time
+            events from your connected apps.
           </p>
         </div>
         <CreateTriggerDialog
@@ -98,10 +104,14 @@ export function TriggersList({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
+            aria-label="Search triggers"
           />
         </div>
         <Select value={appFilter} onValueChange={setAppFilter}>
-          <SelectTrigger className="w-full sm:w-[180px]">
+          <SelectTrigger
+            className="w-full sm:w-[180px]"
+            aria-label="Filter by app"
+          >
             <SelectValue placeholder="All Apps" />
           </SelectTrigger>
           <SelectContent>
@@ -119,7 +129,10 @@ export function TriggersList({
             setStatusFilter(value as TriggerStatus | "all")
           }
         >
-          <SelectTrigger className="w-full sm:w-[180px]">
+          <SelectTrigger
+            className="w-full sm:w-[180px]"
+            aria-label="Filter by status"
+          >
             <SelectValue placeholder="All Statuses" />
           </SelectTrigger>
           <SelectContent>
@@ -146,62 +159,68 @@ export function TriggersList({
           </div>
           <h3 className="text-lg font-semibold mb-2">No triggers found</h3>
           <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-            Try adjusting your search or filters to find what you're looking for.
+            Try adjusting your search or filters to find what you're looking
+            for.
           </p>
         </div>
       ) : (
         <div className="rounded-md border">
           <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>App</TableHead>
-            <TableHead>Trigger Name</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Last Triggered</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredTriggers.map((trigger) => (
-            <TableRow key={trigger.id}>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Badge variant="outline">{trigger.app_name}</Badge>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="font-medium">{trigger.trigger_name}</div>
-                <div className="text-xs text-muted-foreground line-clamp-1">
-                  {trigger.description}
-                </div>
-              </TableCell>
-              <TableCell>
-                <code className="text-xs bg-muted px-2 py-1 rounded">
-                  {trigger.trigger_type}
-                </code>
-              </TableCell>
-              <TableCell>
-                <TriggerStatusBadge status={trigger.status} />
-              </TableCell>
-              <TableCell>
-                {trigger.last_triggered_at ? (
-                  <span className="text-sm">
-                    {formatDistanceToNow(new Date(trigger.last_triggered_at), {
-                      addSuffix: true,
-                    })}
-                  </span>
-                ) : (
-                  <span className="text-sm text-muted-foreground">Never</span>
-                )}
-              </TableCell>
-              <TableCell className="text-right">
-                <TriggerActionsMenu trigger={trigger} />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>App</TableHead>
+                <TableHead>Trigger Name</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Last Triggered</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredTriggers.map((trigger) => (
+                <TableRow key={trigger.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">{trigger.app_name}</Badge>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-medium">{trigger.trigger_name}</div>
+                    <div className="text-xs text-muted-foreground line-clamp-1">
+                      {trigger.description}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <code className="text-xs bg-muted px-2 py-1 rounded">
+                      {trigger.trigger_type}
+                    </code>
+                  </TableCell>
+                  <TableCell>
+                    <TriggerStatusBadge status={trigger.status} />
+                  </TableCell>
+                  <TableCell>
+                    {trigger.last_triggered_at ? (
+                      <span className="text-sm">
+                        {formatDistanceToNow(
+                          new Date(trigger.last_triggered_at),
+                          {
+                            addSuffix: true,
+                          },
+                        )}
+                      </span>
+                    ) : (
+                      <span className="text-sm text-muted-foreground">
+                        Never
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <TriggerActionsMenu trigger={trigger} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
       <CreateTriggerDialog

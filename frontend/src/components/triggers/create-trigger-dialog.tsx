@@ -56,42 +56,154 @@ interface CreateTriggerDialogProps {
 
 const TRIGGER_TYPES = {
   HUBSPOT: [
-    { value: "contact.creation", label: "Contact Created", description: "When a new contact is created" },
-    { value: "contact.deletion", label: "Contact Deleted", description: "When a contact is deleted" },
-    { value: "contact.propertyChange", label: "Contact Property Changed", description: "When contact properties change" },
-    { value: "deal.creation", label: "Deal Created", description: "When a new deal is created" },
-    { value: "company.creation", label: "Company Created", description: "When a new company is created" },
+    {
+      value: "contact.creation",
+      label: "Contact Created",
+      description: "When a new contact is created",
+    },
+    {
+      value: "contact.deletion",
+      label: "Contact Deleted",
+      description: "When a contact is deleted",
+    },
+    {
+      value: "contact.propertyChange",
+      label: "Contact Property Changed",
+      description: "When contact properties change",
+    },
+    {
+      value: "deal.creation",
+      label: "Deal Created",
+      description: "When a new deal is created",
+    },
+    {
+      value: "company.creation",
+      label: "Company Created",
+      description: "When a new company is created",
+    },
   ],
   SHOPIFY: [
-    { value: "orders/create", label: "Order Created", description: "When a new order is placed" },
-    { value: "orders/updated", label: "Order Updated", description: "When an order is updated" },
-    { value: "orders/paid", label: "Order Paid", description: "When an order payment is confirmed" },
-    { value: "products/create", label: "Product Created", description: "When a new product is added" },
-    { value: "products/update", label: "Product Updated", description: "When a product is modified" },
-    { value: "customers/create", label: "Customer Created", description: "When a new customer signs up" },
+    {
+      value: "orders/create",
+      label: "Order Created",
+      description: "When a new order is placed",
+    },
+    {
+      value: "orders/updated",
+      label: "Order Updated",
+      description: "When an order is updated",
+    },
+    {
+      value: "orders/paid",
+      label: "Order Paid",
+      description: "When an order payment is confirmed",
+    },
+    {
+      value: "products/create",
+      label: "Product Created",
+      description: "When a new product is added",
+    },
+    {
+      value: "products/update",
+      label: "Product Updated",
+      description: "When a product is modified",
+    },
+    {
+      value: "customers/create",
+      label: "Customer Created",
+      description: "When a new customer signs up",
+    },
   ],
   SLACK: [
-    { value: "message.channels", label: "Channel Message", description: "When a message is posted to a channel" },
-    { value: "app_mention", label: "App Mention", description: "When your app is mentioned" },
-    { value: "reaction_added", label: "Reaction Added", description: "When a reaction is added to a message" },
-    { value: "member_joined_channel", label: "Member Joined", description: "When someone joins a channel" },
-    { value: "file_shared", label: "File Shared", description: "When a file is shared" },
+    {
+      value: "message.channels",
+      label: "Channel Message",
+      description: "When a message is posted to a channel",
+    },
+    {
+      value: "app_mention",
+      label: "App Mention",
+      description: "When your app is mentioned",
+    },
+    {
+      value: "reaction_added",
+      label: "Reaction Added",
+      description: "When a reaction is added to a message",
+    },
+    {
+      value: "member_joined_channel",
+      label: "Member Joined",
+      description: "When someone joins a channel",
+    },
+    {
+      value: "file_shared",
+      label: "File Shared",
+      description: "When a file is shared",
+    },
   ],
   GITHUB: [
-    { value: "push", label: "Push", description: "When code is pushed to a repository" },
-    { value: "pull_request", label: "Pull Request", description: "When a pull request is opened/updated" },
-    { value: "issues", label: "Issue", description: "When an issue is opened/closed" },
-    { value: "star", label: "Star Added", description: "When a repository is starred" },
-    { value: "release", label: "Release Published", description: "When a new release is published" },
+    {
+      value: "push",
+      label: "Push",
+      description: "When code is pushed to a repository",
+    },
+    {
+      value: "pull_request",
+      label: "Pull Request",
+      description: "When a pull request is opened/updated",
+    },
+    {
+      value: "issues",
+      label: "Issue",
+      description: "When an issue is opened/closed",
+    },
+    {
+      value: "star",
+      label: "Star Added",
+      description: "When a repository is starred",
+    },
+    {
+      value: "release",
+      label: "Release Published",
+      description: "When a new release is published",
+    },
   ],
   NOTION: [
-    { value: "page.created", label: "Page Created", description: "When a new page is created" },
-    { value: "page.content_updated", label: "Page Content Updated", description: "When page content is modified" },
-    { value: "page.properties_updated", label: "Page Properties Updated", description: "When page properties change" },
-    { value: "page.deleted", label: "Page Deleted", description: "When a page is deleted" },
-    { value: "data_source.created", label: "Database Created", description: "When a new database is created" },
-    { value: "data_source.schema_updated", label: "Database Schema Updated", description: "When database structure changes" },
-    { value: "comment.created", label: "Comment Created", description: "When a new comment is added" },
+    {
+      value: "page.created",
+      label: "Page Created",
+      description: "When a new page is created",
+    },
+    {
+      value: "page.content_updated",
+      label: "Page Content Updated",
+      description: "When page content is modified",
+    },
+    {
+      value: "page.properties_updated",
+      label: "Page Properties Updated",
+      description: "When page properties change",
+    },
+    {
+      value: "page.deleted",
+      label: "Page Deleted",
+      description: "When a page is deleted",
+    },
+    {
+      value: "data_source.created",
+      label: "Database Created",
+      description: "When a new database is created",
+    },
+    {
+      value: "data_source.schema_updated",
+      label: "Database Schema Updated",
+      description: "When database structure changes",
+    },
+    {
+      value: "comment.created",
+      label: "Comment Created",
+      description: "When a new comment is added",
+    },
   ],
 };
 
@@ -121,11 +233,11 @@ export function CreateTriggerDialog({
   const selectedTriggerType = form.watch("trigger_type");
 
   const filteredLinkedAccounts = linkedAccounts?.filter(
-    (la) => la.app_name === selectedAppName
+    (la) => la.app_name === selectedAppName,
   );
 
   const availableTriggers = selectedAppName
-    ? (TRIGGER_TYPES[selectedAppName as keyof typeof TRIGGER_TYPES] || [])
+    ? TRIGGER_TYPES[selectedAppName as keyof typeof TRIGGER_TYPES] || []
     : [];
 
   const handleSubmit = async (values: FormValues) => {
@@ -141,7 +253,8 @@ export function CreateTriggerDialog({
       });
 
       toast.success("Trigger created", {
-        description: "Your trigger has been successfully created and is now active.",
+        description:
+          "Your trigger has been successfully created and is now active.",
       });
 
       form.reset();
@@ -159,8 +272,8 @@ export function CreateTriggerDialog({
       step === 1
         ? ["app_name", "linked_account_owner_id"]
         : step === 2
-        ? ["trigger_type"]
-        : [];
+          ? ["trigger_type"]
+          : [];
 
     const isValid = await form.trigger(fieldsToValidate as any);
     if (isValid) {
@@ -191,7 +304,10 @@ export function CreateTriggerDialog({
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4"
+          >
             {/* Step 1: App & Account Selection */}
             {step === 1 && (
               <>
@@ -203,7 +319,7 @@ export function CreateTriggerDialog({
                       <FormLabel>App</FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                         disabled={appsLoading}
                       >
                         <FormControl>
@@ -213,11 +329,13 @@ export function CreateTriggerDialog({
                         </FormControl>
                         <SelectContent>
                           {apps
-                            ?.filter(
-                              (app) =>
-                                ["HUBSPOT", "SHOPIFY", "SLACK", "GITHUB"].includes(
-                                  app.name
-                                )
+                            ?.filter((app) =>
+                              [
+                                "HUBSPOT",
+                                "SHOPIFY",
+                                "SLACK",
+                                "GITHUB",
+                              ].includes(app.name),
                             )
                             .map((app) => (
                               <SelectItem key={app.name} value={app.name}>
@@ -244,7 +362,7 @@ export function CreateTriggerDialog({
                       <FormLabel>Linked Account</FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                         disabled={!selectedAppName || linkedAccountsLoading}
                       >
                         <FormControl>
@@ -267,8 +385,8 @@ export function CreateTriggerDialog({
                         {!selectedAppName
                           ? "Select an app first"
                           : filteredLinkedAccounts?.length === 0
-                          ? "No linked accounts found for this app"
-                          : "Choose which account to use for this trigger"}
+                            ? "No linked accounts found for this app"
+                            : "Choose which account to use for this trigger"}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

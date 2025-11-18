@@ -8,7 +8,7 @@ import { AlertCircle, Loader2, Plus } from "lucide-react";
 import { useState } from "react";
 
 export default function TriggersPage() {
-  const { data: triggers, isPending, isError } = useTriggers();
+  const { data: triggers, isLoading, isError, refetch } = useTriggers();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ export default function TriggersPage() {
       <Separator />
 
       <div className="m-4">
-        {isPending ? (
+        {isLoading ? (
           <div className="flex justify-center items-center py-16">
             <Loader2 className="animate-spin h-10 w-10 text-muted-foreground mr-2" />
             Loading triggers...
@@ -39,6 +39,13 @@ export default function TriggersPage() {
             <p className="text-sm text-muted-foreground">
               Failed to load triggers. Please try to refresh the page.
             </p>
+            <Button
+              className="mt-4"
+              variant="outline"
+              onClick={() => refetch()}
+            >
+              Try again
+            </Button>
           </div>
         ) : (
           <TriggersList
