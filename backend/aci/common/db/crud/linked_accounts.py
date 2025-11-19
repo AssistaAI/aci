@@ -2,7 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from sqlalchemy import distinct, exists, func, select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from aci.common import validators
 from aci.common.db.sql_models import App, LinkedAccount, Project
@@ -24,8 +24,16 @@ def get_linked_accounts(
     app_name: str | None,
     linked_account_owner_id: str | None,
 ) -> list[LinkedAccount]:
-    """Get all linked accounts under a project, with optional filters"""
-    statement = select(LinkedAccount).filter_by(project_id=project_id)
+    """Get all linked accounts under a project, with optional filters
+
+    WARNING: This function loads ALL linked accounts for a project.
+    For large datasets (>1000 accounts), use get_linked_accounts_paginated instead.
+    """
+    statement = (
+        select(LinkedAccount)
+        .options(selectinload(LinkedAccount.app))  # Eager load app to prevent N+1
+        .filter_by(project_id=project_id)
+    )
     if app_name:
         statement = statement.join(App, LinkedAccount.app_id == App.id).filter(App.name == app_name)
     if linked_account_owner_id:
@@ -36,11 +44,93 @@ def get_linked_accounts(
     return list(db_session.execute(statement).scalars().all())
 
 
+def get_linked_accounts_paginated(
+    db_session: Session,
+    project_id: UUID,
+    limit: int = 50,
+    cursor: str | None = None,
+    app_name: str | None = None,
+    linked_account_owner_id: str | None = None,
+    enabled: bool | None = None,
+) -> tuple[list[LinkedAccount], str | None]:
+    """Get paginated linked accounts using cursor-based pagination
+
+    Args:
+        db_session: Database session
+        project_id: Project UUID
+        limit: Number of records to return (max 100)
+        cursor: Cursor for pagination (base64 encoded created_at timestamp)
+        app_name: Optional filter by app name
+        linked_account_owner_id: Optional filter by owner ID
+        enabled: Optional filter by enabled status
+
+    Returns:
+        Tuple of (linked_accounts, next_cursor)
+    """
+    from base64 import b64decode, b64encode
+
+    # Limit to max 100 for safety
+    limit = min(limit, 100)
+
+    statement = (
+        select(LinkedAccount)
+        .options(selectinload(LinkedAccount.app))  # Eager load to prevent N+1
+        .filter_by(project_id=project_id)
+        .order_by(LinkedAccount.created_at.desc(), LinkedAccount.id.desc())
+    )
+
+    # Apply cursor if provided
+    if cursor:
+        try:
+            cursor_data = b64decode(cursor).decode("utf-8")
+            cursor_created_at, cursor_id = cursor_data.split("|")
+            cursor_dt = datetime.fromisoformat(cursor_created_at)
+
+            # Cursor-based pagination: get records after the cursor
+            statement = statement.filter(
+                (LinkedAccount.created_at < cursor_dt)
+                | ((LinkedAccount.created_at == cursor_dt) & (LinkedAccount.id < UUID(cursor_id)))
+            )
+        except Exception as e:
+            logger.warning(f"Invalid cursor format: {cursor}, error: {e}")
+            # Continue without cursor
+
+    # Apply filters
+    if app_name:
+        statement = statement.join(App, LinkedAccount.app_id == App.id).filter(App.name == app_name)
+    if linked_account_owner_id:
+        statement = statement.filter(
+            LinkedAccount.linked_account_owner_id == linked_account_owner_id
+        )
+    if enabled is not None:
+        statement = statement.filter(LinkedAccount.enabled == enabled)
+
+    # Fetch limit + 1 to check if there are more results
+    statement = statement.limit(limit + 1)
+
+    results = list(db_session.execute(statement).scalars().all())
+
+    # Determine if there are more results
+    has_more = len(results) > limit
+    if has_more:
+        results = results[:limit]
+
+    # Generate next cursor if there are more results
+    next_cursor = None
+    if has_more and results:
+        last_record = results[-1]
+        cursor_data = f"{last_record.created_at.isoformat()}|{last_record.id}"
+        next_cursor = b64encode(cursor_data.encode("utf-8")).decode("utf-8")
+
+    return results, next_cursor
+
+
 def get_linked_account(
     db_session: Session, project_id: UUID, app_name: str, linked_account_owner_id: str
 ) -> LinkedAccount | None:
     statement = (
         select(LinkedAccount)
+        .options(selectinload(LinkedAccount.app))  # Eager load to prevent N+1
         .join(App, LinkedAccount.app_id == App.id)
         .filter(
             LinkedAccount.project_id == project_id,
@@ -67,7 +157,11 @@ def get_linked_account_by_id_under_project(
     - linked_account_id uniquely identifies a linked account across the platform.
     - project_id is extra precaution useful for access control, the linked account must belong to the project.
     """
-    statement = select(LinkedAccount).filter_by(id=linked_account_id, project_id=project_id)
+    statement = (
+        select(LinkedAccount)
+        .options(selectinload(LinkedAccount.app))  # Eager load to prevent N+1
+        .filter_by(id=linked_account_id, project_id=project_id)
+    )
     linked_account: LinkedAccount | None = db_session.execute(statement).scalar_one_or_none()
     return linked_account
 

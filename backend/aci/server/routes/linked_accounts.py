@@ -28,6 +28,7 @@ from aci.common.schemas.linked_accounts import (
     LinkedAccountOAuth2CreateState,
     LinkedAccountPublic,
     LinkedAccountsList,
+    LinkedAccountsPaginated,
     LinkedAccountUpdate,
     LinkedAccountWithCredentials,
 )
@@ -588,27 +589,39 @@ async def linked_accounts_oauth2_callback(
     return linked_account
 
 
-# TODO: add pagination
-@router.get("", response_model=list[LinkedAccountPublic])
+@router.get("", response_model=LinkedAccountsPaginated)
 async def list_linked_accounts(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
     query_params: Annotated[LinkedAccountsList, Query()],
-) -> list[LinkedAccount]:
+) -> LinkedAccountsPaginated:
     """
-    List all linked accounts.
-    - Optionally filter by app_name and linked_account_owner_id.
-    - app_name + linked_account_owner_id can uniquely identify a linked account.
-    - This can be an alternatively way to GET /linked-accounts/{linked_account_id} for getting a specific linked account.
+    List linked accounts with cursor-based pagination.
+
+    - Supports filtering by app_name, linked_account_owner_id, and enabled status
+    - Returns paginated results with cursor for next page
+    - Maximum 100 results per page (default 50)
+    - Use cursor from response to fetch next page
+
+    Example:
+        GET /v1/linked-accounts?limit=50
+        GET /v1/linked-accounts?limit=50&cursor=<next_cursor>&app_name=github
     """
 
-    linked_accounts = crud.linked_accounts.get_linked_accounts(
+    linked_accounts, next_cursor = crud.linked_accounts.get_linked_accounts_paginated(
         context.db_session,
         context.project.id,
-        query_params.app_name,
-        query_params.linked_account_owner_id,
+        limit=query_params.limit,
+        cursor=query_params.cursor,
+        app_name=query_params.app_name,
+        linked_account_owner_id=query_params.linked_account_owner_id,
+        enabled=query_params.enabled,
     )
 
-    return linked_accounts
+    return LinkedAccountsPaginated(
+        data=linked_accounts,
+        next_cursor=next_cursor,
+        has_more=next_cursor is not None,
+    )
 
 
 @router.get(

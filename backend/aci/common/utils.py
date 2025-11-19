@@ -45,16 +45,26 @@ def format_to_screaming_snake_case(name: str) -> str:
 
 # NOTE: it's important that you don't create a new engine for each session, which takes
 # up db resources and will lead up to errors pretty fast
-# TODO: fine tune the pool settings
 @cache
 def get_db_engine(db_url: str) -> Engine:
+    """
+    Create a SQLAlchemy engine with optimized connection pooling settings.
+
+    Pool settings optimized for high-concurrency scenarios with 24k+ linked accounts:
+    - pool_size: 20 connections (up from 10) for concurrent requests
+    - max_overflow: 40 (up from 10) for burst traffic
+    - pool_timeout: 30s before raising timeout error
+    - pool_recycle: 3600s (1 hour) to prevent stale connections
+    - pool_pre_ping: True to check connection health before use
+    """
     return create_engine(
         db_url,
-        pool_size=10,
-        max_overflow=10,
+        pool_size=20,  # Increased for high concurrency
+        max_overflow=40,  # Increased for burst handling
         pool_timeout=30,
-        pool_recycle=3600,  # recycle connections after 1 hour
-        pool_pre_ping=True,
+        pool_recycle=3600,  # Recycle connections after 1 hour
+        pool_pre_ping=True,  # Health check connections before use
+        echo_pool=False,  # Disable pool logging for performance
     )
 
 
