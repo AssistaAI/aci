@@ -3,6 +3,7 @@
 import { useRef, useMemo, useEffect } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useLinkedAccountsInfinite } from "@/hooks/use-linked-account";
+import type { LinkedAccountsPaginatedResponse } from "@/lib/api/linkedaccount";
 import {
   Table,
   TableBody,
@@ -62,7 +63,10 @@ export function VirtualLinkedAccountsTable({
 
   // Flatten all pages into a single array
   const allRows = useMemo(
-    () => data?.pages.flatMap((page) => page.data) ?? [],
+    () =>
+      (data?.pages as LinkedAccountsPaginatedResponse[] | undefined)?.flatMap(
+        (page) => page.data,
+      ) ?? [],
     [data],
   );
 

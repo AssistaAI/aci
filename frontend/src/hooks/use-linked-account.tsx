@@ -43,15 +43,15 @@ export const useLinkedAccountsInfinite = (
 
   return useInfiniteQuery({
     queryKey: linkedAccountKeys.paginated(activeProject.id, filters),
-    queryFn: ({ pageParam }) =>
+    queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
       getLinkedAccountsPaginated({
         apiKey,
-        cursor: pageParam as string | undefined,
+        cursor: pageParam,
         limit: 50,
         ...filters,
       }),
     getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,
-    initialPageParam: undefined,
+    initialPageParam: undefined as string | undefined,
   });
 };
 
