@@ -74,7 +74,7 @@
     }
   },
   {
-    "name": "X__POSTS_BY_BY_IDS",
+    "name": "X__POSTS_BY_IDS",
     "description": "Retrieve multiple posts by their IDs. Returns detailed information for up to 100 posts.",
     "tags": [
       "posts",
@@ -413,7 +413,7 @@
     }
   },
   {
-    "name": "X__USERS_BY_BY_IDS",
+    "name": "X__USERS_BY_IDS",
     "description": "Retrieve multiple users by their IDs. Returns detailed user profile data for up to 100 users.",
     "tags": [
       "users",
@@ -1116,7 +1116,7 @@
     }
   },
   {
-    "name": "X__SPACES_BY_BY_IDS",
+    "name": "X__SPACES_BY_IDS",
     "description": "Retrieve multiple Spaces by their IDs. Returns detailed information for up to 100 Spaces.",
     "tags": [
       "spaces",
@@ -1179,7 +1179,7 @@
     }
   },
   {
-    "name": "X__SPACES_BY_CREATOR_BY_IDS",
+    "name": "X__SPACES_BY_CREATOR_IDS",
     "description": "Get Spaces created by specific users. Returns Space information for Spaces they created.",
     "tags": [
       "spaces",
@@ -1327,7 +1327,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/tweets",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -1510,7 +1510,7 @@
     }
   },
   {
-    "name": "X__POST",
+    "name": "X__DELETE_POST",
     "description": "Delete a specific post by its ID. Permanently removes the post from X.com.",
     "tags": [
       "posts",
@@ -1523,7 +1523,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/tweets/{id}",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -1804,7 +1804,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/likes",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -1888,7 +1888,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/likes/{tweet_id}",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -1941,7 +1941,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/retweets",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2026,7 +2026,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/retweets/{source_tweet_id}",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2220,7 +2220,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/following",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2304,7 +2304,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/following/{target_user_id}",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2438,7 +2438,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/users/{id}/bookmarks",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2522,7 +2522,7 @@
     "protocol_data": {
       "method": "DELETE",
       "path": "/2/users/{id}/bookmarks/{tweet_id}",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",
@@ -2575,7 +2575,7 @@
     "protocol_data": {
       "method": "POST",
       "path": "/2/media/upload",
-      "server_url": "https://api.x.com"
+      "server_url": "https://api.twitter.com"
     },
     "parameters": {
       "type": "object",

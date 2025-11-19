@@ -10,12 +10,12 @@
       "location": "header",
       "name": "Authorization",
       "prefix": "Bearer",
-      "client_id": "{{ X_CLIENT_ID }}",
-      "client_secret": "{{ X_CLIENT_SECRET }}",
-      "scope": "tweet.read tweet.write users.read follows.read follows.write offline.access",
-      "authorize_url": "https://twitter.com/i/oauth2/authorize",
-      "access_token_url": "https://api.twitter.com/2/oauth2/token",
-      "refresh_token_url": "https://api.twitter.com/2/oauth2/token"
+      "client_id": "{{ AIPOLABS_X_CLIENT_ID }}",
+      "client_secret": "{{ AIPOLABS_X_CLIENT_SECRET }}",
+      "scope": "tweet.read tweet.write users.read offline.access like.read like.write follows.read follows.write bookmark.read bookmark.write list.read list.write space.read",
+      "authorize_url": "https://x.com/i/oauth2/authorize",
+      "access_token_url": "https://api.x.com/2/oauth2/token",
+      "refresh_token_url": "https://api.x.com/2/oauth2/token"
     }
   },
   "default_security_credentials_by_scheme": {},
