@@ -29,6 +29,8 @@ export async function getApps(
   appNames.forEach((name) => {
     params.append("app_names", name);
   });
+  // Add limit=1000 to ensure we get all apps (default is only 100)
+  params.append("limit", "1000");
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/v1/apps?${params.toString()}`,
