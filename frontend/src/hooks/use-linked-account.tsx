@@ -23,7 +23,7 @@ import { LinkedAccount } from "@/lib/types/linkedaccount";
 import { toast } from "sonner";
 
 export const linkedAccountKeys = {
-  all: (projectId: string) => [projectId, "linkedaccounts"] as const,
+  all: (projectId: string) => [projectId, "linkedaccounts", "v2"] as const, // v2: pagination fix
   paginated: (projectId: string, filters?: Partial<GetLinkedAccountsParams>) =>
     [projectId, "linkedaccounts", "paginated", filters] as const,
 };
