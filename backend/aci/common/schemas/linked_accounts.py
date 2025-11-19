@@ -75,3 +75,15 @@ class LinkedAccountWithCredentials(LinkedAccountPublic):
 class LinkedAccountsList(BaseModel):
     app_name: str | None = None
     linked_account_owner_id: str | None = None
+    limit: int = Field(default=50, le=100, ge=1)
+    cursor: str | None = None
+    enabled: bool | None = None
+
+
+class LinkedAccountsPaginated(BaseModel):
+    data: list[LinkedAccountPublic]
+    next_cursor: str | None = None
+    has_more: bool = False
+    total_count: int | None = None  # Optional: for client reference
+
+    model_config = ConfigDict(from_attributes=True)

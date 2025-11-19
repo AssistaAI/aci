@@ -1,26 +1,88 @@
 import { LinkedAccount } from "@/lib/types/linkedaccount";
 
-export async function getAllLinkedAccounts(
-  apiKey: string,
-): Promise<LinkedAccount[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
+export interface LinkedAccountsPaginatedResponse {
+  data: LinkedAccount[];
+  next_cursor: string | null;
+  has_more: boolean;
+  total_count?: number;
+}
+
+export interface GetLinkedAccountsParams {
+  apiKey: string;
+  limit?: number;
+  cursor?: string;
+  app_name?: string;
+  linked_account_owner_id?: string;
+  enabled?: boolean;
+}
+
+export async function getLinkedAccountsPaginated(
+  params: GetLinkedAccountsParams,
+): Promise<LinkedAccountsPaginatedResponse> {
+  const searchParams = new URLSearchParams();
+
+  if (params.limit) searchParams.append("limit", params.limit.toString());
+  if (params.cursor) searchParams.append("cursor", params.cursor);
+  if (params.app_name) searchParams.append("app_name", params.app_name);
+  if (params.linked_account_owner_id) {
+    searchParams.append(
+      "linked_account_owner_id",
+      params.linked_account_owner_id,
+    );
+  }
+  if (params.enabled !== undefined) {
+    searchParams.append("enabled", params.enabled.toString());
+  }
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts${
+    searchParams.toString() ? `?${searchParams.toString()}` : ""
+  }`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": params.apiKey,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch all linked accounts: ${response.status} ${response.statusText}`,
+      `Failed to fetch linked accounts: ${response.status} ${response.statusText}`,
     );
   }
 
-  const linkedAccounts = await response.json();
-  return linkedAccounts;
+  return response.json();
+}
+
+/**
+ * @deprecated Use getLinkedAccountsPaginated instead for better performance with large datasets
+ * This function now fetches ALL pages to maintain backward compatibility, but is inefficient.
+ */
+export async function getAllLinkedAccounts(
+  apiKey: string,
+): Promise<LinkedAccount[]> {
+  console.warn(
+    "getAllLinkedAccounts is deprecated. Use getLinkedAccountsPaginated for better performance.",
+  );
+
+  // Fetch all pages to maintain backward compatibility
+  const allAccounts: LinkedAccount[] = [];
+  let cursor: string | null = null;
+  let hasMore = true;
+
+  while (hasMore) {
+    const response = await getLinkedAccountsPaginated({
+      apiKey,
+      limit: 100, // Max allowed by API
+      cursor: cursor || undefined,
+    });
+
+    allAccounts.push(...response.data);
+    cursor = response.next_cursor;
+    hasMore = response.has_more;
+  }
+
+  return allAccounts;
 }
 
 export async function getAppLinkedAccounts(

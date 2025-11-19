@@ -1,9 +1,16 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import { useMemo } from "react";
 import {
   getAllLinkedAccounts,
+  getLinkedAccountsPaginated,
+  GetLinkedAccountsParams,
   createAPILinkedAccount,
   createNoAuthLinkedAccount,
   deleteLinkedAccount,
@@ -17,8 +24,41 @@ import { toast } from "sonner";
 
 export const linkedAccountKeys = {
   all: (projectId: string) => [projectId, "linkedaccounts"] as const,
+  paginated: (projectId: string, filters?: Partial<GetLinkedAccountsParams>) =>
+    [projectId, "linkedaccounts", "paginated", filters] as const,
 };
 
+/**
+ * Hook for infinite scrolling with pagination
+ * Recommended for large datasets (>1000 accounts)
+ */
+export const useLinkedAccountsInfinite = (
+  filters?: Pick<
+    GetLinkedAccountsParams,
+    "app_name" | "linked_account_owner_id" | "enabled"
+  >,
+) => {
+  const { activeProject } = useMetaInfo();
+  const apiKey = getApiKey(activeProject);
+
+  return useInfiniteQuery({
+    queryKey: linkedAccountKeys.paginated(activeProject.id, filters),
+    queryFn: ({ pageParam }) =>
+      getLinkedAccountsPaginated({
+        apiKey,
+        cursor: pageParam as string | undefined,
+        limit: 50,
+        ...filters,
+      }),
+    getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,
+    initialPageParam: undefined,
+  });
+};
+
+/**
+ * @deprecated Use useLinkedAccountsInfinite for better performance with large datasets
+ * Only use this hook for small datasets or backward compatibility
+ */
 export const useLinkedAccounts = () => {
   const { activeProject } = useMetaInfo();
   const apiKey = getApiKey(activeProject);

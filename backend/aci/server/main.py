@@ -3,6 +3,7 @@ from typing import Any
 import logfire
 import stripe
 from fastapi import Depends, FastAPI, Request
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.routing import APIRoute
 from pythonjsonlogger.json import JsonFormatter
@@ -85,6 +86,8 @@ if config.ENVIRONMENT != "local":
     logfire.instrument_sqlalchemy()
 
 """middlewares are executed in the reverse order"""
+# Add GZip compression for responses > 1KB
+app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=6)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(SessionMiddleware, secret_key=config.SIGNING_KEY)
 # TODO: for now, we don't use TrustedHostMiddleware because it blocks health check from AWS ALB:
