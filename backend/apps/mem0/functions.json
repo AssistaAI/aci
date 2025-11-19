@@ -1,0 +1,49 @@
+[
+  {
+    "name": "MEM0__GET_MEMORIES",
+    "description": "Fetch memories from the Mem0 API.",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v1/memories",
+      "server_url": "https://api.mem0.ai"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "headers": {
+          "type": "object",
+          "properties": {
+            "x-api-key": {
+              "type": "string",
+              "description": "API key used to authenticate requests to the Mem0 service."
+            }
+          },
+          "required": [
+            "x-api-key"
+          ]
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "Return memories for a specific user."
+            },
+            "memory_id": {
+              "type": "string",
+              "description": "Return a specific memory by ID."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of memories to retrieve."
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Number of memories to skip before returning results."
+            }
+          }
+        }
+      }
+    }
+  }
+]
