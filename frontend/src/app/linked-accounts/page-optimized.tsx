@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { AddAccountForm } from "@/components/appconfig/add-account";
-import { useMetaInfo } from "@/components/context/metainfo";
 import { useApps } from "@/hooks/use-app";
 import { useAppConfigs } from "@/hooks/use-app-config";
 import { VirtualLinkedAccountsTable } from "@/components/linkedaccount/virtual-linked-accounts-table";

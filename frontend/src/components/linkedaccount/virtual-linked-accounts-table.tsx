@@ -2,7 +2,6 @@
 
 import { useRef, useMemo, useEffect } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { LinkedAccount } from "@/lib/types/linkedaccount";
 import { useLinkedAccountsInfinite } from "@/hooks/use-linked-account";
 import {
   Table,
