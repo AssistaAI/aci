@@ -1,10 +1,11 @@
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import and_, func, select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from aci.common.db.sql_models import Trigger, TriggerEvent
+from aci.common.enums import TriggerEventStatus
 from aci.common.logging_setup import get_logger
 
 logger = get_logger(__name__)
@@ -16,7 +17,7 @@ def create_trigger_event(
     event_type: str,
     event_data: dict,
     external_event_id: str | None = None,
-    status: str = "pending",
+    status: TriggerEventStatus = TriggerEventStatus.PENDING,
     expires_at: datetime | None = None,
 ) -> TriggerEvent:
     """Create a new trigger event from an incoming webhook"""
@@ -113,23 +114,20 @@ def mark_event_processed(
     db_session: Session, event: TriggerEvent, success: bool = True, error_message: str | None = None
 ) -> TriggerEvent:
     """Mark an event as processed (or failed)"""
-    event.status = "delivered" if success else "failed"
+    event.status = TriggerEventStatus.DELIVERED if success else TriggerEventStatus.FAILED
     event.processed_at = datetime.now(UTC)
     if not success and error_message:
         event.error_message = error_message
     db_session.flush()
     logger.info(
-        f"Marked event as processed, event_id={event.id}, status={event.status}, "
-        f"success={success}"
+        f"Marked event as processed, event_id={event.id}, status={event.status}, success={success}"
     )
     return event
 
 
-def mark_event_delivered(
-    db_session: Session, event: TriggerEvent
-) -> TriggerEvent:
+def mark_event_delivered(db_session: Session, event: TriggerEvent) -> TriggerEvent:
     """Mark an event as successfully delivered to client"""
-    event.status = "delivered"
+    event.status = TriggerEventStatus.DELIVERED
     event.delivered_at = datetime.now(UTC)
     db_session.flush()
     logger.info(f"Marked event as delivered, event_id={event.id}")
@@ -198,9 +196,7 @@ def count_trigger_events(
     return count
 
 
-def check_duplicate_event(
-    db_session: Session, trigger_id: UUID, external_event_id: str
-) -> bool:
+def check_duplicate_event(db_session: Session, trigger_id: UUID, external_event_id: str) -> bool:
     """
     Check if an event with the same external_event_id already exists for this trigger.
     Returns True if duplicate exists, False otherwise.

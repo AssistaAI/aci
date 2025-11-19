@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCreateTrigger } from "@/hooks/use-triggers";
+import { useCreateTrigger, useAvailableTriggerTypes } from "@/hooks/use-triggers";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2, ChevronLeft, ChevronRight } from "lucide-react";
@@ -266,13 +266,13 @@ export function CreateTriggerDialog({
   const selectedAppName = form.watch("app_name");
   const selectedTriggerType = form.watch("trigger_type");
 
+  // Fetch available trigger types for the selected app
+  const { data: availableTriggers = [], isPending: triggerTypesLoading } =
+    useAvailableTriggerTypes(selectedAppName);
+
   const filteredLinkedAccounts = linkedAccounts?.filter(
     (la) => la.app_name === selectedAppName,
   );
-
-  const availableTriggers = selectedAppName
-    ? TRIGGER_TYPES[selectedAppName as keyof typeof TRIGGER_TYPES] || []
-    : [];
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -439,31 +439,46 @@ export function CreateTriggerDialog({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Trigger Type</FormLabel>
-                    <div className="grid gap-3">
-                      {availableTriggers.map((trigger) => (
-                        <div
-                          key={trigger.value}
-                          className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                            field.value === trigger.value
-                              ? "border-primary bg-primary/5"
-                              : "border-border hover:border-primary/50"
-                          }`}
-                          onClick={() => field.onChange(trigger.value)}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <div className="font-medium">{trigger.label}</div>
-                              <div className="text-sm text-muted-foreground mt-1">
-                                {trigger.description}
+                    {triggerTypesLoading ? (
+                      <div className="flex items-center justify-center p-8">
+                        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                        <span className="ml-2 text-sm text-muted-foreground">
+                          Loading available triggers...
+                        </span>
+                      </div>
+                    ) : availableTriggers.length === 0 ? (
+                      <div className="text-center p-8 border rounded-lg bg-muted/50">
+                        <p className="text-sm text-muted-foreground">
+                          No trigger types available for this app
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid gap-3">
+                        {availableTriggers.map((trigger) => (
+                          <div
+                            key={trigger.value}
+                            className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                              field.value === trigger.value
+                                ? "border-primary bg-primary/5"
+                                : "border-border hover:border-primary/50"
+                            }`}
+                            onClick={() => field.onChange(trigger.value)}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div>
+                                <div className="font-medium">{trigger.label}</div>
+                                <div className="text-sm text-muted-foreground mt-1">
+                                  {trigger.description}
+                                </div>
                               </div>
+                              {field.value === trigger.value && (
+                                <Badge>Selected</Badge>
+                              )}
                             </div>
-                            {field.value === trigger.value && (
-                              <Badge>Selected</Badge>
-                            )}
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}

@@ -4,6 +4,7 @@ import {
   getTriggerEvents,
   getTriggerStats,
   getTriggerHealth,
+  getAvailableTriggerTypes,
   createTrigger,
   updateTrigger,
   deleteTrigger,
@@ -13,6 +14,7 @@ import type {
   TriggerEvent,
   TriggerStats,
   TriggerHealthCheck,
+  TriggerType,
   CreateTriggerRequest,
   UpdateTriggerRequest,
 } from "@/lib/types/trigger";
@@ -218,5 +220,24 @@ export function useTriggerHealth(triggerId: string) {
       return getTriggerHealth(triggerId, apiKey);
     },
     enabled: !!activeProject && !!apiKey && !!triggerId,
+  });
+}
+
+/**
+ * Hook to fetch available trigger types for an app
+ */
+export function useAvailableTriggerTypes(appName: string | null) {
+  const { activeProject } = useMetaInfo();
+  const apiKey = activeProject?.agents?.[0]?.api_keys?.[0]?.key;
+
+  return useQuery<TriggerType[]>({
+    queryKey: ["trigger-types", activeProject?.id, appName],
+    queryFn: async () => {
+      if (!apiKey || !appName) {
+        throw new Error("No API key or app name available");
+      }
+      return getAvailableTriggerTypes(appName, apiKey);
+    },
+    enabled: !!activeProject && !!apiKey && !!appName,
   });
 }

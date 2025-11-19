@@ -73,3 +73,9 @@ export type TriggerHealthCheck = {
 export type TriggerWithToken = Trigger & {
   verification_token: string;
 };
+
+export type TriggerType = {
+  value: string;
+  label: string;
+  description: string;
+};

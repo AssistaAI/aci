@@ -279,13 +279,36 @@ async def delete_trigger(
     db_session = context.db_session
     trigger = get_trigger_or_404(db_session, trigger_id, context.project.id)
 
-    # TODO Phase 2: Unregister webhook with third-party service
-    # try:
-    #     if trigger.external_webhook_id:
-    #         connector = get_trigger_connector(trigger.app_name, trigger.linked_account)
-    #         await connector.unregister_webhook(trigger)
-    # except Exception as e:
-    #     logger.error(f"Failed to unregister webhook {trigger.external_webhook_id}: {e}")
+    # Unregister webhook with third-party service
+    if trigger.external_webhook_id:
+        try:
+            from aci.server.trigger_connectors import get_trigger_connector
+
+            connector = get_trigger_connector(trigger.app_name)
+            unregister_success = await connector.unregister_webhook(trigger)
+
+            if unregister_success:
+                logger.info(
+                    f"Successfully unregistered webhook, "
+                    f"trigger_id={trigger_id}, external_webhook_id={trigger.external_webhook_id}"
+                )
+            else:
+                logger.warning(
+                    f"Failed to unregister webhook (continuing with deletion), "
+                    f"trigger_id={trigger_id}, external_webhook_id={trigger.external_webhook_id}"
+                )
+        except ValueError as e:
+            # App doesn't have trigger connector support
+            logger.warning(
+                f"Cannot unregister webhook - no connector available for {trigger.app_name}: {e}"
+            )
+        except Exception as e:
+            # Log error but continue with deletion to avoid orphaned database records
+            logger.error(
+                f"Error unregistering webhook (continuing with deletion), "
+                f"trigger_id={trigger_id}, error={e}",
+                exc_info=True,
+            )
 
     crud.triggers.delete_trigger(db_session, trigger)
     db_session.commit()
@@ -399,7 +422,9 @@ async def get_trigger_health(
     db_session = context.db_session
     trigger = get_trigger_or_404(db_session, trigger_id, context.project.id)
 
-    is_healthy = trigger.status == "active"
+    from aci.common.enums import TriggerStatus
+
+    is_healthy = trigger.status == TriggerStatus.ACTIVE
 
     # Check if expired
     if trigger.expires_at and trigger.expires_at < datetime.now(UTC):
@@ -415,6 +440,57 @@ async def get_trigger_health(
     )
 
 
+@router.get("/available-types/{app_name}")
+async def get_available_trigger_types(
+    app_name: str,
+) -> list[dict]:
+    """
+    Get available trigger types for a specific app.
+
+    Returns trigger definitions from the app's triggers.json file.
+    This provides a single source of truth for available triggers.
+    """
+    import json
+    import os
+
+    # Construct path to triggers.json
+    triggers_file = os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "..",
+        "apps",
+        app_name.lower(),
+        "triggers.json",
+    )
+
+    if not os.path.exists(triggers_file):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No triggers available for app {app_name}",
+        )
+
+    try:
+        with open(triggers_file) as f:
+            data = json.load(f)
+            triggers = data.get("triggers", [])
+
+        logger.info(f"Fetched {len(triggers)} trigger types for app {app_name}")
+        return triggers
+
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid triggers.json for {app_name}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to parse trigger configuration",
+        ) from e
+    except Exception as e:
+        logger.error(f"Error reading triggers for {app_name}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to load trigger types",
+        ) from e
+
+
 @router.get("/{trigger_id}/stats", response_model=TriggerStats)
 async def get_trigger_stats(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
@@ -424,16 +500,18 @@ async def get_trigger_stats(
     db_session = context.db_session
     trigger = get_trigger_or_404(db_session, trigger_id, context.project.id)
 
+    from aci.common.enums import TriggerEventStatus
+
     # Count events by status
     total_events = crud.trigger_events.count_trigger_events(db_session, trigger_id=trigger.id)
     pending_events = crud.trigger_events.count_trigger_events(
-        db_session, trigger_id=trigger.id, status="pending"
+        db_session, trigger_id=trigger.id, status=TriggerEventStatus.PENDING
     )
     delivered_events = crud.trigger_events.count_trigger_events(
-        db_session, trigger_id=trigger.id, status="delivered"
+        db_session, trigger_id=trigger.id, status=TriggerEventStatus.DELIVERED
     )
     failed_events = crud.trigger_events.count_trigger_events(
-        db_session, trigger_id=trigger.id, status="failed"
+        db_session, trigger_id=trigger.id, status=TriggerEventStatus.FAILED
     )
 
     # Get last event time
@@ -450,3 +528,128 @@ async def get_trigger_stats(
         failed_events=failed_events,
         last_event_at=last_event_at,
     )
+
+
+# ============================================================================
+# Bulk Operations
+# ============================================================================
+
+
+@router.patch("/bulk/status", status_code=status.HTTP_200_OK)
+async def bulk_update_trigger_status(
+    context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
+    body: Annotated[dict, ...],
+) -> dict:
+    """
+    Update status for multiple triggers at once.
+
+    Request body:
+    {
+        "trigger_ids": ["uuid1", "uuid2", ...],
+        "status": "paused" | "active"
+    }
+
+    Returns:
+    {
+        "updated": 5,
+        "failed": 1,
+        "errors": [{"trigger_id": "...", "error": "..."}]
+    }
+    """
+    from aci.common.schemas.trigger import TriggerBulkStatusUpdate
+
+    # Validate request
+    try:
+        request = TriggerBulkStatusUpdate(**body)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid request: {e}",
+        ) from e
+
+    db_session = context.db_session
+    project_id = context.project.id
+
+    updated_count = 0
+    failed_count = 0
+    errors = []
+
+    for trigger_id in request.trigger_ids:
+        try:
+            trigger = get_trigger_or_404(db_session, trigger_id, project_id)
+            crud.triggers.update_trigger_status(db_session, trigger, request.status)
+            updated_count += 1
+        except Exception as e:
+            failed_count += 1
+            errors.append({"trigger_id": str(trigger_id), "error": str(e)})
+            logger.error(f"Failed to update trigger {trigger_id}: {e}")
+
+    db_session.commit()
+
+    logger.info(f"Bulk status update completed: updated={updated_count}, failed={failed_count}")
+
+    return {
+        "updated": updated_count,
+        "failed": failed_count,
+        "errors": errors,
+    }
+
+
+@router.delete("/bulk", status_code=status.HTTP_200_OK)
+async def bulk_delete_triggers(
+    context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
+    trigger_ids: Annotated[list[UUID], ...],
+) -> dict:
+    """
+    Delete multiple triggers at once.
+
+    Query params:
+        trigger_ids: List of trigger UUIDs to delete
+
+    Returns:
+    {
+        "deleted": 5,
+        "failed": 1,
+        "errors": [{"trigger_id": "...", "error": "..."}]
+    }
+    """
+    db_session = context.db_session
+    project_id = context.project.id
+
+    deleted_count = 0
+    failed_count = 0
+    errors = []
+
+    for trigger_id in trigger_ids:
+        try:
+            trigger = get_trigger_or_404(db_session, trigger_id, project_id)
+
+            # Attempt to unregister webhook
+            if trigger.external_webhook_id:
+                try:
+                    from aci.server.trigger_connectors import get_trigger_connector
+
+                    connector = get_trigger_connector(trigger.app_name)
+                    await connector.unregister_webhook(trigger)
+                except Exception as e:
+                    logger.warning(
+                        f"Failed to unregister webhook for {trigger_id} (continuing): {e}"
+                    )
+
+            crud.triggers.delete_trigger(db_session, trigger)
+            deleted_count += 1
+
+        except Exception as e:
+            failed_count += 1
+            errors.append({"trigger_id": str(trigger_id), "error": str(e)})
+            logger.error(f"Failed to delete trigger {trigger_id}: {e}")
+
+    db_session.commit()
+
+    logger.info(f"Bulk delete completed: deleted={deleted_count}, failed={failed_count}")
+
+    return {
+        "deleted": deleted_count,
+        "failed": failed_count,
+        "errors": errors,
+    }

@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from svix import Webhook, WebhookVerificationError
 
 from aci.common.db import crud
-from aci.common.enums import OrganizationRole
+from aci.common.enums import OrganizationRole, TriggerEventStatus
 from aci.common.logging_setup import get_logger
 from aci.common.schemas.trigger import WebhookReceivedResponse, WebhookVerificationChallenge
 from aci.server import config
@@ -202,13 +202,65 @@ async def receive_webhook(
     Receive and store webhooks from third-party services.
 
     This endpoint:
-    1. Validates the trigger exists and is active
-    2. Verifies the webhook signature (TODO: Phase 2 - per-app verification)
-    3. Stores the event in the database
-    4. Returns success response
-
-    Webhook signature verification will be handled by TriggerConnectors in Phase 2.
+    1. Rate limiting (per-trigger and global per-IP)
+    2. Validates the trigger exists and is active
+    3. Verifies the webhook signature
+    4. Stores the event in the database
+    5. Returns success response
     """
+    import time
+
+    from aci.server import metrics as m
+
+    # Track processing time
+    start_time = time.time()
+
+    # Rate limiting - check both per-trigger and global (by IP)
+    from aci.server.rate_limiter import get_global_rate_limiter, get_webhook_rate_limiter
+
+    # Get client IP
+    client_ip = request.client.host if request.client else "unknown"
+
+    # Check global rate limit (by IP)
+    global_limiter = get_global_rate_limiter()
+    global_allowed, global_metadata = global_limiter.allow(client_ip)
+
+    if not global_allowed:
+        m.record_rate_limit_hit("global_ip")
+        logger.warning(
+            f"Global rate limit exceeded for IP {client_ip}, "
+            f"retry_after={global_metadata['retry_after']}s"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Rate limit exceeded. Retry after {global_metadata['retry_after']} seconds",
+            headers={
+                "Retry-After": str(global_metadata["retry_after"]),
+                "X-RateLimit-Limit": str(global_metadata["limit"]),
+                "X-RateLimit-Remaining": str(global_metadata["remaining"]),
+            },
+        )
+
+    # Check per-trigger rate limit
+    trigger_limiter = get_webhook_rate_limiter()
+    trigger_allowed, trigger_metadata = trigger_limiter.allow(str(trigger_id))
+
+    if not trigger_allowed:
+        m.record_rate_limit_hit("per_trigger")
+        logger.warning(
+            f"Trigger rate limit exceeded for trigger_id={trigger_id}, "
+            f"retry_after={trigger_metadata['retry_after']}s"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Trigger rate limit exceeded. Retry after {trigger_metadata['retry_after']} seconds",
+            headers={
+                "Retry-After": str(trigger_metadata["retry_after"]),
+                "X-RateLimit-Limit": str(trigger_metadata["limit"]),
+                "X-RateLimit-Remaining": str(trigger_metadata["remaining"]),
+            },
+        )
+
     # Get trigger and validate
     trigger = crud.triggers.get_trigger(db_session, trigger_id)
     if not trigger or trigger.app_name != app_name.upper():
@@ -220,7 +272,9 @@ async def receive_webhook(
             detail=f"Trigger not found for app {app_name}",
         )
 
-    if trigger.status != "active":
+    from aci.common.enums import TriggerStatus
+
+    if trigger.status != TriggerStatus.ACTIVE:
         logger.warning(
             f"Webhook received for inactive trigger, "
             f"app={app_name}, trigger_id={trigger_id}, status={trigger.status}"
@@ -258,6 +312,9 @@ async def receive_webhook(
         connector = get_trigger_connector(app_name.upper())
         verification_result = await connector.verify_webhook(request, trigger)
         if not verification_result.is_valid:
+            m.record_webhook_verification_failure(
+                app_name, verification_result.error_message or "unknown"
+            )
             logger.error(
                 f"Webhook signature verification failed, "
                 f"trigger_id={trigger_id}, error={verification_result.error_message}"
@@ -279,7 +336,6 @@ async def receive_webhook(
         event_type = parsed_event.event_type
         external_event_id = parsed_event.external_event_id
         event_data = parsed_event.event_data
-        event_timestamp = parsed_event.timestamp
     except Exception as e:
         logger.error(f"Failed to parse webhook event, trigger_id={trigger_id}, error={e}")
         raise HTTPException(
@@ -317,6 +373,7 @@ async def receive_webhook(
             db_session, trigger_id, external_event_id
         )
         if is_duplicate:
+            m.record_duplicate_event(str(trigger_id))
             logger.info(
                 f"Duplicate webhook event received, skipping, "
                 f"trigger_id={trigger_id}, external_event_id={external_event_id}"
@@ -343,7 +400,7 @@ async def receive_webhook(
             event_type=event_type,
             event_data=event_data,
             external_event_id=external_event_id,
-            status="pending",
+            status=TriggerEventStatus.PENDING,
             expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention
         )
 
@@ -352,10 +409,17 @@ async def receive_webhook(
 
         db_session.commit()
 
+        # Record metrics
+        m.record_webhook_received(app_name, str(trigger_id), event_type)
+        m.record_event_stored(str(trigger_id), event_type)
+        duration = time.time() - start_time
+        m.record_webhook_processing_time(app_name, duration)
+
         logger.info(
             f"Webhook received and stored, "
             f"app={app_name}, trigger_id={trigger_id}, event_id={event.id}, "
-            f"event_type={event_type}, external_event_id={external_event_id}"
+            f"event_type={event_type}, external_event_id={external_event_id}, "
+            f"duration={duration:.3f}s"
         )
 
         return WebhookReceivedResponse(

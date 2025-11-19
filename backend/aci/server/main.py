@@ -34,6 +34,8 @@ from aci.server.routes import (
     triggers,
     webhooks,
 )
+from aci.server.background_jobs import setup_scheduler
+from aci.server.metrics import export_prometheus_metrics
 from aci.server.sentry import setup_sentry
 
 check_dependencies()
@@ -110,6 +112,33 @@ app.add_middleware(
 )
 app.add_middleware(InterceptorMiddleware)
 app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=[config.APPLICATION_LOAD_BALANCER_DNS])
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize background services on startup."""
+    from aci.common.logging_setup import get_logger
+
+    logger = get_logger(__name__)
+
+    # Start background job scheduler
+    scheduler = setup_scheduler()
+    if scheduler:
+        logger.info("Background job scheduler started successfully")
+    else:
+        logger.warning("Background job scheduler not started (APScheduler not installed)")
+
+
+@app.get("/metrics", tags=["monitoring"])
+async def metrics():
+    """
+    Prometheus metrics endpoint.
+
+    Returns metrics in Prometheus text format for scraping.
+    """
+    from fastapi.responses import PlainTextResponse
+
+    return PlainTextResponse(content=export_prometheus_metrics(), media_type="text/plain")
 
 
 # NOTE: generic exception handler (type Exception) for all exceptions doesn't work

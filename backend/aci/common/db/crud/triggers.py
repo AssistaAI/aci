@@ -5,6 +5,7 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.orm import Session
 
 from aci.common.db.sql_models import App, Trigger
+from aci.common.enums import TriggerStatus
 from aci.common.logging_setup import get_logger
 
 logger = get_logger(__name__)
@@ -21,7 +22,7 @@ def create_trigger(
     webhook_url: str,
     verification_token: str,
     config: dict,
-    status: str = "active",
+    status: TriggerStatus = TriggerStatus.ACTIVE,
     external_webhook_id: str | None = None,
     expires_at: datetime | None = None,
 ) -> Trigger:
@@ -120,7 +121,7 @@ def get_expiring_triggers(
             and_(
                 Trigger.expires_at.isnot(None),
                 Trigger.expires_at <= expires_before,
-                Trigger.status == "active",
+                Trigger.status == TriggerStatus.ACTIVE,
             )
         )
         .order_by(Trigger.expires_at.asc())

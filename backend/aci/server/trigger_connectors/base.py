@@ -72,23 +72,14 @@ class TriggerConnectorBase(ABC):
                 ...
     """
 
-    def __init__(
-        self,
-        linked_account: LinkedAccount,
-        security_scheme: OAuth2Scheme | APIKeyScheme,
-        security_credentials: OAuth2SchemeCredentials | APIKeySchemeCredentials,
-    ):
+    def __init__(self):
         """
-        Initialize trigger connector with authentication credentials.
+        Initialize trigger connector.
 
-        Args:
-            linked_account: User's linked account for this app
-            security_scheme: OAuth2 or API key security scheme
-            security_credentials: Authentication credentials
+        Authentication credentials are retrieved from the trigger's linked_account
+        at runtime to support dynamic credential updates and token refresh.
         """
-        self.linked_account = linked_account
-        self.security_scheme = security_scheme
-        self.security_credentials = security_credentials
+        pass
 
     # ========================================================================
     # Abstract Methods (Must be implemented by subclasses)
@@ -294,32 +285,40 @@ class TriggerConnectorBase(ABC):
             logger.error(f"Timestamp validation error: {e}")
             return False
 
-    def get_oauth_token(self) -> str:
+    def get_oauth_token(self, trigger: Trigger) -> str:
         """
-        Get OAuth2 access token from credentials.
+        Get OAuth2 access token from trigger's linked account credentials.
+
+        Args:
+            trigger: Trigger with linked account containing credentials
 
         Returns:
             Access token string
 
         Raises:
-            ValueError: If credentials are not OAuth2
+            ValueError: If credentials are not OAuth2 or missing
         """
-        if not isinstance(self.security_credentials, OAuth2SchemeCredentials):
-            raise ValueError("Credentials are not OAuth2")
+        credentials = trigger.linked_account.security_credentials
+        access_token = credentials.get('access_token')
+        if not access_token:
+            raise ValueError("No access_token found in linked account credentials")
+        return access_token
 
-        return self.security_credentials.access_token
-
-    def get_api_key(self) -> str:
+    def get_api_key(self, trigger: Trigger) -> str:
         """
-        Get API key from credentials.
+        Get API key from trigger's linked account credentials.
+
+        Args:
+            trigger: Trigger with linked account containing credentials
 
         Returns:
             API key string
 
         Raises:
-            ValueError: If credentials are not API key
+            ValueError: If API key is missing
         """
-        if not isinstance(self.security_credentials, APIKeySchemeCredentials):
-            raise ValueError("Credentials are not API key")
-
-        return self.security_credentials.api_key
+        credentials = trigger.linked_account.security_credentials
+        api_key = credentials.get('api_key')
+        if not api_key:
+            raise ValueError("No api_key found in linked account credentials")
+        return api_key

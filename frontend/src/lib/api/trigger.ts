@@ -6,6 +6,7 @@ import {
   TriggerStats,
   TriggerHealthCheck,
   TriggerWithToken,
+  TriggerType,
 } from "@/lib/types/trigger";
 
 /**
@@ -317,4 +318,31 @@ export async function getTriggerHealth(
 
   const health = await response.json();
   return health;
+}
+
+/**
+ * Get available trigger types for a specific app
+ */
+export async function getAvailableTriggerTypes(
+  appName: string,
+  apiKey: string,
+): Promise<TriggerType[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/triggers/available-types/${appName}`,
+    {
+      method: "GET",
+      headers: {
+        "X-API-KEY": apiKey,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch trigger types: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const types = await response.json();
+  return types;
 }

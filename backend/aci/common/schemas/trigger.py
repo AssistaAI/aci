@@ -4,16 +4,13 @@ Uses Pydantic V2 with modern patterns, type safety, and DRY principles.
 """
 
 from datetime import datetime
-from typing import Annotated, Literal
+from typing import Annotated
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from aci.common.db.sql_models import MAX_STRING_LENGTH
-
-# Status enums as type-safe literals
-TriggerStatus = Literal["active", "paused", "error", "expired"]
-TriggerEventStatus = Literal["pending", "delivered", "failed", "expired"]
+from aci.common.enums import TriggerEventStatus, TriggerStatus
 
 
 # ============================================================================

@@ -115,3 +115,21 @@ class WebsiteEvaluationStatus(StrEnum):
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     FAILED = "failed"
+
+
+class TriggerStatus(StrEnum):
+    """Status of a webhook trigger subscription"""
+
+    ACTIVE = "active"
+    PAUSED = "paused"
+    ERROR = "error"
+    EXPIRED = "expired"
+
+
+class TriggerEventStatus(StrEnum):
+    """Status of a received webhook event"""
+
+    PENDING = "pending"
+    DELIVERED = "delivered"
+    FAILED = "failed"
+    EXPIRED = "expired"

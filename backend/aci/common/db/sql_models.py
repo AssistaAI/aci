@@ -49,6 +49,8 @@ from aci.common.enums import (
     SecurityScheme,
     StripeSubscriptionInterval,
     StripeSubscriptionStatus,
+    TriggerEventStatus,
+    TriggerStatus,
     Visibility,
     WebsiteEvaluationStatus,
 )
@@ -651,9 +653,9 @@ class Trigger(Base):
     )  # App-specific config (filters, etc.)
 
     # Status and lifecycle
-    status: Mapped[str] = mapped_column(
-        String(MAX_ENUM_LENGTH), nullable=False
-    )  # active, paused, error, expired
+    status: Mapped[TriggerStatus] = mapped_column(
+        SqlEnum(TriggerStatus), nullable=False
+    )
     last_triggered_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=False), nullable=True, init=False
     )
@@ -708,9 +710,9 @@ class TriggerEvent(Base):
     )  # Deduplication ID from provider
 
     # Processing status
-    status: Mapped[str] = mapped_column(
-        String(MAX_ENUM_LENGTH), nullable=False
-    )  # pending, delivered, failed, expired
+    status: Mapped[TriggerEventStatus] = mapped_column(
+        SqlEnum(TriggerEventStatus), nullable=False
+    )
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True, default=None)
 
     # Timestamps
