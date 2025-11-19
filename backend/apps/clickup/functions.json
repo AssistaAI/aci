@@ -1116,10 +1116,6 @@
             "assignee": {
               "type": "integer",
               "description": "User ID to assign list to"
-            },
-            "status": {
-              "type": "string",
-              "description": "List status"
             }
           },
           "required": [
@@ -1131,8 +1127,7 @@
             "due_date",
             "due_date_time",
             "priority",
-            "assignee",
-            "status"
+            "assignee"
           ],
           "additionalProperties": false
         }
@@ -2234,122 +2229,6 @@
       "visible": [
         "path",
         "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "CLICKUP__AUTOMATIONS",
-    "description": "Retrieve all automation rules configured in the workspace for workflow automation and productivity enhancement.",
-    "tags": [
-      "automations",
-      "workflow",
-      "productivity"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/team/{team_id}/automation",
-      "server_url": "https://api.clickup.com/api/v2"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "team_id": {
-              "type": "string",
-              "description": "Team ID to get automations for"
-            }
-          },
-          "required": [
-            "team_id"
-          ],
-          "visible": [
-            "team_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "CLICKUP__WORKSPACE_ANALYTICS",
-    "description": "Retrieve comprehensive workspace analytics including productivity metrics, task completion rates, and team performance data for strategic insights.",
-    "tags": [
-      "analytics",
-      "productivity",
-      "metrics"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/team/{team_id}/analytics",
-      "server_url": "https://api.clickup.com/api/v2"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "team_id": {
-              "type": "string",
-              "description": "Team ID to get analytics for"
-            }
-          },
-          "required": [
-            "team_id"
-          ],
-          "visible": [
-            "team_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "start_date": {
-              "type": "integer",
-              "description": "Start date for analytics period (Unix timestamp)"
-            },
-            "end_date": {
-              "type": "integer",
-              "description": "End date for analytics period (Unix timestamp)"
-            },
-            "include_subtasks": {
-              "type": "boolean",
-              "default": false,
-              "description": "Include subtasks in analytics"
-            }
-          },
-          "required": [],
-          "visible": [
-            "start_date",
-            "end_date",
-            "include_subtasks"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
       ],
       "additionalProperties": false
     }
