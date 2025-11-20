@@ -416,10 +416,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "path",
-        "query"
-      ],
+      "required": [],
       "visible": [
         "path",
         "query"
