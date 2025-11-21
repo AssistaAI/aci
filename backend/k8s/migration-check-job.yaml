@@ -36,6 +36,12 @@ spec:
           alembic history --verbose | head -20
 
         env:
+        # Ensure PATH includes virtualenv
+        - name: PATH
+          value: /workdir/.venv/bin:/usr/local/bin:/usr/bin:/bin
+        - name: PYTHONPATH
+          value: /workdir
+
         - name: ALEMBIC_DB_SCHEME
           value: postgresql+psycopg
         - name: ALEMBIC_DB_PORT

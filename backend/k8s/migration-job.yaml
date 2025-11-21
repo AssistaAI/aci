@@ -24,9 +24,16 @@ spec:
       containers:
       - name: migrate
         image: ${FULL_IMAGE_NAME}
-        command: ["alembic", "upgrade", "head"]
+        command: ["sh", "-c"]
+        args: ["alembic upgrade head"]
 
         env:
+        # Ensure PATH includes virtualenv
+        - name: PATH
+          value: /workdir/.venv/bin:/usr/local/bin:/usr/bin:/bin
+        - name: PYTHONPATH
+          value: /workdir
+
         # Database connection configuration
         - name: ALEMBIC_DB_SCHEME
           value: postgresql+psycopg
