@@ -7,7 +7,7 @@ import { AlertCircle, Loader2 } from "lucide-react";
 
 export default function AppStorePage() {
   // TODO: implement pagination once we have a lot of apps
-  const { data: apps, isPending, isError } = useApps([]);
+  const { data: apps, isPending, isError } = useApps();
 
   return (
     <div>
