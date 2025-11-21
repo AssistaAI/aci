@@ -124,7 +124,17 @@ jobs:
           echo "========================================"
           echo "=== QUICK LOG CHECK (job-level) ==="
           echo "========================================"
+
+          # Wait a moment for logs to be available
+          echo "Waiting 5 seconds for logs to be available..."
+          sleep 5
+
+          echo "Attempting to retrieve job logs..."
           kubectl logs -n ${{ env.NAMESPACE }} job/aci-migrate-${BUILD_NUMBER} --tail=100 2>&1 || echo "Could not get job-level logs"
+
+          echo ""
+          echo "Attempting to get logs from failed pods specifically..."
+          kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o jsonpath='{.items[0].metadata.name}' | xargs -I {} kubectl logs -n ${{ env.NAMESPACE }} {} 2>&1 || echo "Could not get pod logs"
 
           # Get all pods for this job
           echo ""

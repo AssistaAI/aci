@@ -25,7 +25,7 @@ spec:
       - name: migrate
         image: ${FULL_IMAGE_NAME}
         command: ["sh", "-c"]
-        args: ["python3 test_migration.py && alembic upgrade head"]
+        args: ["python3 -u test_migration.py && alembic upgrade head"]
 
         env:
         # Ensure PATH includes virtualenv
