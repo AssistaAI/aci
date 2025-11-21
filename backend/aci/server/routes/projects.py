@@ -1,7 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Header, status
+from fastapi import APIRouter, Depends, Header, Query, status
 from propelauth_fastapi import User
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,7 @@ from aci.common.exceptions import (
 )
 from aci.common.logging_setup import get_logger
 from aci.common.schemas.agent import AgentCreate, AgentPublic, AgentUpdate
-from aci.common.schemas.project import ProjectCreate, ProjectPublic, ProjectUpdate
+from aci.common.schemas.project import ProjectCreate, ProjectPublic, ProjectUpdate, ProjectsList
 from aci.server import acl, config, quota_manager
 from aci.server import dependencies as deps
 
@@ -61,15 +61,19 @@ async def get_projects(
     user: Annotated[User, Depends(auth.require_user)],
     org_id: Annotated[UUID, Header(alias=config.ACI_ORG_ID_HEADER)],
     db_session: Annotated[Session, Depends(deps.yield_db_session)],
+    query_params: Annotated[ProjectsList, Query()] = Query(),
 ) -> list[Project]:
     """
-    Get all projects for the organization if the user is a member of the organization.
+    Get projects for the organization with pagination if the user is a member of the organization.
+    Results are ordered by creation date descending (newest first).
     """
     acl.validate_user_access_to_org(user, org_id)
 
     logger.info(f"Get projects, user_id={user.user_id}, org_id={org_id}")
 
-    projects = crud.projects.get_projects_by_org(db_session, org_id)
+    projects = crud.projects.get_projects_by_org(
+        db_session, org_id, query_params.limit, query_params.offset
+    )
 
     return projects
 

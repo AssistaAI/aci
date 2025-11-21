@@ -78,13 +78,70 @@ jobs:
         kubectl cluster-info
         kubectl get nodes
     
+    - name: Check Migration Status (Pre-Deployment)
+      run: |
+        export KUBECONFIG=kubeconfig
+        export BUILD_NUMBER="${{ github.run_number }}-pre"
+
+        echo "=== Checking current migration status before deployment ==="
+
+        # Apply migration check job
+        envsubst '${NAMESPACE} ${FULL_IMAGE_NAME} ${IMAGE_TAG} ${BUILD_NUMBER}' < k8s/migration-check-job.yaml | kubectl apply -f -
+
+        # Wait for check job to complete (max 60 seconds)
+        kubectl wait --for=condition=complete --timeout=60s job/aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || true
+
+        # Show migration check output
+        kubectl logs job/aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || echo "Unable to retrieve migration check logs"
+
+        # Clean up check job
+        kubectl delete job aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} --ignore-not-found=true
+      env:
+        NAMESPACE: ${{ env.NAMESPACE }}
+        FULL_IMAGE_NAME: ${{ env.FULL_IMAGE_NAME }}
+        IMAGE_TAG: ${{ env.IMAGE_TAG }}
+      continue-on-error: true  # Don't fail deployment if check fails
+
+    - name: Run Database Migrations
+      run: |
+        export KUBECONFIG=kubeconfig
+        export BUILD_NUMBER="${{ github.run_number }}"
+
+        echo "=== Running database migrations ==="
+
+        # Apply migration job
+        envsubst '${NAMESPACE} ${FULL_IMAGE_NAME} ${IMAGE_TAG} ${BUILD_NUMBER}' < k8s/migration-job.yaml | kubectl apply -f -
+
+        # Wait for migration job to complete (max 5 minutes)
+        echo "Waiting for migration job to complete..."
+        if kubectl wait --for=condition=complete --timeout=300s job/aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}; then
+          echo "✅ Migrations completed successfully"
+          kubectl logs job/aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}
+        else
+          echo "❌ Migration job failed or timed out"
+          kubectl logs job/aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || echo "Unable to retrieve logs"
+
+          # Check job status
+          kubectl describe job aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}
+
+          # Fail the workflow
+          exit 1
+        fi
+
+        # Clean up successful migration job after 1 hour (handled by ttlSecondsAfterFinished)
+        echo "Migration job will be automatically cleaned up after 1 hour"
+      env:
+        NAMESPACE: ${{ env.NAMESPACE }}
+        FULL_IMAGE_NAME: ${{ env.FULL_IMAGE_NAME }}
+        IMAGE_TAG: ${{ env.IMAGE_TAG }}
+
     - name: Deploy to Kubernetes
       run: |
         export KUBECONFIG=kubeconfig
-        
+
         # Verify envsubst is available (should be pre-installed)
         which envsubst || sudo apt-get update && sudo apt-get install -y gettext-base
-        
+
         # Process and apply manifests
         envsubst '${NAMESPACE}' < k8s/namespace.yaml | kubectl apply -f -
         envsubst '${NAMESPACE} ${POSTGRES_INSTANCES}' < k8s/postgres.yaml | kubectl apply -f -
@@ -96,7 +153,7 @@ jobs:
         if [ "${{ env.APPLY_HPA }}" = "true" ]; then
           envsubst '${NAMESPACE}' < k8s/hpa.yaml | kubectl apply -f -
         fi
-        
+
         # Wait for deployment
         kubectl rollout status deployment/aci-backend -n ${{ env.NAMESPACE }} --timeout=300s
       env:
@@ -104,4 +161,28 @@ jobs:
         FULL_IMAGE_NAME: ${{ env.FULL_IMAGE_NAME }}
         REPLICAS: ${{ env.REPLICAS }}
         POSTGRES_INSTANCES: ${{ env.POSTGRES_INSTANCES }}
-        APPLY_HPA: ${{ env.APPLY_HPA }} 
+        APPLY_HPA: ${{ env.APPLY_HPA }}
+
+    - name: Verify Migration Status (Post-Deployment)
+      run: |
+        export KUBECONFIG=kubeconfig
+        export BUILD_NUMBER="${{ github.run_number }}-post"
+
+        echo "=== Verifying final migration status after deployment ==="
+
+        # Apply migration check job
+        envsubst '${NAMESPACE} ${FULL_IMAGE_NAME} ${IMAGE_TAG} ${BUILD_NUMBER}' < k8s/migration-check-job.yaml | kubectl apply -f -
+
+        # Wait for check job to complete
+        kubectl wait --for=condition=complete --timeout=60s job/aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || true
+
+        # Show final migration status
+        kubectl logs job/aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || echo "Unable to retrieve migration verification logs"
+
+        # Clean up check job
+        kubectl delete job aci-migrate-check-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} --ignore-not-found=true
+      env:
+        NAMESPACE: ${{ env.NAMESPACE }}
+        FULL_IMAGE_NAME: ${{ env.FULL_IMAGE_NAME }}
+        IMAGE_TAG: ${{ env.IMAGE_TAG }}
+      continue-on-error: true 

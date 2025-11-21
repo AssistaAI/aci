@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import {
   getAllLinkedAccounts,
+  LinkedAccountsParams,
   createAPILinkedAccount,
   createNoAuthLinkedAccount,
   deleteLinkedAccount,
@@ -17,15 +18,19 @@ import { toast } from "sonner";
 
 export const linkedAccountKeys = {
   all: (projectId: string) => [projectId, "linkedaccounts"] as const,
+  paginated: (projectId: string, params: LinkedAccountsParams) =>
+    [projectId, "linkedaccounts", params] as const,
 };
 
-export const useLinkedAccounts = () => {
+export const useLinkedAccounts = (params?: LinkedAccountsParams) => {
   const { activeProject } = useMetaInfo();
   const apiKey = getApiKey(activeProject);
 
   return useQuery<LinkedAccount[], Error>({
-    queryKey: linkedAccountKeys.all(activeProject.id),
-    queryFn: () => getAllLinkedAccounts(apiKey),
+    queryKey: params
+      ? linkedAccountKeys.paginated(activeProject.id, params)
+      : linkedAccountKeys.all(activeProject.id),
+    queryFn: () => getAllLinkedAccounts(apiKey, params),
   });
 };
 

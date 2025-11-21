@@ -75,3 +75,7 @@ class LinkedAccountWithCredentials(LinkedAccountPublic):
 class LinkedAccountsList(BaseModel):
     app_name: str | None = None
     linked_account_owner_id: str | None = None
+    limit: int = Field(
+        default=100, ge=1, le=1000, description="Maximum number of linked accounts per response."
+    )
+    offset: int = Field(default=0, ge=0, description="Pagination offset.")

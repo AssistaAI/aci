@@ -1,42 +1,39 @@
 import { AppConfig } from "@/lib/types/appconfig";
 
-export async function getAppConfig(
-  appName: string,
-  apiKey: string,
-): Promise<AppConfig | null> {
-  const params = new URLSearchParams();
-  params.append("app_names", appName);
-
-  const response = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
-    }/v1/app-configurations?${params.toString()}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch app configuration`);
-  }
-
-  const configs = await response.json();
-  return configs.length > 0 ? configs[0] : null;
+export interface AppConfigsParams {
+  limit?: number;
+  offset?: number;
+  app_names?: string[];
 }
 
-export async function getAllAppConfigs(apiKey: string): Promise<AppConfig[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/app-configurations`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
+export async function getAllAppConfigs(
+  apiKey: string,
+  params?: AppConfigsParams,
+): Promise<AppConfig[]> {
+  const searchParams = new URLSearchParams();
+
+  if (params?.limit !== undefined) {
+    searchParams.append("limit", params.limit.toString());
+  }
+  if (params?.offset !== undefined) {
+    searchParams.append("offset", params.offset.toString());
+  }
+  if (params?.app_names) {
+    params.app_names.forEach((name) => {
+      searchParams.append("app_names", name);
+    });
+  }
+
+  const url = searchParams.toString()
+    ? `${process.env.NEXT_PUBLIC_API_URL}/v1/app-configurations?${searchParams.toString()}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/v1/app-configurations`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": apiKey,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error(
@@ -46,6 +43,16 @@ export async function getAllAppConfigs(apiKey: string): Promise<AppConfig[]> {
 
   const appConfigs = await response.json();
   return appConfigs;
+}
+
+export async function getAppConfig(
+  appName: string,
+  apiKey: string,
+): Promise<AppConfig | null> {
+  const configs = await getAllAppConfigs(apiKey, {
+    app_names: [appName],
+  });
+  return configs.length > 0 ? configs[0] : null;
 }
 
 export class AppAlreadyConfiguredError extends Error {

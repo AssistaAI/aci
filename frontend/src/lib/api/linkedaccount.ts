@@ -1,17 +1,41 @@
 import { LinkedAccount } from "@/lib/types/linkedaccount";
 
+export interface LinkedAccountsParams {
+  limit?: number;
+  offset?: number;
+  app_name?: string;
+  linked_account_owner_id?: string;
+}
+
 export async function getAllLinkedAccounts(
   apiKey: string,
+  params?: LinkedAccountsParams,
 ): Promise<LinkedAccount[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
+  const searchParams = new URLSearchParams();
+
+  if (params?.limit !== undefined) {
+    searchParams.append("limit", params.limit.toString());
+  }
+  if (params?.offset !== undefined) {
+    searchParams.append("offset", params.offset.toString());
+  }
+  if (params?.app_name) {
+    searchParams.append("app_name", params.app_name);
+  }
+  if (params?.linked_account_owner_id) {
+    searchParams.append("linked_account_owner_id", params.linked_account_owner_id);
+  }
+
+  const url = searchParams.toString()
+    ? `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts?${searchParams.toString()}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": apiKey,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error(

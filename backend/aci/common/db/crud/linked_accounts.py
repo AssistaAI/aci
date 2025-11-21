@@ -23,8 +23,10 @@ def get_linked_accounts(
     project_id: UUID,
     app_name: str | None,
     linked_account_owner_id: str | None,
+    limit: int = 100,
+    offset: int = 0,
 ) -> list[LinkedAccount]:
-    """Get all linked accounts under a project, with optional filters"""
+    """Get linked accounts under a project, with optional filters and pagination"""
     statement = select(LinkedAccount).filter_by(project_id=project_id)
     if app_name:
         statement = statement.join(App, LinkedAccount.app_id == App.id).filter(App.name == app_name)
@@ -32,6 +34,9 @@ def get_linked_accounts(
         statement = statement.filter(
             LinkedAccount.linked_account_owner_id == linked_account_owner_id
         )
+
+    # Add pagination and ordering for consistent results
+    statement = statement.order_by(LinkedAccount.created_at.desc()).offset(offset).limit(limit)
 
     return list(db_session.execute(statement).scalars().all())
 

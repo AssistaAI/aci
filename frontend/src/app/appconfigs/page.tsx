@@ -8,10 +8,16 @@ import { EnhancedDataTable } from "@/components/ui-extensions/enhanced-data-tabl
 import { useApps } from "@/hooks/use-app";
 import { useAppConfigs } from "@/hooks/use-app-config";
 import { useLinkedAccounts } from "@/hooks/use-linked-account";
+import { usePagination } from "@/hooks/use-pagination";
 
 export default function AppConfigPage() {
-  const { data: appConfigs = [], isPending: isConfigsPending } =
-    useAppConfigs();
+  const { pagination, limit, offset, setPageIndex, setPageSize } =
+    usePagination({ initialPageSize: 15 });
+
+  const { data: appConfigs = [], isPending: isConfigsPending } = useAppConfigs({
+    limit,
+    offset,
+  });
   const { data: apps = [] } = useApps();
   const { data: linkedAccounts = [], isPending: isLinkedAccountsPending } =
     useLinkedAccounts();
@@ -77,8 +83,10 @@ export default function AppConfigPage() {
               placeholder: "Search by app name",
             }}
             paginationOptions={{
-              initialPageIndex: 0,
-              initialPageSize: 15,
+              initialPageIndex: pagination.pageIndex,
+              initialPageSize: pagination.pageSize,
+              onPageChange: setPageIndex,
+              onPageSizeChange: setPageSize,
             }}
           />
         )}

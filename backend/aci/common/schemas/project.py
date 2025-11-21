@@ -22,6 +22,15 @@ class ProjectUpdate(BaseModel):
     name: str | None = Field(None, min_length=1, description="Project name cannot be empty")
 
 
+class ProjectsList(BaseModel):
+    """Query parameters for listing projects with pagination."""
+
+    limit: int = Field(
+        default=100, ge=1, le=1000, description="Maximum number of projects per response."
+    )
+    offset: int = Field(default=0, ge=0, description="Pagination offset.")
+
+
 class ProjectPublic(BaseModel):
     id: UUID
     org_id: UUID

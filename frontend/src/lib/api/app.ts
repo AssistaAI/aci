@@ -1,15 +1,39 @@
 import { App } from "@/lib/types/app";
 
-export async function getAllApps(apiKey: string): Promise<App[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/apps?limit=1000`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
+export interface AppsParams {
+  limit?: number;
+  offset?: number;
+  app_names?: string[];
+}
+
+export async function getAllApps(
+  apiKey: string,
+  params?: AppsParams,
+): Promise<App[]> {
+  const searchParams = new URLSearchParams();
+
+  if (params?.limit !== undefined) {
+    searchParams.append("limit", params.limit.toString());
+  }
+  if (params?.offset !== undefined) {
+    searchParams.append("offset", params.offset.toString());
+  }
+  if (params?.app_names) {
+    params.app_names.forEach((name) => {
+      searchParams.append("app_names", name);
+    });
+  }
+
+  const url = searchParams.toString()
+    ? `${process.env.NEXT_PUBLIC_API_URL}/v1/apps?${searchParams.toString()}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/v1/apps`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": apiKey,
     },
-  );
+  });
 
   if (!response.ok) {
     throw new Error(
@@ -24,30 +48,12 @@ export async function getAllApps(apiKey: string): Promise<App[]> {
 export async function getApps(
   appNames: string[],
   apiKey: string,
+  params?: AppsParams,
 ): Promise<App[]> {
-  const params = new URLSearchParams();
-  appNames.forEach((name) => {
-    params.append("app_names", name);
+  return getAllApps(apiKey, {
+    ...params,
+    app_names: appNames,
   });
-  // Add limit=1000 to ensure we get all apps (default is only 100)
-  params.append("limit", "1000");
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/apps?${params.toString()}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": apiKey,
-      },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch app`);
-  }
-
-  const apps = await response.json();
-  return apps;
 }
 
 export async function getApp(

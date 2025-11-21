@@ -53,8 +53,21 @@ def get_project(db_session: Session, project_id: UUID) -> Project | None:
     return project
 
 
-def get_projects_by_org(db_session: Session, org_id: UUID) -> list[Project]:
-    projects = list(db_session.execute(select(Project).filter_by(org_id=org_id)).scalars().all())
+def get_projects_by_org(
+    db_session: Session, org_id: UUID, limit: int = 100, offset: int = 0
+) -> list[Project]:
+    """Get projects by organization with pagination, ordered by creation date descending."""
+    projects = list(
+        db_session.execute(
+            select(Project)
+            .filter_by(org_id=org_id)
+            .order_by(Project.created_at.desc())
+            .offset(offset)
+            .limit(limit)
+        )
+        .scalars()
+        .all()
+    )
     return projects
 
 

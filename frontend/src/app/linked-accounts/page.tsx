@@ -36,14 +36,18 @@ import {
 } from "@/hooks/use-linked-account";
 import { useApps } from "@/hooks/use-app";
 import { useAppConfigs } from "@/hooks/use-app-config";
+import { usePagination } from "@/hooks/use-pagination";
 
 const columnHelper = createColumnHelper<TableData>();
 type TableData = LinkedAccount & { logo: string };
 
 export default function LinkedAccountsPage() {
   const { activeProject } = useMetaInfo();
+  const { pagination, limit, offset, setPageIndex, setPageSize } =
+    usePagination({ initialPageSize: 15 });
+
   const { data: linkedAccounts = [], isPending: isLinkedAccountsPending } =
-    useLinkedAccounts();
+    useLinkedAccounts({ limit, offset });
   const { data: appConfigs = [], isPending: isConfigsPending } =
     useAppConfigs();
   const { data: apps, isPending: isAppsPending, isError } = useApps();
@@ -358,13 +362,15 @@ export default function LinkedAccountsPage() {
               <EnhancedDataTable
                 columns={linkedAccountsColumns}
                 data={tableData}
-                defaultSorting={[{ id: "app_name", desc: false }]}
+                defaultSorting={[{ id: "created_at", desc: true }]}
                 searchBarProps={{
                   placeholder: "Search AppName",
                 }}
                 paginationOptions={{
-                  initialPageIndex: 0,
-                  initialPageSize: 15,
+                  initialPageIndex: pagination.pageIndex,
+                  initialPageSize: pagination.pageSize,
+                  onPageChange: setPageIndex,
+                  onPageSizeChange: setPageSize,
                 }}
               />
             )}

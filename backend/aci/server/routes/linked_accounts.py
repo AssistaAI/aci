@@ -588,17 +588,17 @@ async def linked_accounts_oauth2_callback(
     return linked_account
 
 
-# TODO: add pagination
 @router.get("", response_model=list[LinkedAccountPublic])
 async def list_linked_accounts(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
     query_params: Annotated[LinkedAccountsList, Query()],
 ) -> list[LinkedAccount]:
     """
-    List all linked accounts.
+    List linked accounts with pagination.
     - Optionally filter by app_name and linked_account_owner_id.
     - app_name + linked_account_owner_id can uniquely identify a linked account.
     - This can be an alternatively way to GET /linked-accounts/{linked_account_id} for getting a specific linked account.
+    - Results are ordered by created_at descending (newest first).
     """
 
     linked_accounts = crud.linked_accounts.get_linked_accounts(
@@ -606,6 +606,8 @@ async def list_linked_accounts(
         context.project.id,
         query_params.app_name,
         query_params.linked_account_owner_id,
+        query_params.limit,
+        query_params.offset,
     )
 
     return linked_accounts
