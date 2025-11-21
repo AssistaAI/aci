@@ -122,24 +122,42 @@ jobs:
 
           # Get all pods for this job
           echo "=== Getting pod information ==="
-          kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER}
+          kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o wide
 
-          # Try to get logs from all pods
+          # Try to get logs from all pods - use jsonpath to get pod names
           echo "=== Attempting to retrieve logs from all pods ==="
-          for pod in $(kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o name); do
-            echo "--- Logs from $pod ---"
-            kubectl logs -n ${{ env.NAMESPACE }} $pod --all-containers=true || echo "Could not retrieve logs from $pod"
-            echo "--- Describing $pod ---"
-            kubectl describe -n ${{ env.NAMESPACE }} $pod || echo "Could not describe $pod"
-          done
+          POD_NAMES=$(kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o jsonpath='{.items[*].metadata.name}')
+
+          if [ -z "$POD_NAMES" ]; then
+            echo "❌ No pods found for job aci-migrate-${BUILD_NUMBER}"
+          else
+            for pod_name in $POD_NAMES; do
+              echo "========================================"
+              echo "=== LOGS FROM POD: $pod_name ==="
+              echo "========================================"
+              kubectl logs -n ${{ env.NAMESPACE }} $pod_name --all-containers=true --tail=200 2>&1 || echo "⚠️  Could not retrieve logs from $pod_name"
+
+              echo ""
+              echo "========================================"
+              echo "=== POD DESCRIPTION: $pod_name ==="
+              echo "========================================"
+              kubectl describe -n ${{ env.NAMESPACE }} pod/$pod_name 2>&1 || echo "⚠️  Could not describe $pod_name"
+              echo ""
+            done
+          fi
 
           # Check job status
-          echo "=== Job description ==="
+          echo "========================================"
+          echo "=== JOB DESCRIPTION ==="
+          echo "========================================"
           kubectl describe job aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}
 
           # Check events
-          echo "=== Recent events in namespace ==="
-          kubectl get events -n ${{ env.NAMESPACE }} --sort-by='.lastTimestamp' | tail -20
+          echo ""
+          echo "========================================"
+          echo "=== RECENT EVENTS IN NAMESPACE ==="
+          echo "========================================"
+          kubectl get events -n ${{ env.NAMESPACE }} --sort-by='.lastTimestamp' | tail -30
 
           # Fail the workflow
           exit 1

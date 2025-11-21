@@ -52,14 +52,29 @@ def upgrade() -> None:
     # pgvector indexes for semantic search (IVFFlat with cosine distance)
     # Using lists=100 for IVFFlat partitioning (good for 10k-1M vectors)
     # Note: These indexes require the table to have data for optimal performance
-    op.execute(
-        "CREATE INDEX IF NOT EXISTS ix_apps_embedding ON apps "
-        "USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)"
-    )
-    op.execute(
-        "CREATE INDEX IF NOT EXISTS ix_functions_embedding ON functions "
-        "USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)"
-    )
+    # Wrap in try-except to handle cases where data doesn't exist yet or pgvector has issues
+    from sqlalchemy import text
+    from sqlalchemy.exc import ProgrammingError
+
+    connection = op.get_bind()
+
+    try:
+        connection.execute(text(
+            "CREATE INDEX IF NOT EXISTS ix_apps_embedding ON apps "
+            "USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)"
+        ))
+    except ProgrammingError as e:
+        print(f"Warning: Could not create apps embedding index: {e}")
+        print("This is expected if the apps table is empty or pgvector is not properly configured")
+
+    try:
+        connection.execute(text(
+            "CREATE INDEX IF NOT EXISTS ix_functions_embedding ON functions "
+            "USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)"
+        ))
+    except ProgrammingError as e:
+        print(f"Warning: Could not create functions embedding index: {e}")
+        print("This is expected if the functions table is empty or pgvector is not properly configured")
 
 
 def downgrade() -> None:
