@@ -15,7 +15,27 @@ print("MIGRATION DEBUG TEST STARTING", flush=True)
 print("=" * 60, flush=True)
 
 # Check environment variables
-print("\n1. Checking environment variables:", flush=True)
+print("\n1. Checking filesystem:", flush=True)
+try:
+    import subprocess
+    result = subprocess.run(["ls", "-la", "/workdir/"], capture_output=True, text=True)
+    print(f"   /workdir/ contents:\n{result.stdout}", flush=True)
+
+    result = subprocess.run(["ls", "-la", "/workdir/.venv/"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print(f"   /workdir/.venv/ exists:\n{result.stdout[:500]}", flush=True)
+    else:
+        print(f"   /workdir/.venv/ DOES NOT EXIST", flush=True)
+
+    result = subprocess.run(["which", "python3"], capture_output=True, text=True)
+    print(f"   which python3: {result.stdout.strip()}", flush=True)
+
+    result = subprocess.run(["python3", "-c", "import sys; print(sys.path)"], capture_output=True, text=True)
+    print(f"   sys.path: {result.stdout.strip()}", flush=True)
+except Exception as e:
+    print(f"   Error checking filesystem: {e}", flush=True)
+
+print("\n2. Checking environment variables:", flush=True)
 env_vars = [
     "ALEMBIC_DB_SCHEME",
     "ALEMBIC_DB_HOST",
@@ -35,7 +55,7 @@ for var in env_vars:
         print(f"   {var}: {value}", flush=True)
 
 # Try to import alembic
-print("\n2. Testing alembic import:", flush=True)
+print("\n3. Testing alembic import:", flush=True)
 try:
     import alembic
     print(f"   ✓ Alembic version: {alembic.__version__}", flush=True)
@@ -44,7 +64,7 @@ except Exception as e:
     sys.exit(1)
 
 # Try to connect to database
-print("\n3. Testing database connection:", flush=True)
+print("\n4. Testing database connection:", flush=True)
 try:
     from sqlalchemy import create_engine, text
 
@@ -79,7 +99,7 @@ except Exception as e:
     sys.exit(1)
 
 # Try to run alembic command
-print("\n4. Testing alembic current:", flush=True)
+print("\n5. Testing alembic current:", flush=True)
 try:
     import subprocess
     result = subprocess.run(
