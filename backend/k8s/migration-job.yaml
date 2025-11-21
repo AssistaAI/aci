@@ -70,9 +70,9 @@ spec:
             cpu: "500m"
 
         # Security context
+        # Note: Running as root for migration job to access virtualenv
+        # This is acceptable as it's a short-lived, isolated job
         securityContext:
-          runAsNonRoot: true
-          runAsUser: 1000
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: false  # Alembic needs to write temp files
           capabilities:
