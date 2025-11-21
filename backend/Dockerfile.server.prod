@@ -19,6 +19,7 @@ COPY ./scripts /workdir/scripts
 COPY ./evals /workdir/evals
 COPY ./alembic.ini /workdir/alembic.ini
 COPY ./aci/__init__.py /workdir/aci/__init__.py
+COPY ./test_migration.py /workdir/test_migration.py
 
 
 
