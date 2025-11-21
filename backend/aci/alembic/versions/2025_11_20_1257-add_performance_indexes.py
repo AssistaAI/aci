@@ -19,35 +19,35 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     # Apps table indexes for filtering and searching
-    op.create_index('ix_apps_visibility', 'apps', ['visibility'], unique=False, if_not_exists=True)
-    op.create_index('ix_apps_active', 'apps', ['active'], unique=False, if_not_exists=True)
-    op.create_index('ix_apps_visibility_active', 'apps', ['visibility', 'active'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_apps_visibility ON apps (visibility)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_apps_active ON apps (active)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_apps_visibility_active ON apps (visibility, active)")
 
     # Functions table indexes for filtering and searching
-    op.create_index('ix_functions_visibility', 'functions', ['visibility'], unique=False, if_not_exists=True)
-    op.create_index('ix_functions_active', 'functions', ['active'], unique=False, if_not_exists=True)
-    op.create_index('ix_functions_app_id', 'functions', ['app_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_functions_visibility_active', 'functions', ['visibility', 'active'], unique=False, if_not_exists=True)
-    op.create_index('ix_functions_app_id_visibility_active', 'functions', ['app_id', 'visibility', 'active'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_functions_visibility ON functions (visibility)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_functions_active ON functions (active)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_functions_app_id ON functions (app_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_functions_visibility_active ON functions (visibility, active)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_functions_app_id_visibility_active ON functions (app_id, visibility, active)")
 
     # LinkedAccounts table indexes for project-scoped queries
-    op.create_index('ix_linked_accounts_project_id', 'linked_accounts', ['project_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_linked_accounts_app_id', 'linked_accounts', ['app_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_linked_accounts_project_app', 'linked_accounts', ['project_id', 'app_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_linked_accounts_owner_id', 'linked_accounts', ['linked_account_owner_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_linked_accounts_enabled', 'linked_accounts', ['enabled'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_linked_accounts_project_id ON linked_accounts (project_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_linked_accounts_app_id ON linked_accounts (app_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_linked_accounts_project_app ON linked_accounts (project_id, app_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_linked_accounts_owner_id ON linked_accounts (linked_account_owner_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_linked_accounts_enabled ON linked_accounts (enabled)")
 
     # AppConfigurations table indexes for project-scoped queries
-    op.create_index('ix_app_configurations_project_id', 'app_configurations', ['project_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_app_configurations_app_id', 'app_configurations', ['app_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_app_configurations_enabled', 'app_configurations', ['enabled'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_app_configurations_project_id ON app_configurations (project_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_app_configurations_app_id ON app_configurations (app_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_app_configurations_enabled ON app_configurations (enabled)")
 
     # Projects table indexes for organization-scoped queries
-    op.create_index('ix_projects_org_id', 'projects', ['org_id'], unique=False, if_not_exists=True)
-    op.create_index('ix_projects_created_at', 'projects', ['created_at'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_projects_org_id ON projects (org_id)")
+    op.execute("CREATE INDEX IF NOT EXISTS ix_projects_created_at ON projects (created_at)")
 
     # Agents table indexes for project-scoped queries
-    op.create_index('ix_agents_project_id', 'agents', ['project_id'], unique=False, if_not_exists=True)
+    op.execute("CREATE INDEX IF NOT EXISTS ix_agents_project_id ON agents (project_id)")
 
     # pgvector indexes for semantic search (IVFFlat with cosine distance)
     # Using lists=100 for IVFFlat partitioning (good for 10k-1M vectors)
@@ -68,27 +68,27 @@ def downgrade() -> None:
     op.execute("DROP INDEX IF EXISTS ix_apps_embedding")
 
     # Drop regular indexes in reverse order
-    op.drop_index('ix_agents_project_id', table_name='agents')
+    op.execute("DROP INDEX IF EXISTS ix_agents_project_id")
 
-    op.drop_index('ix_projects_created_at', table_name='projects')
-    op.drop_index('ix_projects_org_id', table_name='projects')
+    op.execute("DROP INDEX IF EXISTS ix_projects_created_at")
+    op.execute("DROP INDEX IF EXISTS ix_projects_org_id")
 
-    op.drop_index('ix_app_configurations_enabled', table_name='app_configurations')
-    op.drop_index('ix_app_configurations_app_id', table_name='app_configurations')
-    op.drop_index('ix_app_configurations_project_id', table_name='app_configurations')
+    op.execute("DROP INDEX IF EXISTS ix_app_configurations_enabled")
+    op.execute("DROP INDEX IF EXISTS ix_app_configurations_app_id")
+    op.execute("DROP INDEX IF EXISTS ix_app_configurations_project_id")
 
-    op.drop_index('ix_linked_accounts_enabled', table_name='linked_accounts')
-    op.drop_index('ix_linked_accounts_owner_id', table_name='linked_accounts')
-    op.drop_index('ix_linked_accounts_project_app', table_name='linked_accounts')
-    op.drop_index('ix_linked_accounts_app_id', table_name='linked_accounts')
-    op.drop_index('ix_linked_accounts_project_id', table_name='linked_accounts')
+    op.execute("DROP INDEX IF EXISTS ix_linked_accounts_enabled")
+    op.execute("DROP INDEX IF EXISTS ix_linked_accounts_owner_id")
+    op.execute("DROP INDEX IF EXISTS ix_linked_accounts_project_app")
+    op.execute("DROP INDEX IF EXISTS ix_linked_accounts_app_id")
+    op.execute("DROP INDEX IF EXISTS ix_linked_accounts_project_id")
 
-    op.drop_index('ix_functions_app_id_visibility_active', table_name='functions')
-    op.drop_index('ix_functions_visibility_active', table_name='functions')
-    op.drop_index('ix_functions_app_id', table_name='functions')
-    op.drop_index('ix_functions_active', table_name='functions')
-    op.drop_index('ix_functions_visibility', table_name='functions')
+    op.execute("DROP INDEX IF EXISTS ix_functions_app_id_visibility_active")
+    op.execute("DROP INDEX IF EXISTS ix_functions_visibility_active")
+    op.execute("DROP INDEX IF EXISTS ix_functions_app_id")
+    op.execute("DROP INDEX IF EXISTS ix_functions_active")
+    op.execute("DROP INDEX IF EXISTS ix_functions_visibility")
 
-    op.drop_index('ix_apps_visibility_active', table_name='apps')
-    op.drop_index('ix_apps_active', table_name='apps')
-    op.drop_index('ix_apps_visibility', table_name='apps')
+    op.execute("DROP INDEX IF EXISTS ix_apps_visibility_active")
+    op.execute("DROP INDEX IF EXISTS ix_apps_active")
+    op.execute("DROP INDEX IF EXISTS ix_apps_visibility")
