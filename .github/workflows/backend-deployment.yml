@@ -120,22 +120,48 @@ jobs:
         else
           echo "❌ Migration job failed or timed out"
 
+          # IMMEDIATE: Try to get logs from the job directly first
+          echo "========================================"
+          echo "=== QUICK LOG CHECK (job-level) ==="
+          echo "========================================"
+          kubectl logs -n ${{ env.NAMESPACE }} job/aci-migrate-${BUILD_NUMBER} --tail=100 2>&1 || echo "Could not get job-level logs"
+
           # Get all pods for this job
+          echo ""
+          echo "========================================"
           echo "=== Getting pod information ==="
+          echo "========================================"
           kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o wide
 
           # Try to get logs from all pods - use jsonpath to get pod names
-          echo "=== Attempting to retrieve logs from all pods ==="
+          echo "========================================"
+          echo "=== RETRIEVING POD LOGS ==="
+          echo "========================================"
           POD_NAMES=$(kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o jsonpath='{.items[*].metadata.name}')
+
+          echo "DEBUG: POD_NAMES='$POD_NAMES'"
+          echo "DEBUG: Number of pods: $(echo $POD_NAMES | wc -w)"
 
           if [ -z "$POD_NAMES" ]; then
             echo "❌ No pods found for job aci-migrate-${BUILD_NUMBER}"
           else
+            echo "✓ Found $(echo $POD_NAMES | wc -w) pod(s)"
             for pod_name in $POD_NAMES; do
+              echo ""
               echo "========================================"
               echo "=== LOGS FROM POD: $pod_name ==="
               echo "========================================"
-              kubectl logs -n ${{ env.NAMESPACE }} $pod_name --all-containers=true --tail=200 2>&1 || echo "⚠️  Could not retrieve logs from $pod_name"
+
+              # Try current logs first
+              echo "--- Current container logs ---"
+              if kubectl logs -n ${{ env.NAMESPACE }} $pod_name --all-containers=true --tail=200 2>&1; then
+                echo "✓ Retrieved current logs"
+              else
+                echo "⚠️  No current logs available"
+                # Try previous logs if current failed
+                echo "--- Previous container logs (if terminated) ---"
+                kubectl logs -n ${{ env.NAMESPACE }} $pod_name --all-containers=true --previous --tail=200 2>&1 || echo "⚠️  No previous logs available either"
+              fi
 
               echo ""
               echo "========================================"
