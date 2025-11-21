@@ -119,10 +119,27 @@ jobs:
           kubectl logs job/aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}
         else
           echo "❌ Migration job failed or timed out"
-          kubectl logs job/aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }} || echo "Unable to retrieve logs"
+
+          # Get all pods for this job
+          echo "=== Getting pod information ==="
+          kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER}
+
+          # Try to get logs from all pods
+          echo "=== Attempting to retrieve logs from all pods ==="
+          for pod in $(kubectl get pods -n ${{ env.NAMESPACE }} -l job-name=aci-migrate-${BUILD_NUMBER} -o name); do
+            echo "--- Logs from $pod ---"
+            kubectl logs -n ${{ env.NAMESPACE }} $pod --all-containers=true || echo "Could not retrieve logs from $pod"
+            echo "--- Describing $pod ---"
+            kubectl describe -n ${{ env.NAMESPACE }} $pod || echo "Could not describe $pod"
+          done
 
           # Check job status
+          echo "=== Job description ==="
           kubectl describe job aci-migrate-${BUILD_NUMBER} -n ${{ env.NAMESPACE }}
+
+          # Check events
+          echo "=== Recent events in namespace ==="
+          kubectl get events -n ${{ env.NAMESPACE }} --sort-by='.lastTimestamp' | tail -20
 
           # Fail the workflow
           exit 1
