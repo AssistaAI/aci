@@ -7,9 +7,7 @@ COPY ./pyproject.toml ./uv.lock /workdir/
 RUN uv sync --no-dev --no-install-project
 
 # Fix permissions for non-root user (UID 1000)
-RUN chmod -R 755 /workdir/.venv && \
-    find /workdir/.venv -type f -exec chmod 644 {} \; && \
-    find /workdir/.venv -type d -exec chmod 755 {} \;
+RUN chmod -R 755 /workdir/.venv
 
 ENV PATH="/workdir/.venv/bin:$PATH"
 ENV PYTHONPATH=/workdir
