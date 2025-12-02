@@ -125,6 +125,9 @@ class Project(Base):
     linked_accounts: Mapped[list[LinkedAccount]] = relationship(
         "LinkedAccount", lazy="select", cascade="all, delete-orphan", init=False
     )
+    search_feedback: Mapped[list["FunctionSearchFeedback"]] = relationship(
+        "FunctionSearchFeedback", back_populates="project", cascade="all, delete-orphan", init=False
+    )
 
 
 class Agent(Base):
@@ -173,6 +176,9 @@ class Agent(Base):
     # deleting agent will delete all API keys under the agent
     api_keys: Mapped[list[APIKey]] = relationship(
         "APIKey", lazy="select", cascade="all, delete-orphan", init=False
+    )
+    search_feedback: Mapped[list["FunctionSearchFeedback"]] = relationship(
+        "FunctionSearchFeedback", back_populates="agent", cascade="all, delete-orphan", init=False
     )
 
 
@@ -606,6 +612,80 @@ class ProcessedStripeEvent(Base):
     )
 
 
+class FunctionSearchFeedback(MappedAsDataclass, Base):
+    """
+    Feedback for function search quality.
+    Used to track when search results were helpful or not.
+    """
+
+    __tablename__ = "function_search_feedback"
+
+    id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True),
+        primary_key=True,
+        default_factory=uuid4,
+        init=False,
+    )
+
+    # Search context
+    agent_id: Mapped[UUID] = mapped_column(
+        ForeignKey("agents.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    project_id: Mapped[UUID] = mapped_column(
+        ForeignKey("projects.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+
+    # Search query details
+    intent: Mapped[str | None] = mapped_column(Text, nullable=True)
+    returned_function_names: Mapped[list[str]] = mapped_column(
+        ARRAY(String(MAX_STRING_LENGTH)),
+        nullable=False,
+    )
+    selected_function_name: Mapped[str | None] = mapped_column(
+        String(MAX_STRING_LENGTH),
+        nullable=True,
+    )
+
+    # Feedback
+    was_helpful: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    feedback_type: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+        default="explicit",  # explicit, implicit_selection, implicit_execution
+    )
+    feedback_comment: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    # Metadata
+    search_metadata: Mapped[dict] = mapped_column(
+        MutableDict.as_mutable(JSONB),
+        nullable=False,
+        default_factory=dict,
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False),
+        server_default=func.now(),
+        nullable=False,
+        init=False,
+    )
+
+    # Relationships
+    agent: Mapped[Agent] = relationship(
+        "Agent",
+        back_populates="search_feedback",
+        init=False,
+        repr=False,
+    )
+    project: Mapped[Project] = relationship(
+        "Project",
+        back_populates="search_feedback",
+        init=False,
+        repr=False,
+    )
+
+
 __all__ = [
     "APIKey",
     "Agent",
@@ -613,6 +693,7 @@ __all__ = [
     "AppConfiguration",
     "Base",
     "Function",
+    "FunctionSearchFeedback",
     "LinkedAccount",
     "Project",
     "Secret",
