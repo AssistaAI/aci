@@ -1,7 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Header, Query, status
+from fastapi import APIRouter, Depends, Header, status
 from propelauth_fastapi import User
 from sqlalchemy.orm import Session
 
@@ -61,7 +61,7 @@ async def get_projects(
     user: Annotated[User, Depends(auth.require_user)],
     org_id: Annotated[UUID, Header(alias=config.ACI_ORG_ID_HEADER)],
     db_session: Annotated[Session, Depends(deps.yield_db_session)],
-    query_params: Annotated[ProjectsList, Query()] = Query(),
+    query_params: ProjectsList = Depends(),
 ) -> list[Project]:
     """
     Get projects for the organization with pagination if the user is a member of the organization.
