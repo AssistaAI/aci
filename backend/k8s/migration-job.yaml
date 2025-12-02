@@ -34,6 +34,10 @@ spec:
         - name: PYTHONPATH
           value: /workdir
 
+        # Common configuration used by Alembic models (encryption, AWS, etc.)
+        - name: COMMON_AWS_ENDPOINT_URL
+          value: "https://kms.us-east-1.amazonaws.com"
+
         # Database connection configuration
         - name: ALEMBIC_DB_SCHEME
           value: postgresql+psycopg
@@ -60,6 +64,11 @@ spec:
         # Logging configuration
         - name: LOG_LEVEL
           value: INFO
+
+        # Load shared application configuration (includes COMMON_AWS_REGION, KEY_ENCRYPTION_KEY_ARN, etc.)
+        envFrom:
+        - secretRef:
+            name: aci-backend-${NAMESPACE}
 
         resources:
           requests:
