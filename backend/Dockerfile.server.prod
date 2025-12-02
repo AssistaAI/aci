@@ -11,7 +11,7 @@ RUN chmod -R a+rX /workdir/.venv
 
 ENV PATH="/workdir/.venv/bin:$PATH"
 ENV PYTHONPATH=/workdir
-ENV UVICORN_WORKERS=10
+ENV UVICORN_WORKERS=4
 
 RUN playwright install chromium --with-deps --no-shell
 
