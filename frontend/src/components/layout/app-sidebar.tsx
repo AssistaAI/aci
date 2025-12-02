@@ -27,6 +27,7 @@ import { RiSettings3Line, RiLinkUnlinkM } from "react-icons/ri";
 import { AiOutlineRobot } from "react-icons/ai";
 import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 import { RiFileList3Line } from "react-icons/ri";
+import { MdOutlineWebhook } from "react-icons/md";
 import { UpgradeButton } from "./subscription-button";
 
 import {
@@ -55,6 +56,11 @@ export const sidebarItems = [
     title: "Linked Accounts",
     url: `/linked-accounts`,
     icon: RiLinkUnlinkM,
+  },
+  {
+    title: "Triggers",
+    url: `/triggers`,
+    icon: MdOutlineWebhook,
   },
   {
     title: "Agents",
