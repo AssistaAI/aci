@@ -111,6 +111,10 @@ class OAuth2Manager:
         elif self.app_name == "X":
             # X (Twitter) uses PKCE but doesn't use access_type/prompt
             auth_url_kwargs["code_verifier"] = code_verifier
+        elif self.app_name == "JIRA":
+            # JIRA uses PKCE and scope='offline_access' but doesn't support 'access_type' parameter
+            auth_url_kwargs["code_verifier"] = code_verifier
+            auth_url_kwargs["prompt"] = prompt
         else:
             auth_url_kwargs["code_verifier"] = code_verifier
             auth_url_kwargs["access_type"] = access_type
@@ -271,13 +275,17 @@ class OAuth2Manager:
                 response.raise_for_status()
 
                 orgs_data = response.json()
-                logger.info(f"Fetched Zoho organizations, app_name={self.app_name}, count={len(orgs_data.get('data', []))}")
+                logger.info(
+                    f"Fetched Zoho organizations, app_name={self.app_name}, count={len(orgs_data.get('data', []))}"
+                )
 
                 # Get the first (default) organization ID
                 if "data" in orgs_data and len(orgs_data["data"]) > 0:
                     org_id = orgs_data["data"][0].get("id")
                     if org_id:
-                        logger.info(f"Successfully fetched Zoho orgId, app_name={self.app_name}, orgId={org_id}")
+                        logger.info(
+                            f"Successfully fetched Zoho orgId, app_name={self.app_name}, orgId={org_id}"
+                        )
                         return str(org_id)
 
                 logger.warning(f"No organizations found in Zoho response, app_name={self.app_name}")

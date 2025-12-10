@@ -12,8 +12,8 @@
       "prefix": "Bearer",
       "client_id": "{{ AIPOLABS_JIRA_APP_CLIENT_ID }}",
       "client_secret": "{{ AIPOLABS_JIRA_APP_CLIENT_SECRET }}",
-      "scope": "read:jira-user read:jira-work write:jira-work manage:jira-project offline_access read:me",
-      "authorize_url": "https://auth.atlassian.com/authorize?audience=api.atlassian.com&response_type=code&prompt=consent",
+      "scope": "read:jira-user read:jira-work write:jira-work manage:jira-project offline_access read:me read:project:jira write:project:jira read:issue:jira write:issue:jira read:issue-meta:jira read:issue-details:jira read:comment:jira write:comment:jira read:user:jira read:issue-type:jira read:priority:jira read:workflow:jira read:issue.transition:jira read:board-scope:jira-software read:sprint:jira-software write:sprint:jira-software read:jql:jira",
+      "authorize_url": "https://auth.atlassian.com/authorize?audience=api.atlassian.com",
       "access_token_url": "https://auth.atlassian.com/oauth/token",
       "refresh_token_url": "https://auth.atlassian.com/oauth/token"
     }
