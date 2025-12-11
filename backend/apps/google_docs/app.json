@@ -1,27 +1,20 @@
 {
   "name": "GOOGLE_DOCS",
   "display_name": "Google Docs",
-  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/google_docs.svg",
-  "provider": "Google",
-  "version": "1.0.0",
-  "description": "\"Create, edit, and collaborate on documents effortlessly through chat, making teamwork and writing projects smoother.\"",
-  "security_schemes": {
-    "oauth2": {
-      "location": "header",
-      "name": "Authorization",
-      "prefix": "Bearer",
-      "client_id": "{{ AIPOLABS_GOOGLE_DOCS_CLIENT_ID }}",
-      "client_secret": "{{ AIPOLABS_GOOGLE_DOCS_CLIENT_SECRET }}",
-      "scope": "https://www.googleapis.com/auth/documents",
-      "authorize_url": "https://accounts.google.com/o/oauth2/v2/auth",
-      "access_token_url": "https://oauth2.googleapis.com/token",
-      "refresh_token_url": "https://oauth2.googleapis.com/token"
-    }
-  },
-  "default_security_credentials_by_scheme": {},
+  "description": "Connects Assista to the Google Docs API for document workflows.",
   "categories": [
-    "Document Management"
+    "productivity"
   ],
-  "visibility": "public",
-  "active": true
+  "external_docs_url": "https://developers.google.com/docs/api",
+  "authorization": {
+    "type": "OAUTH2",
+    "authorization_url": "https://accounts.google.com/o/oauth2/v2/auth",
+    "token_url": "https://oauth2.googleapis.com/token",
+    "scopes": [
+      "https://www.googleapis.com/auth/documents.readonly"
+    ],
+    "client_id_env_name": "GOOGLE_OAUTH_CLIENT_ID",
+    "client_secret_env_name": "GOOGLE_OAUTH_CLIENT_SECRET",
+    "redirect_uri_env_name": "ASSISTA_OAUTH_REDIRECT_URI"
+  }
 }
