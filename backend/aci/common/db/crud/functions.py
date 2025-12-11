@@ -1,16 +1,13 @@
 from uuid import UUID
 
-from sqlalchemy import select, update
+from sqlalchemy import or_, select, update
 from sqlalchemy.orm import Session
 
 from aci.common import utils
 from aci.common.db import crud
 from aci.common.db.sql_models import App, Function
 from aci.common.enums import Visibility
-from aci.common.logging_setup import get_logger
 from aci.common.schemas.function import FunctionUpsert
-
-logger = get_logger(__name__)
 
 
 def create_functions(
@@ -22,14 +19,14 @@ def create_functions(
     Create functions.
     Note: each function might be of different app.
     """
-    logger.debug(f"Creating functions, functions_upsert={functions_upsert}")
+    # Create functions
 
     functions = []
     for i, function_upsert in enumerate(functions_upsert):
         app_name = utils.parse_app_name_from_function_name(function_upsert.name)
         app = crud.apps.get_app(db_session, app_name, False, False)
         if not app:
-            logger.error(f"App={app_name} does not exist for function={function_upsert.name}")
+            # App does not exist for function
             raise ValueError(f"App={app_name} does not exist for function={function_upsert.name}")
         function_data = function_upsert.model_dump(mode="json", exclude_none=True)
         function = Function(
@@ -55,12 +52,12 @@ def update_functions(
     Note: each function might be of different app.
     With the option to update the function embedding. (needed if FunctionEmbeddingFields are updated)
     """
-    logger.debug(f"Updating functions, functions_upsert={functions_upsert}")
+    # Update functions
     functions = []
     for i, function_upsert in enumerate(functions_upsert):
         function = crud.functions.get_function(db_session, function_upsert.name, False, False)
         if not function:
-            logger.error(f"Function={function_upsert.name} does not exist")
+            # Function does not exist
             raise ValueError(f"Function={function_upsert.name} does not exist")
 
         function_data = function_upsert.model_dump(mode="json", exclude_unset=True)
@@ -83,8 +80,20 @@ def search_functions(
     intent_embedding: list[float] | None,
     limit: int,
     offset: int,
+    intent_text: str | None = None,
 ) -> list[Function]:
-    """Get a list of functions with optional filtering by app names and sorting by vector similarity to intent."""
+    """Get a list of functions with optional filtering by app names and sorting by vector similarity to intent.
+
+    Args:
+        db_session: Database session
+        public_only: Whether to filter for public functions only
+        active_only: Whether to filter for active functions only
+        app_names: List of app names to filter by
+        intent_embedding: Embedding vector for semantic search
+        limit: Maximum number of results
+        offset: Pagination offset
+        intent_text: Original intent text for lexical filtering
+    """
     statement = select(Function).join(App, Function.app_id == App.id)
 
     # filter out all functions of inactive apps and all inactive functions
@@ -101,12 +110,34 @@ def search_functions(
     if app_names is not None:
         statement = statement.filter(App.name.in_(app_names))
 
+    # Apply lexical filtering if intent text is provided
+    # This helps filter out obviously irrelevant results before vector ranking
+    if intent_text and len(intent_text.strip()) > 2:
+        # Clean and prepare search terms - limit to 3 most important terms
+        # Sanitize input to prevent SQL injection
+        import re
+        # Only allow alphanumeric, spaces, and common punctuation
+        clean_intent = re.sub(r'[^\w\s\-_.]', '', intent_text)
+        search_terms = [term.lower() for term in clean_intent.split()[:3] if len(term) > 3]
+
+        if search_terms and search_terms[0]:
+            # Use parameterized queries to prevent SQL injection
+            # SQLAlchemy's ilike is safe when using % in the parameter, not in the query
+            safe_pattern = f"%{search_terms[0]}%"
+            statement = statement.filter(
+                or_(
+                    Function.name.ilike(safe_pattern),
+                    Function.description.ilike(safe_pattern),
+                    App.name.ilike(safe_pattern),
+                )
+            )
+
     if intent_embedding is not None:
         similarity_score = Function.embedding.cosine_distance(intent_embedding)
         statement = statement.order_by(similarity_score)
 
     statement = statement.offset(offset).limit(limit)
-    logger.debug(f"Executing statement, statement={statement}")
+    # Execute search query with lexical filtering
 
     return list(db_session.execute(statement).scalars().all())
 
