@@ -12,7 +12,11 @@
       "prefix": "Bearer"
     }
   },
-  "default_security_credentials_by_scheme": {},
+  "default_security_credentials_by_scheme": {
+    "api_key": {
+      "value": "{{FIRECRAWL_API_KEY}}"
+    }
+  },
   "categories": [
     "Search & Scraping",
     "Data & Analytics"
