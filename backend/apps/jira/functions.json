@@ -150,7 +150,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/ex/jira/{cloudid}/rest/api/3/search",
+      "path": "/ex/jira/{cloudid}/rest/api/3/search/jql",
       "server_url": "https://api.atlassian.com"
     },
     "security_schemes": [
@@ -713,7 +713,7 @@
   },
   {
     "name": "JIRA__TRANSITION_ISSUE",
-    "description": "Transition an issue through workflow states (To Do \u2192 In Progress \u2192 Done) in Jira",
+    "description": "Transition an issue through workflow states (To Do → In Progress → Done) in Jira. IMPORTANT: For simple status changes, only use the 'transition.id' field. The 'fields' object (resolution, assignee) should ONLY be included when transitioning to 'Done' status and only if those fields are required on the transition screen. Use JIRA__ISSUE_TRANSITIONS first to get available transition IDs. Common transitions: To Do (id varies), In Progress (id varies), Done (id varies). Example for moving to In Progress: {\"transition\": {\"id\": \"21\"}}. Do NOT include resolution or assignee fields unless specifically moving to Done status.",
     "tags": [
       "issues",
       "transition",
@@ -841,8 +841,7 @@
             "transition"
           ],
           "visible": [
-            "transition",
-            "fields"
+            "transition"
           ],
           "additionalProperties": false
         }
@@ -1099,10 +1098,7 @@
           "required": [],
           "visible": [
             "startAt",
-            "maxResults",
-            "type",
-            "name",
-            "projectKeyOrId"
+            "maxResults"
           ],
           "additionalProperties": false
         }

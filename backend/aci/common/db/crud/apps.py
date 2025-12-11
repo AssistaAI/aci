@@ -85,7 +85,7 @@ def get_apps(
     limit: int | None,
     offset: int | None,
 ) -> list[App]:
-    statement = select(App)
+    statement = select(App).order_by(App.name)
     if public_only:
         statement = statement.filter(App.visibility == Visibility.PUBLIC)
     if active_only:
