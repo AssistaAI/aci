@@ -141,6 +141,58 @@ class OAuth2SchemeOverride(BaseModel):
     # TODO: might need to support "scope" in the future
 
 
+class OAuth1Scheme(BaseModel):
+    """OAuth1 security scheme configuration"""
+
+    consumer_key: str = Field(
+        ...,
+        min_length=1,
+        max_length=2048,
+        description="The consumer key for OAuth1 authentication",
+    )
+    consumer_secret: str = Field(
+        ...,
+        min_length=1,
+        max_length=2048,
+        description="The consumer secret for OAuth1 authentication",
+    )
+    request_token_url: str = Field(
+        ...,
+        description="The URL to obtain the request token, e.g., 'https://api.twitter.com/oauth/request_token'",
+    )
+    authorize_url: str = Field(
+        ...,
+        description="The URL for user authorization, e.g., 'https://api.twitter.com/oauth/authorize'",
+    )
+    access_token_url: str = Field(
+        ...,
+        description="The URL to exchange for the access token, e.g., 'https://api.twitter.com/oauth/access_token'",
+    )
+
+
+class OAuth1SchemePublic(BaseModel):
+    """Public OAuth1 scheme without secrets"""
+
+    pass
+
+
+class OAuth1SchemeOverride(BaseModel):
+    """Fields allowed to be overridden by the user for OAuth1"""
+
+    consumer_key: str = Field(
+        ...,
+        min_length=1,
+        max_length=2048,
+        description="The consumer key for OAuth1 authentication",
+    )
+    consumer_secret: str = Field(
+        ...,
+        min_length=1,
+        max_length=2048,
+        description="The consumer secret for OAuth1 authentication",
+    )
+
+
 class NoAuthScheme(BaseModel, extra="forbid"):
     """
     model for security scheme that has no authentication.
@@ -225,6 +277,23 @@ class NoAuthSchemeCredentialsLimited(BaseModel, extra="forbid"):
     """
 
     pass
+
+
+class OAuth1SchemeCredentials(BaseModel):
+    """Credentials for OAuth1 scheme"""
+
+    consumer_key: str
+    consumer_secret: str
+    oauth_token: str
+    oauth_token_secret: str
+    raw_response: dict | None = None
+
+
+class OAuth1SchemeCredentialsLimited(BaseModel):
+    """Limited OAuth1 credentials to expose to the client directly"""
+
+    oauth_token: str
+    oauth_token_secret: str
 
 
 class SecuritySchemesPublic(BaseModel):

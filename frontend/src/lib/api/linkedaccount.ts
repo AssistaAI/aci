@@ -23,7 +23,10 @@ export async function getAllLinkedAccounts(
     searchParams.append("app_name", params.app_name);
   }
   if (params?.linked_account_owner_id) {
-    searchParams.append("linked_account_owner_id", params.linked_account_owner_id);
+    searchParams.append(
+      "linked_account_owner_id",
+      params.linked_account_owner_id,
+    );
   }
 
   const url = searchParams.toString()
@@ -246,4 +249,53 @@ export async function updateLinkedAccount(
 
   const updatedLinkedAccount = await response.json();
   return updatedLinkedAccount;
+}
+
+/**
+ * Get Trello authorization URL for the simplified token flow.
+ * Trello uses a special auth flow where the token is returned in the URL fragment.
+ * User must provide their own Trello API key.
+ */
+export async function getTrelloAuthURL(
+  linkedAccountOwnerId: string,
+  trelloApiKey: string,
+  userApiKey: string,
+  afterTrelloLinkRedirectURL?: string,
+): Promise<string> {
+  const params = new URLSearchParams();
+  params.append("linked_account_owner_id", linkedAccountOwnerId);
+  params.append("api_key", trelloApiKey); // User's Trello API key
+  if (afterTrelloLinkRedirectURL) {
+    params.append("after_trello_link_redirect_url", afterTrelloLinkRedirectURL);
+  }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/linked-accounts/trello/auth?${params.toString()}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": userApiKey, // ACI API key for authentication
+      },
+    },
+  );
+
+  if (!response.ok) {
+    let errorMsg = `Failed to get Trello auth URL: ${response.status} ${response.statusText}`;
+    try {
+      const errorData = await response.json();
+      if (errorData && errorData.error) {
+        errorMsg = errorData.error;
+      }
+    } catch (e) {
+      console.error("Error parsing error response:", e);
+    }
+    throw new Error(errorMsg);
+  }
+
+  const data = await response.json();
+  if (!data.url || typeof data.url !== "string") {
+    throw new Error("Invalid response: missing or invalid URL");
+  }
+  return data.url;
 }

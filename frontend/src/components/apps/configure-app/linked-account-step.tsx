@@ -23,6 +23,7 @@ import {
   useCreateAPILinkedAccount,
   useCreateNoAuthLinkedAccount,
   useGetOauth2LinkURL,
+  useGetTrelloAuthURL,
 } from "@/hooks/use-linked-account";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -33,6 +34,7 @@ export const FORM_SUBMIT_COPY_OAUTH2_LINK_URL = "copyOAuth2LinkURL";
 export const FORM_SUBMIT_LINK_OAUTH2_ACCOUNT = "linkOAuth2";
 export const FORM_SUBMIT_API_KEY = "apiKey";
 export const FORM_SUBMIT_NO_AUTH = "noAuth";
+export const FORM_SUBMIT_TRELLO_AUTH = "trelloAuth";
 
 // Form schema for linked account
 export interface LinkedAccountFormValues {
@@ -91,12 +93,15 @@ export function LinkedAccountStep({
   } = useCreateNoAuthLinkedAccount();
   const { mutateAsync: getOauth2LinkURL, isPending: isGettingOauth2LinkURL } =
     useGetOauth2LinkURL();
+  const { mutateAsync: getTrelloAuthURL, isPending: isGettingTrelloAuthURL } =
+    useGetTrelloAuthURL();
 
   const totalLoading =
     isLoading ||
     isCreatingAPILinkedAccount ||
     isCreatingNoAuthLinkedAccount ||
-    isGettingOauth2LinkURL;
+    isGettingOauth2LinkURL ||
+    isGettingTrelloAuthURL;
 
   // fetch oauth2 link url
   const fetchOAuth2LinkURL = async (
@@ -201,6 +206,23 @@ export function LinkedAccountStep({
     }
   };
 
+  const linkTrelloAccount = async (
+    linkedAccountOwnerId: string,
+    trelloApiKey: string,
+  ) => {
+    try {
+      const trelloAuthURL = await getTrelloAuthURL({
+        linkedAccountOwnerId,
+        trelloApiKey,
+        afterTrelloLinkRedirectURL: `${process.env.NEXT_PUBLIC_DEV_PORTAL_URL}/appconfigs/${appName}`,
+      });
+      window.location.href = trelloAuthURL;
+    } catch (error) {
+      console.error("Error linking Trello account:", error);
+      toast.error("link account failed");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const nativeEvent = e.nativeEvent as SubmitEvent;
@@ -241,6 +263,12 @@ export function LinkedAccountStep({
           break;
         case FORM_SUBMIT_NO_AUTH:
           await linkNoAuthAccount(values.linkedAccountOwnerId);
+          break;
+        case FORM_SUBMIT_TRELLO_AUTH:
+          await linkTrelloAccount(
+            values.linkedAccountOwnerId,
+            values.apiKey as string,
+          );
           break;
       }
     } catch (error) {
@@ -309,9 +337,16 @@ export function LinkedAccountStep({
               name="apiKey"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>API key</FormLabel>
+                  <FormLabel>
+                    {appName === "TRELLO" ? "Trello API Key" : "API Key"}
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="API key" {...field} />
+                    <Input
+                      placeholder={
+                        appName === "TRELLO" ? "Your Trello API Key" : "API key"
+                      }
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -354,7 +389,17 @@ export function LinkedAccountStep({
                 </Button>
               )}
 
-              {authType !== "oauth2" && (
+              {authType !== "oauth2" && appName === "TRELLO" && (
+                <Button
+                  type="submit"
+                  name={FORM_SUBMIT_TRELLO_AUTH}
+                  disabled={totalLoading}
+                >
+                  Connect Trello
+                </Button>
+              )}
+
+              {authType !== "oauth2" && appName !== "TRELLO" && (
                 <Button
                   type="submit"
                   name={(() => {

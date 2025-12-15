@@ -44,7 +44,11 @@ import {
   useCreateAPILinkedAccount,
   useCreateNoAuthLinkedAccount,
   useGetOauth2LinkURL,
+  useGetTrelloAuthURL,
 } from "@/hooks/use-linked-account";
+
+// Apps that use special auth flows instead of manual API key entry
+const APPS_WITH_OAUTH_FLOW = ["TRELLO"];
 
 const formSchema = z
   .object({
@@ -56,9 +60,8 @@ const formSchema = z
   .refine(
     (data) => {
       // If the current app uses api_key auth, then apiKey must be provided
-      return (
-        data.authType !== "api_key" || (data.apiKey && data.apiKey.length > 0)
-      );
+      if (data.authType !== "api_key") return true;
+      return data.apiKey && data.apiKey.length > 0;
     },
     {
       message: "API Key is required",
@@ -73,6 +76,8 @@ const FORM_SUBMIT_COPY_OAUTH2_LINK_URL = "copyOAuth2LinkURL";
 const FORM_SUBMIT_LINK_OAUTH2_ACCOUNT = "linkOAuth2";
 const FORM_SUBMIT_API_KEY = "apiKey";
 const FORM_SUBMIT_NO_AUTH = "noAuth";
+const FORM_SUBMIT_TRELLO_AUTH = "trelloAuth";
+
 export interface AppInfo {
   name: string;
   logo: string | undefined;
@@ -89,6 +94,7 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
   const { mutateAsync: createNoAuthLinkedAccount } =
     useCreateNoAuthLinkedAccount();
   const { mutateAsync: getOauth2URL } = useGetOauth2LinkURL();
+  const { mutateAsync: getTrelloAuthURL } = useGetTrelloAuthURL();
   if (appInfos.length === 0) {
     console.error("No app infos provided");
     throw new Error("No app infos provided");
@@ -179,6 +185,22 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
     }
   };
 
+  const linkTrelloAccount = async (
+    linkedAccountOwnerId: string,
+    trelloApiKey: string,
+  ) => {
+    try {
+      const trelloAuthURL = await getTrelloAuthURL({
+        linkedAccountOwnerId,
+        trelloApiKey,
+        afterTrelloLinkRedirectURL: `${process.env.NEXT_PUBLIC_DEV_PORTAL_URL}/appconfigs/TRELLO`,
+      });
+      window.location.href = trelloAuthURL;
+    } catch (error) {
+      console.error("Error linking Trello account:", error);
+    }
+  };
+
   const linkAPIAccount = async (
     appName: string,
     linkedAccountOwnerId: string,
@@ -249,6 +271,12 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
         break;
       case FORM_SUBMIT_NO_AUTH:
         await linkNoAuthAccount(values.appName, values.linkedAccountOwnerId);
+        break;
+      case FORM_SUBMIT_TRELLO_AUTH:
+        await linkTrelloAccount(
+          values.linkedAccountOwnerId,
+          values.apiKey as string,
+        );
         break;
     }
   };
@@ -425,25 +453,53 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
               )}
             />
 
-            {selectedAuthType === "api_key" && (
-              <FormField
-                control={form.control}
-                name="apiKey"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>API Key</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="api key"
-                        className="w-full"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
+            {selectedAuthType === "api_key" &&
+              !APPS_WITH_OAUTH_FLOW.includes(selectedAppName) && (
+                <FormField
+                  control={form.control}
+                  name="apiKey"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>API Key</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="api key"
+                          className="w-full"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+            {selectedAuthType === "api_key" &&
+              APPS_WITH_OAUTH_FLOW.includes(selectedAppName) && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="apiKey"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{selectedAppName} API Key</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder={`your ${selectedAppName} API key`}
+                            className="w-full"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Click the button below to connect your {selectedAppName}{" "}
+                    account. You&apos;ll be redirected to authorize access.
+                  </p>
+                </>
+              )}
 
             <DialogFooter>
               <Button
@@ -468,6 +524,13 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
               <Button
                 type="submit"
                 name={(() => {
+                  // Special case for apps with OAuth-like flow (like Trello)
+                  if (
+                    selectedAuthType === "api_key" &&
+                    APPS_WITH_OAUTH_FLOW.includes(selectedAppName)
+                  ) {
+                    return FORM_SUBMIT_TRELLO_AUTH;
+                  }
                   switch (selectedAuthType) {
                     case "oauth2":
                       return FORM_SUBMIT_LINK_OAUTH2_ACCOUNT;
@@ -481,7 +544,17 @@ export function AddAccountForm({ appInfos }: AddAccountProps) {
                 })()}
                 disabled={!selectedAppName}
               >
-                {selectedAuthType === "oauth2" ? "Start OAuth2 Flow" : "Save"}
+                {(() => {
+                  if (
+                    selectedAuthType === "api_key" &&
+                    APPS_WITH_OAUTH_FLOW.includes(selectedAppName)
+                  ) {
+                    return `Connect ${selectedAppName}`;
+                  }
+                  return selectedAuthType === "oauth2"
+                    ? "Start OAuth2 Flow"
+                    : "Save";
+                })()}
               </Button>
             </DialogFooter>
           </form>

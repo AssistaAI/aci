@@ -4,11 +4,11 @@
   "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/trello.svg",
   "provider": "Atlassian",
   "version": "1.0.0",
-  "description": "\"Organize projects, manage tasks, and collaborate visually to streamline your workflow and boost team productivity.\"",
+  "description": "Organize projects, manage tasks, and collaborate visually using Trello's kanban-style boards.",
   "security_schemes": {
     "api_key": {
       "location": "query",
-      "name": "token",
+      "name": "key",
       "prefix": null
     }
   },
