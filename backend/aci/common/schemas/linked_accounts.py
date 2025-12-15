@@ -7,6 +7,7 @@ from aci.common.db.sql_models import MAX_STRING_LENGTH, SecurityScheme
 from aci.common.schemas.security_scheme import (
     APIKeySchemeCredentialsLimited,
     NoAuthSchemeCredentialsLimited,
+    OAuth1SchemeCredentialsLimited,
     OAuth2SchemeCredentialsLimited,
 )
 
@@ -18,6 +19,10 @@ class LinkedAccountCreateBase(BaseModel):
 
 class LinkedAccountOAuth2Create(LinkedAccountCreateBase):
     after_oauth2_link_redirect_url: str | None = None
+
+
+class LinkedAccountOAuth1Create(LinkedAccountCreateBase):
+    after_oauth1_link_redirect_url: str | None = None
 
 
 class LinkedAccountAPIKeyCreate(LinkedAccountCreateBase):
@@ -49,6 +54,17 @@ class LinkedAccountOAuth2CreateState(BaseModel):
     after_oauth2_link_redirect_url: str | None = None
 
 
+class LinkedAccountOAuth1CreateState(BaseModel):
+    project_id: UUID
+    app_name: str
+    linked_account_owner_id: str = Field(..., max_length=MAX_STRING_LENGTH)
+    # Store the consumer key used at the start of the OAuth1 flow
+    consumer_key: str
+    # Request token secret (needed for access token exchange)
+    oauth_token_secret: str
+    after_oauth1_link_redirect_url: str | None = None
+
+
 class LinkedAccountPublic(BaseModel):
     id: UUID
     project_id: UUID
@@ -67,6 +83,7 @@ class LinkedAccountPublic(BaseModel):
 class LinkedAccountWithCredentials(LinkedAccountPublic):
     security_credentials: (
         OAuth2SchemeCredentialsLimited
+        | OAuth1SchemeCredentialsLimited
         | APIKeySchemeCredentialsLimited
         | NoAuthSchemeCredentialsLimited
     )

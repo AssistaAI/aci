@@ -447,6 +447,19 @@ class OAuth2Error(ACIException):
         )
 
 
+class OAuth1Error(ACIException):
+    """
+    Exception raised when an OAuth1 error occurs
+    """
+
+    def __init__(self, message: str | None = None):
+        super().__init__(
+            title="OAuth1 error",
+            message=message,
+            error_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+
+
 class MaxUniqueLinkedAccountOwnerIdsReached(ACIException):
     """Raised when an organization has reached its maximum allowed linked accounts for an app."""
 

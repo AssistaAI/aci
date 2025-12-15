@@ -10,6 +10,7 @@ import {
   deleteLinkedAccount,
   updateLinkedAccount,
   getOauth2LinkURL,
+  getTrelloAuthURL,
 } from "@/lib/api/linkedaccount";
 import { useMetaInfo } from "@/components/context/metainfo";
 import { getApiKey } from "@/lib/api/util";
@@ -163,5 +164,29 @@ export const useUpdateLinkedAccount = () => {
       queryClient.invalidateQueries({
         queryKey: linkedAccountKeys.all(activeProject.id),
       }),
+  });
+};
+
+type GetTrelloAuthURLParams = {
+  linkedAccountOwnerId: string;
+  trelloApiKey: string;
+  afterTrelloLinkRedirectURL?: string;
+};
+
+export const useGetTrelloAuthURL = () => {
+  const { activeProject } = useMetaInfo();
+  const apiKey = getApiKey(activeProject);
+
+  return useMutation<string, Error, GetTrelloAuthURLParams>({
+    mutationFn: (params) =>
+      getTrelloAuthURL(
+        params.linkedAccountOwnerId,
+        params.trelloApiKey,
+        apiKey,
+        params.afterTrelloLinkRedirectURL,
+      ),
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 };

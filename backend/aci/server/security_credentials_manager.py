@@ -13,6 +13,8 @@ from aci.common.schemas.security_scheme import (
     APIKeySchemeCredentials,
     NoAuthScheme,
     NoAuthSchemeCredentials,
+    OAuth1Scheme,
+    OAuth1SchemeCredentials,
     OAuth2Scheme,
     OAuth2SchemeCredentials,
     SecuritySchemeOverrides,
@@ -24,8 +26,13 @@ logger = get_logger(__name__)
 
 # TODO: only pass necessary data to the functions
 class SecurityCredentialsResponse(BaseModel):
-    scheme: APIKeyScheme | OAuth2Scheme | NoAuthScheme
-    credentials: APIKeySchemeCredentials | OAuth2SchemeCredentials | NoAuthSchemeCredentials
+    scheme: APIKeyScheme | OAuth2Scheme | OAuth1Scheme | NoAuthScheme
+    credentials: (
+        APIKeySchemeCredentials
+        | OAuth2SchemeCredentials
+        | OAuth1SchemeCredentials
+        | NoAuthSchemeCredentials
+    )
     is_app_default_credentials: bool
     is_updated: bool
 
@@ -37,6 +44,8 @@ async def get_security_credentials(
         return _get_api_key_credentials(app, linked_account)
     elif linked_account.security_scheme == SecurityScheme.OAUTH2:
         return await _get_oauth2_credentials(app, app_configuration, linked_account)
+    elif linked_account.security_scheme == SecurityScheme.OAUTH1:
+        return _get_oauth1_credentials(app, linked_account)
     elif linked_account.security_scheme == SecurityScheme.NO_AUTH:
         return _get_no_auth_credentials(app, linked_account)
     else:
@@ -236,3 +245,25 @@ def get_app_configuration_oauth2_scheme(
         )
 
     return oauth2_scheme
+
+
+def get_app_configuration_oauth1_scheme(
+    app: App, app_configuration: AppConfiguration
+) -> OAuth1Scheme:
+    """
+    Get the OAuth1 scheme for an app configuration.
+    """
+    return OAuth1Scheme.model_validate(app.security_schemes[SecurityScheme.OAUTH1])
+
+
+def _get_oauth1_credentials(app: App, linked_account: LinkedAccount) -> SecurityCredentialsResponse:
+    """
+    Get OAuth1 credentials from linked account.
+    OAuth1 access tokens don't expire, so no refresh is needed.
+    """
+    return SecurityCredentialsResponse(
+        scheme=OAuth1Scheme.model_validate(app.security_schemes[SecurityScheme.OAUTH1]),
+        credentials=OAuth1SchemeCredentials.model_validate(linked_account.security_credentials),
+        is_app_default_credentials=False,
+        is_updated=False,
+    )
