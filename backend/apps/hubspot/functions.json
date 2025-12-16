@@ -193,7 +193,7 @@
   },
   {
     "name": "HUBSPOT__CREATE_DEAL",
-    "description": "Create a new deal in HubSpot CRM with specified properties, amount, and pipeline stage.",
+    "description": "Create a new deal in HubSpot CRM. TIP: Call HUBSPOT__PIPELINES first with object_type='deals' to get valid pipeline and dealstage IDs.",
     "tags": [
       "deals",
       "crm",
@@ -240,15 +240,15 @@
                 },
                 "amount": {
                   "type": "string",
-                  "description": "Deal amount in cents"
+                  "description": "Deal amount (e.g., '1000.00' for $1000)"
                 },
                 "dealstage": {
                   "type": "string",
-                  "description": "Current stage of the deal"
+                  "description": "Current stage of the deal (get valid stages from HUBSPOT__PIPELINES)"
                 },
                 "pipeline": {
                   "type": "string",
-                  "description": "Pipeline ID for the deal"
+                  "description": "Pipeline ID for the deal (get from HUBSPOT__PIPELINES with object_type='deals')"
                 }
               },
               "required": [
@@ -423,11 +423,12 @@
   },
   {
     "name": "HUBSPOT__SEARCH_CRM",
-    "description": "Search across HubSpot CRM objects (contacts, companies, deals) using filters and queries.",
+    "description": "Search across HubSpot CRM objects (contacts, companies, deals) to find object IDs and data. Use this before UPDATE functions or when creating associations to get required IDs.",
     "tags": [
       "search",
       "crm",
-      "filter"
+      "filter",
+      "find-ids"
     ],
     "visibility": "public",
     "active": true,
@@ -491,19 +492,46 @@
               "maximum": 100,
               "description": "Number of results to return"
             },
+            "after": {
+              "type": "string",
+              "description": "Pagination cursor for next page"
+            },
             "properties": {
               "type": "array",
               "items": {
                 "type": "string"
               },
               "description": "Properties to include in results"
+            },
+            "filterGroups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "visible": [],
+                "additionalProperties": true
+              },
+              "description": "Array of filter groups for advanced filtering"
+            },
+            "sorts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "visible": [],
+                "additionalProperties": true
+              },
+              "description": "Array of sort definitions"
             }
           },
           "required": [],
           "visible": [
             "query",
             "limit",
-            "properties"
+            "properties",
+            "filterGroups"
           ],
           "additionalProperties": false
         }
@@ -521,7 +549,7 @@
   },
   {
     "name": "HUBSPOT__UPDATE_CONTACT",
-    "description": "Update an existing contact's properties and information in HubSpot CRM",
+    "description": "Update an existing contact's properties in HubSpot CRM. TIP: Call HUBSPOT__SEARCH_CRM first to find the contact_id if you only have email or name.",
     "tags": [
       "contacts",
       "update",
@@ -638,7 +666,7 @@
   },
   {
     "name": "HUBSPOT__UPDATE_DEAL",
-    "description": "Update an existing deal's properties, stage, and amount in HubSpot CRM",
+    "description": "Update an existing deal's properties in HubSpot CRM. TIP: Call HUBSPOT__SEARCH_CRM or HUBSPOT__DEALS first to find the deal_id.",
     "tags": [
       "deals",
       "update",
@@ -751,7 +779,7 @@
   },
   {
     "name": "HUBSPOT__UPDATE_COMPANY",
-    "description": "Update an existing company's properties and information in HubSpot CRM",
+    "description": "Update an existing company's properties in HubSpot CRM. TIP: Call HUBSPOT__SEARCH_CRM or HUBSPOT__COMPANIES first to find the company_id.",
     "tags": [
       "companies",
       "update",
@@ -915,7 +943,7 @@
   },
   {
     "name": "HUBSPOT__CREATE_TICKET",
-    "description": "Create a new customer service ticket in HubSpot Service Hub with priority and assignment details",
+    "description": "Create a new customer service ticket in HubSpot. Call HUBSPOT__OWNERS first to get a valid hubspot_owner_id if assigning to a specific user.",
     "tags": [
       "tickets",
       "create",
@@ -966,11 +994,11 @@
                 },
                 "hs_pipeline": {
                   "type": "string",
-                  "description": "Service pipeline ID"
+                  "description": "Service pipeline ID (call HUBSPOT__PIPELINES with object_type='tickets' to get valid IDs)"
                 },
                 "hs_pipeline_stage": {
                   "type": "string",
-                  "description": "Current stage of the ticket"
+                  "description": "Current stage of the ticket (get from HUBSPOT__PIPELINES response)"
                 },
                 "hs_ticket_priority": {
                   "type": "string",
@@ -1114,18 +1142,19 @@
   },
   {
     "name": "HUBSPOT__EMAIL_CAMPAIGNS",
-    "description": "Retrieve email marketing campaigns from HubSpot with performance metrics and send statistics",
+    "description": "Retrieve marketing email templates and campaigns from HubSpot CMS with their status and metadata",
     "tags": [
       "email",
       "campaigns",
-      "marketing"
+      "marketing",
+      "templates"
     ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/marketing/v3/marketing-emails",
+      "path": "/cms/v3/emails",
       "server_url": "https://api.hubapi.com"
     },
     "parameters": {
@@ -1163,11 +1192,11 @@
   },
   {
     "name": "HUBSPOT__CREATE_EMAIL_CAMPAIGN",
-    "description": "Create a new email marketing campaign in HubSpot with content, recipients, and scheduling options",
+    "description": "Send a single transactional email through HubSpot to a contact with custom content and sender details",
     "tags": [
       "email",
       "create",
-      "campaigns",
+      "transactional",
       "marketing"
     ],
     "visibility": "public",
@@ -1175,7 +1204,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "POST",
-      "path": "/marketing/v3/marketing-emails",
+      "path": "/marketing/v3/transactional/single-email/send",
       "server_url": "https://api.hubapi.com"
     },
     "parameters": {
@@ -1201,51 +1230,74 @@
         "body": {
           "type": "object",
           "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the email campaign"
+            "emailId": {
+              "type": "integer",
+              "description": "ID of the transactional email template to send (optional if using message)"
             },
-            "subject": {
-              "type": "string",
-              "description": "Email subject line"
+            "message": {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Recipient email address"
+                },
+                "from": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Sender email address (must be verified in HubSpot)"
+                },
+                "replyTo": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "description": "Reply-to email addresses"
+                },
+                "subject": {
+                  "type": "string",
+                  "description": "Email subject line"
+                }
+              },
+              "required": [
+                "to",
+                "subject"
+              ],
+              "visible": [
+                "to",
+                "from",
+                "replyTo",
+                "subject"
+              ],
+              "additionalProperties": false,
+              "description": "Email message details"
             },
-            "fromName": {
-              "type": "string",
-              "description": "Sender name for the email"
+            "contactProperties": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "description": "Contact properties to personalize the email (e.g., firstname, lastname)",
+              "additionalProperties": true
             },
-            "fromEmail": {
-              "type": "string",
-              "format": "email",
-              "description": "Sender email address"
-            },
-            "replyTo": {
-              "type": "string",
-              "format": "email",
-              "description": "Reply-to email address"
-            },
-            "htmlContent": {
-              "type": "string",
-              "description": "HTML content of the email"
-            },
-            "textContent": {
-              "type": "string",
-              "description": "Plain text version of the email"
+            "customProperties": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "description": "Custom properties for template personalization",
+              "additionalProperties": true
             }
           },
           "required": [
-            "name",
-            "subject",
-            "fromName",
-            "fromEmail"
+            "message"
           ],
           "visible": [
-            "name",
-            "subject",
-            "fromName",
-            "fromEmail",
-            "replyTo",
-            "htmlContent",
-            "textContent"
+            "emailId",
+            "message",
+            "contactProperties",
+            "customProperties"
           ],
           "additionalProperties": false
         }
@@ -1368,11 +1420,12 @@
               "description": "How the list membership is determined"
             },
             "customProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Custom properties to include in the list"
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "visible": [],
+              "description": "Custom properties as key-value pairs (optional)",
+              "additionalProperties": true
             }
           },
           "required": [
@@ -1382,8 +1435,7 @@
           "visible": [
             "name",
             "objectTypeId",
-            "processingType",
-            "customProperties"
+            "processingType"
           ],
           "additionalProperties": false
         }
@@ -1411,7 +1463,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/reports/v2/reports",
+      "path": "/analytics/v2/reports",
       "server_url": "https://api.hubapi.com"
     },
     "parameters": {
@@ -1449,7 +1501,7 @@
   },
   {
     "name": "HUBSPOT__CREATE_NOTE",
-    "description": "Create a note and associate it with contacts, companies, or deals in HubSpot CRM for activity tracking",
+    "description": "Create a note and associate it with contacts, companies, or deals in HubSpot. Call HUBSPOT__OWNERS first to get a valid hubspot_owner_id if assigning to a specific user.",
     "tags": [
       "notes",
       "create",
@@ -1497,7 +1549,7 @@
                 "hs_timestamp": {
                   "type": "string",
                   "format": "date-time",
-                  "description": "Timestamp for the note"
+                  "description": "Timestamp when the note was created (required field)"
                 },
                 "hubspot_owner_id": {
                   "type": "string",
@@ -1505,7 +1557,8 @@
                 }
               },
               "required": [
-                "hs_note_body"
+                "hs_note_body",
+                "hs_timestamp"
               ],
               "visible": [
                 "hs_note_body",
@@ -1596,11 +1649,12 @@
   },
   {
     "name": "HUBSPOT__OWNERS",
-    "description": "Retrieve HubSpot team members and owners for assignment to contacts, deals, and tickets",
+    "description": "Retrieve HubSpot team members and owner IDs required for assigning tasks, tickets, contacts, and deals. Always call this function first before creating tasks or tickets to get valid owner IDs.",
     "tags": [
       "owners",
       "team",
-      "users"
+      "users",
+      "assignment"
     ],
     "visibility": "public",
     "active": true,
@@ -1650,11 +1704,12 @@
   },
   {
     "name": "HUBSPOT__PIPELINES",
-    "description": "Retrieve sales and service pipelines from HubSpot with their stages and probability settings",
+    "description": "Retrieve sales and service pipelines from HubSpot with their stages and IDs. Always call this before creating deals or tickets to get valid pipeline and stage IDs.",
     "tags": [
       "pipelines",
       "sales",
-      "stages"
+      "stages",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
@@ -1699,7 +1754,7 @@
   },
   {
     "name": "HUBSPOT__CREATE_TASK",
-    "description": "Create a task or activity in HubSpot and associate it with contacts, companies, or deals for follow-up tracking",
+    "description": "Create a task or activity in HubSpot. IMPORTANT: Call HUBSPOT__OWNERS first to get a valid hubspot_owner_id before creating tasks.",
     "tags": [
       "tasks",
       "create",
@@ -1768,25 +1823,26 @@
                   ],
                   "description": "Priority level of the task"
                 },
-                "hs_task_due_date": {
+                "hs_timestamp": {
                   "type": "string",
                   "format": "date-time",
-                  "description": "Due date and time for the task"
+                  "description": "Timestamp when the task is scheduled to occur (required field, also serves as the due date)"
                 },
                 "hubspot_owner_id": {
                   "type": "string",
-                  "description": "ID of the HubSpot user assigned to this task"
+                  "description": "ID of the HubSpot user assigned to this task (obtain by calling HUBSPOT__OWNERS first)"
                 }
               },
               "required": [
-                "hs_task_subject"
+                "hs_task_subject",
+                "hs_timestamp"
               ],
               "visible": [
                 "hs_task_subject",
                 "hs_task_body",
                 "hs_task_status",
                 "hs_task_priority",
-                "hs_task_due_date",
+                "hs_timestamp",
                 "hubspot_owner_id"
               ],
               "additionalProperties": false
