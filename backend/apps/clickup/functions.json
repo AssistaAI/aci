@@ -1,9 +1,10 @@
 [
   {
     "name": "CLICKUP__AUTHORIZED_WORKSPACES",
-    "description": "View the Workspaces available to the authenticated user.",
+    "description": "View the Workspaces available to the authenticated user. Call this first to get team_id for other operations.",
     "tags": [
-      "Authorization"
+      "Authorization",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
@@ -312,9 +313,10 @@
   },
   {
     "name": "CLICKUP__SPACES_GET",
-    "description": "View the Spaces available in a Workspace. You can only get member info in private Spaces.",
+    "description": "View the Spaces available in a Workspace. Call this before creating folders to get valid space_id.",
     "tags": [
-      "spaces"
+      "spaces",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
@@ -496,7 +498,7 @@
   },
   {
     "name": "CLICKUP__CREATE_TASK",
-    "description": "Create a new task in a list with title, description, assignees, and due date.",
+    "description": "Create a new task in a list. IMPORTANT: Call CLICKUP__LISTS first to get list_id, and CLICKUP__TEAM_MEMBERS to get assignee user IDs.",
     "tags": [
       "tasks",
       "create",
@@ -562,7 +564,7 @@
               "items": {
                 "type": "integer"
               },
-              "description": "Array of user IDs to assign"
+              "description": "Array of user IDs to assign (get from CLICKUP__TEAM_MEMBERS)"
             },
             "status": {
               "type": "string",
@@ -633,7 +635,7 @@
   },
   {
     "name": "CLICKUP__UPDATE_TASK",
-    "description": "Update an existing task with new information, status, assignees, or due dates.",
+    "description": "Update an existing task. TIP: Call CLICKUP__TASKS or CLICKUP__TASK_GET_TASK first to find the task_id if you don't have it.",
     "tags": [
       "tasks",
       "update",
@@ -972,11 +974,12 @@
   },
   {
     "name": "CLICKUP__LISTS",
-    "description": "Get all lists in a folder with their task counts and settings.",
+    "description": "Get all lists in a folder with their task counts and settings. Call this before creating tasks to get valid list_id.",
     "tags": [
       "lists",
       "folders",
-      "organization"
+      "organization",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
@@ -1033,7 +1036,7 @@
   },
   {
     "name": "CLICKUP__CREATE_LIST",
-    "description": "Create a new list in a folder for organizing tasks and projects.",
+    "description": "Create a new list in a folder. TIP: Call CLICKUP__FOLDERS first to get a valid folder_id.",
     "tags": [
       "lists",
       "create",
@@ -1115,7 +1118,7 @@
             },
             "assignee": {
               "type": "integer",
-              "description": "User ID to assign list to"
+              "description": "User ID to assign list to (get from CLICKUP__TEAM_MEMBERS)"
             }
           },
           "required": [
@@ -1146,11 +1149,12 @@
   },
   {
     "name": "CLICKUP__FOLDERS",
-    "description": "Get all folders in a space with their lists and task organization.",
+    "description": "Get all folders in a space with their lists and task organization. Call this before creating lists to get valid folder_id.",
     "tags": [
       "folders",
       "spaces",
-      "organization"
+      "organization",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
@@ -1207,7 +1211,7 @@
   },
   {
     "name": "CLICKUP__CREATE_FOLDER",
-    "description": "Create a new folder in a space for organizing lists and projects with hierarchical structure.",
+    "description": "Create a new folder in a space. TIP: Call CLICKUP__SPACES_GET first to get a valid space_id.",
     "tags": [
       "folders",
       "create",
@@ -1457,7 +1461,7 @@
             },
             "assignee": {
               "type": "integer",
-              "description": "User ID of the assignee"
+              "description": "User ID of the assignee (get from CLICKUP__TEAM_MEMBERS)"
             },
             "tid": {
               "type": "string",
@@ -1606,52 +1610,32 @@
   },
   {
     "name": "CLICKUP__TEAM_MEMBERS",
-    "description": "Retrieve all team members in a workspace with their roles, permissions, and activity status for team management.",
+    "description": "Retrieve all team members in a workspace to get user IDs for task assignment, goal ownership, and time tracking. Call this before assigning tasks or creating goals. The workspace is determined by your authentication token.",
     "tags": [
       "team",
       "members",
-      "users"
+      "users",
+      "setup"
     ],
     "visibility": "public",
     "active": true,
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/team/{team_id}/member",
+      "path": "/team",
       "server_url": "https://api.clickup.com/api/v2"
     },
     "parameters": {
       "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "team_id": {
-              "type": "string",
-              "description": "Team ID to get members for"
-            }
-          },
-          "required": [
-            "team_id"
-          ],
-          "visible": [
-            "team_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
+      "properties": {},
+      "required": [],
+      "visible": [],
       "additionalProperties": false
     }
   },
   {
     "name": "CLICKUP__CREATE_GOAL",
-    "description": "Create a new goal with targets, deadlines, and key results for objective tracking and team alignment.",
+    "description": "Create a new goal with targets, deadlines, and key results. TIP: Call CLICKUP__TEAM_MEMBERS first to get valid owner user IDs.",
     "tags": [
       "goals",
       "objectives",
@@ -1740,7 +1724,7 @@
               "items": {
                 "type": "integer"
               },
-              "description": "Array of user IDs as goal owners"
+              "description": "Array of user IDs as goal owners (get from CLICKUP__TEAM_MEMBERS)"
             }
           },
           "required": [
@@ -1932,7 +1916,7 @@
   },
   {
     "name": "CLICKUP__TASK_ATTACHMENTS",
-    "description": "Retrieve all file attachments for a specific task including documents, images, and other uploaded files.",
+    "description": "Retrieve all file attachments for a specific task. Note: This uses the Get Task endpoint as ClickUp doesn't have a dedicated attachments list endpoint. Attachments are in the 'attachments' field of the response.",
     "tags": [
       "attachments",
       "files",
@@ -1943,7 +1927,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/task/{task_id}/attachment",
+      "path": "/task/{task_id}",
       "server_url": "https://api.clickup.com/api/v2"
     },
     "parameters": {
@@ -1977,7 +1961,7 @@
   },
   {
     "name": "CLICKUP__CREATE_TASK_ATTACHMENT",
-    "description": "Upload a file attachment to a task for document sharing and collaboration within project context.",
+    "description": "Upload a file attachment to a task. Provide the file content as base64-encoded string in the 'attachment' field.",
     "tags": [
       "attachments",
       "upload",
@@ -2010,6 +1994,23 @@
           ],
           "additionalProperties": false
         },
+        "header": {
+          "type": "object",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [
+            "Content-Type"
+          ],
+          "additionalProperties": false,
+          "default": {}
+        },
         "body": {
           "type": "object",
           "properties": {
@@ -2035,6 +2036,7 @@
       },
       "required": [
         "path",
+        "header",
         "body"
       ],
       "visible": [
@@ -2106,7 +2108,7 @@
   },
   {
     "name": "CLICKUP__TASK_DEPENDENCIES",
-    "description": "Retrieve task dependencies and blocking relationships for project scheduling and workflow management.",
+    "description": "Retrieve task dependencies and blocking relationships. Note: This uses the Get Task endpoint as ClickUp doesn't have a dedicated dependencies list endpoint. Dependencies are in the 'dependencies' field of the response.",
     "tags": [
       "dependencies",
       "tasks",
@@ -2117,7 +2119,7 @@
     "protocol": "rest",
     "protocol_data": {
       "method": "GET",
-      "path": "/task/{task_id}/dependency",
+      "path": "/task/{task_id}",
       "server_url": "https://api.clickup.com/api/v2"
     },
     "parameters": {
