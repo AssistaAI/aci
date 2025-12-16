@@ -1,4 +1,6 @@
 from abc import abstractmethod
+from base64 import b64decode
+from io import BytesIO
 from typing import Any, Generic, override
 
 import httpx
@@ -33,6 +35,50 @@ class RestFunctionExecutor(FunctionExecutor[TScheme, TCred], Generic[TScheme, TC
     ) -> None:
         pass
 
+    def _prepare_multipart_files(self, body: dict) -> dict:
+        """
+        Prepare multipart file upload data from body dict.
+        Handles base64-encoded file data and converts it to the format expected by httpx.
+
+        Expected body format:
+        {
+            "attachment": "base64_encoded_data",
+            "filename": "example.txt"
+        }
+
+        Returns format expected by httpx files parameter:
+        {
+            "attachment": ("filename", file_bytes)
+        }
+        """
+        files = {}
+        filename = body.get("filename", "file")
+
+        for key, value in body.items():
+            # Skip the filename field - it will be used in the file tuple
+            if key == "filename":
+                continue
+
+            # Check if this looks like a file field (has format: binary or is named attachment/file)
+            if key in ["attachment", "file"] or (isinstance(value, str) and len(value) > 100):
+                try:
+                    # Try to decode as base64
+                    file_bytes = b64decode(value)
+                    # httpx expects: (filename, file_content)
+                    files[key] = (filename, BytesIO(file_bytes))
+                    logger.info(
+                        f"Prepared file upload: key='{key}', filename='{filename}', size={len(file_bytes)} bytes"
+                    )
+                except Exception as e:
+                    logger.warning(f"Failed to decode base64 file data for key '{key}': {e}")
+                    # If not base64, pass as-is (might be a string field)
+                    files[key] = (None, str(value))
+            else:
+                # Regular form field (not a file)
+                files[key] = (None, str(value))
+
+        return files
+
     @override
     def _execute(
         self,
@@ -47,6 +93,11 @@ class RestFunctionExecutor(FunctionExecutor[TScheme, TCred], Generic[TScheme, TC
         headers: dict = function_input.get("header", {})
         cookies: dict = function_input.get("cookie", {})
         body: dict = function_input.get("body", {})
+
+        logger.debug(
+            f"Function input extracted: path={path}, query={query}, headers={headers}, "
+            f"cookies={cookies}, body_keys={list(body.keys()) if body else []}"
+        )
 
         protocol_data = RestMetadata.model_validate(function.protocol_data)
         # Construct URL with path parameters
@@ -67,6 +118,35 @@ class RestFunctionExecutor(FunctionExecutor[TScheme, TCred], Generic[TScheme, TC
         # Check Content-Type to determine how to send body data
         content_type = headers.get("Content-Type", "") if headers else ""
         is_form_encoded = "application/x-www-form-urlencoded" in content_type.lower()
+        is_multipart = "multipart/form-data" in content_type.lower()
+
+        # Auto-detect file uploads: if body has attachment/file fields, assume multipart
+        if not is_multipart and not is_form_encoded and body:
+            has_file_field = any(key in body for key in ["attachment", "file", "upload"])
+            if has_file_field:
+                logger.info(
+                    f"Auto-detecting multipart upload based on body fields: {list(body.keys())}"
+                )
+                is_multipart = True
+
+        logger.info(
+            f"Request encoding check: content_type='{content_type}', "
+            f"is_multipart={is_multipart}, is_form_encoded={is_form_encoded}, "
+            f"headers={headers}"
+        )
+
+        # For multipart/form-data, we need to let httpx handle the Content-Type header
+        # (it will add the boundary parameter automatically)
+        if is_multipart and headers:
+            headers.pop("Content-Type", None)
+
+        # Prepare files for multipart upload
+        files = self._prepare_multipart_files(body) if body and is_multipart else None
+
+        logger.info(
+            f"Request preparation: is_multipart={is_multipart}, files={files is not None}, "
+            f"body_size={len(body) if body else 0}"
+        )
 
         request = httpx.Request(
             method=protocol_data.method,
@@ -75,7 +155,8 @@ class RestFunctionExecutor(FunctionExecutor[TScheme, TCred], Generic[TScheme, TC
             headers=headers if headers else None,
             cookies=cookies if cookies else None,
             data=body if body and is_form_encoded else None,
-            json=body if body and not is_form_encoded else None,
+            files=files if is_multipart else None,
+            json=body if body and not is_form_encoded and not is_multipart else None,
         )
 
         logger.info(
