@@ -1,0 +1,202 @@
+[
+  {
+    "name": "SHOPIFY__ORDER_CREATED",
+    "description": "Triggered when a new order is created in Shopify",
+    "trigger_type": "orders/create",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "orders/create",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__ORDER_UPDATED",
+    "description": "Triggered when an existing order is updated in Shopify",
+    "trigger_type": "orders/updated",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "orders/updated",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__ORDER_PAID",
+    "description": "Triggered when an order payment is confirmed in Shopify",
+    "trigger_type": "orders/paid",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "orders/paid",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__PRODUCT_CREATED",
+    "description": "Triggered when a new product is created in Shopify",
+    "trigger_type": "products/create",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "products/create",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__PRODUCT_UPDATED",
+    "description": "Triggered when an existing product is updated in Shopify",
+    "trigger_type": "products/update",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "products/update",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__PRODUCT_DELETED",
+    "description": "Triggered when a product is deleted in Shopify",
+    "trigger_type": "products/delete",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "products/delete",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__CUSTOMER_CREATED",
+    "description": "Triggered when a new customer account is created in Shopify",
+    "trigger_type": "customers/create",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "customers/create",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__CUSTOMER_UPDATED",
+    "description": "Triggered when customer information is updated in Shopify",
+    "trigger_type": "customers/update",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "customers/update",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__INVENTORY_ITEM_UPDATED",
+    "description": "Triggered when inventory item information is updated in Shopify",
+    "trigger_type": "inventory_items/update",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "inventory_items/update",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SHOPIFY__FULFILLMENT_CREATED",
+    "description": "Triggered when a new fulfillment is created for an order in Shopify",
+    "trigger_type": "fulfillments/create",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "GraphQL Admin API",
+      "graphql_mutation": "webhookSubscriptionCreate",
+      "event_type": "fulfillments/create",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Shopify-Hmac-SHA256",
+      "event_id_header": "X-Shopify-Event-Id",
+      "requires_auth": "access_token"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }
+]

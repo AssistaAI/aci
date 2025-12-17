@@ -1,0 +1,189 @@
+[
+  {
+    "name": "SLACK__MESSAGE_CHANNELS",
+    "description": "Triggered when a message is posted to any public channel the app is in",
+    "trigger_type": "message.channels",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "message.channels",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "channels:history"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "description": "Optional channel ID to filter messages from specific channel",
+          "examples": ["C1234567890"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__APP_MENTION",
+    "description": "Triggered when the app is mentioned in a message",
+    "trigger_type": "app_mention",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "app_mention",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "app_mentions:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__REACTION_ADDED",
+    "description": "Triggered when a reaction emoji is added to a message",
+    "trigger_type": "reaction_added",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "reaction_added",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "reactions:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "emoji": {
+          "type": "string",
+          "description": "Optional emoji name to filter specific reactions",
+          "examples": ["thumbsup", "fire", "rocket"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__MEMBER_JOINED_CHANNEL",
+    "description": "Triggered when a user joins a public or private channel",
+    "trigger_type": "member_joined_channel",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "member_joined_channel",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "channels:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "description": "Optional channel ID to watch for new members",
+          "examples": ["C1234567890"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__MEMBER_LEFT_CHANNEL",
+    "description": "Triggered when a user leaves a public or private channel",
+    "trigger_type": "member_left_channel",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "member_left_channel",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "channels:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "description": "Optional channel ID to watch for departing members",
+          "examples": ["C1234567890"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__FILE_SHARED",
+    "description": "Triggered when a file is shared in a channel or direct message",
+    "trigger_type": "file_shared",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "file_shared",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "files:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "description": "Optional channel ID to watch for file shares",
+          "examples": ["C1234567890"]
+        },
+        "file_type": {
+          "type": "string",
+          "description": "Optional file type filter",
+          "examples": ["pdf", "image", "video"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__CHANNEL_CREATED",
+    "description": "Triggered when a new channel is created in the workspace",
+    "trigger_type": "channel_created",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "channel_created",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "channels:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "SLACK__TEAM_JOIN",
+    "description": "Triggered when a new user joins the workspace",
+    "trigger_type": "team_join",
+    "protocol": "webhook",
+    "protocol_data": {
+      "subscription_api": "Slack Events API",
+      "event_type": "team_join",
+      "verification_method": "hmac_sha256",
+      "signature_header": "X-Slack-Signature",
+      "timestamp_header": "X-Slack-Request-Timestamp",
+      "requires_oauth_scope": "users:read"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }
+]
