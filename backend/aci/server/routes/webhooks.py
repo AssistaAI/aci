@@ -1,6 +1,6 @@
 import secrets
 import string
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta
 from typing import Annotated
 from uuid import UUID
 
@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from svix import Webhook, WebhookVerificationError
 
 from aci.common.db import crud
+from aci.common.db.sql_models import TriggerEvent
 from aci.common.enums import OrganizationRole, TriggerEventStatus
 from aci.common.logging_setup import get_logger
 from aci.common.schemas.trigger import WebhookReceivedResponse, WebhookVerificationChallenge
@@ -379,11 +380,13 @@ async def receive_webhook(
                 f"trigger_id={trigger_id}, external_event_id={external_event_id}"
             )
             # Return success to avoid retries from provider
-            existing_event = (
-                db_session.query(crud.trigger_events.TriggerEvent)
-                .filter_by(trigger_id=trigger_id, external_event_id=external_event_id)
-                .first()
-            )
+            from sqlalchemy import select
+
+            existing_event = db_session.execute(
+                select(TriggerEvent).filter_by(
+                    trigger_id=trigger_id, external_event_id=external_event_id
+                )
+            ).scalar_one_or_none()
             return WebhookReceivedResponse(
                 event_id=existing_event.id,
                 trigger_id=trigger.id,
@@ -401,11 +404,11 @@ async def receive_webhook(
             event_data=event_data,
             external_event_id=external_event_id,
             status=TriggerEventStatus.PENDING,
-            expires_at=datetime.now(UTC) + timedelta(days=30),  # 30-day retention
+            expires_at=datetime.utcnow() + timedelta(days=30),  # 30-day retention
         )
 
         # Update trigger's last_triggered_at
-        crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.now(UTC))
+        crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.utcnow())
 
         db_session.commit()
 
@@ -433,11 +436,13 @@ async def receive_webhook(
         # Handle race condition: two concurrent webhooks with same external_event_id
         db_session.rollback()
         if external_event_id:
-            existing_event = (
-                db_session.query(crud.trigger_events.TriggerEvent)
-                .filter_by(trigger_id=trigger_id, external_event_id=external_event_id)
-                .first()
-            )
+            from sqlalchemy import select
+
+            existing_event = db_session.execute(
+                select(TriggerEvent).filter_by(
+                    trigger_id=trigger_id, external_event_id=external_event_id
+                )
+            ).scalar_one_or_none()
             if existing_event:
                 logger.info(
                     f"Race condition on webhook event creation, returning existing event, "

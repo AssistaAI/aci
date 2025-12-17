@@ -17,9 +17,8 @@ from typing import Any
 import httpx
 from fastapi import Request
 
-from aci.common.db.sql_models import LinkedAccount, Trigger
+from aci.common.db.sql_models import Trigger
 from aci.common.logging_setup import get_logger
-from aci.common.schemas.security_scheme import OAuth2Scheme, OAuth2SchemeCredentials
 from aci.server.trigger_connectors.base import (
     ParsedWebhookEvent,
     TriggerConnectorBase,
@@ -41,15 +40,32 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
     BASE_URL = "https://api.hubapi.com"
     WEBHOOK_API_VERSION = "v3"
 
-    def __init__(
-        self,
-        linked_account: LinkedAccount,
-        security_scheme: OAuth2Scheme,
-        security_credentials: OAuth2SchemeCredentials,
-        app_id: int,  # HubSpot app ID (from developer account)
-    ):
-        super().__init__(linked_account, security_scheme, security_credentials)
-        self.app_id = app_id
+    def __init__(self):
+        """
+        Initialize HubSpot trigger connector.
+
+        Credentials are retrieved from the trigger's linked_account at runtime.
+        App ID should be stored in trigger.config["app_id"].
+        """
+        super().__init__()
+
+    def _get_app_id(self, trigger: Trigger) -> int:
+        """
+        Get HubSpot app ID from trigger config.
+
+        Args:
+            trigger: Trigger with config containing app_id
+
+        Returns:
+            HubSpot app ID
+
+        Raises:
+            ValueError: If app_id not found in config
+        """
+        app_id = trigger.config.get("app_id")
+        if not app_id:
+            raise ValueError(f"HubSpot app_id not found in trigger config, trigger_id={trigger.id}")
+        return int(app_id)
 
     # ========================================================================
     # Webhook Registration
@@ -68,7 +84,8 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
             WebhookRegistrationResult with subscription ID
         """
         try:
-            access_token = self.get_oauth_token()
+            access_token = self.get_oauth_token(trigger)
+            app_id = self._get_app_id(trigger)
 
             # Build subscription payload
             event_type = trigger.trigger_type  # e.g., "contact.creation"
@@ -88,7 +105,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
                 subscription_data["propertyName"] = property_name
 
             # Make API request
-            url = f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/{self.app_id}/subscriptions"
+            url = f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/{app_id}/subscriptions"
 
             async with httpx.AsyncClient() as client:
                 response = await client.post(
@@ -153,10 +170,11 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
             return False
 
         try:
-            access_token = self.get_oauth_token()
+            access_token = self.get_oauth_token(trigger)
+            app_id = self._get_app_id(trigger)
             url = (
                 f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/"
-                f"{self.app_id}/subscriptions/{trigger.external_webhook_id}"
+                f"{app_id}/subscriptions/{trigger.external_webhook_id}"
             )
 
             async with httpx.AsyncClient() as client:
@@ -188,9 +206,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
     # Webhook Verification
     # ========================================================================
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify HubSpot webhook signature.
 
@@ -225,7 +241,9 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
             # For v1 signatures (deprecated but still supported)
             if signature_version == "v1":
                 client_secret = trigger.verification_token
-                source_string = client_secret + http_method + request_uri + request_body.decode("utf-8")
+                source_string = (
+                    client_secret + http_method + request_uri + request_body.decode("utf-8")
+                )
 
                 expected_signature = hashlib.sha256(source_string.encode("utf-8")).hexdigest()
 
@@ -250,9 +268,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
                     )
 
                 client_secret = trigger.verification_token
-                source_string = (
-                    http_method + request_uri + request_body.decode("utf-8") + timestamp
-                )
+                source_string = http_method + request_uri + request_body.decode("utf-8") + timestamp
 
                 expected_signature = hashlib.sha256(
                     (client_secret + source_string).encode("utf-8")
@@ -319,11 +335,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
 
         # Convert occurredAt (milliseconds) to datetime
         occurred_at_ms = payload.get("occurredAt")
-        timestamp = (
-            datetime.fromtimestamp(occurred_at_ms / 1000)
-            if occurred_at_ms
-            else None
-        )
+        timestamp = datetime.fromtimestamp(occurred_at_ms / 1000) if occurred_at_ms else None
 
         return ParsedWebhookEvent(
             event_type=event_type,
@@ -336,23 +348,27 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
     # Helper Methods
     # ========================================================================
 
-    async def get_subscription_details(self, subscription_id: str) -> dict[str, Any] | None:
+    async def get_subscription_details(
+        self, trigger: Trigger, subscription_id: str
+    ) -> dict[str, Any] | None:
         """
         Get details of a specific webhook subscription.
 
         GET /webhooks/v3/{appId}/subscriptions/{subscriptionId}
 
         Args:
+            trigger: Trigger with config containing app_id
             subscription_id: HubSpot subscription ID
 
         Returns:
             Subscription details or None if not found
         """
         try:
-            access_token = self.get_oauth_token()
+            access_token = self.get_oauth_token(trigger)
+            app_id = self._get_app_id(trigger)
             url = (
                 f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/"
-                f"{self.app_id}/subscriptions/{subscription_id}"
+                f"{app_id}/subscriptions/{subscription_id}"
             )
 
             async with httpx.AsyncClient() as client:
@@ -366,8 +382,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
                     return response.json()
                 else:
                     logger.error(
-                        f"Failed to get HubSpot subscription details, "
-                        f"status={response.status_code}"
+                        f"Failed to get HubSpot subscription details, status={response.status_code}"
                     )
                     return None
 
@@ -375,18 +390,22 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
             logger.exception(f"Error getting HubSpot subscription details: {e}")
             return None
 
-    async def list_subscriptions(self) -> list[dict[str, Any]]:
+    async def list_subscriptions(self, trigger: Trigger) -> list[dict[str, Any]]:
         """
         List all webhook subscriptions for this app.
 
         GET /webhooks/v3/{appId}/subscriptions
 
+        Args:
+            trigger: Trigger with config containing app_id
+
         Returns:
             List of subscription objects
         """
         try:
-            access_token = self.get_oauth_token()
-            url = f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/{self.app_id}/subscriptions"
+            access_token = self.get_oauth_token(trigger)
+            app_id = self._get_app_id(trigger)
+            url = f"{self.BASE_URL}/webhooks/{self.WEBHOOK_API_VERSION}/{app_id}/subscriptions"
 
             async with httpx.AsyncClient() as client:
                 response = await client.get(
@@ -400,8 +419,7 @@ class HubSpotTriggerConnector(TriggerConnectorBase):
                     return data.get("results", [])
                 else:
                     logger.error(
-                        f"Failed to list HubSpot subscriptions, "
-                        f"status={response.status_code}"
+                        f"Failed to list HubSpot subscriptions, status={response.status_code}"
                     )
                     return []
 

@@ -17,7 +17,7 @@ from typing import Any
 
 from fastapi import Request
 
-from aci.common.db.sql_models import LinkedAccount, Trigger
+from aci.common.db.sql_models import Trigger
 from aci.common.logging_setup import get_logger
 from aci.server.trigger_connectors.base import (
     ParsedWebhookEvent,
@@ -55,29 +55,31 @@ class SlackTriggerConnector(TriggerConnectorBase):
     # There is no programmatic API to create event subscriptions
     # Event subscriptions are tied to the app, not per-user
 
-    def __init__(self, linked_account: LinkedAccount):
+    def __init__(self):
         """
         Initialize Slack trigger connector.
 
-        Args:
-            linked_account: LinkedAccount with OAuth2 credentials for Slack
+        Credentials are retrieved from the trigger's linked_account at runtime.
         """
-        super().__init__(linked_account)
+        super().__init__()
 
-    def _get_signing_secret(self) -> str | None:
+    def _get_signing_secret(self, trigger: Trigger) -> str | None:
         """
-        Get Slack signing secret from app configuration.
+        Get Slack signing secret from trigger's linked account metadata.
 
         The signing secret is used for webhook verification and should be
-        stored in the app's metadata during app setup/configuration.
+        stored in the linked account's metadata during app setup/configuration.
+
+        Args:
+            trigger: Trigger with linked account containing metadata
 
         Returns:
             Signing secret string or None if not found
         """
         # TODO: Implement proper signing secret retrieval from app configuration
-        # For now, this would need to be stored in environment or app metadata
+        # For now, this would need to be stored in environment or linked account metadata
         # Example: return config.SLACK_SIGNING_SECRET
-        metadata = self.linked_account.metadata or {}
+        metadata = trigger.linked_account.metadata or {}
         return metadata.get("signing_secret")
 
     async def register_webhook(self, trigger: Trigger) -> WebhookRegistrationResult:
@@ -145,9 +147,7 @@ class SlackTriggerConnector(TriggerConnectorBase):
 
         return True
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify Slack Events API webhook signature.
 
@@ -211,12 +211,11 @@ class SlackTriggerConnector(TriggerConnectorBase):
             )
 
         # Get signing secret
-        signing_secret = self._get_signing_secret()
+        signing_secret = self._get_signing_secret(trigger)
 
         if not signing_secret:
             logger.error(
-                f"Signing secret not found for webhook verification, "
-                f"trigger_id={trigger.id}"
+                f"Signing secret not found for webhook verification, trigger_id={trigger.id}"
             )
             return WebhookVerificationResult(
                 is_valid=False,
@@ -243,30 +242,20 @@ class SlackTriggerConnector(TriggerConnectorBase):
         try:
             is_valid = hmac.compare_digest(calculated_signature, slack_signature)
         except Exception as e:
-            logger.error(
-                f"HMAC comparison failed, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
-            )
+            logger.error(f"HMAC comparison failed, trigger_id={trigger.id}, error={e!s}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message=f"HMAC comparison error: {e!s}",
             )
 
         if not is_valid:
-            logger.warning(
-                f"Slack webhook signature verification failed, "
-                f"trigger_id={trigger.id}"
-            )
+            logger.warning(f"Slack webhook signature verification failed, trigger_id={trigger.id}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Invalid signature",
             )
 
-        logger.info(
-            f"Slack webhook signature verified successfully, "
-            f"trigger_id={trigger.id}"
-        )
+        logger.info(f"Slack webhook signature verified successfully, trigger_id={trigger.id}")
 
         return WebhookVerificationResult(is_valid=True)
 
@@ -353,15 +342,9 @@ class SlackTriggerConnector(TriggerConnectorBase):
         challenge = payload.get("challenge")
 
         if not challenge:
-            logger.error(
-                f"URL verification challenge missing in payload, "
-                f"payload={payload}"
-            )
+            logger.error(f"URL verification challenge missing in payload, payload={payload}")
             raise ValueError("Challenge value not found in url_verification payload")
 
-        logger.info(
-            f"Handling Slack URL verification challenge, "
-            f"challenge_length={len(challenge)}"
-        )
+        logger.info(f"Handling Slack URL verification challenge, challenge_length={len(challenge)}")
 
         return {"challenge": challenge}

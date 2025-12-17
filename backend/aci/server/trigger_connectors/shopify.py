@@ -14,7 +14,7 @@ from typing import Any
 import httpx
 from fastapi import Request
 
-from aci.common.db.sql_models import LinkedAccount, Trigger
+from aci.common.db.sql_models import Trigger
 from aci.common.logging_setup import get_logger
 from aci.server.trigger_connectors.base import (
     ParsedWebhookEvent,
@@ -46,38 +46,40 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
     GRAPHQL_API_VERSION = "2024-07"  # Update to latest stable version
 
-    def __init__(self, linked_account: LinkedAccount):
+    def __init__(self):
         """
         Initialize Shopify trigger connector.
 
-        Args:
-            linked_account: LinkedAccount with OAuth2 credentials for Shopify
+        Credentials are retrieved from the trigger's linked_account at runtime.
         """
-        super().__init__(linked_account)
-        self.shop_domain = self._get_shop_domain()
+        super().__init__()
 
-    def _get_shop_domain(self) -> str:
+    def _get_shop_domain(self, trigger: Trigger) -> str:
         """
-        Extract shop domain from linked account metadata.
+        Extract shop domain from trigger's linked account metadata.
+
+        Args:
+            trigger: Trigger with linked account containing metadata
 
         Returns:
             Shop domain (e.g., "myshop.myshopify.com")
         """
         # Shop domain should be stored in linked_account metadata during OAuth
-        metadata = self.linked_account.metadata or {}
+        metadata = trigger.linked_account.metadata or {}
         shop_domain = metadata.get("shop_domain") or metadata.get("shop")
 
         if not shop_domain:
             raise ValueError(
                 f"Shop domain not found in linked account metadata, "
-                f"linked_account_id={self.linked_account.id}"
+                f"linked_account_id={trigger.linked_account.id}"
             )
 
         return shop_domain
 
-    def _get_graphql_endpoint(self) -> str:
+    def _get_graphql_endpoint(self, trigger: Trigger) -> str:
         """Build GraphQL API endpoint URL."""
-        return f"https://{self.shop_domain}/admin/api/{self.GRAPHQL_API_VERSION}/graphql.json"
+        shop_domain = self._get_shop_domain(trigger)
+        return f"https://{shop_domain}/admin/api/{self.GRAPHQL_API_VERSION}/graphql.json"
 
     async def register_webhook(self, trigger: Trigger) -> WebhookRegistrationResult:
         """
@@ -109,14 +111,15 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         Returns:
             WebhookRegistrationResult with subscription ID and webhook URL
         """
+        shop_domain = self._get_shop_domain(trigger)
         logger.info(
             f"Registering Shopify webhook, "
             f"trigger_id={trigger.id}, "
             f"trigger_type={trigger.trigger_type}, "
-            f"shop={self.shop_domain}"
+            f"shop={shop_domain}"
         )
 
-        access_token = self.get_oauth_token()
+        access_token = self.get_oauth_token(trigger)
 
         # Convert trigger_type to Shopify topic format (e.g., "orders/create" -> "ORDERS_CREATE")
         shopify_topic = trigger.trigger_type.replace("/", "_").upper()
@@ -154,7 +157,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.post(
-                    self._get_graphql_endpoint(),
+                    self._get_graphql_endpoint(trigger),
                     json={"query": mutation, "variables": variables},
                     headers={
                         "Content-Type": "application/json",
@@ -164,11 +167,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
                 if response.status_code != 200:
                     error_msg = f"GraphQL request failed with status {response.status_code}"
-                    logger.error(
-                        f"{error_msg}, "
-                        f"trigger_id={trigger.id}, "
-                        f"response={response.text}"
-                    )
+                    logger.error(f"{error_msg}, trigger_id={trigger.id}, response={response.text}")
                     return WebhookRegistrationResult(
                         success=False,
                         error_message=error_msg,
@@ -207,9 +206,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
                 webhook_subscription = data.get("webhookSubscription", {})
                 subscription_id = webhook_subscription.get("id")
-                callback_url = (
-                    webhook_subscription.get("endpoint", {}).get("callbackUrl")
-                )
+                callback_url = webhook_subscription.get("endpoint", {}).get("callbackUrl")
 
                 if not subscription_id:
                     error_msg = "Subscription ID not returned from Shopify"
@@ -239,9 +236,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         except Exception as e:
             error_msg = f"Exception during webhook registration: {e!s}"
             logger.error(
-                f"Shopify webhook registration exception, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
+                f"Shopify webhook registration exception, trigger_id={trigger.id}, error={e!s}"
             )
             return WebhookRegistrationResult(
                 success=False,
@@ -271,8 +266,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         """
         if not trigger.external_webhook_id:
             logger.warning(
-                f"Cannot unregister webhook without external_webhook_id, "
-                f"trigger_id={trigger.id}"
+                f"Cannot unregister webhook without external_webhook_id, trigger_id={trigger.id}"
             )
             return False
 
@@ -282,7 +276,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
             f"subscription_id={trigger.external_webhook_id}"
         )
 
-        access_token = self.get_oauth_token()
+        access_token = self.get_oauth_token(trigger)
 
         mutation = """
         mutation webhookSubscriptionDelete($id: ID!) {
@@ -301,7 +295,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.post(
-                    self._get_graphql_endpoint(),
+                    self._get_graphql_endpoint(trigger),
                     json={"query": mutation, "variables": variables},
                     headers={
                         "Content-Type": "application/json",
@@ -357,15 +351,11 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
         except Exception as e:
             logger.error(
-                f"Shopify webhook deletion exception, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
+                f"Shopify webhook deletion exception, trigger_id={trigger.id}, error={e!s}"
             )
             return False
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify Shopify webhook signature using HMAC-SHA256.
 
@@ -389,10 +379,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         shopify_hmac = request.headers.get("X-Shopify-Hmac-SHA256")
 
         if not shopify_hmac:
-            logger.warning(
-                f"Missing X-Shopify-Hmac-SHA256 header, "
-                f"trigger_id={trigger.id}"
-            )
+            logger.warning(f"Missing X-Shopify-Hmac-SHA256 header, trigger_id={trigger.id}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Missing X-Shopify-Hmac-SHA256 header",
@@ -400,12 +387,11 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
         # Get client secret from app configuration
         # In production, this should be stored securely in app metadata
-        client_secret = self._get_client_secret()
+        client_secret = self._get_client_secret(trigger)
 
         if not client_secret:
             logger.error(
-                f"Client secret not found for webhook verification, "
-                f"trigger_id={trigger.id}"
+                f"Client secret not found for webhook verification, trigger_id={trigger.id}"
             )
             return WebhookVerificationResult(
                 is_valid=False,
@@ -429,11 +415,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         try:
             is_valid = hmac.compare_digest(calculated_hmac_b64, shopify_hmac)
         except Exception as e:
-            logger.error(
-                f"HMAC comparison failed, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
-            )
+            logger.error(f"HMAC comparison failed, trigger_id={trigger.id}, error={e!s}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message=f"HMAC comparison error: {e!s}",
@@ -441,35 +423,34 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
 
         if not is_valid:
             logger.warning(
-                f"Shopify webhook signature verification failed, "
-                f"trigger_id={trigger.id}"
+                f"Shopify webhook signature verification failed, trigger_id={trigger.id}"
             )
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Invalid HMAC signature",
             )
 
-        logger.info(
-            f"Shopify webhook signature verified successfully, "
-            f"trigger_id={trigger.id}"
-        )
+        logger.info(f"Shopify webhook signature verified successfully, trigger_id={trigger.id}")
 
         return WebhookVerificationResult(is_valid=True)
 
-    def _get_client_secret(self) -> str | None:
+    def _get_client_secret(self, trigger: Trigger) -> str | None:
         """
-        Get Shopify client secret from app configuration.
+        Get Shopify client secret from trigger's linked account metadata.
 
-        The client secret should be stored in the app's metadata
+        The client secret should be stored in the linked account's metadata
         during app setup/configuration.
+
+        Args:
+            trigger: Trigger with linked account containing metadata
 
         Returns:
             Client secret string or None if not found
         """
         # TODO: Implement proper client secret retrieval from app configuration
-        # For now, this would need to be stored in environment or app metadata
+        # For now, this would need to be stored in environment or linked account metadata
         # Example: return config.SHOPIFY_CLIENT_SECRET
-        metadata = self.linked_account.metadata or {}
+        metadata = trigger.linked_account.metadata or {}
         return metadata.get("client_secret")
 
     def parse_event(self, payload: dict[str, Any]) -> ParsedWebhookEvent:
@@ -500,9 +481,7 @@ class ShopifyTriggerConnector(TriggerConnectorBase):
         timestamp = None
         if created_at:
             try:
-                timestamp = datetime.fromisoformat(
-                    created_at.replace("Z", "+00:00")
-                )
+                timestamp = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
             except (ValueError, AttributeError):
                 timestamp = datetime.now(UTC)
 

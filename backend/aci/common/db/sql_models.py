@@ -620,13 +620,13 @@ class Trigger(Base):
         PGUUID(as_uuid=True), primary_key=True, default_factory=uuid4, init=False
     )
     project_id: Mapped[UUID] = mapped_column(
-        PGUUID(as_uuid=True), ForeignKey("projects.id"), nullable=False
+        PGUUID(as_uuid=True), ForeignKey("projects.id", ondelete="CASCADE"), nullable=False
     )
     app_id: Mapped[UUID] = mapped_column(
-        PGUUID(as_uuid=True), ForeignKey("apps.id"), nullable=False
+        PGUUID(as_uuid=True), ForeignKey("apps.id", ondelete="CASCADE"), nullable=False
     )
     linked_account_id: Mapped[UUID] = mapped_column(
-        PGUUID(as_uuid=True), ForeignKey("linked_accounts.id"), nullable=False
+        PGUUID(as_uuid=True), ForeignKey("linked_accounts.id", ondelete="CASCADE"), nullable=False
     )
 
     # Trigger identification
@@ -653,9 +653,7 @@ class Trigger(Base):
     )  # App-specific config (filters, etc.)
 
     # Status and lifecycle
-    status: Mapped[TriggerStatus] = mapped_column(
-        SqlEnum(TriggerStatus), nullable=False
-    )
+    status: Mapped[TriggerStatus] = mapped_column(SqlEnum(TriggerStatus), nullable=False)
     last_triggered_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=False), nullable=True, init=False
     )
@@ -695,7 +693,7 @@ class TriggerEvent(Base):
         PGUUID(as_uuid=True), primary_key=True, default_factory=uuid4, init=False
     )
     trigger_id: Mapped[UUID] = mapped_column(
-        PGUUID(as_uuid=True), ForeignKey("triggers.id"), nullable=False
+        PGUUID(as_uuid=True), ForeignKey("triggers.id", ondelete="CASCADE"), nullable=False
     )
 
     # Event data
@@ -710,9 +708,7 @@ class TriggerEvent(Base):
     )  # Deduplication ID from provider
 
     # Processing status
-    status: Mapped[TriggerEventStatus] = mapped_column(
-        SqlEnum(TriggerEventStatus), nullable=False
-    )
+    status: Mapped[TriggerEventStatus] = mapped_column(SqlEnum(TriggerEventStatus), nullable=False)
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True, default=None)
 
     # Timestamps

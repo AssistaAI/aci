@@ -22,10 +22,10 @@ def upgrade() -> None:
     # Create triggers table
     op.create_table(
         'triggers',
-        sa.Column('id', sa.UUID(), nullable=False),
-        sa.Column('project_id', sa.UUID(), nullable=False),
-        sa.Column('app_id', sa.UUID(), nullable=False),
-        sa.Column('linked_account_id', sa.UUID(), nullable=False),
+        sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column('project_id', postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column('app_id', postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column('linked_account_id', postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column('trigger_name', sa.String(length=255), nullable=False),
         sa.Column('trigger_type', sa.String(length=255), nullable=False),
         sa.Column('description', sa.Text(), nullable=False),
@@ -53,8 +53,8 @@ def upgrade() -> None:
     # Create trigger_events table
     op.create_table(
         'trigger_events',
-        sa.Column('id', sa.UUID(), nullable=False),
-        sa.Column('trigger_id', sa.UUID(), nullable=False),
+        sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column('trigger_id', postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column('event_type', sa.String(length=255), nullable=False),
         sa.Column('event_data', postgresql.JSONB(astext_type=sa.Text()), nullable=False),
         sa.Column('external_event_id', sa.String(length=255), nullable=True),
@@ -64,7 +64,7 @@ def upgrade() -> None:
         sa.Column('processed_at', sa.DateTime(), nullable=True),
         sa.Column('delivered_at', sa.DateTime(), nullable=True),
         sa.Column('expires_at', sa.DateTime(), nullable=False),
-        sa.ForeignKeyConstraint(['trigger_id'], ['triggers.id'], ),
+        sa.ForeignKeyConstraint(['trigger_id'], ['triggers.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('trigger_id', 'external_event_id', name='uc_trigger_external_event')
     )

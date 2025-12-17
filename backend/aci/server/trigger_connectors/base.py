@@ -8,8 +8,8 @@ Modern, type-safe implementation using:
 - Proper error handling
 """
 
-import hmac
 import hashlib
+import hmac
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
@@ -17,14 +17,8 @@ from typing import Any
 
 from fastapi import Request
 
-from aci.common.db.sql_models import LinkedAccount, Trigger
+from aci.common.db.sql_models import Trigger
 from aci.common.logging_setup import get_logger
-from aci.common.schemas.security_scheme import (
-    APIKeyScheme,
-    APIKeySchemeCredentials,
-    OAuth2Scheme,
-    OAuth2SchemeCredentials,
-)
 
 logger = get_logger(__name__)
 
@@ -38,6 +32,7 @@ class WebhookRegistrationResult:
     webhook_url: str | None = None
     expires_at: datetime | None = None
     error_message: str | None = None
+    metadata: dict[str, Any] | None = None
 
 
 @dataclass
@@ -72,7 +67,7 @@ class TriggerConnectorBase(ABC):
                 ...
     """
 
-    def __init__(self):
+    def __init__(self):  # noqa: B027
         """
         Initialize trigger connector.
 
@@ -233,13 +228,16 @@ class TriggerConnectorBase(ABC):
                 expected_signature = expected_mac.hexdigest()
             elif signature_format == "base64":
                 import base64
+
                 expected_signature = base64.b64encode(expected_mac.digest()).decode("utf-8")
             else:
                 raise ValueError(f"Unsupported signature format: {signature_format}")
 
             # Remove prefix if present (e.g., "sha256=")
-            if "=" in signature:
-                signature = signature.split("=", 1)[1]
+            # Only strip the algorithm prefix, not base64 padding
+            prefix = f"{algorithm}="
+            if signature.startswith(prefix):
+                signature = signature[len(prefix) :]
 
             # Timing-safe comparison
             return hmac.compare_digest(expected_signature, signature)
@@ -275,8 +273,7 @@ class TriggerConnectorBase(ABC):
 
             if not is_valid:
                 logger.warning(
-                    f"Webhook timestamp validation failed, "
-                    f"age={age}s, max_age={max_age_seconds}s"
+                    f"Webhook timestamp validation failed, age={age}s, max_age={max_age_seconds}s"
                 )
 
             return is_valid
@@ -299,7 +296,7 @@ class TriggerConnectorBase(ABC):
             ValueError: If credentials are not OAuth2 or missing
         """
         credentials = trigger.linked_account.security_credentials
-        access_token = credentials.get('access_token')
+        access_token = credentials.get("access_token")
         if not access_token:
             raise ValueError("No access_token found in linked account credentials")
         return access_token
@@ -318,7 +315,7 @@ class TriggerConnectorBase(ABC):
             ValueError: If API key is missing
         """
         credentials = trigger.linked_account.security_credentials
-        api_key = credentials.get('api_key')
-        if not api_key:
-            raise ValueError("No api_key found in linked account credentials")
-        return api_key
+        secret_key = credentials.get("secret_key")
+        if not secret_key:
+            raise ValueError("No secret_key found in linked account credentials")
+        return secret_key

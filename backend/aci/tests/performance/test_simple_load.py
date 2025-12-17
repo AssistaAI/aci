@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pytest
 
-from aci.server.metrics import MetricsCollector, get_metrics_collector
+from aci.server.metrics import MetricsCollector
 from aci.server.rate_limiter import RateLimiter
 
 
@@ -66,7 +66,7 @@ class TestRateLimiterPerformance:
         throughput = total_requests / elapsed
 
         print(f"\nConcurrent throughput: {throughput:.0f} req/s")
-        print(f"Success rate: {sum(all_results)/len(all_results)*100:.1f}%")
+        print(f"Success rate: {sum(all_results) / len(all_results) * 100:.1f}%")
         print(f"Rate limited: {len([r for r in all_results if not r])} requests")
 
         # Some requests should be rate limited when sharing same identifier
@@ -94,7 +94,7 @@ class TestRateLimiterPerformance:
         p95 = latencies[int(len(latencies) * 0.95)]
         p99 = latencies[int(len(latencies) * 0.99)]
 
-        print(f"\nRate limiter latency (ms):")
+        print("\nRate limiter latency (ms):")
         print(f"  P50: {p50:.3f}")
         print(f"  P95: {p95:.3f}")
         print(f"  P99: {p99:.3f}")
@@ -134,9 +134,7 @@ class TestMetricsCollectorPerformance:
 
         def record_metrics(thread_id):
             for i in range(operations_per_thread):
-                collector.increment_counter(
-                    "concurrent_test", labels={"thread": str(thread_id)}
-                )
+                collector.increment_counter("concurrent_test", labels={"thread": str(thread_id)})
                 collector.set_gauge("thread_gauge", i, labels={"thread": str(thread_id)})
                 collector.record_histogram("latency", float(i % 100))
 
@@ -185,7 +183,7 @@ class TestMetricsCollectorPerformance:
         p50 = latencies[len(latencies) // 2]
         p95 = latencies[int(len(latencies) * 0.95)]
 
-        print(f"\nMetrics retrieval latency (ms):")
+        print("\nMetrics retrieval latency (ms):")
         print(f"  P50: {p50:.3f}")
         print(f"  P95: {p95:.3f}")
 

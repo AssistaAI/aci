@@ -72,11 +72,11 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
             }
 
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 return WebhookRegistrationResult(
                     success=False,
-                    error_message="No access token found in linked account credentials"
+                    error_message="No access token found in linked account credentials",
                 )
 
             # Create the subscription
@@ -108,7 +108,9 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
                         error_message=None,
                     )
                 else:
-                    error_msg = f"Failed to create subscription: {response.status_code} {response.text}"
+                    error_msg = (
+                        f"Failed to create subscription: {response.status_code} {response.text}"
+                    )
                     logger.error(error_msg)
                     return WebhookRegistrationResult(
                         success=False,
@@ -140,7 +142,7 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
                 return True
 
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 logger.error("No access token found in linked account credentials")
                 return False
@@ -181,15 +183,9 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
         Returns:
             True if configuration looks valid
         """
-        return bool(
-            trigger.webhook_url
-            and trigger.verification_token
-            and trigger.linked_account
-        )
+        return bool(trigger.webhook_url and trigger.verification_token and trigger.linked_account)
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify Microsoft Graph webhook authenticity.
 
@@ -223,23 +219,20 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
 
                     if not is_valid:
                         return WebhookVerificationResult(
-                            is_valid=False,
-                            error_message="Invalid clientState"
+                            is_valid=False, error_message="Invalid clientState"
                         )
 
                     return WebhookVerificationResult(is_valid=True)
 
             # Unknown notification type
             return WebhookVerificationResult(
-                is_valid=False,
-                error_message="Unknown notification format"
+                is_valid=False, error_message="Unknown notification format"
             )
 
         except Exception as e:
             logger.error(f"Microsoft Graph signature verification failed: {e!s}")
             return WebhookVerificationResult(
-                is_valid=False,
-                error_message=f"Verification error: {e!s}"
+                is_valid=False, error_message=f"Verification error: {e!s}"
             )
 
     async def fetch_calendar_events(
@@ -257,7 +250,7 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
         """
         try:
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 logger.error("No access token found in linked account credentials")
                 return []
@@ -355,7 +348,9 @@ class MicrosoftCalendarTriggerConnector(TriggerConnectorBase):
                             "subscriptionExpirationDateTime"
                         ),
                     },
-                    external_event_id=f"{subscription_id}_{event_id}" if subscription_id and event_id else None,
+                    external_event_id=f"{subscription_id}_{event_id}"
+                    if subscription_id and event_id
+                    else None,
                     timestamp=datetime.now(UTC),
                 )
 

@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from aci.common.db import crud
@@ -196,7 +196,7 @@ async def create_trigger(
 @router.get("", response_model=list[TriggerPublic])
 async def list_triggers(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
-    query: Annotated[TriggersListQuery, Query()],
+    query: Annotated[TriggersListQuery, Depends()],
 ) -> list[Trigger]:
     """
     List all triggers for the current project.
@@ -325,7 +325,7 @@ async def delete_trigger(
 async def list_trigger_events(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
     trigger_id: UUID,
-    query: Annotated[TriggerEventsListQuery, Query()],
+    query: Annotated[TriggerEventsListQuery, Depends()],
 ) -> list[TriggerEvent]:
     """
     List events for a specific trigger.
@@ -354,7 +354,7 @@ async def list_trigger_events(
 @router.get("/events/all", response_model=list[TriggerEventPublic])
 async def list_all_trigger_events(
     context: Annotated[deps.RequestContext, Depends(deps.get_request_context)],
-    query: Annotated[TriggerEventsListQuery, Query()],
+    query: Annotated[TriggerEventsListQuery, Depends()],
 ) -> list[TriggerEvent]:
     """
     List all trigger events for the current project.
@@ -454,8 +454,10 @@ async def get_available_trigger_types(
     import os
 
     # Construct path to triggers.json
+    # The apps folder is at /workdir/apps, not relative to aci/server/routes
     triggers_file = os.path.join(
         os.path.dirname(__file__),
+        "..",
         "..",
         "..",
         "apps",

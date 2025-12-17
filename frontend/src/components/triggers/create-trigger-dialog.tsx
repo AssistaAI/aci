@@ -239,6 +239,23 @@ const TRIGGER_TYPES = {
       description: "When a calendar event is deleted",
     },
   ],
+  GMAIL: [
+    {
+      value: "message.received",
+      label: "Message Received",
+      description: "When a new email is received",
+    },
+    {
+      value: "message.sent",
+      label: "Message Sent",
+      description: "When an email is sent",
+    },
+    {
+      value: "label.added",
+      label: "Label Added",
+      description: "When a label is added to a message",
+    },
+  ],
 };
 
 export function CreateTriggerDialog({
@@ -371,6 +388,8 @@ export function CreateTriggerDialog({
                                 "GITHUB",
                                 "GOOGLE_CALENDAR",
                                 "MICROSOFT_CALENDAR",
+                                "GMAIL",
+                                "NOTION",
                               ].includes(app.name),
                             )
                             .map((app) => (

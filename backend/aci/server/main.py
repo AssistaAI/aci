@@ -15,8 +15,10 @@ from aci.common.logging_setup import setup_logging
 from aci.server import config
 from aci.server import dependencies as deps
 from aci.server.acl import get_propelauth
+from aci.server.background_jobs import setup_scheduler
 from aci.server.dependency_check import check_dependencies
 from aci.server.log_schema_filter import LogSchemaFilter
+from aci.server.metrics import export_prometheus_metrics
 from aci.server.middleware.interceptor import InterceptorMiddleware, RequestContextFilter
 from aci.server.middleware.ratelimit import RateLimitMiddleware
 from aci.server.routes import (
@@ -34,8 +36,6 @@ from aci.server.routes import (
     triggers,
     webhooks,
 )
-from aci.server.background_jobs import setup_scheduler
-from aci.server.metrics import export_prometheus_metrics
 from aci.server.sentry import setup_sentry
 
 check_dependencies()

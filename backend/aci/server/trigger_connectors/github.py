@@ -13,7 +13,7 @@ from typing import Any
 import httpx
 from fastapi import Request
 
-from aci.common.db.sql_models import LinkedAccount, Trigger
+from aci.common.db.sql_models import Trigger
 from aci.common.logging_setup import get_logger
 from aci.server.trigger_connectors.base import (
     ParsedWebhookEvent,
@@ -47,14 +47,13 @@ class GitHubTriggerConnector(TriggerConnectorBase):
 
     BASE_URL = "https://api.github.com"
 
-    def __init__(self, linked_account: LinkedAccount):
+    def __init__(self):
         """
         Initialize GitHub trigger connector.
 
-        Args:
-            linked_account: LinkedAccount with OAuth2 credentials for GitHub
+        Credentials are retrieved from the trigger's linked_account at runtime.
         """
-        super().__init__(linked_account)
+        super().__init__()
 
     def _get_webhook_secret(self) -> str:
         """
@@ -169,11 +168,7 @@ class GitHubTriggerConnector(TriggerConnectorBase):
 
                 if response.status_code not in (200, 201):
                     error_msg = f"GitHub API request failed with status {response.status_code}"
-                    logger.error(
-                        f"{error_msg}, "
-                        f"trigger_id={trigger.id}, "
-                        f"response={response.text}"
-                    )
+                    logger.error(f"{error_msg}, trigger_id={trigger.id}, response={response.text}")
                     return WebhookRegistrationResult(
                         success=False,
                         error_message=f"{error_msg}: {response.text}",
@@ -215,9 +210,7 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         except Exception as e:
             error_msg = f"Exception during webhook registration: {e!s}"
             logger.error(
-                f"GitHub webhook registration exception, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
+                f"GitHub webhook registration exception, trigger_id={trigger.id}, error={e!s}"
             )
             return WebhookRegistrationResult(
                 success=False,
@@ -238,8 +231,7 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         """
         if not trigger.external_webhook_id:
             logger.warning(
-                f"Cannot unregister webhook without external_webhook_id, "
-                f"trigger_id={trigger.id}"
+                f"Cannot unregister webhook without external_webhook_id, trigger_id={trigger.id}"
             )
             return False
 
@@ -292,16 +284,10 @@ class GitHubTriggerConnector(TriggerConnectorBase):
                 return False
 
         except Exception as e:
-            logger.error(
-                f"GitHub webhook deletion exception, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
-            )
+            logger.error(f"GitHub webhook deletion exception, trigger_id={trigger.id}, error={e!s}")
             return False
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify GitHub webhook signature using HMAC-SHA256.
 
@@ -321,10 +307,7 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         github_signature = request.headers.get("X-Hub-Signature-256")
 
         if not github_signature:
-            logger.warning(
-                f"Missing X-Hub-Signature-256 header, "
-                f"trigger_id={trigger.id}"
-            )
+            logger.warning(f"Missing X-Hub-Signature-256 header, trigger_id={trigger.id}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Missing X-Hub-Signature-256 header",
@@ -335,10 +318,7 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         webhook_secret = config.get("webhook_secret")
 
         if not webhook_secret:
-            logger.error(
-                f"Webhook secret not found in trigger config, "
-                f"trigger_id={trigger.id}"
-            )
+            logger.error(f"Webhook secret not found in trigger config, trigger_id={trigger.id}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Webhook secret not configured",
@@ -361,30 +341,20 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         try:
             is_valid = hmac.compare_digest(calculated_signature, github_signature)
         except Exception as e:
-            logger.error(
-                f"HMAC comparison failed, "
-                f"trigger_id={trigger.id}, "
-                f"error={e!s}"
-            )
+            logger.error(f"HMAC comparison failed, trigger_id={trigger.id}, error={e!s}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message=f"HMAC comparison error: {e!s}",
             )
 
         if not is_valid:
-            logger.warning(
-                f"GitHub webhook signature verification failed, "
-                f"trigger_id={trigger.id}"
-            )
+            logger.warning(f"GitHub webhook signature verification failed, trigger_id={trigger.id}")
             return WebhookVerificationResult(
                 is_valid=False,
                 error_message="Invalid signature",
             )
 
-        logger.info(
-            f"GitHub webhook signature verified successfully, "
-            f"trigger_id={trigger.id}"
-        )
+        logger.info(f"GitHub webhook signature verified successfully, trigger_id={trigger.id}")
 
         return WebhookVerificationResult(is_valid=True)
 
@@ -424,24 +394,20 @@ class GitHubTriggerConnector(TriggerConnectorBase):
         # Parse timestamp
         timestamp = None
         created_at = (
-            payload.get("created_at")
-            or payload.get("updated_at")
-            or payload.get("pushed_at")
+            payload.get("created_at") or payload.get("updated_at") or payload.get("pushed_at")
         )
 
         if created_at:
             try:
-                timestamp = datetime.fromisoformat(
-                    created_at.replace("Z", "+00:00")
-                )
+                timestamp = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
             except (ValueError, TypeError):
                 timestamp = datetime.now(UTC)
 
         return ParsedWebhookEvent(
-            event_id=str(event_id) if event_id else None,
-            event_type=event_type,
+            event_type=event_type or "unknown",
+            event_data=payload,
+            external_event_id=str(event_id) if event_id else None,
             timestamp=timestamp or datetime.now(UTC),
-            data=payload,
         )
 
     def generate_random_secret(self) -> str:

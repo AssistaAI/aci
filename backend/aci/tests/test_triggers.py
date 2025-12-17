@@ -43,8 +43,7 @@ def mock_db_session():
 @pytest.fixture
 def sample_trigger():
     """Sample trigger for testing"""
-    return Trigger(
-        id=uuid4(),
+    trigger = Trigger(
         project_id=uuid4(),
         app_id=uuid4(),
         linked_account_id=uuid4(),
@@ -52,23 +51,29 @@ def sample_trigger():
         trigger_type="test.event",
         description="Test Description",
         webhook_url="https://example.com/webhook",
+        external_webhook_id=None,
         verification_token="test_token_123",
         config={"key": "value"},
         status=TriggerStatus.ACTIVE,
     )
+    # Manually set id for testing (init=False in model)
+    object.__setattr__(trigger, "id", uuid4())
+    return trigger
 
 
 @pytest.fixture
 def sample_trigger_event():
     """Sample trigger event for testing"""
-    return TriggerEvent(
-        id=uuid4(),
+    trigger_event = TriggerEvent(
         trigger_id=uuid4(),
         event_type="test.event",
         event_data={"test": "data"},
         external_event_id="ext_123",
         status=TriggerEventStatus.PENDING,
     )
+    # Manually set id for testing (init=False in model)
+    object.__setattr__(trigger_event, "id", uuid4())
+    return trigger_event
 
 
 # ============================================================================
@@ -314,7 +319,7 @@ class TestTriggerConnectorBase:
         connector = self.MockConnector()
 
         mock_trigger = Mock()
-        mock_trigger.linked_account.security_credentials = {"api_key": "test_api_key_123"}
+        mock_trigger.linked_account.security_credentials = {"secret_key": "test_api_key_123"}
 
         api_key = connector.get_api_key(mock_trigger)
         assert api_key == "test_api_key_123"

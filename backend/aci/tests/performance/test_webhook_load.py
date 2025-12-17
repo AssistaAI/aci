@@ -44,9 +44,7 @@ class WebhookUser(HttpUser):
 
     def _sign_payload(self, payload: bytes) -> str:
         """Create HMAC signature for webhook payload."""
-        return hmac.new(
-            self.webhook_secret.encode(), payload, hashlib.sha256
-        ).hexdigest()
+        return hmac.new(self.webhook_secret.encode(), payload, hashlib.sha256).hexdigest()
 
     @task(10)
     def send_webhook_small(self):

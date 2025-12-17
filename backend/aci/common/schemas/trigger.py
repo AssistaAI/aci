@@ -12,7 +12,6 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from aci.common.db.sql_models import MAX_STRING_LENGTH
 from aci.common.enums import TriggerEventStatus, TriggerStatus
 
-
 # ============================================================================
 # Base Models (DRY - shared fields)
 # ============================================================================
@@ -23,7 +22,10 @@ class TriggerBase(BaseModel):
 
     trigger_name: Annotated[str, Field(max_length=MAX_STRING_LENGTH)]
     trigger_type: Annotated[
-        str, Field(max_length=MAX_STRING_LENGTH, description="Event type (e.g., gmail.message_received)")
+        str,
+        Field(
+            max_length=MAX_STRING_LENGTH, description="Event type (e.g., gmail.message_received)"
+        ),
     ]
     description: str = Field(description="Human-readable description of the trigger")
     config: dict = Field(default_factory=dict, description="App-specific configuration and filters")
@@ -35,7 +37,10 @@ class TriggerEventBase(BaseModel):
     event_type: Annotated[str, Field(max_length=MAX_STRING_LENGTH)]
     event_data: dict = Field(description="Raw webhook payload from third-party service")
     external_event_id: Annotated[
-        str | None, Field(None, max_length=MAX_STRING_LENGTH, description="Provider's event ID for deduplication")
+        str | None,
+        Field(
+            None, max_length=MAX_STRING_LENGTH, description="Provider's event ID for deduplication"
+        ),
     ]
 
 
@@ -47,14 +52,22 @@ class TriggerEventBase(BaseModel):
 class TriggerCreate(TriggerBase):
     """Request schema for creating a new trigger"""
 
-    app_name: Annotated[str, Field(max_length=MAX_STRING_LENGTH, description="Name of the app to subscribe to")]
+    app_name: Annotated[
+        str, Field(max_length=MAX_STRING_LENGTH, description="Name of the app to subscribe to")
+    ]
     linked_account_owner_id: Annotated[
-        str, Field(max_length=MAX_STRING_LENGTH, description="Owner of the linked account to use for webhook registration")
+        str,
+        Field(
+            max_length=MAX_STRING_LENGTH,
+            description="Owner of the linked account to use for webhook registration",
+        ),
     ]
 
     # Optional fields with sensible defaults
     status: TriggerStatus = Field(default="active")
-    expires_at: datetime | None = Field(None, description="Optional expiration time (for Gmail push notifications)")
+    expires_at: datetime | None = Field(
+        None, description="Optional expiration time (for Gmail push notifications)"
+    )
 
     @field_validator("config")
     @classmethod

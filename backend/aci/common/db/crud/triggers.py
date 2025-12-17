@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta
 from uuid import UUID
 
 from sqlalchemy import and_, func, select
@@ -113,7 +113,7 @@ def get_expiring_triggers(
     """Get triggers that are expiring soon (for renewal jobs)"""
     if expires_before is None:
         # Default: triggers expiring within next 24 hours
-        expires_before = datetime.now(UTC) + timedelta(hours=24)
+        expires_before = datetime.utcnow() + timedelta(hours=24)
 
     statement = (
         select(Trigger)

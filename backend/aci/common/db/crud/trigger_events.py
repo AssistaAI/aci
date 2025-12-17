@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta
 from uuid import UUID
 
 from sqlalchemy import func, select
@@ -23,7 +23,7 @@ def create_trigger_event(
     """Create a new trigger event from an incoming webhook"""
     if expires_at is None:
         # Default: events expire after 30 days
-        expires_at = datetime.now(UTC) + timedelta(days=30)
+        expires_at = datetime.utcnow() + timedelta(days=30)
 
     trigger_event = TriggerEvent(
         trigger_id=trigger_id,
@@ -115,7 +115,7 @@ def mark_event_processed(
 ) -> TriggerEvent:
     """Mark an event as processed (or failed)"""
     event.status = TriggerEventStatus.DELIVERED if success else TriggerEventStatus.FAILED
-    event.processed_at = datetime.now(UTC)
+    event.processed_at = datetime.utcnow()
     if not success and error_message:
         event.error_message = error_message
     db_session.flush()
@@ -128,7 +128,7 @@ def mark_event_processed(
 def mark_event_delivered(db_session: Session, event: TriggerEvent) -> TriggerEvent:
     """Mark an event as successfully delivered to client"""
     event.status = TriggerEventStatus.DELIVERED
-    event.delivered_at = datetime.now(UTC)
+    event.delivered_at = datetime.utcnow()
     db_session.flush()
     logger.info(f"Marked event as delivered, event_id={event.id}")
     return event
@@ -158,7 +158,7 @@ def cleanup_expired_events(db_session: Session) -> int:
     Delete trigger events that have expired.
     Returns the number of events deleted.
     """
-    now = datetime.now(UTC)
+    now = datetime.utcnow()
     statement = select(TriggerEvent).filter(TriggerEvent.expires_at <= now)
 
     expired_events = list(db_session.execute(statement).scalars().all())

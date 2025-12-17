@@ -71,11 +71,11 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
             }
 
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 return WebhookRegistrationResult(
                     success=False,
-                    error_message="No access token found in linked account credentials"
+                    error_message="No access token found in linked account credentials",
                 )
 
             # Register the channel
@@ -108,7 +108,9 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
                         error_message=None,
                     )
                 else:
-                    error_msg = f"Failed to register channel: {response.status_code} {response.text}"
+                    error_msg = (
+                        f"Failed to register channel: {response.status_code} {response.text}"
+                    )
                     logger.error(error_msg)
                     return WebhookRegistrationResult(
                         success=False,
@@ -140,7 +142,7 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
                 return True
 
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 logger.error("No access token found in linked account credentials")
                 return False
@@ -162,14 +164,11 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
 
                 if response.status_code in [200, 204, 404]:
                     logger.info(
-                        f"Google Calendar channel stopped, "
-                        f"channel_id={trigger.external_webhook_id}"
+                        f"Google Calendar channel stopped, channel_id={trigger.external_webhook_id}"
                     )
                     return True
                 else:
-                    logger.error(
-                        f"Failed to stop channel: {response.status_code} {response.text}"
-                    )
+                    logger.error(f"Failed to stop channel: {response.status_code} {response.text}")
                     return False
 
         except Exception as e:
@@ -186,15 +185,9 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
         Returns:
             True if configuration looks valid
         """
-        return bool(
-            trigger.webhook_url
-            and trigger.verification_token
-            and trigger.linked_account
-        )
+        return bool(trigger.webhook_url and trigger.verification_token and trigger.linked_account)
 
-    async def verify_webhook(
-        self, request: Request, trigger: Trigger
-    ) -> WebhookVerificationResult:
+    async def verify_webhook(self, request: Request, trigger: Trigger) -> WebhookVerificationResult:
         """
         Verify Google Calendar webhook authenticity.
 
@@ -214,8 +207,7 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
 
             if not channel_token:
                 return WebhookVerificationResult(
-                    is_valid=False,
-                    error_message="Missing X-Goog-Channel-Token header"
+                    is_valid=False, error_message="Missing X-Goog-Channel-Token header"
                 )
 
             expected_token = trigger.verification_token
@@ -223,8 +215,7 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
 
             if not is_valid:
                 return WebhookVerificationResult(
-                    is_valid=False,
-                    error_message="Invalid channel token"
+                    is_valid=False, error_message="Invalid channel token"
                 )
 
             return WebhookVerificationResult(is_valid=True)
@@ -232,8 +223,7 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
         except Exception as e:
             logger.error(f"Google Calendar signature verification failed: {e!s}")
             return WebhookVerificationResult(
-                is_valid=False,
-                error_message=f"Verification error: {e!s}"
+                is_valid=False, error_message=f"Verification error: {e!s}"
             )
 
     async def fetch_calendar_events(
@@ -255,7 +245,7 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
         """
         try:
             # Get access token from linked account's security credentials
-            access_token = trigger.linked_account.security_credentials.get('access_token')
+            access_token = trigger.linked_account.security_credentials.get("access_token")
             if not access_token:
                 logger.error("No access token found in linked account credentials")
                 return []
@@ -334,6 +324,8 @@ class GoogleCalendarTriggerConnector(TriggerConnectorBase):
                 "message_number": message_number,
                 "notification_type": "calendar_event_change",
             },
-            external_event_id=f"{resource_id}_{message_number}" if resource_id and message_number else None,
+            external_event_id=f"{resource_id}_{message_number}"
+            if resource_id and message_number
+            else None,
             timestamp=datetime.now(UTC),
         )

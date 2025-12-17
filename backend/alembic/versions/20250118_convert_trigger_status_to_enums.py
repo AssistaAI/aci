@@ -5,13 +5,14 @@ Revises: (fill in with previous revision)
 Create Date: 2025-01-18 20:45:00.000000
 
 """
-from alembic import op
-import sqlalchemy as sa
+
 from sqlalchemy.dialects import postgresql
 
+from alembic import op
+
 # revision identifiers, used by Alembic.
-revision = 'convert_trigger_enums'
-down_revision = 'a1b2c3d4e5f6'
+revision = "convert_trigger_enums"
+down_revision = "a1b2c3d4e5f6"
 branch_labels = None
 depends_on = None
 
@@ -27,10 +28,14 @@ def upgrade() -> None:
     """
 
     # Create enum types
-    trigger_status_enum = postgresql.ENUM('ACTIVE', 'PAUSED', 'ERROR', 'EXPIRED', name='triggerstatus')
+    trigger_status_enum = postgresql.ENUM(
+        "ACTIVE", "PAUSED", "ERROR", "EXPIRED", name="triggerstatus"
+    )
     trigger_status_enum.create(op.get_bind())
 
-    trigger_event_status_enum = postgresql.ENUM('PENDING', 'DELIVERED', 'FAILED', 'EXPIRED', name='triggereventstatus')
+    trigger_event_status_enum = postgresql.ENUM(
+        "PENDING", "DELIVERED", "FAILED", "EXPIRED", name="triggereventstatus"
+    )
     trigger_event_status_enum.create(op.get_bind())
 
     # Update existing data to uppercase

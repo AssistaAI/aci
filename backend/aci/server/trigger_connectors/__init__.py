@@ -7,6 +7,7 @@ for a specific third-party service.
 
 from .base import TriggerConnectorBase
 from .github import GitHubTriggerConnector
+from .gmail import GmailTriggerConnector
 from .google_calendar import GoogleCalendarTriggerConnector
 from .hubspot import HubSpotTriggerConnector
 from .microsoft_calendar import MicrosoftCalendarTriggerConnector
@@ -16,6 +17,7 @@ from .slack import SlackTriggerConnector
 
 __all__ = [
     "GitHubTriggerConnector",
+    "GmailTriggerConnector",
     "GoogleCalendarTriggerConnector",
     "HubSpotTriggerConnector",
     "MicrosoftCalendarTriggerConnector",
@@ -29,6 +31,7 @@ __all__ = [
 # Mapping of app names to their trigger connector classes
 _CONNECTOR_MAP = {
     "GITHUB": GitHubTriggerConnector,
+    "GMAIL": GmailTriggerConnector,
     "GOOGLE_CALENDAR": GoogleCalendarTriggerConnector,
     "HUBSPOT": HubSpotTriggerConnector,
     "MICROSOFT_CALENDAR": MicrosoftCalendarTriggerConnector,
