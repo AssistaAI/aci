@@ -1,5 +1,49 @@
 [
   {
+    "name": "X__ME",
+    "description": "Get authenticated user information. Returns the current authenticated user's ID and profile details. IMPORTANT: Call this ONCE at the start of your session and cache the returned user ID. Reuse the cached ID for all subsequent operations (ADD_BOOKMARK, LIKE_POST, FOLLOW_USER, etc.) to avoid rate limits.",
+    "tags": [
+      "users",
+      "profile",
+      "authenticated",
+      "setup"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/2/users/me",
+      "server_url": "https://api.twitter.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query parameters",
+          "properties": {
+            "user.fields": {
+              "type": "string",
+              "description": "Comma-separated list of user fields to include",
+              "default": "id,name,username,description,public_metrics,verified,created_at"
+            }
+          },
+          "required": [],
+          "visible": [
+            "user.fields"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
     "name": "X__POST_BY_ID",
     "description": "Retrieve a specific post by its ID. Returns detailed post information including metrics and context.",
     "tags": [
@@ -172,7 +216,7 @@
             },
             "tweet.fields": {
               "type": "string",
-              "description": "Comma-separated list of tweet fields to include",
+              "description": "Comma-separated list of tweet fields to include. Valid fields: article, attachments, author_id, card_uri, community_id, context_annotations, conversation_id, created_at, display_text_range, edit_controls, edit_history_tweet_ids, entities, geo, id, in_reply_to_user_id, lang, media_metadata, non_public_metrics, note_tweet, organic_metrics, possibly_sensitive, promoted_metrics, public_metrics, referenced_tweets, reply_settings, scopes, source, suggested_source_links, text, withheld",
               "default": "id,text,author_id,created_at,public_metrics"
             },
             "user.fields": {
@@ -1792,7 +1836,7 @@
   },
   {
     "name": "X__LIKE_POST",
-    "description": "Like a specific post. Adds the post to the authenticated user's liked posts.",
+    "description": "Like a specific post. Adds the post to the authenticated user's liked posts. Use the cached user ID from X__ME as the 'id' path parameter.",
     "tags": [
       "posts",
       "likes",
@@ -1928,7 +1972,7 @@
   },
   {
     "name": "X__REPOST",
-    "description": "Repost (retweet) a specific post. Shares the post to the authenticated user's timeline.",
+    "description": "Repost (retweet) a specific post. Shares the post to the authenticated user's timeline. Use the cached user ID from X__ME as the 'id' path parameter.",
     "tags": [
       "posts",
       "repost",
@@ -2426,7 +2470,7 @@
   },
   {
     "name": "X__ADD_BOOKMARK",
-    "description": "Add a post to the authenticated user's bookmarks. Saves the post for later reading.",
+    "description": "Add a post to the authenticated user's bookmarks. Saves the post for later reading. Use the cached user ID from X__ME as the 'id' path parameter.",
     "tags": [
       "posts",
       "bookmarks",
