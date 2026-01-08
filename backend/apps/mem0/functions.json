@@ -1,7 +1,11 @@
 [
   {
     "name": "MEM0__GET_MEMORIES",
-    "description": "Fetch memories from the Mem0 API.",
+    "description": "Retrieve stored memories from the Mem0 AI memory service for a specific user or by memory ID.",
+    "tags": ["memory", "ai", "storage"],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
     "protocol_data": {
       "method": "GET",
       "path": "/v1/memories",
