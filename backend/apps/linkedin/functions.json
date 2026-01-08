@@ -1,826 +1,826 @@
 [
-  {
-    "name": "LINKEDIN__USER_PROFILE",
-    "description": "Get the authenticated user's profile information including the author URN (required for creating posts). Returns sub, name, email, and picture. Use the 'sub' field to construct the author URN as 'urn:li:person:{sub}'.",
-    "tags": [
-      "profile",
-      "user",
-      "personal",
-      "author"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/userinfo",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {},
-      "required": [],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__USER_EMAIL",
-    "description": "Get the authenticated user's primary email address using OpenID Connect userinfo endpoint.",
-    "tags": [
-      "profile",
-      "email",
-      "contact"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/userinfo",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {},
-      "required": [],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__GET_COMPANY_INFO",
-    "description": "Get organizations where the authenticated user has specific roles (Administrator or Content Poster), to determine management or content posting capabilities for LinkedIn company pages.",
-    "tags": [
-      "company",
-      "organization",
-      "admin",
-      "roles"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/organizationAcls",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for filtering organization ACLs",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Query type for organization ACLs",
-              "default": "roleAssignee"
-            },
-            "role": {
-              "type": "string",
-              "description": "The specific role to filter by",
-              "default": "ADMINISTRATOR",
-              "enum": [
-                "ADMINISTRATOR",
-                "DIRECT_SPONSORED_CONTENT_POSTER"
-              ]
-            },
-            "state": {
-              "type": "string",
-              "description": "The approval state of the role",
-              "default": "APPROVED",
-              "enum": [
-                "APPROVED",
-                "REQUESTED"
-              ]
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of results to return per page",
-              "default": 10,
-              "minimum": 1,
-              "maximum": 100
-            },
-            "start": {
-              "type": "integer",
-              "description": "Starting index for pagination",
-              "default": 0,
-              "minimum": 0
-            }
-          },
-          "required": [],
-          "visible": [
-            "role",
-            "state",
-            "count",
-            "start"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__CREATE_POST",
-    "description": "Create and publish a post on LinkedIn. Supports text content with visibility settings and distribution options. Use USER_PROFILE to get the author URN.",
-    "tags": [
-      "posts",
-      "create",
-      "share",
-      "content"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com",
-      "headers": {
-        "Content-Type": "application/json",
-        "LinkedIn-Version": "202509",
-        "X-Restli-Protocol-Version": "2.0.0"
-      }
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "Post content and settings",
-          "properties": {
-            "author": {
-              "type": "string",
-              "description": "The URN of the LinkedIn member or organization creating the post (e.g., 'urn:li:person:123456789' or 'urn:li:organization:987654321'). Use USER_PROFILE action to get the author URN."
-            },
-            "commentary": {
-              "type": "string",
-              "description": "The main text content of the post. Supports plain text and @-mentions (e.g., @[Name](urn:li:person:xxxx))."
-            },
-            "visibility": {
-              "type": "string",
-              "description": "Controls who can see the post. PUBLIC (visible to everyone), CONNECTIONS (connections only), LOGGED_IN (signed-in members), CONTAINER (for group/event posts)",
-              "default": "PUBLIC",
-              "enum": [
-                "PUBLIC",
-                "CONNECTIONS",
-                "LOGGED_IN",
-                "CONTAINER"
-              ]
-            },
-            "distribution": {
-              "type": "object",
-              "description": "Distribution settings for the post",
-              "properties": {
-                "feedDistribution": {
-                  "type": "string",
-                  "description": "Feed distribution type. MAIN_FEED distributes to main feed, NONE does not distribute automatically",
-                  "default": "MAIN_FEED",
-                  "enum": [
-                    "MAIN_FEED",
-                    "NONE"
-                  ]
-                }
-              },
-              "required": [],
-              "visible": [
-                "feedDistribution"
-              ],
-              "additionalProperties": false
-            },
-            "lifecycleState": {
-              "type": "string",
-              "description": "The state of the post. PUBLISHED (post directly), DRAFT (save as draft), PUBLISH_REQUESTED (requires review)",
-              "default": "PUBLISHED",
-              "enum": [
-                "PUBLISHED",
-                "DRAFT",
-                "PUBLISH_REQUESTED"
-              ]
-            },
-            "isReshareDisabledByAuthor": {
-              "type": "boolean",
-              "description": "Set to true to prevent others from resharing this post",
-              "default": false
-            }
-          },
-          "required": [
-            "author",
-            "commentary"
-          ],
-          "visible": [
-            "author",
-            "commentary",
-            "visibility",
-            "distribution",
-            "lifecycleState",
-            "isReshareDisabledByAuthor"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__DELETE_POST",
-    "description": "Delete a specific LinkedIn post (share) by its unique share ID.",
-    "tags": [
-      "posts",
-      "delete",
-      "remove"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/rest/posts/{share_id}",
-      "server_url": "https://api.linkedin.com",
-      "headers": {
-        "LinkedIn-Version": "202509",
-        "X-Restli-Protocol-Version": "2.0.0"
-      }
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "share_id": {
-              "type": "string",
-              "description": "Unique identifier of the LinkedIn share (post) to be deleted"
-            }
-          },
-          "required": [
-            "share_id"
-          ],
-          "visible": [
-            "share_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__COMPANY_PROFILE",
-    "description": "Get company profile information by company ID or universal name.",
-    "tags": [
-      "company",
-      "organization",
-      "profile"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/organizations/{id}",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Company ID or universal name (e.g., '1337' or 'linkedin')"
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "visible": [
-            "id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "LINKEDIN__USER_PROFILE",
+        "description": "Get the authenticated user's profile information including the author URN (required for creating posts). Returns sub, name, email, and picture. Use the 'sub' field to construct the author URN as 'urn:li:person:{sub}'.",
+        "tags": [
+            "profile",
+            "user",
+            "personal",
+            "author"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/userinfo",
+            "server_url": "https://api.linkedin.com"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "projection": {
-              "type": "string",
-              "description": "Fields to include in the response",
-              "default": "(id,name,vanityName,description,website,industries,specialties,locations,logoV2)"
-            }
-          },
-          "required": [],
-          "visible": [
-            "projection"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__CREATE_COMPANY_POST",
-    "description": "Create and publish a post on behalf of a company page. Requires admin access to the organization.",
-    "tags": [
-      "company",
-      "posts",
-      "organization",
-      "marketing"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com",
-      "headers": {
-        "Content-Type": "application/json",
-        "LinkedIn-Version": "202509",
-        "X-Restli-Protocol-Version": "2.0.0"
-      }
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "Company post content and settings",
-          "properties": {
-            "author": {
-              "type": "string",
-              "description": "Organization URN (e.g., 'urn:li:organization:123456789')"
-            },
-            "commentary": {
-              "type": "string",
-              "description": "The text content of the company post"
-            },
-            "visibility": {
-              "type": "string",
-              "description": "Post visibility",
-              "default": "PUBLIC",
-              "enum": [
-                "PUBLIC"
-              ]
-            },
-            "distribution": {
-              "type": "object",
-              "description": "Distribution settings",
-              "properties": {
-                "feedDistribution": {
-                  "type": "string",
-                  "description": "Feed distribution type",
-                  "default": "MAIN_FEED",
-                  "enum": [
-                    "MAIN_FEED",
-                    "NONE"
-                  ]
-                }
-              },
-              "required": [],
-              "visible": [
-                "feedDistribution"
-              ],
-              "additionalProperties": false
-            },
-            "lifecycleState": {
-              "type": "string",
-              "description": "Post lifecycle state",
-              "default": "PUBLISHED",
-              "enum": [
-                "PUBLISHED",
-                "DRAFT"
-              ]
-            }
-          },
-          "required": [
-            "author",
-            "commentary"
-          ],
-          "visible": [
-            "author",
-            "commentary",
-            "visibility",
-            "distribution",
-            "lifecycleState"
-          ],
-          "additionalProperties": false
+    {
+        "name": "LINKEDIN__USER_EMAIL",
+        "description": "Get the authenticated user's primary email address using OpenID Connect userinfo endpoint.",
+        "tags": [
+            "profile",
+            "email",
+            "contact"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/userinfo",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__COMPANY_ANALYTICS",
-    "description": "Get analytics data for a company page including follower statistics and post performance metrics.",
-    "tags": [
-      "analytics",
-      "company",
-      "metrics",
-      "insights"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/organizationalEntityFollowerStatistics",
-      "server_url": "https://api.linkedin.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for analytics",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Query type",
-              "default": "organizationalEntity"
-            },
-            "organizationalEntity": {
-              "type": "string",
-              "description": "Organization URN (e.g., 'urn:li:organization:123456789')"
-            },
-            "timeIntervals.timeGranularityType": {
-              "type": "string",
-              "description": "Time granularity for the data",
-              "default": "DAY",
-              "enum": [
-                "DAY",
-                "MONTH"
-              ]
-            },
-            "timeIntervals.timeRange.start": {
-              "type": "integer",
-              "description": "Start time as Unix timestamp (milliseconds)"
-            },
-            "timeIntervals.timeRange.end": {
-              "type": "integer",
-              "description": "End time as Unix timestamp (milliseconds)"
-            }
-          },
-          "required": [
-            "organizationalEntity"
-          ],
-          "visible": [
-            "organizationalEntity",
-            "timeIntervals.timeGranularityType",
-            "timeIntervals.timeRange.start",
-            "timeIntervals.timeRange.end"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__SEARCH_COMPANIES",
-    "description": "Search for companies on LinkedIn using keywords. Returns company profiles matching the search query.",
-    "tags": [
-      "search",
-      "companies",
-      "organizations"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/organizations",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Search parameters",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Query type for organization search",
-              "default": "search"
-            },
-            "keywords": {
-              "type": "string",
-              "description": "Keywords to search for in company names"
-            },
-            "start": {
-              "type": "integer",
-              "description": "Pagination start index",
-              "default": 0
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of results to return (max 50)",
-              "default": 10,
-              "maximum": 50
-            }
-          },
-          "required": [
-            "keywords"
-          ],
-          "visible": [
-            "keywords",
-            "start",
-            "count"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__USER_CONNECTIONS",
-    "description": "Get the authenticated user's 1st-degree connections. Returns basic profile information for connections.",
-    "tags": [
-      "connections",
-      "network",
-      "contacts"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/connections",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for connections",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Query type for connections",
-              "default": "viewer"
-            },
-            "start": {
-              "type": "integer",
-              "description": "Pagination start index",
-              "default": 0
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of results to return (max 100)",
-              "default": 50,
-              "maximum": 100
-            }
-          },
-          "required": [],
-          "visible": [
-            "start",
-            "count"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__POST_ANALYTICS",
-    "description": "Get analytics data for a specific UGC post including engagement metrics like likes, comments, and shares.",
-    "tags": [
-      "analytics",
-      "posts",
-      "engagement",
-      "metrics"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/socialActions/{shareUrn}/statistics",
-      "server_url": "https://api.linkedin.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "shareUrn": {
-              "type": "string",
-              "description": "Share URN to get analytics for (e.g., 'urn:li:share:123456789')"
-            }
-          },
-          "required": [
-            "shareUrn"
-          ],
-          "visible": [
-            "shareUrn"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "LINKEDIN__SHARE_ARTICLE",
-    "description": "Share an external article or URL as a LinkedIn post with title and description.",
-    "tags": [
-      "share",
-      "article",
-      "link",
-      "content"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/rest/posts",
-      "server_url": "https://api.linkedin.com",
-      "headers": {
-        "Content-Type": "application/json",
-        "LinkedIn-Version": "202509",
-        "X-Restli-Protocol-Version": "2.0.0"
-      }
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "Article sharing content and settings",
-          "properties": {
-            "author": {
-              "type": "string",
-              "description": "Author URN (e.g., 'urn:li:person:123456789' for personal or 'urn:li:organization:123456789' for company)"
-            },
-            "commentary": {
-              "type": "string",
-              "description": "Optional commentary text to accompany the shared article"
-            },
-            "content": {
-              "type": "object",
-              "description": "Article content details",
-              "properties": {
-                "article": {
-                  "type": "object",
-                  "description": "Article details",
-                  "properties": {
-                    "source": {
-                      "type": "string",
-                      "description": "URL of the article being shared"
+    {
+        "name": "LINKEDIN__GET_COMPANY_INFO",
+        "description": "Get organizations where the authenticated user has specific roles (Administrator or Content Poster), to determine management or content posting capabilities for LinkedIn company pages.",
+        "tags": [
+            "company",
+            "organization",
+            "admin",
+            "roles"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/organizationAcls",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for filtering organization ACLs",
+                    "properties": {
+                        "q": {
+                            "type": "string",
+                            "description": "Query type for organization ACLs",
+                            "default": "roleAssignee"
+                        },
+                        "role": {
+                            "type": "string",
+                            "description": "The specific role to filter by",
+                            "default": "ADMINISTRATOR",
+                            "enum": [
+                                "ADMINISTRATOR",
+                                "DIRECT_SPONSORED_CONTENT_POSTER"
+                            ]
+                        },
+                        "state": {
+                            "type": "string",
+                            "description": "The approval state of the role",
+                            "default": "APPROVED",
+                            "enum": [
+                                "APPROVED",
+                                "REQUESTED"
+                            ]
+                        },
+                        "count": {
+                            "type": "integer",
+                            "description": "Number of results to return per page",
+                            "default": 10,
+                            "minimum": 1,
+                            "maximum": 100
+                        },
+                        "start": {
+                            "type": "integer",
+                            "description": "Starting index for pagination",
+                            "default": 0,
+                            "minimum": 0
+                        }
                     },
-                    "title": {
-                      "type": "string",
-                      "description": "Article title"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Article description or summary"
-                    }
-                  },
-                  "required": [
-                    "source"
-                  ],
-                  "visible": [
-                    "source",
-                    "title",
-                    "description"
-                  ],
-                  "additionalProperties": false
+                    "required": [],
+                    "visible": [
+                        "role",
+                        "state",
+                        "count",
+                        "start"
+                    ],
+                    "additionalProperties": false
                 }
-              },
-              "required": [
-                "article"
-              ],
-              "visible": [
-                "article"
-              ],
-              "additionalProperties": false
             },
-            "visibility": {
-              "type": "string",
-              "description": "Post visibility",
-              "default": "PUBLIC",
-              "enum": [
-                "PUBLIC",
-                "CONNECTIONS"
-              ]
-            },
-            "distribution": {
-              "type": "object",
-              "description": "Distribution settings",
-              "properties": {
-                "feedDistribution": {
-                  "type": "string",
-                  "description": "Feed distribution type",
-                  "default": "MAIN_FEED",
-                  "enum": [
-                    "MAIN_FEED",
-                    "NONE"
-                  ]
-                }
-              },
-              "required": [],
-              "visible": [
-                "feedDistribution"
-              ],
-              "additionalProperties": false
-            },
-            "lifecycleState": {
-              "type": "string",
-              "description": "Post lifecycle state",
-              "default": "PUBLISHED",
-              "enum": [
-                "PUBLISHED",
-                "DRAFT"
-              ]
-            }
-          },
-          "required": [
-            "author",
+            "required": [],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__CREATE_POST",
+        "description": "Create and publish a post on LinkedIn. Supports text content with visibility settings and distribution options. Use USER_PROFILE to get the author URN.",
+        "tags": [
+            "posts",
+            "create",
+            "share",
             "content"
-          ],
-          "visible": [
-            "author",
-            "commentary",
-            "content",
-            "visibility",
-            "distribution",
-            "lifecycleState"
-          ],
-          "additionalProperties": false
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/rest/posts",
+            "server_url": "https://api.linkedin.com",
+            "headers": {
+                "Content-Type": "application/json",
+                "LinkedIn-Version": "202509",
+                "X-Restli-Protocol-Version": "2.0.0"
+            }
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "description": "Post content and settings",
+                    "properties": {
+                        "author": {
+                            "type": "string",
+                            "description": "The URN of the LinkedIn member or organization creating the post (e.g., 'urn:li:person:123456789' or 'urn:li:organization:987654321'). Use USER_PROFILE action to get the author URN."
+                        },
+                        "commentary": {
+                            "type": "string",
+                            "description": "The main text content of the post. Supports plain text and @-mentions (e.g., @[Name](urn:li:person:xxxx))."
+                        },
+                        "visibility": {
+                            "type": "string",
+                            "description": "Controls who can see the post. PUBLIC (visible to everyone), CONNECTIONS (connections only), LOGGED_IN (signed-in members), CONTAINER (for group/event posts)",
+                            "default": "PUBLIC",
+                            "enum": [
+                                "PUBLIC",
+                                "CONNECTIONS",
+                                "LOGGED_IN",
+                                "CONTAINER"
+                            ]
+                        },
+                        "distribution": {
+                            "type": "object",
+                            "description": "Distribution settings for the post",
+                            "properties": {
+                                "feedDistribution": {
+                                    "type": "string",
+                                    "description": "Feed distribution type. MAIN_FEED distributes to main feed, NONE does not distribute automatically",
+                                    "default": "MAIN_FEED",
+                                    "enum": [
+                                        "MAIN_FEED",
+                                        "NONE"
+                                    ]
+                                }
+                            },
+                            "required": [],
+                            "visible": [
+                                "feedDistribution"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "lifecycleState": {
+                            "type": "string",
+                            "description": "The state of the post. PUBLISHED (post directly), DRAFT (save as draft), PUBLISH_REQUESTED (requires review)",
+                            "default": "PUBLISHED",
+                            "enum": [
+                                "PUBLISHED",
+                                "DRAFT",
+                                "PUBLISH_REQUESTED"
+                            ]
+                        },
+                        "isReshareDisabledByAuthor": {
+                            "type": "boolean",
+                            "description": "Set to true to prevent others from resharing this post",
+                            "default": false
+                        }
+                    },
+                    "required": [
+                        "author",
+                        "commentary"
+                    ],
+                    "visible": [
+                        "author",
+                        "commentary",
+                        "visibility",
+                        "distribution",
+                        "lifecycleState",
+                        "isReshareDisabledByAuthor"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "LINKEDIN__DELETE_POST",
+        "description": "Delete a specific LinkedIn post (share) by its unique share ID.",
+        "tags": [
+            "posts",
+            "delete",
+            "remove"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/rest/posts/{share_id}",
+            "server_url": "https://api.linkedin.com",
+            "headers": {
+                "LinkedIn-Version": "202509",
+                "X-Restli-Protocol-Version": "2.0.0"
+            }
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "share_id": {
+                            "type": "string",
+                            "description": "Unique identifier of the LinkedIn share (post) to be deleted"
+                        }
+                    },
+                    "required": [
+                        "share_id"
+                    ],
+                    "visible": [
+                        "share_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__COMPANY_PROFILE",
+        "description": "Get company profile information by company ID or universal name. from Linkedin.",
+        "tags": [
+            "company",
+            "organization",
+            "profile"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/organizations/{id}",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Company ID or universal name (e.g., '1337' or 'linkedin')"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ],
+                    "visible": [
+                        "id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "projection": {
+                            "type": "string",
+                            "description": "Fields to include in the response",
+                            "default": "(id,name,vanityName,description,website,industries,specialties,locations,logoV2)"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "projection"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__CREATE_COMPANY_POST",
+        "description": "Create and publish a post on behalf of a company page. Requires admin access to the organization.",
+        "tags": [
+            "company",
+            "posts",
+            "organization",
+            "marketing"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/rest/posts",
+            "server_url": "https://api.linkedin.com",
+            "headers": {
+                "Content-Type": "application/json",
+                "LinkedIn-Version": "202509",
+                "X-Restli-Protocol-Version": "2.0.0"
+            }
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "description": "Company post content and settings",
+                    "properties": {
+                        "author": {
+                            "type": "string",
+                            "description": "Organization URN (e.g., 'urn:li:organization:123456789')"
+                        },
+                        "commentary": {
+                            "type": "string",
+                            "description": "The text content of the company post"
+                        },
+                        "visibility": {
+                            "type": "string",
+                            "description": "Post visibility",
+                            "default": "PUBLIC",
+                            "enum": [
+                                "PUBLIC"
+                            ]
+                        },
+                        "distribution": {
+                            "type": "object",
+                            "description": "Distribution settings",
+                            "properties": {
+                                "feedDistribution": {
+                                    "type": "string",
+                                    "description": "Feed distribution type",
+                                    "default": "MAIN_FEED",
+                                    "enum": [
+                                        "MAIN_FEED",
+                                        "NONE"
+                                    ]
+                                }
+                            },
+                            "required": [],
+                            "visible": [
+                                "feedDistribution"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "lifecycleState": {
+                            "type": "string",
+                            "description": "Post lifecycle state",
+                            "default": "PUBLISHED",
+                            "enum": [
+                                "PUBLISHED",
+                                "DRAFT"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "author",
+                        "commentary"
+                    ],
+                    "visible": [
+                        "author",
+                        "commentary",
+                        "visibility",
+                        "distribution",
+                        "lifecycleState"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__COMPANY_ANALYTICS",
+        "description": "Get analytics data for a company page including follower statistics and post performance metrics.",
+        "tags": [
+            "analytics",
+            "company",
+            "metrics",
+            "insights"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/organizationalEntityFollowerStatistics",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for analytics",
+                    "properties": {
+                        "q": {
+                            "type": "string",
+                            "description": "Query type",
+                            "default": "organizationalEntity"
+                        },
+                        "organizationalEntity": {
+                            "type": "string",
+                            "description": "Organization URN (e.g., 'urn:li:organization:123456789')"
+                        },
+                        "timeIntervals.timeGranularityType": {
+                            "type": "string",
+                            "description": "Time granularity for the data",
+                            "default": "DAY",
+                            "enum": [
+                                "DAY",
+                                "MONTH"
+                            ]
+                        },
+                        "timeIntervals.timeRange.start": {
+                            "type": "integer",
+                            "description": "Start time as Unix timestamp (milliseconds)"
+                        },
+                        "timeIntervals.timeRange.end": {
+                            "type": "integer",
+                            "description": "End time as Unix timestamp (milliseconds)"
+                        }
+                    },
+                    "required": [
+                        "organizationalEntity"
+                    ],
+                    "visible": [
+                        "organizationalEntity",
+                        "timeIntervals.timeGranularityType",
+                        "timeIntervals.timeRange.start",
+                        "timeIntervals.timeRange.end"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__SEARCH_COMPANIES",
+        "description": "Search for companies on LinkedIn using keywords. Returns company profiles matching the search query.",
+        "tags": [
+            "search",
+            "companies",
+            "organizations"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/organizations",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Search parameters",
+                    "properties": {
+                        "q": {
+                            "type": "string",
+                            "description": "Query type for organization search",
+                            "default": "search"
+                        },
+                        "keywords": {
+                            "type": "string",
+                            "description": "Keywords to search for in company names"
+                        },
+                        "start": {
+                            "type": "integer",
+                            "description": "Pagination start index",
+                            "default": 0
+                        },
+                        "count": {
+                            "type": "integer",
+                            "description": "Number of results to return (max 50)",
+                            "default": 10,
+                            "maximum": 50
+                        }
+                    },
+                    "required": [
+                        "keywords"
+                    ],
+                    "visible": [
+                        "keywords",
+                        "start",
+                        "count"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__USER_CONNECTIONS",
+        "description": "Get the authenticated user's 1st-degree connections. Returns basic profile information for connections.",
+        "tags": [
+            "connections",
+            "network",
+            "contacts"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/connections",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for connections",
+                    "properties": {
+                        "q": {
+                            "type": "string",
+                            "description": "Query type for connections",
+                            "default": "viewer"
+                        },
+                        "start": {
+                            "type": "integer",
+                            "description": "Pagination start index",
+                            "default": 0
+                        },
+                        "count": {
+                            "type": "integer",
+                            "description": "Number of results to return (max 100)",
+                            "default": 50,
+                            "maximum": 100
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "start",
+                        "count"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__POST_ANALYTICS",
+        "description": "Get analytics data for a specific UGC post including engagement metrics like likes, comments, and shares.",
+        "tags": [
+            "analytics",
+            "posts",
+            "engagement",
+            "metrics"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/socialActions/{shareUrn}/statistics",
+            "server_url": "https://api.linkedin.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "shareUrn": {
+                            "type": "string",
+                            "description": "Share URN to get analytics for (e.g., 'urn:li:share:123456789')"
+                        }
+                    },
+                    "required": [
+                        "shareUrn"
+                    ],
+                    "visible": [
+                        "shareUrn"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "LINKEDIN__SHARE_ARTICLE",
+        "description": "Share an external article or URL as a LinkedIn post with title and description.",
+        "tags": [
+            "share",
+            "article",
+            "link",
+            "content"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/rest/posts",
+            "server_url": "https://api.linkedin.com",
+            "headers": {
+                "Content-Type": "application/json",
+                "LinkedIn-Version": "202509",
+                "X-Restli-Protocol-Version": "2.0.0"
+            }
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "description": "Article sharing content and settings",
+                    "properties": {
+                        "author": {
+                            "type": "string",
+                            "description": "Author URN (e.g., 'urn:li:person:123456789' for personal or 'urn:li:organization:123456789' for company)"
+                        },
+                        "commentary": {
+                            "type": "string",
+                            "description": "Optional commentary text to accompany the shared article"
+                        },
+                        "content": {
+                            "type": "object",
+                            "description": "Article content details",
+                            "properties": {
+                                "article": {
+                                    "type": "object",
+                                    "description": "Article details",
+                                    "properties": {
+                                        "source": {
+                                            "type": "string",
+                                            "description": "URL of the article being shared"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "description": "Article title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "description": "Article description or summary"
+                                        }
+                                    },
+                                    "required": [
+                                        "source"
+                                    ],
+                                    "visible": [
+                                        "source",
+                                        "title",
+                                        "description"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "required": [
+                                "article"
+                            ],
+                            "visible": [
+                                "article"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "visibility": {
+                            "type": "string",
+                            "description": "Post visibility",
+                            "default": "PUBLIC",
+                            "enum": [
+                                "PUBLIC",
+                                "CONNECTIONS"
+                            ]
+                        },
+                        "distribution": {
+                            "type": "object",
+                            "description": "Distribution settings",
+                            "properties": {
+                                "feedDistribution": {
+                                    "type": "string",
+                                    "description": "Feed distribution type",
+                                    "default": "MAIN_FEED",
+                                    "enum": [
+                                        "MAIN_FEED",
+                                        "NONE"
+                                    ]
+                                }
+                            },
+                            "required": [],
+                            "visible": [
+                                "feedDistribution"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "lifecycleState": {
+                            "type": "string",
+                            "description": "Post lifecycle state",
+                            "default": "PUBLISHED",
+                            "enum": [
+                                "PUBLISHED",
+                                "DRAFT"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "author",
+                        "content"
+                    ],
+                    "visible": [
+                        "author",
+                        "commentary",
+                        "content",
+                        "visibility",
+                        "distribution",
+                        "lifecycleState"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]

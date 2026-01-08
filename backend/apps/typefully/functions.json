@@ -1,916 +1,916 @@
 [
-  {
-    "name": "TYPEFULLY__CREATE_DRAFT",
-    "description": "Create a draft given some plain-text content",
-    "tags": [
-      "drafts",
-      "content",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/drafts/",
-      "server_url": "https://api.typefully.com/v1"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
-        },
-        "body": {
-          "type": "object",
-          "description": "Draft content and options",
-          "properties": {
-            "content": {
-              "type": "string",
-              "description": "Content of the draft. You can split into multiple tweets by adding 4 consecutive newlines between tweets in the content."
-            },
-            "threadify": {
-              "type": "boolean",
-              "description": "Content will be automatically split into multiple tweets"
-            },
-            "share": {
-              "type": "boolean",
-              "description": "If true, returned payload will include a share_url"
-            },
-            "schedule-date": {
-              "type": "string",
-              "description": "Can either be an ISO formatted date (e.g.: 2022-06-13T11:13:31.662Z) or 'next-free-slot'"
-            },
-            "auto_retweet_enabled": {
-              "type": "boolean",
-              "description": "If true, the post will have an AutoRT enabled, according to the one set on Typefully for the account"
-            },
-            "auto_plug_enabled": {
-              "type": "boolean",
-              "description": "If true, the post will have an AutoPlug enabled, according to the one set on Typefully for the account"
-            }
-          },
-          "required": [
-            "content"
-          ],
-          "visible": [
+    {
+        "name": "TYPEFULLY__CREATE_DRAFT",
+        "description": "Create a draft given some plain-text content in Typefully.",
+        "tags": [
+            "drafts",
             "content",
-            "threadify",
-            "share",
-            "schedule-date",
-            "auto_retweet_enabled",
-            "auto_plug_enabled"
-          ],
-          "additionalProperties": false
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/drafts/",
+            "server_url": "https://api.typefully.com/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Draft content and options",
+                    "properties": {
+                        "content": {
+                            "type": "string",
+                            "description": "Content of the draft. You can split into multiple tweets by adding 4 consecutive newlines between tweets in the content."
+                        },
+                        "threadify": {
+                            "type": "boolean",
+                            "description": "Content will be automatically split into multiple tweets"
+                        },
+                        "share": {
+                            "type": "boolean",
+                            "description": "If true, returned payload will include a share_url"
+                        },
+                        "schedule-date": {
+                            "type": "string",
+                            "description": "Can either be an ISO formatted date (e.g.: 2022-06-13T11:13:31.662Z) or 'next-free-slot'"
+                        },
+                        "auto_retweet_enabled": {
+                            "type": "boolean",
+                            "description": "If true, the post will have an AutoRT enabled, according to the one set on Typefully for the account"
+                        },
+                        "auto_plug_enabled": {
+                            "type": "boolean",
+                            "description": "If true, the post will have an AutoPlug enabled, according to the one set on Typefully for the account"
+                        }
+                    },
+                    "required": [
+                        "content"
+                    ],
+                    "visible": [
+                        "content",
+                        "threadify",
+                        "share",
+                        "schedule-date",
+                        "auto_retweet_enabled",
+                        "auto_plug_enabled"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "body"
-      ],
-      "visible": [
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__RECENTLY_PUBLISHED_DRAFTS",
-    "description": "Get a list of all the most recently published drafts in Typefully",
-    "tags": [
-      "drafts",
-      "published",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/drafts/recently-published/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__RECENTLY_PUBLISHED_DRAFTS",
+        "description": "Get a list of all the most recently published drafts in Typefully",
+        "tags": [
+            "drafts",
+            "published",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/drafts/recently-published/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "content_filter": {
-              "type": "string",
-              "description": "Filters the list of drafts to only include tweets or threads",
-              "enum": [
-                "threads",
-                "tweets"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "content_filter"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "content_filter": {
+                            "type": "string",
+                            "description": "Filters the list of drafts to only include tweets or threads",
+                            "enum": [
+                                "threads",
+                                "tweets"
+                            ]
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "content_filter"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__LATEST_NOTIFICATIONS",
-    "description": "Get the latest notifications from Typefully",
-    "tags": [
-      "notifications",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/notifications/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__LATEST_NOTIFICATIONS",
+        "description": "Get the latest notifications from Typefully",
+        "tags": [
+            "notifications",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/notifications/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "kind": {
-              "type": "string",
-              "description": "Filter notifications based on whether they are inbox notifications (e.g. comments, replies) or activity events (e.g. tweet published)",
-              "enum": [
-                "inbox",
-                "activity"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "kind"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "description": "Filter notifications based on whether they are inbox notifications (e.g. comments, replies) or activity events (e.g. tweet published)",
+                            "enum": [
+                                "inbox",
+                                "activity"
+                            ]
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "kind"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__MARK_NOTIFICATIONS_READ",
-    "description": "Mark all notifications as read",
-    "tags": [
-      "notifications",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/notifications/mark-all-read/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__MARK_NOTIFICATIONS_READ",
+        "description": "Mark all Typefully notifications as read for the current user.",
+        "tags": [
+            "notifications",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/notifications/mark-all-read/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "body": {
-          "type": "object",
-          "description": "Options for marking notifications as read",
-          "properties": {
-            "kind": {
-              "type": "string",
-              "description": "Specifies whether to mark inbox notifications (e.g. comments, replies) or activities (e.g. publishing events) as read",
-              "enum": [
-                "inbox",
-                "activity"
-              ]
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Options for marking notifications as read",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "description": "Specifies whether to mark inbox notifications (e.g. comments, replies) or activities (e.g. publishing events) as read",
+                            "enum": [
+                                "inbox",
+                                "activity"
+                            ]
+                        },
+                        "username": {
+                            "type": "string",
+                            "description": "The username of the account. If given, it will only mark read notifications for that specific account"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "kind",
+                        "username"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "username": {
-              "type": "string",
-              "description": "The username of the account. If given, it will only mark read notifications for that specific account"
-            }
-          },
-          "required": [],
-          "visible": [
-            "kind",
-            "username"
-          ],
-          "additionalProperties": false
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__RECENTLY_SCHEDULED_DRAFTS",
-    "description": "Get a list of all the most recently scheduled drafts in Typefully",
-    "tags": [
-      "drafts",
-      "scheduled",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/drafts/recently-scheduled/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__RECENTLY_SCHEDULED_DRAFTS",
+        "description": "Get a list of all the most recently scheduled drafts in Typefully",
+        "tags": [
+            "drafts",
+            "scheduled",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/drafts/recently-scheduled/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "content_filter": {
-              "type": "string",
-              "description": "Filters the list of drafts to only include tweets or threads",
-              "enum": [
-                "threads",
-                "tweets"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "content_filter"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "content_filter": {
+                            "type": "string",
+                            "description": "Filters the list of drafts to only include tweets or threads",
+                            "enum": [
+                                "threads",
+                                "tweets"
+                            ]
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "content_filter"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__UPDATE_DRAFT",
-    "description": "Update an existing draft in Typefully",
-    "tags": [
-      "drafts",
-      "update",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "PUT",
-      "path": "/drafts/{draft_id}/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__UPDATE_DRAFT",
+        "description": "Update an existing draft in Typefully",
+        "tags": [
+            "drafts",
+            "update",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "PUT",
+            "path": "/drafts/{draft_id}/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "draft_id": {
-              "type": "string",
-              "description": "ID of the draft to update"
-            }
-          },
-          "required": [
-            "draft_id"
-          ],
-          "visible": [
-            "draft_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "description": "Updated draft content and options",
-          "properties": {
-            "content": {
-              "type": "string",
-              "description": "Updated content of the draft. You can split into multiple tweets by adding 4 consecutive newlines between tweets in the content."
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "draft_id": {
+                            "type": "string",
+                            "description": "ID of the draft to update"
+                        }
+                    },
+                    "required": [
+                        "draft_id"
+                    ],
+                    "visible": [
+                        "draft_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Updated draft content and options",
+                    "properties": {
+                        "content": {
+                            "type": "string",
+                            "description": "Updated content of the draft. You can split into multiple tweets by adding 4 consecutive newlines between tweets in the content."
+                        },
+                        "threadify": {
+                            "type": "boolean",
+                            "description": "Content will be automatically split into multiple tweets"
+                        },
+                        "schedule-date": {
+                            "type": "string",
+                            "description": "Can either be an ISO formatted date (e.g.: 2022-06-13T11:13:31.662Z) or 'next-free-slot'"
+                        },
+                        "auto_retweet_enabled": {
+                            "type": "boolean",
+                            "description": "If true, the post will have an AutoRT enabled, according to the one set on Typefully for the account"
+                        },
+                        "auto_plug_enabled": {
+                            "type": "boolean",
+                            "description": "If true, the post will have an AutoPlug enabled, according to the one set on Typefully for the account"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "content",
+                        "threadify",
+                        "schedule-date",
+                        "auto_retweet_enabled",
+                        "auto_plug_enabled"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "threadify": {
-              "type": "boolean",
-              "description": "Content will be automatically split into multiple tweets"
-            },
-            "schedule-date": {
-              "type": "string",
-              "description": "Can either be an ISO formatted date (e.g.: 2022-06-13T11:13:31.662Z) or 'next-free-slot'"
-            },
-            "auto_retweet_enabled": {
-              "type": "boolean",
-              "description": "If true, the post will have an AutoRT enabled, according to the one set on Typefully for the account"
-            },
-            "auto_plug_enabled": {
-              "type": "boolean",
-              "description": "If true, the post will have an AutoPlug enabled, according to the one set on Typefully for the account"
-            }
-          },
-          "required": [],
-          "visible": [
-            "content",
-            "threadify",
-            "schedule-date",
-            "auto_retweet_enabled",
-            "auto_plug_enabled"
-          ],
-          "additionalProperties": false
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__DRAFT_DELETE_DRAFTS",
-    "description": "Delete a draft from Typefully",
-    "tags": [
-      "drafts",
-      "delete",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/drafts/{draft_id}/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__DRAFT_DELETE_DRAFTS",
+        "description": "Delete a draft post from Typefully before publishing.",
+        "tags": [
+            "drafts",
+            "delete",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/drafts/{draft_id}/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "draft_id": {
-              "type": "string",
-              "description": "ID of the draft to delete"
-            }
-          },
-          "required": [
-            "draft_id"
-          ],
-          "visible": [
-            "draft_id"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "draft_id": {
+                            "type": "string",
+                            "description": "ID of the draft to delete"
+                        }
+                    },
+                    "required": [
+                        "draft_id"
+                    ],
+                    "visible": [
+                        "draft_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__PUBLISH_DRAFT",
-    "description": "Publish a draft immediately in Typefully",
-    "tags": [
-      "drafts",
-      "publish",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/drafts/{draft_id}/publish/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__PUBLISH_DRAFT",
+        "description": "Publish a draft immediately in Typefully",
+        "tags": [
+            "drafts",
+            "publish",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/drafts/{draft_id}/publish/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "draft_id": {
-              "type": "string",
-              "description": "ID of the draft to publish"
-            }
-          },
-          "required": [
-            "draft_id"
-          ],
-          "visible": [
-            "draft_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "description": "Publishing options",
-          "properties": {
-            "schedule-date": {
-              "type": "string",
-              "description": "Optional schedule date. If not provided, publishes immediately. Can be an ISO formatted date or 'next-free-slot'"
-            }
-          },
-          "required": [],
-          "visible": [
-            "schedule-date"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "draft_id": {
+                            "type": "string",
+                            "description": "ID of the draft to publish"
+                        }
+                    },
+                    "required": [
+                        "draft_id"
+                    ],
+                    "visible": [
+                        "draft_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Publishing options",
+                    "properties": {
+                        "schedule-date": {
+                            "type": "string",
+                            "description": "Optional schedule date. If not provided, publishes immediately. Can be an ISO formatted date or 'next-free-slot'"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "schedule-date"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__DRAFT_GET_DRAFTS",
-    "description": "Get a specific draft by ID from Typefully",
-    "tags": [
-      "drafts",
-      "get",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/drafts/{draft_id}/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__DRAFT_GET_DRAFTS",
+        "description": "Get a specific draft by ID from Typefully",
+        "tags": [
+            "drafts",
+            "get",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/drafts/{draft_id}/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "draft_id": {
-              "type": "string",
-              "description": "ID of the draft to retrieve"
-            }
-          },
-          "required": [
-            "draft_id"
-          ],
-          "visible": [
-            "draft_id"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "draft_id": {
+                            "type": "string",
+                            "description": "ID of the draft to retrieve"
+                        }
+                    },
+                    "required": [
+                        "draft_id"
+                    ],
+                    "visible": [
+                        "draft_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__ALL_DRAFTS",
-    "description": "Get a list of all drafts in Typefully",
-    "tags": [
-      "drafts",
-      "list",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/drafts/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__ALL_DRAFTS",
+        "description": "Get a list of all drafts in Typefully",
+        "tags": [
+            "drafts",
+            "list",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/drafts/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "status": {
-              "type": "string",
-              "description": "Filter drafts by status",
-              "enum": [
-                "draft",
-                "scheduled",
-                "published",
-                "failed"
-              ]
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "description": "Filter drafts by status",
+                            "enum": [
+                                "draft",
+                                "scheduled",
+                                "published",
+                                "failed"
+                            ]
+                        },
+                        "content_filter": {
+                            "type": "string",
+                            "description": "Filters the list of drafts to only include tweets or threads",
+                            "enum": [
+                                "threads",
+                                "tweets"
+                            ]
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "description": "Number of drafts to return",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 20
+                        },
+                        "offset": {
+                            "type": "integer",
+                            "description": "Number of drafts to skip for pagination",
+                            "minimum": 0,
+                            "default": 0
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "status",
+                        "content_filter",
+                        "limit",
+                        "offset"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "content_filter": {
-              "type": "string",
-              "description": "Filters the list of drafts to only include tweets or threads",
-              "enum": [
-                "threads",
-                "tweets"
-              ]
-            },
-            "limit": {
-              "type": "integer",
-              "description": "Number of drafts to return",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
-            },
-            "offset": {
-              "type": "integer",
-              "description": "Number of drafts to skip for pagination",
-              "minimum": 0,
-              "default": 0
-            }
-          },
-          "required": [],
-          "visible": [
-            "status",
-            "content_filter",
-            "limit",
-            "offset"
-          ],
-          "additionalProperties": false
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__ANALYTICS",
-    "description": "Get analytics data for published posts in Typefully",
-    "tags": [
-      "analytics",
-      "metrics",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/analytics/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__ANALYTICS",
+        "description": "Get analytics data for published posts in Typefully",
+        "tags": [
+            "analytics",
+            "metrics",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/analytics/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "from_date": {
-              "type": "string",
-              "format": "date",
-              "description": "Start date for analytics data (YYYY-MM-DD)"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "from_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "Start date for analytics data (YYYY-MM-DD)"
+                        },
+                        "to_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "End date for analytics data (YYYY-MM-DD)"
+                        },
+                        "username": {
+                            "type": "string",
+                            "description": "The username of the account to get analytics for. If not provided, returns for all connected accounts"
+                        },
+                        "content_filter": {
+                            "type": "string",
+                            "description": "Filter analytics by content type",
+                            "enum": [
+                                "threads",
+                                "tweets"
+                            ]
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "from_date",
+                        "to_date",
+                        "username",
+                        "content_filter"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "to_date": {
-              "type": "string",
-              "format": "date",
-              "description": "End date for analytics data (YYYY-MM-DD)"
-            },
-            "username": {
-              "type": "string",
-              "description": "The username of the account to get analytics for. If not provided, returns for all connected accounts"
-            },
-            "content_filter": {
-              "type": "string",
-              "description": "Filter analytics by content type",
-              "enum": [
-                "threads",
-                "tweets"
-              ]
-            }
-          },
-          "required": [],
-          "visible": [
-            "from_date",
-            "to_date",
-            "username",
-            "content_filter"
-          ],
-          "additionalProperties": false
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "TYPEFULLY__SCHEDULE_SLOTS",
-    "description": "Get available schedule slots in Typefully",
-    "tags": [
-      "schedule",
-      "slots",
-      "twitter",
-      "x"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/schedule/slots/",
-      "server_url": "https://api.typefully.com/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content type of the request",
-              "default": "application/json"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
+    {
+        "name": "TYPEFULLY__SCHEDULE_SLOTS",
+        "description": "Get available schedule slots in Typefully",
+        "tags": [
+            "schedule",
+            "slots",
+            "twitter",
+            "x"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/schedule/slots/",
+            "server_url": "https://api.typefully.com/v1"
         },
-        "query": {
-          "type": "object",
-          "description": "Query parameters",
-          "properties": {
-            "username": {
-              "type": "string",
-              "description": "The username of the account to get schedule slots for"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content type of the request",
+                            "default": "application/json"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "username": {
+                            "type": "string",
+                            "description": "The username of the account to get schedule slots for"
+                        },
+                        "days": {
+                            "type": "integer",
+                            "description": "Number of days ahead to check for available slots",
+                            "minimum": 1,
+                            "maximum": 30,
+                            "default": 7
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "username",
+                        "days"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "days": {
-              "type": "integer",
-              "description": "Number of days ahead to check for available slots",
-              "minimum": 1,
-              "maximum": 30,
-              "default": 7
-            }
-          },
-          "required": [],
-          "visible": [
-            "username",
-            "days"
-          ],
-          "additionalProperties": false
+            "required": [
+                "header"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false
     }
-  }
 ]

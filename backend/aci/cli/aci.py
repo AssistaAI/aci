@@ -13,6 +13,7 @@ from aci.cli.commands import (
     update_agent,
     upsert_app,
     upsert_functions,
+    validate_descriptions,
 )
 from aci.common.logging_setup import setup_logging
 
@@ -37,6 +38,7 @@ cli.add_command(fuzzy_test_function_execution.fuzzy_test_function_execution)
 cli.add_command(test_app_functions.test_app_functions)
 cli.add_command(billing.populate_subscription_plans)
 cli.add_command(billing.create_test_subscription)
+cli.add_command(validate_descriptions.validate_descriptions)
 
 if __name__ == "__main__":
     cli()

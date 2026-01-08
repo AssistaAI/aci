@@ -1,1497 +1,1497 @@
 [
-  {
-    "name": "GOOGLE_ADS__LIST_ACCESSIBLE_CUSTOMERS",
-    "description": "Returns the resource names of customers directly accessible by the user authenticating the call",
-    "tags": [
-      "google_ads",
-      "customers"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v21/customers:listAccessibleCustomers",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__LIST_ACCESSIBLE_CUSTOMERS",
+        "description": "Return the resource names of customers directly accessible by the user authenticating the call",
+        "tags": [
+            "google_ads",
+            "customers"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v21/customers:listAccessibleCustomers",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__SEARCH_CAMPAIGNS",
-    "description": "Search for campaigns using Google Ads Query Language (GAQL)",
-    "tags": [
-      "google_ads",
-      "campaigns",
-      "search"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__SEARCH_CAMPAIGNS",
+        "description": "Search for campaigns using Google Ads Query Language (GAQL)",
+        "tags": [
+            "google_ads",
+            "campaigns",
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "The GAQL (Google Ads Query Language) query to execute"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The GAQL (Google Ads Query Language) query to execute"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__GET_CAMPAIGN",
-    "description": "Get details of a specific campaign",
-    "tags": [
-      "google_ads",
-      "campaigns"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v21/{resource_name}",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "resource_name": {
-              "type": "string",
-              "description": "The resource name of the campaign (e.g., customers/1234567890/campaigns/987654321)"
-            }
-          },
-          "required": [
-            "resource_name"
-          ],
-          "visible": [
-            "resource_name"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__GET_CAMPAIGN",
+        "description": "Get details of a specific campaign from Google Ads.",
+        "tags": [
+            "google_ads",
+            "campaigns"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v21/{resource_name}",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "resource_name": {
+                            "type": "string",
+                            "description": "The resource name of the campaign (e.g., customers/1234567890/campaigns/987654321)"
+                        }
+                    },
+                    "required": [
+                        "resource_name"
+                    ],
+                    "visible": [
+                        "resource_name"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__CREATE_CAMPAIGN",
-    "description": "Create a new advertising campaign",
-    "tags": [
-      "google_ads",
-      "campaigns"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/campaigns:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__CREATE_CAMPAIGN",
+        "description": "Create a new advertising campaign in Google Ads with budget and targeting settings.",
+        "tags": [
+            "google_ads",
+            "campaigns"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/campaigns:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Campaign mutation operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Campaign mutation operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__UPDATE_CAMPAIGN",
-    "description": "Update an existing campaign",
-    "tags": [
-      "google_ads",
-      "campaigns"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/campaigns:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__UPDATE_CAMPAIGN",
+        "description": "Update an existing Google Ads campaign's settings, budget, or targeting.",
+        "tags": [
+            "google_ads",
+            "campaigns"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/campaigns:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Campaign update operations with resource name and update mask"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Campaign update operations with resource name and update mask"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__SEARCH_AD_GROUPS",
-    "description": "Search for ad groups using GAQL",
-    "tags": [
-      "google_ads",
-      "ad_groups",
-      "search"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__SEARCH_AD_GROUPS",
+        "description": "Search for ad groups using GAQL from Google Ads.",
+        "tags": [
+            "google_ads",
+            "ad_groups",
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for ad groups"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for ad groups"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__CREATE_AD_GROUP",
-    "description": "Create a new ad group within a campaign",
-    "tags": [
-      "google_ads",
-      "ad_groups"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroups:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__CREATE_AD_GROUP",
+        "description": "Create a new ad group within a Google Ads campaign.",
+        "tags": [
+            "google_ads",
+            "ad_groups"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroups:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Ad group mutation operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Ad group mutation operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__UPDATE_AD_GROUP",
-    "description": "Update an existing ad group",
-    "tags": [
-      "google_ads",
-      "ad_groups"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroups:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__UPDATE_AD_GROUP",
+        "description": "Update an existing Google Ads ad group's bids, targeting, or settings.",
+        "tags": [
+            "google_ads",
+            "ad_groups"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroups:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Ad group update operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Ad group update operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__SEARCH_ADS",
-    "description": "Search for ads using GAQL",
-    "tags": [
-      "google_ads",
-      "ads",
-      "search"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__SEARCH_ADS",
+        "description": "Search for ads in Google Ads using GAQL (Google Ads Query Language).",
+        "tags": [
+            "google_ads",
+            "ads",
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for ads"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for ads"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__CREATE_AD",
-    "description": "Create a new ad",
-    "tags": [
-      "google_ads",
-      "ads"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroupAds:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__CREATE_AD",
+        "description": "Create a new ad in Google Ads with headlines, descriptions, and URLs.",
+        "tags": [
+            "google_ads",
+            "ads"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroupAds:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Ad mutation operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Ad mutation operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__UPDATE_AD",
-    "description": "Update an existing ad",
-    "tags": [
-      "google_ads",
-      "ads"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroupAds:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__UPDATE_AD",
+        "description": "Update an existing ad in Google Ads with new copy or settings.",
+        "tags": [
+            "google_ads",
+            "ads"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroupAds:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Ad update operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Ad update operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__SEARCH_KEYWORDS",
-    "description": "Search for keywords using GAQL",
-    "tags": [
-      "google_ads",
-      "keywords",
-      "search"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__SEARCH_KEYWORDS",
+        "description": "Search for keywords in Google Ads using GAQL (Google Ads Query Language).",
+        "tags": [
+            "google_ads",
+            "keywords",
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for keywords"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for keywords"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__CREATE_KEYWORD",
-    "description": "Create a new keyword for an ad group",
-    "tags": [
-      "google_ads",
-      "keywords"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroupCriteria:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__CREATE_KEYWORD",
+        "description": "Add a keyword to a Google Ads ad group for search targeting.",
+        "tags": [
+            "google_ads",
+            "keywords"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroupCriteria:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Keyword mutation operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Keyword mutation operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__UPDATE_KEYWORD",
-    "description": "Update an existing keyword",
-    "tags": [
-      "google_ads",
-      "keywords"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/adGroupCriteria:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__UPDATE_KEYWORD",
+        "description": "Update an existing keyword in Google Ads including bids and match types.",
+        "tags": [
+            "google_ads",
+            "keywords"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/adGroupCriteria:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Keyword update operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Keyword update operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__GET_CAMPAIGN_INSIGHTS",
-    "description": "Get insights and performance metrics for campaigns",
-    "tags": [
-      "google_ads",
-      "insights",
-      "analytics"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__GET_CAMPAIGN_INSIGHTS",
+        "description": "Get insights and performance metrics for campaigns from Google Ads.",
+        "tags": [
+            "google_ads",
+            "insights",
+            "analytics"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for campaign metrics (e.g., SELECT campaign.id, metrics.impressions, metrics.clicks FROM campaign)"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for campaign metrics (e.g., SELECT campaign.id, metrics.impressions, metrics.clicks FROM campaign)"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__GET_AD_GROUP_INSIGHTS",
-    "description": "Get insights and performance metrics for ad groups",
-    "tags": [
-      "google_ads",
-      "insights",
-      "analytics"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__GET_AD_GROUP_INSIGHTS",
+        "description": "Get insights and performance metrics for ad groups from Google Ads.",
+        "tags": [
+            "google_ads",
+            "insights",
+            "analytics"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for ad group metrics"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for ad group metrics"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__GET_ACCOUNT_HIERARCHY",
-    "description": "Get the account hierarchy for a customer",
-    "tags": [
-      "google_ads",
-      "accounts"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__GET_ACCOUNT_HIERARCHY",
+        "description": "Get the account hierarchy for a customer",
+        "tags": [
+            "google_ads",
+            "accounts"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for customer hierarchy"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for customer hierarchy"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__SEARCH_CUSTOM_AUDIENCES",
-    "description": "Search for custom audiences using GAQL",
-    "tags": [
-      "google_ads",
-      "audiences",
-      "search"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/googleAds:searchStream",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__SEARCH_CUSTOM_AUDIENCES",
+        "description": "Search for custom audiences using GAQL from Google Ads.",
+        "tags": [
+            "google_ads",
+            "audiences",
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/googleAds:searchStream",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "GAQL query for custom audiences"
-            }
-          },
-          "required": [
-            "query"
-          ],
-          "visible": [
-            "query"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "GAQL query for custom audiences"
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__CREATE_CUSTOM_AUDIENCE",
-    "description": "Create a new custom audience",
-    "tags": [
-      "google_ads",
-      "audiences"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v21/customers/{customer_id}/customAudiences:mutate",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "customer_id": {
-              "type": "string",
-              "description": "The ID of the customer account"
-            }
-          },
-          "required": [
-            "customer_id"
-          ],
-          "visible": [
-            "customer_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__CREATE_CUSTOM_AUDIENCE",
+        "description": "Create a new custom audience in Google Ads for targeted advertising.",
+        "tags": [
+            "google_ads",
+            "audiences"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v21/customers/{customer_id}/customAudiences:mutate",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "operations": {
-              "type": "array",
-              "description": "Custom audience mutation operations"
-            }
-          },
-          "required": [
-            "operations"
-          ],
-          "visible": [
-            "operations"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "customer_id": {
+                            "type": "string",
+                            "description": "The ID of the customer account"
+                        }
+                    },
+                    "required": [
+                        "customer_id"
+                    ],
+                    "visible": [
+                        "customer_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "operations": {
+                            "type": "array",
+                            "description": "Custom audience mutation operations"
+                        }
+                    },
+                    "required": [
+                        "operations"
+                    ],
+                    "visible": [
+                        "operations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOOGLE_ADS__GENERATE_USER_CREDENTIALS",
-    "description": "Generate user credentials for authentication purposes",
-    "tags": [
-      "google_ads",
-      "authentication"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/credentials:generateUser",
-      "server_url": "https://googleads.googleapis.com",
-      "content_type": "application/json"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "properties": {
-            "developer_token": {
-              "type": "string",
-              "description": "Your developer token for authentication",
-              "default": ""
-            }
-          },
-          "required": [
-            "developer_token"
-          ],
-          "visible": [],
-          "additionalProperties": false
+    {
+        "name": "GOOGLE_ADS__GENERATE_USER_CREDENTIALS",
+        "description": "Generate user credentials for authentication purposes via Google Ads.",
+        "tags": [
+            "google_ads",
+            "authentication"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/credentials:generateUser",
+            "server_url": "https://googleads.googleapis.com",
+            "content_type": "application/json"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "developer_token": {
+                            "type": "string",
+                            "description": "Your developer token for authentication",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "developer_token"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [],
-      "additionalProperties": false
     }
-  }
 ]

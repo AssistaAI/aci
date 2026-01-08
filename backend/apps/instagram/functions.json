@@ -1,1757 +1,1757 @@
 [
-  {
-    "name": "INSTAGRAM__GET_MEDIA",
-    "description": "Get Instagram media posts from an Instagram Business Account",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/media",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__GET_MEDIA",
+        "description": "Get Instagram media posts from an Instagram Business Account",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/media",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Comma-separated list of fields to return"
-            },
-            "limit": {
-              "type": "integer",
-              "description": "Number of media items to return"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__CREATE_MEDIA_CONTAINER",
-    "description": "Create Instagram media container for publishing (first step of 2-step publishing process)",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/media",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "image_url": {
-              "type": "string"
-            },
-            "video_url": {
-              "type": "string"
-            },
-            "caption": {
-              "type": "string"
-            },
-            "location_id": {
-              "type": "string"
-            },
-            "user_tags": {
-              "type": "array"
-            },
-            "product_tags": {
-              "type": "array"
-            },
-            "cover_url": {
-              "type": "string"
-            },
-            "media_type": {
-              "type": "string",
-              "enum": [
-                "IMAGE",
-                "VIDEO",
-                "CAROUSEL_ALBUM",
-                "REELS"
-              ]
-            },
-            "children": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {},
-                "required": [],
-                "visible": []
-              }
-            }
-          },
-          "additionalProperties": false,
-          "required": [],
-          "visible": []
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__PUBLISH_MEDIA",
-    "description": "Publish a created media container to Instagram feed (second step of 2-step publishing process)",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/media_publish",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "creation_id": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          "required": [
-            "creation_id"
-          ],
-          "additionalProperties": false,
-          "visible": []
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_MEDIA_DETAILS",
-    "description": "Get detailed information about a specific Instagram media object",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{media_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Instagram media ID"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include in response"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__DELETE_MEDIA",
-    "description": "Delete an Instagram media object (post, reel, story)",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/{media_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Instagram media ID to delete"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_COMMENTS",
-    "description": "Get comments on an Instagram media object",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{media_id}/comments",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Instagram media ID"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include for each comment"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__REPLY_TO_COMMENT",
-    "description": "Reply to an Instagram comment",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{comment_id}/replies",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "comment_id": {
-              "type": "string",
-              "description": "Instagram comment ID to reply to"
-            }
-          },
-          "required": [
-            "comment_id"
-          ],
-          "visible": [
-            "comment_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          "required": [
-            "message"
-          ],
-          "additionalProperties": false,
-          "visible": []
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__DELETE_COMMENT",
-    "description": "Delete an Instagram comment or reply",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/{comment_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "comment_id": {
-              "type": "string",
-              "description": "Instagram comment ID to delete"
-            }
-          },
-          "required": [
-            "comment_id"
-          ],
-          "visible": [
-            "comment_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__CREATE_STORY",
-    "description": "Create and publish an Instagram Story",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/stories",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "image_url": {
-              "type": "string"
-            },
-            "video_url": {
-              "type": "string"
-            },
-            "media_type": {
-              "type": "string",
-              "enum": [
-                "IMAGE",
-                "VIDEO"
-              ]
-            },
-            "stickers": {
-              "type": "array"
-            },
-            "location_id": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [],
-          "visible": []
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_ACCOUNT_INFO",
-    "description": "Get Instagram Business Account information and metadata",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include in account information"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_ACCOUNT_INSIGHTS",
-    "description": "Get Instagram Business Account analytics and insights metrics",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/insights",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "metric": {
-              "type": "string",
-              "description": "Specific metric to retrieve"
-            },
-            "period": {
-              "type": "string",
-              "description": "Time period for insights data"
-            },
-            "since": {
-              "type": "string",
-              "description": "Start date for insights period"
-            },
-            "until": {
-              "type": "string",
-              "description": "End date for insights period"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_MEDIA_INSIGHTS",
-    "description": "Get analytics and insights for a specific Instagram media object",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{media_id}/insights",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Instagram media ID"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "metric": {
-              "type": "string",
-              "description": "Specific metric to retrieve for the post"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_CONVERSATIONS",
-    "description": "Get Instagram direct message conversations",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/conversations",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "platform": {
-              "type": "string",
-              "description": "Platform for conversations"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_MESSAGES",
-    "description": "Get conversation messages",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{conversation_id}/messages",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "conversation_id": {
-              "type": "string",
-              "description": "Instagram conversation ID"
-            }
-          },
-          "required": [
-            "conversation_id"
-          ],
-          "visible": [
-            "conversation_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include in message data"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__SEND_MESSAGE",
-    "description": "Send direct message",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{conversation_id}/messages",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "conversation_id": {
-              "type": "string",
-              "description": "Instagram conversation ID"
-            }
-          },
-          "required": [
-            "conversation_id"
-          ],
-          "visible": [
-            "conversation_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "recipient": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {},
-              "required": [],
-              "visible": [],
-              "default": {}
-            },
-            "message": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "string"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
                 },
-                "attachment": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {},
-                  "required": [],
-                  "visible": []
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Comma-separated list of fields to return"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "description": "Number of media items to return"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
                 }
-              },
-              "additionalProperties": false,
-              "required": [],
-              "visible": [],
-              "default": {}
-            }
-          },
-          "required": [
-            "recipient",
-            "message"
-          ],
-          "additionalProperties": false,
-          "visible": []
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_PUBLISHING_LIMIT",
-    "description": "Get publishing rate limits",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/content_publishing_limit",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_TAGGED_MEDIA",
-    "description": "Get tagged media",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/tags",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include for tagged media"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_PRODUCT_CATALOG",
-    "description": "Get product catalog",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/product_catalog",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include for catalog information"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__LIST_CATALOG_PRODUCTS",
-    "description": "List catalog products",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{catalog_id}/products",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "catalog_id": {
-              "type": "string",
-              "description": "Product catalog ID"
-            }
-          },
-          "required": [
-            "catalog_id"
-          ],
-          "visible": [
-            "catalog_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Product fields to include"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__CREATE_LIVE_VIDEO",
-    "description": "Create live video",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/live_media",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "media_type": {
-              "type": "string",
-              "enum": [
-                "VIDEO"
-              ],
-              "default": "VIDEO"
             },
-            "broadcast_status": {
-              "type": "string",
-              "enum": [
-                "LIVE"
-              ],
-              "default": "LIVE"
-            }
-          },
-          "additionalProperties": false,
-          "required": [],
-          "visible": []
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_AVAILABLE_CATALOGS",
-    "description": "Get available catalogs",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/available_catalogs",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_MENTIONS",
-    "description": "Get mention notifications",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/mentions",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__CREATE_MEDIA_CONTAINER",
+        "description": "Create Instagram media container for publishing (first step of 2-step publishing process)",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/media",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Fields to include for mentioned media"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__DISCOVER_BUSINESS_ACCOUNT",
-    "description": "Discover competitor accounts",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/business_discovery",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "username": {
-              "type": "string",
-              "description": "Instagram username to research"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "image_url": {
+                            "type": "string"
+                        },
+                        "video_url": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        },
+                        "location_id": {
+                            "type": "string"
+                        },
+                        "user_tags": {
+                            "type": "array"
+                        },
+                        "product_tags": {
+                            "type": "array"
+                        },
+                        "cover_url": {
+                            "type": "string"
+                        },
+                        "media_type": {
+                            "type": "string",
+                            "enum": [
+                                "IMAGE",
+                                "VIDEO",
+                                "CAROUSEL_ALBUM",
+                                "REELS"
+                            ]
+                        },
+                        "children": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {},
+                                "required": [],
+                                "visible": []
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
+                }
             },
-            "fields": {
-              "type": "string",
-              "description": "Account fields to retrieve"
-            }
-          },
-          "required": [
-            "username"
-          ],
-          "visible": [
-            "username"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__SEARCH_HASHTAGS",
-    "description": "Search hashtags",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/hashtag_search",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__PUBLISH_MEDIA",
+        "description": "Publish a created media container to Instagram feed (second step of 2-step publishing process)",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/media_publish",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "q": {
-              "type": "string",
-              "description": "Hashtag search query"
-            }
-          },
-          "required": [
-            "q"
-          ],
-          "visible": [
-            "q"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_HASHTAG_TOP_MEDIA",
-    "description": "Get hashtag top posts",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{hashtag_id}/top_media",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "hashtag_id": {
-              "type": "string",
-              "description": "Instagram hashtag ID"
-            }
-          },
-          "required": [
-            "hashtag_id"
-          ],
-          "visible": [
-            "hashtag_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "user_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID for context"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "creation_id": {
+                            "type": "string",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "creation_id"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
+                }
             },
-            "fields": {
-              "type": "string",
-              "description": "Media fields to include"
-            }
-          },
-          "required": [
-            "user_id"
-          ],
-          "visible": [
-            "user_id"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__CONFIGURE_WEBHOOKS",
-    "description": "Configure Instagram webhooks",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/webhooks",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__GET_MEDIA_DETAILS",
+        "description": "Get detailed information about a specific Instagram media object",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{media_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "callback_url": {
-              "type": "string",
-              "format": "uri",
-              "default": ""
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Instagram media ID"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include in response"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
             },
-            "verify_token": {
-              "type": "string",
-              "default": ""
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__DELETE_MEDIA",
+        "description": "Delete a media post from your Instagram business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/{media_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Instagram media ID to delete"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "fields": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "comments",
-                  "mentions",
-                  "messaging_seen",
-                  "messaging_handovers",
-                  "messaging_postbacks"
-                ]
-              },
-              "default": []
-            }
-          },
-          "required": [
-            "callback_url",
-            "verify_token",
-            "fields"
-          ],
-          "additionalProperties": false,
-          "visible": []
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_CONNECTED_ACCOUNTS",
-    "description": "Get connected Instagram accounts",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{page_id}/instagram_accounts",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "page_id": {
-              "type": "string",
-              "description": "Facebook Page ID"
-            }
-          },
-          "required": [
-            "page_id"
-          ],
-          "visible": [
-            "page_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__UPLOAD_MEDIA",
-    "description": "Upload media to Instagram",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{instagram_account_id}/media_upload",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_ARCHIVED_STORIES",
-    "description": "Get archived stories",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/stories_archive",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__GET_COMMENTS",
+        "description": "Get comments on an Instagram media object",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{media_id}/comments",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Story fields to include"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Instagram media ID"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include for each comment"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "INSTAGRAM__GET_REELS",
-    "description": "Get Instagram Reels",
-    "tags": [
-      "instagram"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{instagram_account_id}/reels",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "instagram_account_id": {
-              "type": "string",
-              "description": "Instagram Business Account ID"
-            }
-          },
-          "required": [
-            "instagram_account_id"
-          ],
-          "visible": [
-            "instagram_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "INSTAGRAM__REPLY_TO_COMMENT",
+        "description": "Reply to an Instagram comment using the Instagram Graph API with your business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{comment_id}/replies",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Reels fields to include"
-            }
-          },
-          "required": [],
-          "visible": [],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "comment_id": {
+                            "type": "string",
+                            "description": "Instagram comment ID to reply to"
+                        }
+                    },
+                    "required": [
+                        "comment_id"
+                    ],
+                    "visible": [
+                        "comment_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "type": "string",
+                            "default": ""
+                        }
+                    },
+                    "required": [
+                        "message"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "INSTAGRAM__DELETE_COMMENT",
+        "description": "Delete a comment from an Instagram post owned by your account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/{comment_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "comment_id": {
+                            "type": "string",
+                            "description": "Instagram comment ID to delete"
+                        }
+                    },
+                    "required": [
+                        "comment_id"
+                    ],
+                    "visible": [
+                        "comment_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__CREATE_STORY",
+        "description": "Create and publish an Instagram Story",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/stories",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "image_url": {
+                            "type": "string"
+                        },
+                        "video_url": {
+                            "type": "string"
+                        },
+                        "media_type": {
+                            "type": "string",
+                            "enum": [
+                                "IMAGE",
+                                "VIDEO"
+                            ]
+                        },
+                        "stickers": {
+                            "type": "array"
+                        },
+                        "location_id": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_ACCOUNT_INFO",
+        "description": "Get Instagram Business Account information and metadata",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include in account information"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_ACCOUNT_INSIGHTS",
+        "description": "Get Instagram Business Account analytics and insights metrics",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/insights",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "metric": {
+                            "type": "string",
+                            "description": "Specific metric to retrieve"
+                        },
+                        "period": {
+                            "type": "string",
+                            "description": "Time period for insights data"
+                        },
+                        "since": {
+                            "type": "string",
+                            "description": "Start date for insights period"
+                        },
+                        "until": {
+                            "type": "string",
+                            "description": "End date for insights period"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_MEDIA_INSIGHTS",
+        "description": "Get analytics and insights for a specific Instagram media object",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{media_id}/insights",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Instagram media ID"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "metric": {
+                            "type": "string",
+                            "description": "Specific metric to retrieve for the post"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_CONVERSATIONS",
+        "description": "Get Instagram Direct message conversations for a business or creator account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/conversations",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "platform": {
+                            "type": "string",
+                            "description": "Platform for conversations"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_MESSAGES",
+        "description": "Get messages from an Instagram Direct conversation thread.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{conversation_id}/messages",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "conversation_id": {
+                            "type": "string",
+                            "description": "Instagram conversation ID"
+                        }
+                    },
+                    "required": [
+                        "conversation_id"
+                    ],
+                    "visible": [
+                        "conversation_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include in message data"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__SEND_MESSAGE",
+        "description": "Send a direct message through Instagram to a user or conversation.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{conversation_id}/messages",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "conversation_id": {
+                            "type": "string",
+                            "description": "Instagram conversation ID"
+                        }
+                    },
+                    "required": [
+                        "conversation_id"
+                    ],
+                    "visible": [
+                        "conversation_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "recipient": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {},
+                            "required": [],
+                            "visible": [],
+                            "default": {}
+                        },
+                        "message": {
+                            "type": "object",
+                            "properties": {
+                                "text": {
+                                    "type": "string"
+                                },
+                                "attachment": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {},
+                                    "required": [],
+                                    "visible": []
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [],
+                            "visible": [],
+                            "default": {}
+                        }
+                    },
+                    "required": [
+                        "recipient",
+                        "message"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_PUBLISHING_LIMIT",
+        "description": "Get the publishing rate limits for your Instagram business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/content_publishing_limit",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_TAGGED_MEDIA",
+        "description": "Get media where your Instagram account has been tagged by others.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/tags",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include for tagged media"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_PRODUCT_CATALOG",
+        "description": "Get the product catalog linked to your Instagram shopping account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/product_catalog",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include for catalog information"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__LIST_CATALOG_PRODUCTS",
+        "description": "List products from a catalog linked to your Instagram shopping account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{catalog_id}/products",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "catalog_id": {
+                            "type": "string",
+                            "description": "Product catalog ID"
+                        }
+                    },
+                    "required": [
+                        "catalog_id"
+                    ],
+                    "visible": [
+                        "catalog_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Product fields to include"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__CREATE_LIVE_VIDEO",
+        "description": "Create a live video broadcast on Instagram for your business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/live_media",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "media_type": {
+                            "type": "string",
+                            "enum": [
+                                "VIDEO"
+                            ],
+                            "default": "VIDEO"
+                        },
+                        "broadcast_status": {
+                            "type": "string",
+                            "enum": [
+                                "LIVE"
+                            ],
+                            "default": "LIVE"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_AVAILABLE_CATALOGS",
+        "description": "Get available product catalogs linked to your Instagram shopping account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/available_catalogs",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_MENTIONS",
+        "description": "Get notifications when your Instagram account is mentioned by others.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/mentions",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Fields to include for mentioned media"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__DISCOVER_BUSINESS_ACCOUNT",
+        "description": "Discover competitor or related business accounts on Instagram.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/business_discovery",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "username": {
+                            "type": "string",
+                            "description": "Instagram username to research"
+                        },
+                        "fields": {
+                            "type": "string",
+                            "description": "Account fields to retrieve"
+                        }
+                    },
+                    "required": [
+                        "username"
+                    ],
+                    "visible": [
+                        "username"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__SEARCH_HASHTAGS",
+        "description": "Search for hashtags on Instagram to discover relevant content topics.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/hashtag_search",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "q": {
+                            "type": "string",
+                            "description": "Hashtag search query"
+                        }
+                    },
+                    "required": [
+                        "q"
+                    ],
+                    "visible": [
+                        "q"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_HASHTAG_TOP_MEDIA",
+        "description": "Get top performing posts for a specific Instagram hashtag.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{hashtag_id}/top_media",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "hashtag_id": {
+                            "type": "string",
+                            "description": "Instagram hashtag ID"
+                        }
+                    },
+                    "required": [
+                        "hashtag_id"
+                    ],
+                    "visible": [
+                        "hashtag_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "user_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID for context"
+                        },
+                        "fields": {
+                            "type": "string",
+                            "description": "Media fields to include"
+                        }
+                    },
+                    "required": [
+                        "user_id"
+                    ],
+                    "visible": [
+                        "user_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__CONFIGURE_WEBHOOKS",
+        "description": "Configure Instagram webhooks for real-time notifications on account events.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/webhooks",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "callback_url": {
+                            "type": "string",
+                            "format": "uri",
+                            "default": ""
+                        },
+                        "verify_token": {
+                            "type": "string",
+                            "default": ""
+                        },
+                        "fields": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "comments",
+                                    "mentions",
+                                    "messaging_seen",
+                                    "messaging_handovers",
+                                    "messaging_postbacks"
+                                ]
+                            },
+                            "default": []
+                        }
+                    },
+                    "required": [
+                        "callback_url",
+                        "verify_token",
+                        "fields"
+                    ],
+                    "additionalProperties": false,
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_CONNECTED_ACCOUNTS",
+        "description": "Get all Instagram accounts connected to your Meta Business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{page_id}/instagram_accounts",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "page_id": {
+                            "type": "string",
+                            "description": "Facebook Page ID"
+                        }
+                    },
+                    "required": [
+                        "page_id"
+                    ],
+                    "visible": [
+                        "page_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__UPLOAD_MEDIA",
+        "description": "Upload photos, videos, or reels to Instagram as a business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{instagram_account_id}/media_upload",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_ARCHIVED_STORIES",
+        "description": "Get archived Instagram stories from your business account history.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/stories_archive",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Story fields to include"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "INSTAGRAM__GET_REELS",
+        "description": "Get Instagram Reels published by your business account.",
+        "tags": [
+            "instagram"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{instagram_account_id}/reels",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "instagram_account_id": {
+                            "type": "string",
+                            "description": "Instagram Business Account ID"
+                        }
+                    },
+                    "required": [
+                        "instagram_account_id"
+                    ],
+                    "visible": [
+                        "instagram_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Reels fields to include"
+                        }
+                    },
+                    "required": [],
+                    "visible": [],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]
