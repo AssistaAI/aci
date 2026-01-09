@@ -1,0 +1,10 @@
+{
+  "aci-devops": {
+    "command": "python",
+    "args": ["-m", "mcp_server.server"],
+    "cwd": "${CLAUDE_PROJECT_DIR}/backend",
+    "env": {
+      "PYTHONPATH": "${CLAUDE_PROJECT_DIR}/backend"
+    }
+  }
+}
