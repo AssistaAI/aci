@@ -18,6 +18,7 @@ class SecurityScheme(StrEnum):
     API_KEY = "api_key"
     HTTP_BASIC = "http_basic"
     HTTP_BEARER = "http_bearer"
+    OAUTH1 = "oauth1"
     OAUTH2 = "oauth2"
 
 
