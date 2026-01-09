@@ -38,6 +38,7 @@ dependencies = [
     "browser-use>=0.5.0",
     "langchain-openai>=0.3.28",
     "elevenlabs>=2.8.1",
+    "apscheduler>=3.10.4",
 ]
 
 [dependency-groups]

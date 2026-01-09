@@ -1,0 +1,19 @@
+{
+  "triggers": [
+    {
+      "value": "message.received",
+      "label": "Message Received",
+      "description": "When a new email is received"
+    },
+    {
+      "value": "message.sent",
+      "label": "Message Sent",
+      "description": "When an email is sent"
+    },
+    {
+      "value": "label.added",
+      "label": "Label Added",
+      "description": "When a label is added to a message"
+    }
+  ]
+}

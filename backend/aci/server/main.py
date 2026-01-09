@@ -15,8 +15,10 @@ from aci.common.logging_setup import setup_logging
 from aci.server import config
 from aci.server import dependencies as deps
 from aci.server.acl import get_propelauth
+from aci.server.background_jobs import setup_scheduler
 from aci.server.dependency_check import check_dependencies
 from aci.server.log_schema_filter import LogSchemaFilter
+from aci.server.metrics import export_prometheus_metrics
 from aci.server.middleware.interceptor import InterceptorMiddleware, RequestContextFilter
 from aci.server.middleware.ratelimit import RateLimitMiddleware
 from aci.server.routes import (
@@ -31,6 +33,7 @@ from aci.server.routes import (
     linked_accounts,
     organizations,
     projects,
+    triggers,
     webhooks,
 )
 from aci.server.sentry import setup_sentry
@@ -111,6 +114,33 @@ app.add_middleware(InterceptorMiddleware)
 app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=[config.APPLICATION_LOAD_BALANCER_DNS])
 
 
+@app.on_event("startup")
+async def startup_event():
+    """Initialize background services on startup."""
+    from aci.common.logging_setup import get_logger
+
+    logger = get_logger(__name__)
+
+    # Start background job scheduler
+    scheduler = setup_scheduler()
+    if scheduler:
+        logger.info("Background job scheduler started successfully")
+    else:
+        logger.warning("Background job scheduler not started (APScheduler not installed)")
+
+
+@app.get("/metrics", tags=["monitoring"])
+async def metrics():
+    """
+    Prometheus metrics endpoint.
+
+    Returns metrics in Prometheus text format for scraping.
+    """
+    from fastapi.responses import PlainTextResponse
+
+    return PlainTextResponse(content=export_prometheus_metrics(), media_type="text/plain")
+
+
 # NOTE: generic exception handler (type Exception) for all exceptions doesn't work
 # https://github.com/fastapi/fastapi/discussions/9478
 # That's why we have another catch-all in the interceptor middleware
@@ -178,6 +208,13 @@ app.include_router(
     webhooks.router,
     prefix=config.ROUTER_PREFIX_WEBHOOKS,
     tags=[config.ROUTER_PREFIX_WEBHOOKS.split("/")[-1]],
+)
+
+app.include_router(
+    triggers.router,
+    prefix=config.ROUTER_PREFIX_TRIGGERS,
+    tags=[config.ROUTER_PREFIX_TRIGGERS.split("/")[-1]],
+    dependencies=[Depends(deps.validate_api_key), Depends(deps.validate_project_quota)],
 )
 
 app.include_router(

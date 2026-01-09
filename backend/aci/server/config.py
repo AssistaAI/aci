@@ -1,3 +1,5 @@
+import os
+
 from aci.common.utils import check_and_get_env_variable, construct_db_url
 
 ENVIRONMENT = check_and_get_env_variable("SERVER_ENVIRONMENT")
@@ -62,12 +64,18 @@ ROUTER_PREFIX_LINKED_ACCOUNTS = "/v1/linked-accounts"
 ROUTER_PREFIX_AGENT = "/v1/agent"
 ROUTER_PREFIX_ANALYTICS = "/v1/analytics"
 ROUTER_PREFIX_WEBHOOKS = "/v1/webhooks"
+ROUTER_PREFIX_TRIGGERS = "/v1/triggers"
 ROUTER_PREFIX_BILLING = "/v1/billing"
 ROUTER_PREFIX_ORGANIZATIONS = "/v1/organizations"
 ROUTER_PREFIX_DOCS = "/v1/docs"
 
 # DEV PORTAL
 DEV_PORTAL_URL = check_and_get_env_variable("SERVER_DEV_PORTAL_URL")
+
+# WEBHOOKS
+# Base URL for webhook callbacks (should be publicly accessible, e.g., ngrok URL for local dev)
+# Falls back to SERVER_REDIRECT_URI_BASE if not set
+WEBHOOK_BASE_URL = os.getenv("SERVER_WEBHOOK_BASE_URL", REDIRECT_URI_BASE)
 
 # LOGFIRE
 LOGFIRE_WRITE_TOKEN = check_and_get_env_variable("SERVER_LOGFIRE_WRITE_TOKEN")

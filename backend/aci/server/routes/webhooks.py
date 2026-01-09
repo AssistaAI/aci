@@ -1,15 +1,19 @@
 import secrets
 import string
+from datetime import datetime, timedelta
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from svix import Webhook, WebhookVerificationError
 
 from aci.common.db import crud
-from aci.common.enums import OrganizationRole
+from aci.common.db.sql_models import TriggerEvent
+from aci.common.enums import OrganizationRole, TriggerEventStatus
 from aci.common.logging_setup import get_logger
+from aci.common.schemas.trigger import WebhookReceivedResponse, WebhookVerificationChallenge
 from aci.server import config
 from aci.server import dependencies as deps
 from aci.server.acl import get_propelauth
@@ -138,3 +142,318 @@ def _convert_org_id_to_uuid(org_id: str | UUID) -> UUID:
         return org_id
     else:
         raise TypeError(f"org_id must be a str or UUID, got {type(org_id).__name__}")
+
+
+# ============================================================================
+# Third-Party Webhook Receiver Endpoints
+# ============================================================================
+
+
+@router.get("/{app_name}/{trigger_id}", response_model=WebhookVerificationChallenge)
+async def webhook_challenge_verification(
+    app_name: str,
+    trigger_id: UUID,
+    request: Request,
+    db_session: Annotated[Session, Depends(deps.yield_db_session)],
+) -> dict:
+    """
+    Handle challenge-response verification for webhook registration.
+
+    Used by services like Slack, Stripe, etc. that send a challenge parameter
+    during webhook subscription setup.
+    """
+    # Verify trigger exists and is active
+    trigger = crud.triggers.get_trigger(db_session, trigger_id)
+    if not trigger or trigger.app_name != app_name.upper():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Trigger not found for app {app_name}",
+        )
+
+    if trigger.status != "active":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Trigger is not active, status={trigger.status}",
+        )
+
+    # Get challenge parameter from query string
+    challenge = request.query_params.get("challenge")
+    if not challenge:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing challenge parameter",
+        )
+
+    logger.info(
+        f"Webhook challenge verification successful, app={app_name}, trigger_id={trigger_id}"
+    )
+
+    # Echo back the challenge
+    return {"challenge": challenge}
+
+
+@router.post("/{app_name}/{trigger_id}", response_model=WebhookReceivedResponse)
+async def receive_webhook(
+    app_name: str,
+    trigger_id: UUID,
+    request: Request,
+    db_session: Annotated[Session, Depends(deps.yield_db_session)],
+) -> WebhookReceivedResponse:
+    """
+    Receive and store webhooks from third-party services.
+
+    This endpoint:
+    1. Rate limiting (per-trigger and global per-IP)
+    2. Validates the trigger exists and is active
+    3. Verifies the webhook signature
+    4. Stores the event in the database
+    5. Returns success response
+    """
+    import time
+
+    from aci.server import metrics as m
+
+    # Track processing time
+    start_time = time.time()
+
+    # Rate limiting - check both per-trigger and global (by IP)
+    from aci.server.rate_limiter import get_global_rate_limiter, get_webhook_rate_limiter
+
+    # Get client IP
+    client_ip = request.client.host if request.client else "unknown"
+
+    # Check global rate limit (by IP)
+    global_limiter = get_global_rate_limiter()
+    global_allowed, global_metadata = global_limiter.allow(client_ip)
+
+    if not global_allowed:
+        m.record_rate_limit_hit("global_ip")
+        logger.warning(
+            f"Global rate limit exceeded for IP {client_ip}, "
+            f"retry_after={global_metadata['retry_after']}s"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Rate limit exceeded. Retry after {global_metadata['retry_after']} seconds",
+            headers={
+                "Retry-After": str(global_metadata["retry_after"]),
+                "X-RateLimit-Limit": str(global_metadata["limit"]),
+                "X-RateLimit-Remaining": str(global_metadata["remaining"]),
+            },
+        )
+
+    # Check per-trigger rate limit
+    trigger_limiter = get_webhook_rate_limiter()
+    trigger_allowed, trigger_metadata = trigger_limiter.allow(str(trigger_id))
+
+    if not trigger_allowed:
+        m.record_rate_limit_hit("per_trigger")
+        logger.warning(
+            f"Trigger rate limit exceeded for trigger_id={trigger_id}, "
+            f"retry_after={trigger_metadata['retry_after']}s"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Trigger rate limit exceeded. Retry after {trigger_metadata['retry_after']} seconds",
+            headers={
+                "Retry-After": str(trigger_metadata["retry_after"]),
+                "X-RateLimit-Limit": str(trigger_metadata["limit"]),
+                "X-RateLimit-Remaining": str(trigger_metadata["remaining"]),
+            },
+        )
+
+    # Get trigger and validate
+    trigger = crud.triggers.get_trigger(db_session, trigger_id)
+    if not trigger or trigger.app_name != app_name.upper():
+        logger.error(
+            f"Webhook received for non-existent trigger, app={app_name}, trigger_id={trigger_id}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Trigger not found for app {app_name}",
+        )
+
+    from aci.common.enums import TriggerStatus
+
+    if trigger.status != TriggerStatus.ACTIVE:
+        logger.warning(
+            f"Webhook received for inactive trigger, "
+            f"app={app_name}, trigger_id={trigger_id}, status={trigger.status}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Trigger is not active, status={trigger.status}",
+        )
+
+    # Import connector
+    from aci.server.trigger_connectors import get_trigger_connector
+
+    # Parse webhook payload based on app type
+    # Google Calendar and Microsoft Calendar send notifications via headers with empty body
+    if app_name.upper() in ["GOOGLE_CALENDAR", "MICROSOFT_CALENDAR"]:
+        # For calendar services, extract data from headers
+        payload_dict = dict(request.headers)
+        logger.info(
+            f"Calendar webhook received with headers, "
+            f"app={app_name}, trigger_id={trigger_id}, headers={list(payload_dict.keys())}"
+        )
+    else:
+        # For other services, parse JSON body
+        try:
+            payload_dict = await request.json()
+        except Exception as e:
+            logger.error(f"Failed to parse webhook payload, error={e}")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid JSON payload",
+            ) from e
+
+    # Verify webhook signature using TriggerConnector
+    try:
+        connector = get_trigger_connector(app_name.upper())
+        verification_result = await connector.verify_webhook(request, trigger)
+        if not verification_result.is_valid:
+            m.record_webhook_verification_failure(
+                app_name, verification_result.error_message or "unknown"
+            )
+            logger.error(
+                f"Webhook signature verification failed, "
+                f"trigger_id={trigger_id}, error={verification_result.error_message}"
+            )
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=f"Invalid webhook signature: {verification_result.error_message}",
+            )
+    except Exception as e:
+        logger.error(f"Webhook verification error, trigger_id={trigger_id}, error={e}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Webhook verification failed",
+        ) from e
+
+    # Parse event using TriggerConnector
+    try:
+        parsed_event = connector.parse_event(payload_dict)
+        event_type = parsed_event.event_type
+        external_event_id = parsed_event.external_event_id
+        event_data = parsed_event.event_data
+    except Exception as e:
+        logger.error(f"Failed to parse webhook event, trigger_id={trigger_id}, error={e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Failed to parse webhook event",
+        ) from e
+
+    # For Google Calendar and Microsoft Calendar, fetch actual event details
+    # The webhook notification only contains metadata, not the actual calendar events
+    if app_name.upper() in ["GOOGLE_CALENDAR", "MICROSOFT_CALENDAR"]:
+        # Skip sync notifications (initial setup) - these don't contain event data
+        if event_data.get("resource_state") != "sync":
+            try:
+                calendar_id = trigger.config.get("calendar_id", "primary")
+                calendar_events = await connector.fetch_calendar_events(trigger, calendar_id)
+
+                # Add the fetched calendar events to event_data
+                event_data["calendar_events"] = calendar_events
+                event_data["event_count"] = len(calendar_events)
+
+                logger.info(
+                    f"Fetched {len(calendar_events)} calendar events for webhook, "
+                    f"trigger_id={trigger_id}, calendar_id={calendar_id}"
+                )
+            except Exception as e:
+                logger.warning(
+                    f"Failed to fetch calendar events for webhook (continuing with metadata only), "
+                    f"trigger_id={trigger_id}, error={e}"
+                )
+                # Continue processing even if event fetch fails - at least we have metadata
+
+    # Check for duplicate events
+    if external_event_id:
+        is_duplicate = crud.trigger_events.check_duplicate_event(
+            db_session, trigger_id, external_event_id
+        )
+        if is_duplicate:
+            m.record_duplicate_event(str(trigger_id))
+            logger.info(
+                f"Duplicate webhook event received, skipping, "
+                f"trigger_id={trigger_id}, external_event_id={external_event_id}"
+            )
+            # Return success to avoid retries from provider
+            from sqlalchemy import select
+
+            existing_event = db_session.execute(
+                select(TriggerEvent).filter_by(
+                    trigger_id=trigger_id, external_event_id=external_event_id
+                )
+            ).scalar_one_or_none()
+            return WebhookReceivedResponse(
+                event_id=existing_event.id,
+                trigger_id=trigger.id,
+                event_type=event_type,
+                status=existing_event.status,
+                received_at=existing_event.received_at,
+            )
+
+    # Store event with race condition protection
+    try:
+        event = crud.trigger_events.create_trigger_event(
+            db_session,
+            trigger_id=trigger.id,
+            event_type=event_type,
+            event_data=event_data,
+            external_event_id=external_event_id,
+            status=TriggerEventStatus.PENDING,
+            expires_at=datetime.utcnow() + timedelta(days=30),  # 30-day retention
+        )
+
+        # Update trigger's last_triggered_at
+        crud.triggers.update_trigger_last_triggered_at(db_session, trigger, datetime.utcnow())
+
+        db_session.commit()
+
+        # Record metrics
+        m.record_webhook_received(app_name, str(trigger_id), event_type)
+        m.record_event_stored(str(trigger_id), event_type)
+        duration = time.time() - start_time
+        m.record_webhook_processing_time(app_name, duration)
+
+        logger.info(
+            f"Webhook received and stored, "
+            f"app={app_name}, trigger_id={trigger_id}, event_id={event.id}, "
+            f"event_type={event_type}, external_event_id={external_event_id}, "
+            f"duration={duration:.3f}s"
+        )
+
+        return WebhookReceivedResponse(
+            event_id=event.id,
+            trigger_id=trigger.id,
+            event_type=event_type,
+            status=event.status,
+            received_at=event.received_at,
+        )
+    except IntegrityError:
+        # Handle race condition: two concurrent webhooks with same external_event_id
+        db_session.rollback()
+        if external_event_id:
+            from sqlalchemy import select
+
+            existing_event = db_session.execute(
+                select(TriggerEvent).filter_by(
+                    trigger_id=trigger_id, external_event_id=external_event_id
+                )
+            ).scalar_one_or_none()
+            if existing_event:
+                logger.info(
+                    f"Race condition on webhook event creation, returning existing event, "
+                    f"trigger_id={trigger_id}, external_event_id={external_event_id}"
+                )
+                return WebhookReceivedResponse(
+                    event_id=existing_event.id,
+                    trigger_id=trigger.id,
+                    event_type=event_type,
+                    status=existing_event.status,
+                    received_at=existing_event.received_at,
+                )
+        # If we land here without an existing event, re-raise
+        raise
