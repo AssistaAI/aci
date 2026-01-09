@@ -1,297 +1,297 @@
 [
-  {
-    "name": "GOCO__COMPANIES",
-    "description": "Retrieve a list of companies",
-    "tags": [
-      "goco",
-      "companies"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/companies",
-      "server_url": "https://api.goco.io/public/api/v1"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content-Type header",
-              "default": "application/json"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "default": {}
-        }
-      },
-      "required": [
-        "header"
-      ],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOCO__CUSTOM_FIELDS",
-    "description": "Retrieve a list of custom fields for a company",
-    "tags": [
-      "goco",
-      "custom_fields"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/companies/{companyUrlName}/custom_fields",
-      "server_url": "https://api.goco.io/public/api/v1"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content-Type header",
-              "default": "application/json"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "default": {}
+    {
+        "name": "GOCO__COMPANIES",
+        "description": "Retrieve a list of companies from GoCo HR platform.",
+        "tags": [
+            "goco",
+            "companies"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/companies",
+            "server_url": "https://api.goco.io/public/api/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "companyUrlName": {
-              "type": "string",
-              "description": "The URL name of the company"
-            }
-          },
-          "required": [
-            "companyUrlName"
-          ],
-          "visible": [
-            "companyUrlName"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content-Type header",
+                            "default": "application/json"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "default": {}
+                }
+            },
+            "required": [
+                "header"
+            ],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOCO__DEPARTMENTS",
-    "description": "Retrieve a list of departments",
-    "tags": [
-      "goco",
-      "departments"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/companies/{companyUrlName}/departments",
-      "server_url": "https://api.goco.io/public/api/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content-Type header",
-              "default": "application/json"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "default": {}
+    {
+        "name": "GOCO__CUSTOM_FIELDS",
+        "description": "Retrieve a list of custom fields for a company from Goco.",
+        "tags": [
+            "goco",
+            "custom_fields"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/companies/{companyUrlName}/custom_fields",
+            "server_url": "https://api.goco.io/public/api/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "companyUrlName": {
-              "type": "string",
-              "description": "The URL name of the company"
-            }
-          },
-          "required": [
-            "companyUrlName"
-          ],
-          "visible": [
-            "companyUrlName"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content-Type header",
+                            "default": "application/json"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "companyUrlName": {
+                            "type": "string",
+                            "description": "The URL name of the company"
+                        }
+                    },
+                    "required": [
+                        "companyUrlName"
+                    ],
+                    "visible": [
+                        "companyUrlName"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOCO__JOB_TITLES",
-    "description": "Retrieve a list of job titles",
-    "tags": [
-      "goco",
-      "job_titles"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/companies/{companyUrlName}/job_titles",
-      "server_url": "https://api.goco.io/public/api/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content-Type header",
-              "default": "application/json"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "default": {}
+    {
+        "name": "GOCO__DEPARTMENTS",
+        "description": "Retrieve a list of departments from GoCo HR platform.",
+        "tags": [
+            "goco",
+            "departments"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/companies/{companyUrlName}/departments",
+            "server_url": "https://api.goco.io/public/api/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "companyUrlName": {
-              "type": "string",
-              "description": "The URL name of the company"
-            }
-          },
-          "required": [
-            "companyUrlName"
-          ],
-          "visible": [
-            "companyUrlName"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content-Type header",
+                            "default": "application/json"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "companyUrlName": {
+                            "type": "string",
+                            "description": "The URL name of the company"
+                        }
+                    },
+                    "required": [
+                        "companyUrlName"
+                    ],
+                    "visible": [
+                        "companyUrlName"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "GOCO__LOCATIONS",
-    "description": "Retrieve a list of locations",
-    "tags": [
-      "goco",
-      "locations"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/companies/{companyUrlName}/locations",
-      "server_url": "https://api.goco.io/public/api/v1"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "header": {
-          "type": "object",
-          "description": "Headers for the HTTP request",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "description": "Content-Type header",
-              "default": "application/json"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "default": {}
+    {
+        "name": "GOCO__JOB_TITLES",
+        "description": "Retrieve a list of job titles from Goco.",
+        "tags": [
+            "goco",
+            "job_titles"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/companies/{companyUrlName}/job_titles",
+            "server_url": "https://api.goco.io/public/api/v1"
         },
-        "path": {
-          "type": "object",
-          "description": "Path parameters",
-          "properties": {
-            "companyUrlName": {
-              "type": "string",
-              "description": "The URL name of the company"
-            }
-          },
-          "required": [
-            "companyUrlName"
-          ],
-          "visible": [
-            "companyUrlName"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content-Type header",
+                            "default": "application/json"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "companyUrlName": {
+                            "type": "string",
+                            "description": "The URL name of the company"
+                        }
+                    },
+                    "required": [
+                        "companyUrlName"
+                    ],
+                    "visible": [
+                        "companyUrlName"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "header",
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "GOCO__LOCATIONS",
+        "description": "Retrieve a list of office locations from GoCo HR platform.",
+        "tags": [
+            "goco",
+            "locations"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/companies/{companyUrlName}/locations",
+            "server_url": "https://api.goco.io/public/api/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Headers for the HTTP request",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "description": "Content-Type header",
+                            "default": "application/json"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "default": {}
+                },
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "companyUrlName": {
+                            "type": "string",
+                            "description": "The URL name of the company"
+                        }
+                    },
+                    "required": [
+                        "companyUrlName"
+                    ],
+                    "visible": [
+                        "companyUrlName"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]

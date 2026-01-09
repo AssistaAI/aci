@@ -1,383 +1,383 @@
 [
-  {
-    "name": "ETHERSCAN__ACCOUNT_BALANCE",
-    "description": "Get the Ether balance for a single address across multiple chains",
-    "tags": [
-      "account",
-      "balance",
-      "ether",
-      "multichain"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/api",
-      "server_url": "https://api.etherscan.io"
-    },
-    "parameters": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for the http request",
-          "required": [
-            "module",
-            "action",
-            "address"
-          ],
-          "visible": [
-            "module",
-            "action",
-            "chainid",
-            "address",
-            "tag"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "chainid": {
-              "type": "integer",
-              "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
-              "default": 1
-            },
-            "module": {
-              "type": "string",
-              "description": "Module name",
-              "default": "account"
-            },
-            "action": {
-              "type": "string",
-              "description": "Action name",
-              "default": "balance"
-            },
-            "address": {
-              "type": "string",
-              "description": "The address to check balance for"
-            },
-            "tag": {
-              "type": "string",
-              "description": "The tag to check balance for",
-              "default": "latest"
+    {
+        "name": "ETHERSCAN__ACCOUNT_BALANCE",
+        "description": "Get the Ether balance for a single address across multiple chains from Etherscan.",
+        "tags": [
+            "account",
+            "balance",
+            "ether",
+            "multichain"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/api",
+            "server_url": "https://api.etherscan.io"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for the http request",
+                    "required": [
+                        "module",
+                        "action",
+                        "address"
+                    ],
+                    "visible": [
+                        "module",
+                        "action",
+                        "chainid",
+                        "address",
+                        "tag"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "chainid": {
+                            "type": "integer",
+                            "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
+                            "default": 1
+                        },
+                        "module": {
+                            "type": "string",
+                            "description": "Module name",
+                            "default": "account"
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Action name",
+                            "default": "balance"
+                        },
+                        "address": {
+                            "type": "string",
+                            "description": "The address to check balance for"
+                        },
+                        "tag": {
+                            "type": "string",
+                            "description": "The tag to check balance for",
+                            "default": "latest"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  },
-  {
-    "name": "ETHERSCAN__TOKEN_BALANCE",
-    "description": "Get the token balance for a single address across multiple chains",
-    "tags": [
-      "account",
-      "balance",
-      "token",
-      "multichain"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/api",
-      "server_url": "https://api.etherscan.io"
     },
-    "parameters": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for the http request",
-          "required": [
-            "module",
-            "action",
-            "contractaddress",
-            "address"
-          ],
-          "visible": [
-            "module",
-            "action",
-            "chainid",
-            "contractaddress",
-            "address",
-            "tag"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "chainid": {
-              "type": "integer",
-              "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
-              "default": 1
-            },
-            "module": {
-              "type": "string",
-              "description": "Module name",
-              "default": "account"
-            },
-            "action": {
-              "type": "string",
-              "description": "Action name",
-              "default": "tokenbalance"
-            },
-            "contractaddress": {
-              "type": "string",
-              "description": "The token contract address"
-            },
-            "address": {
-              "type": "string",
-              "description": "The address to check token balance for"
-            },
-            "tag": {
-              "type": "string",
-              "description": "The tag to check balance for",
-              "default": "latest"
+    {
+        "name": "ETHERSCAN__TOKEN_BALANCE",
+        "description": "Get the token balance for a single address across multiple chains from Etherscan.",
+        "tags": [
+            "account",
+            "balance",
+            "token",
+            "multichain"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/api",
+            "server_url": "https://api.etherscan.io"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for the http request",
+                    "required": [
+                        "module",
+                        "action",
+                        "contractaddress",
+                        "address"
+                    ],
+                    "visible": [
+                        "module",
+                        "action",
+                        "chainid",
+                        "contractaddress",
+                        "address",
+                        "tag"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "chainid": {
+                            "type": "integer",
+                            "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
+                            "default": 1
+                        },
+                        "module": {
+                            "type": "string",
+                            "description": "Module name",
+                            "default": "account"
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Action name",
+                            "default": "tokenbalance"
+                        },
+                        "contractaddress": {
+                            "type": "string",
+                            "description": "The token contract address"
+                        },
+                        "address": {
+                            "type": "string",
+                            "description": "The address to check token balance for"
+                        },
+                        "tag": {
+                            "type": "string",
+                            "description": "The tag to check balance for",
+                            "default": "latest"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  },
-  {
-    "name": "ETHERSCAN__TRANSACTIONS",
-    "description": "Get the list of transactions for a single address across multiple chains",
-    "tags": [
-      "account",
-      "transactions",
-      "history",
-      "multichain"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/api",
-      "server_url": "https://api.etherscan.io"
     },
-    "parameters": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for the http request",
-          "required": [
-            "module",
-            "action",
-            "address"
-          ],
-          "visible": [
-            "module",
-            "action",
-            "chainid",
-            "address",
-            "startblock",
-            "endblock",
-            "page",
-            "offset",
-            "sort"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "chainid": {
-              "type": "integer",
-              "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
-              "default": 1
-            },
-            "module": {
-              "type": "string",
-              "description": "Module name",
-              "default": "account"
-            },
-            "action": {
-              "type": "string",
-              "description": "Action name",
-              "default": "txlist"
-            },
-            "address": {
-              "type": "string",
-              "description": "The address to get transactions for"
-            },
-            "startblock": {
-              "type": "integer",
-              "description": "Start block number",
-              "default": 0
-            },
-            "endblock": {
-              "type": "integer",
-              "description": "End block number",
-              "default": 99999999
-            },
-            "page": {
-              "type": "integer",
-              "description": "Page number",
-              "default": 1
-            },
-            "offset": {
-              "type": "integer",
-              "description": "Number of records per page",
-              "default": 10
-            },
-            "sort": {
-              "type": "string",
-              "description": "Sort order",
-              "enum": [
-                "asc",
-                "desc"
-              ],
-              "default": "desc"
+    {
+        "name": "ETHERSCAN__TRANSACTIONS",
+        "description": "Get the list of transactions for a single address across multiple chains",
+        "tags": [
+            "account",
+            "transactions",
+            "history",
+            "multichain"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/api",
+            "server_url": "https://api.etherscan.io"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for the http request",
+                    "required": [
+                        "module",
+                        "action",
+                        "address"
+                    ],
+                    "visible": [
+                        "module",
+                        "action",
+                        "chainid",
+                        "address",
+                        "startblock",
+                        "endblock",
+                        "page",
+                        "offset",
+                        "sort"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "chainid": {
+                            "type": "integer",
+                            "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
+                            "default": 1
+                        },
+                        "module": {
+                            "type": "string",
+                            "description": "Module name",
+                            "default": "account"
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Action name",
+                            "default": "txlist"
+                        },
+                        "address": {
+                            "type": "string",
+                            "description": "The address to get transactions for"
+                        },
+                        "startblock": {
+                            "type": "integer",
+                            "description": "Start block number",
+                            "default": 0
+                        },
+                        "endblock": {
+                            "type": "integer",
+                            "description": "End block number",
+                            "default": 99999999
+                        },
+                        "page": {
+                            "type": "integer",
+                            "description": "Page number",
+                            "default": 1
+                        },
+                        "offset": {
+                            "type": "integer",
+                            "description": "Number of records per page",
+                            "default": 10
+                        },
+                        "sort": {
+                            "type": "string",
+                            "description": "Sort order",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "default": "desc"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  },
-  {
-    "name": "ETHERSCAN__GAS_PRICE",
-    "description": "Get the current gas prices across multiple chains",
-    "tags": [
-      "gas",
-      "price",
-      "network",
-      "multichain"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/api",
-      "server_url": "https://api.etherscan.io"
     },
-    "parameters": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for the http request",
-          "required": [
-            "module",
-            "action"
-          ],
-          "visible": [
-            "module",
-            "action",
-            "chainid"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "chainid": {
-              "type": "integer",
-              "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
-              "default": 1
-            },
-            "module": {
-              "type": "string",
-              "description": "Module name",
-              "default": "gastracker"
-            },
-            "action": {
-              "type": "string",
-              "description": "Action name",
-              "default": "gasoracle"
+    {
+        "name": "ETHERSCAN__GAS_PRICE",
+        "description": "Get the current gas prices across multiple chains from Etherscan.",
+        "tags": [
+            "gas",
+            "price",
+            "network",
+            "multichain"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/api",
+            "server_url": "https://api.etherscan.io"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for the http request",
+                    "required": [
+                        "module",
+                        "action"
+                    ],
+                    "visible": [
+                        "module",
+                        "action",
+                        "chainid"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "chainid": {
+                            "type": "integer",
+                            "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
+                            "default": 1
+                        },
+                        "module": {
+                            "type": "string",
+                            "description": "Module name",
+                            "default": "gastracker"
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Action name",
+                            "default": "gasoracle"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  },
-  {
-    "name": "ETHERSCAN__CONTRACT_SOURCE",
-    "description": "Get the source code of a verified contract across multiple chains",
-    "tags": [
-      "contract",
-      "source",
-      "code",
-      "multichain"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/api",
-      "server_url": "https://api.etherscan.io"
     },
-    "parameters": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "visible": [
-        "query"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Query parameters for the http request",
-          "required": [
-            "module",
-            "action",
-            "address"
-          ],
-          "visible": [
-            "module",
-            "action",
-            "chainid",
-            "address"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "chainid": {
-              "type": "integer",
-              "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
-              "default": 1
-            },
-            "module": {
-              "type": "string",
-              "description": "Module name",
-              "default": "contract"
-            },
-            "action": {
-              "type": "string",
-              "description": "Action name",
-              "default": "getsourcecode"
-            },
-            "address": {
-              "type": "string",
-              "description": "The contract address to get source code for"
+    {
+        "name": "ETHERSCAN__CONTRACT_SOURCE",
+        "description": "Get the source code of a verified contract across multiple chains from Etherscan.",
+        "tags": [
+            "contract",
+            "source",
+            "code",
+            "multichain"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/api",
+            "server_url": "https://api.etherscan.io"
+        },
+        "parameters": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "visible": [
+                "query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "query": {
+                    "type": "object",
+                    "description": "Query parameters for the http request",
+                    "required": [
+                        "module",
+                        "action",
+                        "address"
+                    ],
+                    "visible": [
+                        "module",
+                        "action",
+                        "chainid",
+                        "address"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "chainid": {
+                            "type": "integer",
+                            "description": "Chain ID to query (e.g., 1 for Ethereum, 42161 for Arbitrum, 10 for Optimism)",
+                            "default": 1
+                        },
+                        "module": {
+                            "type": "string",
+                            "description": "Module name",
+                            "default": "contract"
+                        },
+                        "action": {
+                            "type": "string",
+                            "description": "Action name",
+                            "default": "getsourcecode"
+                        },
+                        "address": {
+                            "type": "string",
+                            "description": "The contract address to get source code for"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 ]

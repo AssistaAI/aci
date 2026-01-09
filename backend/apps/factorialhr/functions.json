@@ -1,7 +1,7 @@
 [
   {
     "name": "FACTORIAL_HR__READS_ALL_CREDENTIALS",
-    "description": "Get a list of all credentials",
+    "description": "Get a list of all API credentials from Factorial HR for authentication management.",
     "tags": [
       "credentials"
     ],
@@ -32,7 +32,7 @@
   },
   {
     "name": "FACTORIAL_HR__READS_ALL_WEBHOOK_SUBSCRIPTIONS",
-    "description": "Get a list of all webhook subscriptions",
+    "description": "Get a list of all webhook subscriptions from Factorial HR for event notifications.",
     "tags": [
       "webhooks"
     ],
@@ -87,7 +87,7 @@
   },
   {
     "name": "FACTORIAL_HR__CREATES_A_WEBHOOK_SUBSCRIPTION",
-    "description": "Create a new webhook subscription",
+    "description": "Create a new webhook subscription in Factorial HR for receiving event notifications.",
     "tags": [
       "webhooks"
     ],

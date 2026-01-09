@@ -1,136 +1,170 @@
 [
-  {
-    "name": "TAVILY__SEARCH",
-    "description": "Tavily Search API is a search engine optimized for LLMs, aimed at efficient, quick and persistent search results.",
-    "tags": ["search"],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/search",
-      "server_url": "https://api.tavily.com"
+    {
+        "name": "TAVILY__SEARCH",
+        "description": "Search the web using Tavily API, optimized for LLM applications and AI agents.",
+        "tags": [
+            "search"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/search",
+            "server_url": "https://api.tavily.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "description": "body parameters",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The search query you want to execute with Tavily."
+                        },
+                        "search_depth": {
+                            "type": "string",
+                            "default": "basic",
+                            "description": "The depth of the search. It can be 'basic' or 'advanced'. Default is 'basic'.",
+                            "enum": [
+                                "basic",
+                                "advanced"
+                            ]
+                        },
+                        "topic": {
+                            "type": "string",
+                            "default": "general",
+                            "description": "The category of the search. This will determine which of our agents will be used for the search. Currently: only 'general' and 'news' are supported. Default is 'general'.",
+                            "enum": [
+                                "general",
+                                "news"
+                            ]
+                        },
+                        "days": {
+                            "type": "integer",
+                            "default": 3,
+                            "description": "The number of days back from the current date to include in the search results. This specifies the time frame of data to be retrieved. Please note that this feature is only available when using the 'news' search topic. Default is 3."
+                        },
+                        "max_results": {
+                            "type": "integer",
+                            "default": 5,
+                            "description": "The maximum number of search results to return. Default is 5."
+                        },
+                        "include_images": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Include a list of query-related images in the response. Default is False."
+                        },
+                        "include_image_descriptions": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "When include_images is set to True, this option adds descriptive text for each image. Default is False."
+                        },
+                        "include_answer": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Include a short answer to original query. Default is False."
+                        },
+                        "include_raw_content": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Include the cleaned and parsed HTML content of each search result. Default is False."
+                        },
+                        "include_domains": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "A list of domains to specifically include in the search results. Default is [], which includes all domains."
+                        },
+                        "exclude_domains": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "A list of domains to specifically exclude from the search results. Default is [], which doesn't exclude any domains."
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ],
+                    "visible": [
+                        "query",
+                        "search_depth",
+                        "topic",
+                        "days",
+                        "max_results",
+                        "include_images",
+                        "include_image_descriptions",
+                        "include_answer"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
+        },
+        "response": {}
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "body parameters",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "The search query you want to execute with Tavily."
+    {
+        "name": "TAVILY__EXTRACT",
+        "description": "Extract and scrape raw content from a provided URL using Tavily API.",
+        "tags": [
+            "search",
+            "scrape"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/extract",
+            "server_url": "https://api.tavily.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "description": "body parameters",
+                    "properties": {
+                        "urls": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "The urls you want to extract with Tavily."
+                        },
+                        "api_key": {
+                            "type": "string",
+                            "default": "X-API-KEY",
+                            "description": "Your Tavily API Key."
+                        }
+                    },
+                    "required": [
+                        "urls"
+                    ],
+                    "visible": [
+                        "urls"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "search_depth": {
-              "type": "string",
-              "default": "basic",
-              "description": "The depth of the search. It can be 'basic' or 'advanced'. Default is 'basic'.",
-              "enum": ["basic", "advanced"]
-            },
-            "topic": {
-              "type": "string",
-              "default": "general",
-              "description": "The category of the search. This will determine which of our agents will be used for the search. Currently: only 'general' and 'news' are supported. Default is 'general'.",
-              "enum": ["general", "news"]
-            },
-            "days": {
-              "type": "integer",
-              "default": 3,
-              "description": "The number of days back from the current date to include in the search results. This specifies the time frame of data to be retrieved. Please note that this feature is only available when using the 'news' search topic. Default is 3."
-            },
-            "max_results": {
-              "type": "integer",
-              "default": 5,
-              "description": "The maximum number of search results to return. Default is 5."
-            },
-            "include_images": {
-              "type": "boolean",
-              "default": false,
-              "description": "Include a list of query-related images in the response. Default is False."
-            },
-            "include_image_descriptions": {
-              "type": "boolean",
-              "default": false,
-              "description": "When include_images is set to True, this option adds descriptive text for each image. Default is False."
-            },
-            "include_answer": {
-              "type": "boolean",
-              "default": false,
-              "description": "Include a short answer to original query. Default is False."
-            },
-            "include_raw_content": {
-              "type": "boolean",
-              "default": false,
-              "description": "Include the cleaned and parsed HTML content of each search result. Default is False."
-            },
-            "include_domains": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "A list of domains to specifically include in the search results. Default is [], which includes all domains."
-            },
-            "exclude_domains": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "A list of domains to specifically exclude from the search results. Default is [], which doesn't exclude any domains."
-            }
-          },
-          "required": ["query"],
-          "visible": ["query", "search_depth", "topic", "days", "max_results", "include_images", "include_image_descriptions", "include_answer"],
-          "additionalProperties": false
-        }
-      },
-      "required": ["body"],
-      "visible": ["body"],
-      "additionalProperties": false
-    },
-    "response": {}
-  },
-  {
-    "name": "TAVILY__EXTRACT",
-    "description": "Tavily Extract API is used to scrape raw content from a provided list of URLs.",
-    "tags": ["search", "scrape"],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/extract",
-      "server_url": "https://api.tavily.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "body parameters",
-          "properties": {
-            "urls": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "The urls you want to extract with Tavily."
-            },
-            "api_key": {
-              "type": "string",
-              "default": "X-API-KEY",
-              "description": "Your Tavily API Key."
-            }
-          },
-          "required": ["urls"],
-          "visible": ["urls"],
-          "additionalProperties": false
-        }
-      },
-      "required": ["body"],
-      "visible": ["body"],
-      "additionalProperties": false
-    },
-    "response": {}
-  }
+            "required": [
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
+        },
+        "response": {}
+    }
 ]

@@ -2108,7 +2108,7 @@
           "properties": {
             "query": {
               "type": "string",
-              "default": "query Users($first: Int) { users(first: $first) { nodes { id name displayName email avatarUrl isMe admin active lastSeen assignedIssues { nodes { title } } teamMemberships { nodes { team { name } role } } } } }",
+              "default": "query Users($first: Int) { users(first: $first) { nodes { id name displayName email avatarUrl isMe admin active lastSeen assignedIssues { nodes { title } } teamMemberships { nodes { team { name } owner } } } } }",
               "description": "GraphQL query for retrieving users"
             },
             "variables": {
@@ -2366,15 +2366,15 @@
           "properties": {
             "query": {
               "type": "string",
-              "default": "query SearchIssues($query: String!, $first: Int) { issueSearch(query: $query, first: $first) { nodes { id title description identifier state { name } assignee { name } team { name } labels { nodes { name } } createdAt updatedAt } } }",
+              "default": "query SearchIssues($searchText: String!, $first: Int) { issues(filter: { or: [{ title: { contains: $searchText } }, { description: { contains: $searchText } }] }, first: $first) { nodes { id title description identifier state { name } assignee { name } team { name } labels { nodes { name } } createdAt updatedAt } } }",
               "description": "GraphQL query for searching issues"
             },
             "variables": {
               "type": "object",
               "properties": {
-                "query": {
+                "searchText": {
                   "type": "string",
-                  "description": "Search query string"
+                  "description": "Text to search for in issue titles and descriptions"
                 },
                 "first": {
                   "type": "integer",
@@ -2384,10 +2384,10 @@
                 }
               },
               "required": [
-                "query"
+                "searchText"
               ],
               "visible": [
-                "query",
+                "searchText",
                 "first"
               ],
               "additionalProperties": false

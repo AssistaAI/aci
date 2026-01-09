@@ -1,0 +1,10 @@
+{
+  "aci-devops": {
+    "command": "python",
+    "args": ["-m", "mcp_server.server"],
+    "cwd": "./backend",
+    "env": {
+      "PYTHONPATH": "./backend"
+    }
+  }
+}

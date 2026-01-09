@@ -1,313 +1,313 @@
 [
-  {
-    "name": "ROSSUM__DOCUMENT",
-    "description": "Retrieve a specific document from Rossum by ID",
-    "tags": [
-      "rossum",
-      "document",
-      "retrieval"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/api/v1/documents/{document_id}",
-      "server_url": "https://{organizations}.rossum.app"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "document_id": {
-              "type": "string",
-              "description": "ID of the document to retrieve"
-            },
-            "organizations": {
-              "type": "string",
-              "description": "organizations name"
-            }
-          },
-          "required": [
-            "document_id",
-            "organizations"
-          ],
-          "visible": [
-            "document_id",
-            "organizations"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "ROSSUM__QUEUES",
-    "description": "get Rossum all queues",
-    "tags": [
-      "rossum",
-      "queues",
-      "retrieval"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/api/v1/queues",
-      "server_url": "https://{organizations}.rossum.app"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "organizations": {
-              "type": "string",
-              "description": "organizations name"
-            }
-          },
-          "required": [
-            "organizations"
-          ],
-          "visible": [
-            "organizations"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "ROSSUM__LOGIN",
-    "description": "Authenticate with Rossum API using username and password credentials",
-    "tags": [
-      "rossum",
-      "authentication",
-      "login"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/api/v1/auth/login",
-      "server_url": "https://{organizations}.rossum.app",
-      "content_type": "application/json"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "organizations": {
-              "type": "string",
-              "description": "organizations name"
-            }
-          },
-          "required": [
-            "organizations"
-          ],
-          "visible": [
-            "organizations"
-          ],
-          "additionalProperties": false
+    {
+        "name": "ROSSUM__DOCUMENT",
+        "description": "Retrieve a specific document from Rossum by ID",
+        "tags": [
+            "rossum",
+            "document",
+            "retrieval"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/api/v1/documents/{document_id}",
+            "server_url": "https://{organizations}.rossum.app"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "username": {
-              "type": "string",
-              "description": "Registered username/email for authentication"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "document_id": {
+                            "type": "string",
+                            "description": "ID of the document to retrieve"
+                        },
+                        "organizations": {
+                            "type": "string",
+                            "description": "organizations name"
+                        }
+                    },
+                    "required": [
+                        "document_id",
+                        "organizations"
+                    ],
+                    "visible": [
+                        "document_id",
+                        "organizations"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "password": {
-              "type": "string",
-              "description": "Account password",
-              "writeOnly": true
-            }
-          },
-          "required": [
-            "username",
-            "password"
-          ],
-          "visible": [
-            "username",
-            "password"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "ROSSUM__UPLOAD_TO_QUEUE",
-    "description": "Upload a document to a specific queue in Rossum",
-    "tags": [
-      "rossum",
-      "document",
-      "upload"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/api/v1/queues/{queue_id}/upload",
-      "server_url": "https://{organizations}.rossum.app"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "organizations": {
-              "type": "string",
-              "description": "organizations name",
-              "default": "example name."
-            },
-            "queue_id": {
-              "type": "string",
-              "description": "Target queue ID",
-              "example": "1765744"
-            }
-          },
-          "required": [
-            "queue_id"
-          ],
-          "visible": [
-            "organizations",
-            "queue_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "ROSSUM__QUEUES",
+        "description": "Get all document processing queues from Rossum AI data capture platform.",
+        "tags": [
+            "rossum",
+            "queues",
+            "retrieval"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/api/v1/queues",
+            "server_url": "https://{organizations}.rossum.app"
         },
-        "header": {
-          "type": "object",
-          "properties": {
-            "Content-Type": {
-              "type": "string",
-              "default": "multipart/form-data",
-              "description": "Must be set for file uploads"
-            }
-          },
-          "required": [
-            "Content-Type"
-          ],
-          "visible": [],
-          "additionalProperties": false,
-          "default": {}
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "content": {
-              "type": "string",
-              "format": "binary",
-              "description": "File content in binary format"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "organizations": {
+                            "type": "string",
+                            "description": "organizations name"
+                        }
+                    },
+                    "required": [
+                        "organizations"
+                    ],
+                    "visible": [
+                        "organizations"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "filename": {
-              "type": "string",
-              "description": "Original filename with extension",
-              "example": "O'Reilly - Python Cookbook.pdf"
-            }
-          },
-          "required": [
-            "content"
-          ],
-          "visible": [
-            "content",
-            "filename"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "header",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "ROSSUM__ANNOTATION",
-    "description": "Retrieve a specific annotation from Rossum by ID",
-    "tags": [
-      "rossum",
-      "annotation",
-      "retrieval"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/api/v1/annotations/{annotation_id}",
-      "server_url": "https://{organizations}.rossum.app"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "organizations": {
-              "type": "string",
-              "description": "organizations name"
+    {
+        "name": "ROSSUM__LOGIN",
+        "description": "Authenticate with Rossum API using username and password credentials",
+        "tags": [
+            "rossum",
+            "authentication",
+            "login"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/api/v1/auth/login",
+            "server_url": "https://{organizations}.rossum.app",
+            "content_type": "application/json"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "organizations": {
+                            "type": "string",
+                            "description": "organizations name"
+                        }
+                    },
+                    "required": [
+                        "organizations"
+                    ],
+                    "visible": [
+                        "organizations"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "username": {
+                            "type": "string",
+                            "description": "Registered username/email for authentication"
+                        },
+                        "password": {
+                            "type": "string",
+                            "description": "Account password",
+                            "writeOnly": true
+                        }
+                    },
+                    "required": [
+                        "username",
+                        "password"
+                    ],
+                    "visible": [
+                        "username",
+                        "password"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "annotation_id": {
-              "type": "string",
-              "description": "ID of the annotation to retrieve"
-            }
-          },
-          "required": [
-            "annotation_id"
-          ],
-          "visible": [
-            "organizations",
-            "annotation_id"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "ROSSUM__UPLOAD_TO_QUEUE",
+        "description": "Upload a document to a specific queue in Rossum",
+        "tags": [
+            "rossum",
+            "document",
+            "upload"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/api/v1/queues/{queue_id}/upload",
+            "server_url": "https://{organizations}.rossum.app"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "organizations": {
+                            "type": "string",
+                            "description": "organizations name",
+                            "default": "example name."
+                        },
+                        "queue_id": {
+                            "type": "string",
+                            "description": "Target queue ID",
+                            "example": "1765744"
+                        }
+                    },
+                    "required": [
+                        "queue_id"
+                    ],
+                    "visible": [
+                        "organizations",
+                        "queue_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "properties": {
+                        "Content-Type": {
+                            "type": "string",
+                            "default": "multipart/form-data",
+                            "description": "Must be set for file uploads"
+                        }
+                    },
+                    "required": [
+                        "Content-Type"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {}
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "content": {
+                            "type": "string",
+                            "format": "binary",
+                            "description": "File content in binary format"
+                        },
+                        "filename": {
+                            "type": "string",
+                            "description": "Original filename with extension",
+                            "example": "O'Reilly - Python Cookbook.pdf"
+                        }
+                    },
+                    "required": [
+                        "content"
+                    ],
+                    "visible": [
+                        "content",
+                        "filename"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "ROSSUM__ANNOTATION",
+        "description": "Retrieve a specific annotation from Rossum by ID",
+        "tags": [
+            "rossum",
+            "annotation",
+            "retrieval"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/api/v1/annotations/{annotation_id}",
+            "server_url": "https://{organizations}.rossum.app"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "organizations": {
+                            "type": "string",
+                            "description": "organizations name"
+                        },
+                        "annotation_id": {
+                            "type": "string",
+                            "description": "ID of the annotation to retrieve"
+                        }
+                    },
+                    "required": [
+                        "annotation_id"
+                    ],
+                    "visible": [
+                        "organizations",
+                        "annotation_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]

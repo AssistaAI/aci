@@ -1,1610 +1,1610 @@
 [
-  {
-    "name": "WEBFLOW__AUTHORIZATION_INFO",
-    "description": "Get information about the current authorization token, including scopes and user details.",
-    "tags": [
-      "authorization",
-      "token"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/token/introspect",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {},
-      "required": [],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_SITES",
-    "description": "List all sites that the current access token can access. Returns site details including ID, workspace, display name, and custom domains.",
-    "tags": [
-      "sites",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {},
-      "required": [],
-      "visible": [],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_SITE",
-    "description": "Get detailed information about a specific site including its configuration, domains, and settings.",
-    "tags": [
-      "sites",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__PUBLISH_SITE",
-    "description": "Publish a site to make changes live. Publishes the site to the live domain.",
-    "tags": [
-      "sites",
-      "publish"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/sites/{site_id}/publish",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site to publish"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__AUTHORIZATION_INFO",
+        "description": "Get information about the current authorization token, including scopes and user details.",
+        "tags": [
+            "authorization",
+            "token"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/token/introspect",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "publishToWebflowSubdomain": {
-              "type": "boolean",
-              "default": false,
-              "description": "Whether to publish to the Webflow subdomain"
-            },
-            "customDomains": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Array of custom domain IDs to publish to"
-            }
-          },
-          "required": [],
-          "visible": [
-            "publishToWebflowSubdomain",
-            "customDomains"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_COLLECTIONS",
-    "description": "List all CMS collections for a specific site. Returns collection metadata including fields and settings.",
-    "tags": [
-      "cms",
-      "collections",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/collections",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_COLLECTION",
-    "description": "Get detailed information about a specific CMS collection including its fields and configuration.",
-    "tags": [
-      "cms",
-      "collections",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/collections/{collection_id}",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            }
-          },
-          "required": [
-            "collection_id"
-          ],
-          "visible": [
-            "collection_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_COLLECTION_ITEMS",
-    "description": "List all items in a CMS collection with support for filtering, sorting, and pagination.",
-    "tags": [
-      "cms",
-      "items",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/collections/{collection_id}/items",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            }
-          },
-          "required": [
-            "collection_id"
-          ],
-          "visible": [
-            "collection_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__LIST_SITES",
+        "description": "List all sites that the current access token can access. Returns site details including ID, workspace, display name, and custom domains.",
+        "tags": [
+            "sites",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "offset": {
-              "type": "integer",
-              "default": 0,
-              "description": "Number of items to skip for pagination"
-            },
-            "limit": {
-              "type": "integer",
-              "default": 100,
-              "maximum": 100,
-              "description": "Maximum number of items to return (max 100)"
-            },
-            "cmsLocaleId": {
-              "type": "string",
-              "description": "Locale ID for localized content"
-            }
-          },
-          "required": [],
-          "visible": [
-            "offset",
-            "limit",
-            "cmsLocaleId"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "visible": [],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_COLLECTION_ITEM",
-    "description": "Get detailed information about a specific item in a CMS collection.",
-    "tags": [
-      "cms",
-      "items",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/collections/{collection_id}/items/{item_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            },
-            "item_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection item"
-            }
-          },
-          "required": [
-            "collection_id",
-            "item_id"
-          ],
-          "visible": [
-            "collection_id",
-            "item_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__GET_SITE",
+        "description": "Get detailed information about a specific site including its configuration, domains, and settings.",
+        "tags": [
+            "sites",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "cmsLocaleId": {
-              "type": "string",
-              "description": "Locale ID for localized content"
-            }
-          },
-          "required": [],
-          "visible": [
-            "cmsLocaleId"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__CREATE_COLLECTION_ITEM",
-    "description": "Create a new item in a CMS collection.",
-    "tags": [
-      "cms",
-      "items",
-      "create"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/collections/{collection_id}/items",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            }
-          },
-          "required": [
-            "collection_id"
-          ],
-          "visible": [
-            "collection_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__PUBLISH_SITE",
+        "description": "Publish a site to make changes live. Publishes the site to the live domain.",
+        "tags": [
+            "sites",
+            "publish"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/sites/{site_id}/publish",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "cmsLocaleId": {
-              "type": "string",
-              "description": "Locale ID for localized content"
-            }
-          },
-          "required": [],
-          "visible": [
-            "cmsLocaleId"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site to publish"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "publishToWebflowSubdomain": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether to publish to the Webflow subdomain"
+                        },
+                        "customDomains": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Array of custom domain IDs to publish to"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "publishToWebflowSubdomain",
+                        "customDomains"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__LIST_COLLECTIONS",
+        "description": "List all CMS collections for a specific site. Returns collection metadata including fields and settings.",
+        "tags": [
+            "cms",
+            "collections",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/collections",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "fieldData": {
-              "type": "object",
-              "description": "Field data for the collection item (key-value pairs matching collection schema)",
-              "additionalProperties": true,
-              "properties": {},
-              "required": [],
-              "visible": []
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "isDraft": {
-              "type": "boolean",
-              "default": false,
-              "description": "Whether the item should be created as a draft"
-            }
-          },
-          "required": [
-            "fieldData"
-          ],
-          "visible": [
-            "fieldData",
-            "isDraft"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "query",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__UPDATE_COLLECTION_ITEM",
-    "description": "Update an existing item in a CMS collection.",
-    "tags": [
-      "cms",
-      "items",
-      "update"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "PATCH",
-      "path": "/v2/collections/{collection_id}/items/{item_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            },
-            "item_id": {
-              "type": "string",
-              "description": "Unique identifier for the item to update"
-            }
-          },
-          "required": [
-            "collection_id",
-            "item_id"
-          ],
-          "visible": [
-            "collection_id",
-            "item_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__GET_COLLECTION",
+        "description": "Get detailed information about a specific CMS collection including its fields and configuration.",
+        "tags": [
+            "cms",
+            "collections",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/collections/{collection_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "cmsLocaleId": {
-              "type": "string",
-              "description": "Locale ID for localized content"
-            }
-          },
-          "required": [],
-          "visible": [
-            "cmsLocaleId"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        }
+                    },
+                    "required": [
+                        "collection_id"
+                    ],
+                    "visible": [
+                        "collection_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__LIST_COLLECTION_ITEMS",
+        "description": "List all items in a CMS collection with support for filtering, sorting, and pagination.",
+        "tags": [
+            "cms",
+            "items",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/collections/{collection_id}/items",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "fieldData": {
-              "type": "object",
-              "description": "Updated field data for the collection item",
-              "additionalProperties": true,
-              "properties": {},
-              "required": [],
-              "visible": []
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        }
+                    },
+                    "required": [
+                        "collection_id"
+                    ],
+                    "visible": [
+                        "collection_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "offset": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Number of items to skip for pagination"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "default": 100,
+                            "maximum": 100,
+                            "description": "Maximum number of items to return (max 100)"
+                        },
+                        "cmsLocaleId": {
+                            "type": "string",
+                            "description": "Locale ID for localized content"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "offset",
+                        "limit",
+                        "cmsLocaleId"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "isDraft": {
-              "type": "boolean",
-              "description": "Whether the item should be set as draft"
-            }
-          },
-          "required": [
-            "fieldData"
-          ],
-          "visible": [
-            "fieldData",
-            "isDraft"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "query",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__DELETE_COLLECTION_ITEM",
-    "description": "Delete an item from a CMS collection.",
-    "tags": [
-      "cms",
-      "items",
-      "delete"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/v2/collections/{collection_id}/items/{item_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            },
-            "item_id": {
-              "type": "string",
-              "description": "Unique identifier for the item to delete"
-            }
-          },
-          "required": [
-            "collection_id",
-            "item_id"
-          ],
-          "visible": [
-            "collection_id",
-            "item_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__PUBLISH_COLLECTION_ITEMS",
-    "description": "Publish one or more staged collection items to make them live.",
-    "tags": [
-      "cms",
-      "items",
-      "publish"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/collections/{collection_id}/items/publish",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            }
-          },
-          "required": [
-            "collection_id"
-          ],
-          "visible": [
-            "collection_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__GET_COLLECTION_ITEM",
+        "description": "Get detailed information about a specific item in a CMS collection. from Webflow.",
+        "tags": [
+            "cms",
+            "items",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/collections/{collection_id}/items/{item_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "itemIds": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Array of item IDs to publish"
-            }
-          },
-          "required": [
-            "itemIds"
-          ],
-          "visible": [
-            "itemIds"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        },
+                        "item_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection item"
+                        }
+                    },
+                    "required": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "visible": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "cmsLocaleId": {
+                            "type": "string",
+                            "description": "Locale ID for localized content"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "cmsLocaleId"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_FORMS",
-    "description": "List all forms on a specific site, including form fields and settings.",
-    "tags": [
-      "forms",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/forms",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_FORM",
-    "description": "Get detailed information about a specific form including its fields and configuration.",
-    "tags": [
-      "forms",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/forms/{form_id}",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "form_id": {
-              "type": "string",
-              "description": "Unique identifier for the form"
-            }
-          },
-          "required": [
-            "form_id"
-          ],
-          "visible": [
-            "form_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_FORM_SUBMISSIONS",
-    "description": "List form submissions for a specific form with pagination support.",
-    "tags": [
-      "forms",
-      "submissions",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/form_submissions",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__CREATE_COLLECTION_ITEM",
+        "description": "Create a new item in a CMS collection. in Webflow.",
+        "tags": [
+            "cms",
+            "items",
+            "create"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/collections/{collection_id}/items",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "formElementId": {
-              "type": "string",
-              "description": "Filter submissions by form element ID"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        }
+                    },
+                    "required": [
+                        "collection_id"
+                    ],
+                    "visible": [
+                        "collection_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "cmsLocaleId": {
+                            "type": "string",
+                            "description": "Locale ID for localized content"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "cmsLocaleId"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "fieldData": {
+                            "type": "object",
+                            "description": "Field data for the collection item (key-value pairs matching collection schema)",
+                            "additionalProperties": true,
+                            "properties": {},
+                            "required": [],
+                            "visible": []
+                        },
+                        "isDraft": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether the item should be created as a draft"
+                        }
+                    },
+                    "required": [
+                        "fieldData"
+                    ],
+                    "visible": [
+                        "fieldData",
+                        "isDraft"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "offset": {
-              "type": "integer",
-              "default": 0,
-              "description": "Number of submissions to skip for pagination"
-            },
-            "limit": {
-              "type": "integer",
-              "default": 100,
-              "maximum": 100,
-              "description": "Maximum number of submissions to return"
-            }
-          },
-          "required": [],
-          "visible": [
-            "formElementId",
-            "offset",
-            "limit"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "query",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_WEBHOOKS",
-    "description": "List all webhooks configured for a specific site.",
-    "tags": [
-      "webhooks",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/webhooks",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_WEBHOOK",
-    "description": "Get detailed information about a specific webhook including its configuration and events.",
-    "tags": [
-      "webhooks",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/webhooks/{webhook_id}",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "webhook_id": {
-              "type": "string",
-              "description": "Unique identifier for the webhook"
-            }
-          },
-          "required": [
-            "webhook_id"
-          ],
-          "visible": [
-            "webhook_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__CREATE_WEBHOOK",
-    "description": "Create a new webhook to receive notifications when specific events occur on a site.",
-    "tags": [
-      "webhooks",
-      "create"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/sites/{site_id}/webhooks",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__UPDATE_COLLECTION_ITEM",
+        "description": "Update an existing item in a CMS collection. in Webflow.",
+        "tags": [
+            "cms",
+            "items",
+            "update"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "PATCH",
+            "path": "/v2/collections/{collection_id}/items/{item_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string",
-              "format": "uri",
-              "description": "URL to send webhook notifications to"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        },
+                        "item_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the item to update"
+                        }
+                    },
+                    "required": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "visible": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "cmsLocaleId": {
+                            "type": "string",
+                            "description": "Locale ID for localized content"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "cmsLocaleId"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "fieldData": {
+                            "type": "object",
+                            "description": "Updated field data for the collection item",
+                            "additionalProperties": true,
+                            "properties": {},
+                            "required": [],
+                            "visible": []
+                        },
+                        "isDraft": {
+                            "type": "boolean",
+                            "description": "Whether the item should be set as draft"
+                        }
+                    },
+                    "required": [
+                        "fieldData"
+                    ],
+                    "visible": [
+                        "fieldData",
+                        "isDraft"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "triggerType": {
-              "type": "string",
-              "enum": [
-                "form_submission",
-                "site_publish",
-                "page_created",
-                "page_metadata_updated",
-                "page_deleted",
-                "collection_item_created",
-                "collection_item_changed",
-                "collection_item_deleted",
-                "collection_item_unpublished",
-                "ecomm_new_order",
-                "ecomm_order_changed",
-                "ecomm_inventory_changed",
-                "user_account_added",
-                "user_account_updated",
-                "user_account_deleted"
-              ],
-              "description": "Type of event that triggers the webhook"
-            },
-            "filter": {
-              "type": "object",
-              "description": "Optional filters to limit when webhook fires (only for form_submission trigger type)",
-              "additionalProperties": true,
-              "properties": {},
-              "required": [],
-              "visible": []
-            }
-          },
-          "required": [
-            "url",
-            "triggerType"
-          ],
-          "visible": [
-            "url",
-            "triggerType",
-            "filter"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "query",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__DELETE_WEBHOOK",
-    "description": "Remove a webhook from a site permanently.",
-    "tags": [
-      "webhooks",
-      "delete"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/v2/webhooks/{webhook_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "webhook_id": {
-              "type": "string",
-              "description": "Unique identifier for the webhook to delete"
-            }
-          },
-          "required": [
-            "webhook_id"
-          ],
-          "visible": [
-            "webhook_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_PRODUCTS",
-    "description": "List all ecommerce products for a specific site with pagination support.",
-    "tags": [
-      "ecommerce",
-      "products",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/products",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__DELETE_COLLECTION_ITEM",
+        "description": "Delete an item from a CMS collection. from Webflow.",
+        "tags": [
+            "cms",
+            "items",
+            "delete"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/v2/collections/{collection_id}/items/{item_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "offset": {
-              "type": "integer",
-              "default": 0,
-              "description": "Number of products to skip for pagination"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        },
+                        "item_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the item to delete"
+                        }
+                    },
+                    "required": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "visible": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "limit": {
-              "type": "integer",
-              "default": 100,
-              "maximum": 100,
-              "description": "Maximum number of products to return"
-            }
-          },
-          "required": [],
-          "visible": [
-            "offset",
-            "limit"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_PRODUCT",
-    "description": "Get detailed information about a specific ecommerce product including variants and pricing.",
-    "tags": [
-      "ecommerce",
-      "products",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/products/{product_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "product_id": {
-              "type": "string",
-              "description": "Unique identifier for the product"
-            }
-          },
-          "required": [
-            "product_id"
-          ],
-          "visible": [
-            "product_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_ORDERS",
-    "description": "List all ecommerce orders for a specific site with pagination support.",
-    "tags": [
-      "ecommerce",
-      "orders",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/sites/{site_id}/orders",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
-            }
-          },
-          "required": [
-            "site_id"
-          ],
-          "visible": [
-            "site_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__PUBLISH_COLLECTION_ITEMS",
+        "description": "Publish one or more staged collection items to make them live. via Webflow.",
+        "tags": [
+            "cms",
+            "items",
+            "publish"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/collections/{collection_id}/items/publish",
+            "server_url": "https://api.webflow.com"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "offset": {
-              "type": "integer",
-              "default": 0,
-              "description": "Number of orders to skip for pagination"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        }
+                    },
+                    "required": [
+                        "collection_id"
+                    ],
+                    "visible": [
+                        "collection_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "itemIds": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Array of item IDs to publish"
+                        }
+                    },
+                    "required": [
+                        "itemIds"
+                    ],
+                    "visible": [
+                        "itemIds"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "limit": {
-              "type": "integer",
-              "default": 100,
-              "maximum": 100,
-              "description": "Maximum number of orders to return"
-            }
-          },
-          "required": [],
-          "visible": [
-            "offset",
-            "limit"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__GET_ORDER",
-    "description": "Get detailed information about a specific ecommerce order including items and customer details.",
-    "tags": [
-      "ecommerce",
-      "orders",
-      "details"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/orders/{order_id}",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "order_id": {
-              "type": "string",
-              "description": "Unique identifier for the order"
-            }
-          },
-          "required": [
-            "order_id"
-          ],
-          "visible": [
-            "order_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__UPDATE_ORDER",
-    "description": "Update order fulfillment status and other order properties.",
-    "tags": [
-      "ecommerce",
-      "orders",
-      "update"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "PATCH",
-      "path": "/v2/orders/{order_id}",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "order_id": {
-              "type": "string",
-              "description": "Unique identifier for the order"
-            }
-          },
-          "required": [
-            "order_id"
-          ],
-          "visible": [
-            "order_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__LIST_FORMS",
+        "description": "List all forms on a specific site, including form fields and settings.",
+        "tags": [
+            "forms",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/forms",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "comment": {
-              "type": "string",
-              "description": "Comment about the order update"
-            }
-          },
-          "required": [],
-          "visible": [
-            "comment"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__FULFILL_ORDER",
-    "description": "Mark an order as fulfilled.",
-    "tags": [
-      "ecommerce",
-      "orders",
-      "fulfill"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/sites/{site_id}/orders/{order_id}/fulfill",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "order_id": {
-              "type": "string",
-              "description": "Unique identifier for the order"
-            }
-          },
-          "required": [
-            "site_id",
-            "order_id"
-          ],
-          "visible": [
-            "site_id",
-            "order_id"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__GET_FORM",
+        "description": "Get detailed information about a specific form including its fields and configuration.",
+        "tags": [
+            "forms",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/forms/{form_id}",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "sendOrderFulfilledEmail": {
-              "type": "boolean",
-              "default": false,
-              "description": "Whether to send fulfillment email to customer"
-            }
-          },
-          "required": [],
-          "visible": [
-            "sendOrderFulfilledEmail"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__UNFULFILL_ORDER",
-    "description": "Mark an order as unfulfilled.",
-    "tags": [
-      "ecommerce",
-      "orders",
-      "unfulfill"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/v2/sites/{site_id}/orders/{order_id}/unfulfill",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "site_id": {
-              "type": "string",
-              "description": "Unique identifier for the site"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "form_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the form"
+                        }
+                    },
+                    "required": [
+                        "form_id"
+                    ],
+                    "visible": [
+                        "form_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "order_id": {
-              "type": "string",
-              "description": "Unique identifier for the order"
-            }
-          },
-          "required": [
-            "site_id",
-            "order_id"
-          ],
-          "visible": [
-            "site_id",
-            "order_id"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__LIST_INVENTORY",
-    "description": "Get inventory levels for a specific product item.",
-    "tags": [
-      "ecommerce",
-      "inventory",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/v2/collections/{collection_id}/items/{item_id}/inventory",
-      "server_url": "https://api.webflow.com"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            },
-            "item_id": {
-              "type": "string",
-              "description": "Unique identifier for the item"
-            }
-          },
-          "required": [
-            "collection_id",
-            "item_id"
-          ],
-          "visible": [
-            "collection_id",
-            "item_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WEBFLOW__UPDATE_INVENTORY",
-    "description": "Update inventory levels for a specific product item.",
-    "tags": [
-      "ecommerce",
-      "inventory",
-      "update"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "PATCH",
-      "path": "/v2/collections/{collection_id}/items/{item_id}/inventory",
-      "server_url": "https://api.webflow.com"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "collection_id": {
-              "type": "string",
-              "description": "Unique identifier for the collection"
-            },
-            "item_id": {
-              "type": "string",
-              "description": "Unique identifier for the item"
-            }
-          },
-          "required": [
-            "collection_id",
-            "item_id"
-          ],
-          "visible": [
-            "collection_id",
-            "item_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WEBFLOW__LIST_FORM_SUBMISSIONS",
+        "description": "List form submissions for a specific form with pagination support. from Webflow.",
+        "tags": [
+            "forms",
+            "submissions",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/form_submissions",
+            "server_url": "https://api.webflow.com"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "inventoryType": {
-              "type": "string",
-              "enum": [
-                "finite",
-                "infinite"
-              ],
-              "description": "Type of inventory tracking"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "formElementId": {
+                            "type": "string",
+                            "description": "Filter submissions by form element ID"
+                        },
+                        "offset": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Number of submissions to skip for pagination"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "default": 100,
+                            "maximum": 100,
+                            "description": "Maximum number of submissions to return"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "formElementId",
+                        "offset",
+                        "limit"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "quantity": {
-              "type": "integer",
-              "description": "Inventory quantity to set (for finite type)"
-            },
-            "updateQuantity": {
-              "type": "integer",
-              "description": "Amount to increment/decrement inventory by"
-            }
-          },
-          "required": [],
-          "visible": [
-            "inventoryType",
-            "quantity",
-            "updateQuantity"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "WEBFLOW__LIST_WEBHOOKS",
+        "description": "List all webhooks configured for a specific site. from Webflow.",
+        "tags": [
+            "webhooks",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/webhooks",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__GET_WEBHOOK",
+        "description": "Get detailed information about a specific webhook including its configuration and events.",
+        "tags": [
+            "webhooks",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/webhooks/{webhook_id}",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "webhook_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the webhook"
+                        }
+                    },
+                    "required": [
+                        "webhook_id"
+                    ],
+                    "visible": [
+                        "webhook_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__CREATE_WEBHOOK",
+        "description": "Create a new webhook to receive notifications when specific events occur on a site.",
+        "tags": [
+            "webhooks",
+            "create"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/sites/{site_id}/webhooks",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to send webhook notifications to"
+                        },
+                        "triggerType": {
+                            "type": "string",
+                            "enum": [
+                                "form_submission",
+                                "site_publish",
+                                "page_created",
+                                "page_metadata_updated",
+                                "page_deleted",
+                                "collection_item_created",
+                                "collection_item_changed",
+                                "collection_item_deleted",
+                                "collection_item_unpublished",
+                                "ecomm_new_order",
+                                "ecomm_order_changed",
+                                "ecomm_inventory_changed",
+                                "user_account_added",
+                                "user_account_updated",
+                                "user_account_deleted"
+                            ],
+                            "description": "Type of event that triggers the webhook"
+                        },
+                        "filter": {
+                            "type": "object",
+                            "description": "Optional filters to limit when webhook fires (only for form_submission trigger type)",
+                            "additionalProperties": true,
+                            "properties": {},
+                            "required": [],
+                            "visible": []
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "triggerType"
+                    ],
+                    "visible": [
+                        "url",
+                        "triggerType",
+                        "filter"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__DELETE_WEBHOOK",
+        "description": "Remove a webhook from a site permanently. from Webflow.",
+        "tags": [
+            "webhooks",
+            "delete"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/v2/webhooks/{webhook_id}",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "webhook_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the webhook to delete"
+                        }
+                    },
+                    "required": [
+                        "webhook_id"
+                    ],
+                    "visible": [
+                        "webhook_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__LIST_PRODUCTS",
+        "description": "List all ecommerce products for a specific site with pagination support. from Webflow.",
+        "tags": [
+            "ecommerce",
+            "products",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/products",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "offset": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Number of products to skip for pagination"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "default": 100,
+                            "maximum": 100,
+                            "description": "Maximum number of products to return"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "offset",
+                        "limit"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__GET_PRODUCT",
+        "description": "Get detailed information about a specific ecommerce product including variants and pricing.",
+        "tags": [
+            "ecommerce",
+            "products",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/products/{product_id}",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "product_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the product"
+                        }
+                    },
+                    "required": [
+                        "product_id"
+                    ],
+                    "visible": [
+                        "product_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__LIST_ORDERS",
+        "description": "List all ecommerce orders for a specific site with pagination support. from Webflow.",
+        "tags": [
+            "ecommerce",
+            "orders",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/sites/{site_id}/orders",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        }
+                    },
+                    "required": [
+                        "site_id"
+                    ],
+                    "visible": [
+                        "site_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "offset": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Number of orders to skip for pagination"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "default": 100,
+                            "maximum": 100,
+                            "description": "Maximum number of orders to return"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "offset",
+                        "limit"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__GET_ORDER",
+        "description": "Get detailed information about a specific ecommerce order including items and customer details.",
+        "tags": [
+            "ecommerce",
+            "orders",
+            "details"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/orders/{order_id}",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "order_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the order"
+                        }
+                    },
+                    "required": [
+                        "order_id"
+                    ],
+                    "visible": [
+                        "order_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__UPDATE_ORDER",
+        "description": "Update order fulfillment status and other order properties. in Webflow.",
+        "tags": [
+            "ecommerce",
+            "orders",
+            "update"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "PATCH",
+            "path": "/v2/orders/{order_id}",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "order_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the order"
+                        }
+                    },
+                    "required": [
+                        "order_id"
+                    ],
+                    "visible": [
+                        "order_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "comment": {
+                            "type": "string",
+                            "description": "Comment about the order update"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "comment"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__FULFILL_ORDER",
+        "description": "Mark an order as fulfilled in Webflow e-commerce.",
+        "tags": [
+            "ecommerce",
+            "orders",
+            "fulfill"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/sites/{site_id}/orders/{order_id}/fulfill",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        },
+                        "order_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the order"
+                        }
+                    },
+                    "required": [
+                        "site_id",
+                        "order_id"
+                    ],
+                    "visible": [
+                        "site_id",
+                        "order_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "sendOrderFulfilledEmail": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether to send fulfillment email to customer"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "sendOrderFulfilledEmail"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__UNFULFILL_ORDER",
+        "description": "Mark an order as unfulfilled in Webflow e-commerce.",
+        "tags": [
+            "ecommerce",
+            "orders",
+            "unfulfill"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/v2/sites/{site_id}/orders/{order_id}/unfulfill",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "site_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the site"
+                        },
+                        "order_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the order"
+                        }
+                    },
+                    "required": [
+                        "site_id",
+                        "order_id"
+                    ],
+                    "visible": [
+                        "site_id",
+                        "order_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__LIST_INVENTORY",
+        "description": "Get inventory levels for a specific product item. from Webflow.",
+        "tags": [
+            "ecommerce",
+            "inventory",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/v2/collections/{collection_id}/items/{item_id}/inventory",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        },
+                        "item_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the item"
+                        }
+                    },
+                    "required": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "visible": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WEBFLOW__UPDATE_INVENTORY",
+        "description": "Update inventory levels for a specific product item. in Webflow.",
+        "tags": [
+            "ecommerce",
+            "inventory",
+            "update"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "PATCH",
+            "path": "/v2/collections/{collection_id}/items/{item_id}/inventory",
+            "server_url": "https://api.webflow.com"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "collection_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the collection"
+                        },
+                        "item_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the item"
+                        }
+                    },
+                    "required": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "visible": [
+                        "collection_id",
+                        "item_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "inventoryType": {
+                            "type": "string",
+                            "enum": [
+                                "finite",
+                                "infinite"
+                            ],
+                            "description": "Type of inventory tracking"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "description": "Inventory quantity to set (for finite type)"
+                        },
+                        "updateQuantity": {
+                            "type": "integer",
+                            "description": "Amount to increment/decrement inventory by"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "inventoryType",
+                        "quantity",
+                        "updateQuantity"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]

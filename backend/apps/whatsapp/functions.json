@@ -1,1262 +1,1262 @@
 [
-  {
-    "name": "WHATSAPP__SEND_MESSAGE",
-    "description": "Send text, media, or template messages to WhatsApp customers. Supports text, images, documents, audio, video, location, and contacts.",
-    "tags": [
-      "messages",
-      "send"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/messages",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__SEND_MESSAGE",
+        "description": "Send text, media, or template messages to WhatsApp customers. Supports text, images, documents, audio, video, location, and contacts.",
+        "tags": [
+            "messages",
+            "send"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/messages",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp",
-              "description": "Messaging product identifier"
-            },
-            "recipient_type": {
-              "type": "string",
-              "enum": [
-                "individual"
-              ],
-              "default": "individual",
-              "description": "Recipient type"
-            },
-            "to": {
-              "type": "string",
-              "description": "Recipient's WhatsApp ID (phone number)"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "text",
-                "template",
-                "image",
-                "document",
-                "audio",
-                "video",
-                "location",
-                "contacts",
-                "interactive",
-                "reaction",
-                "sticker"
-              ],
-              "description": "Type of message to send"
-            },
-            "text": {
-              "type": "object",
-              "properties": {
-                "body": {
-                  "type": "string",
-                  "description": "Text content of the message"
-                },
-                "preview_url": {
-                  "type": "boolean",
-                  "default": false,
-                  "description": "Whether to show URL preview"
-                }
-              },
-              "required": [
-                "body"
-              ],
-              "visible": [
-                "body",
-                "preview_url"
-              ],
-              "additionalProperties": false
-            },
-            "template": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the approved template"
-                },
-                "language": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Language code (e.g., en_US)"
-                    }
-                  },
-                  "required": [
-                    "code"
-                  ],
-                  "visible": [
-                    "code"
-                  ],
-                  "additionalProperties": false
-                },
-                "components": {
-                  "type": "array",
-                  "items": {
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
                     "type": "object",
-                    "additionalProperties": true,
-                    "properties": {},
-                    "required": [],
-                    "visible": []
-                  },
-                  "description": "Template component parameters"
-                }
-              },
-              "required": [
-                "name",
-                "language"
-              ],
-              "visible": [
-                "name",
-                "language",
-                "components"
-              ],
-              "additionalProperties": false
-            },
-            "image": {
-              "type": "object",
-              "properties": {
-                "link": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of the image"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Media ID from upload"
-                },
-                "caption": {
-                  "type": "string",
-                  "description": "Image caption"
-                }
-              },
-              "additionalProperties": false,
-              "visible": [
-                "link",
-                "id",
-                "caption"
-              ],
-              "required": []
-            },
-            "document": {
-              "type": "object",
-              "properties": {
-                "link": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of the document"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Media ID from upload"
-                },
-                "filename": {
-                  "type": "string",
-                  "description": "Document filename"
-                },
-                "caption": {
-                  "type": "string",
-                  "description": "Document caption"
-                }
-              },
-              "additionalProperties": false,
-              "visible": [
-                "link",
-                "id",
-                "filename",
-                "caption"
-              ],
-              "required": []
-            },
-            "audio": {
-              "type": "object",
-              "properties": {
-                "link": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of the audio file"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Media ID from upload"
-                }
-              },
-              "additionalProperties": false,
-              "visible": [
-                "link",
-                "id"
-              ],
-              "required": []
-            },
-            "video": {
-              "type": "object",
-              "properties": {
-                "link": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of the video"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Media ID from upload"
-                },
-                "caption": {
-                  "type": "string",
-                  "description": "Video caption"
-                }
-              },
-              "additionalProperties": false,
-              "visible": [
-                "link",
-                "id",
-                "caption"
-              ],
-              "required": []
-            },
-            "location": {
-              "type": "object",
-              "properties": {
-                "latitude": {
-                  "type": "number",
-                  "description": "Location latitude"
-                },
-                "longitude": {
-                  "type": "number",
-                  "description": "Location longitude"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Location name"
-                },
-                "address": {
-                  "type": "string",
-                  "description": "Location address"
-                }
-              },
-              "required": [
-                "latitude",
-                "longitude"
-              ],
-              "visible": [
-                "latitude",
-                "longitude",
-                "name",
-                "address"
-              ],
-              "additionalProperties": false
-            },
-            "contacts": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": true,
-                "properties": {},
-                "required": [],
-                "visible": []
-              },
-              "description": "Contact cards to send"
-            }
-          },
-          "required": [
-            "to",
-            "type"
-          ],
-          "visible": [
-            "to",
-            "type",
-            "text",
-            "template",
-            "image",
-            "document",
-            "audio",
-            "video",
-            "location",
-            "contacts"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__UPLOAD_MEDIA",
-    "description": "Upload media files (images, documents, audio, video) to WhatsApp Cloud API for later use in messages.",
-    "tags": [
-      "media",
-      "upload"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/media",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp"
-            },
-            "file": {
-              "type": "string",
-              "format": "binary",
-              "description": "The media file to upload"
-            }
-          },
-          "required": [
-            "file"
-          ],
-          "visible": [
-            "file"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__GET_MEDIA",
-    "description": "Retrieve media file URL and metadata by media ID.",
-    "tags": [
-      "media",
-      "get"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{media_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Media ID returned from upload"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "Phone number ID to verify ownership"
-            }
-          },
-          "required": [],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__DELETE_MEDIA",
-    "description": "Delete a previously uploaded media file.",
-    "tags": [
-      "media",
-      "delete"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/{media_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "media_id": {
-              "type": "string",
-              "description": "Media ID to delete"
-            }
-          },
-          "required": [
-            "media_id"
-          ],
-          "visible": [
-            "media_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__LIST_MESSAGE_TEMPLATES",
-    "description": "List all message templates for the WhatsApp Business Account with optional filtering by status and category.",
-    "tags": [
-      "templates",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{business_account_id}/message_templates",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "business_account_id": {
-              "type": "string",
-              "description": "WhatsApp Business Account ID (WABA ID)"
-            }
-          },
-          "required": [
-            "business_account_id"
-          ],
-          "visible": [
-            "business_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "APPROVED",
-                "PENDING",
-                "REJECTED",
-                "PAUSED",
-                "DISABLED"
-              ],
-              "description": "Filter by approval status"
-            },
-            "category": {
-              "type": "string",
-              "enum": [
-                "AUTHENTICATION",
-                "MARKETING",
-                "UTILITY"
-              ],
-              "description": "Filter by template category"
-            },
-            "limit": {
-              "type": "integer",
-              "default": 100,
-              "description": "Number of templates to return"
-            }
-          },
-          "required": [],
-          "visible": [
-            "status",
-            "category",
-            "limit"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__CREATE_MESSAGE_TEMPLATE",
-    "description": "Create a new message template for sending pre-approved messages to customers. Templates must be approved before use.",
-    "tags": [
-      "templates",
-      "create"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{business_account_id}/message_templates",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "business_account_id": {
-              "type": "string",
-              "description": "WhatsApp Business Account ID (WABA ID)"
-            }
-          },
-          "required": [
-            "business_account_id"
-          ],
-          "visible": [
-            "business_account_id"
-          ],
-          "additionalProperties": false
-        },
-        "body": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Template name (lowercase, alphanumeric, underscores only)"
-            },
-            "category": {
-              "type": "string",
-              "enum": [
-                "AUTHENTICATION",
-                "MARKETING",
-                "UTILITY"
-              ],
-              "description": "Template category"
-            },
-            "language": {
-              "type": "string",
-              "description": "Language code (e.g., en_US)"
-            },
-            "components": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "HEADER",
-                      "BODY",
-                      "FOOTER",
-                      "BUTTONS"
-                    ]
-                  },
-                  "format": {
-                    "type": "string",
-                    "enum": [
-                      "TEXT",
-                      "IMAGE",
-                      "VIDEO",
-                      "DOCUMENT",
-                      "LOCATION"
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
                     ],
-                    "description": "Format for HEADER component"
-                  },
-                  "text": {
-                    "type": "string",
-                    "description": "Text content with optional {{1}}, {{2}} placeholders"
-                  },
-                  "example": {
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
                     "type": "object",
-                    "additionalProperties": true,
-                    "description": "Example values for placeholders",
-                    "properties": {},
-                    "required": [],
-                    "visible": []
-                  },
-                  "buttons": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp",
+                            "description": "Messaging product identifier"
+                        },
+                        "recipient_type": {
+                            "type": "string",
+                            "enum": [
+                                "individual"
+                            ],
+                            "default": "individual",
+                            "description": "Recipient type"
+                        },
+                        "to": {
+                            "type": "string",
+                            "description": "Recipient's WhatsApp ID (phone number)"
+                        },
                         "type": {
-                          "type": "string",
-                          "enum": [
-                            "QUICK_REPLY",
-                            "PHONE_NUMBER",
-                            "URL"
-                          ]
+                            "type": "string",
+                            "enum": [
+                                "text",
+                                "template",
+                                "image",
+                                "document",
+                                "audio",
+                                "video",
+                                "location",
+                                "contacts",
+                                "interactive",
+                                "reaction",
+                                "sticker"
+                            ],
+                            "description": "Type of message to send"
                         },
                         "text": {
-                          "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "body": {
+                                    "type": "string",
+                                    "description": "Text content of the message"
+                                },
+                                "preview_url": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Whether to show URL preview"
+                                }
+                            },
+                            "required": [
+                                "body"
+                            ],
+                            "visible": [
+                                "body",
+                                "preview_url"
+                            ],
+                            "additionalProperties": false
                         },
-                        "phone_number": {
-                          "type": "string"
+                        "template": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name of the approved template"
+                                },
+                                "language": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "description": "Language code (e.g., en_US)"
+                                        }
+                                    },
+                                    "required": [
+                                        "code"
+                                    ],
+                                    "visible": [
+                                        "code"
+                                    ],
+                                    "additionalProperties": false
+                                },
+                                "components": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "properties": {},
+                                        "required": [],
+                                        "visible": []
+                                    },
+                                    "description": "Template component parameters"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "language"
+                            ],
+                            "visible": [
+                                "name",
+                                "language",
+                                "components"
+                            ],
+                            "additionalProperties": false
                         },
-                        "url": {
-                          "type": "string"
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "URL of the image"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "description": "Media ID from upload"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "description": "Image caption"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "visible": [
+                                "link",
+                                "id",
+                                "caption"
+                            ],
+                            "required": []
+                        },
+                        "document": {
+                            "type": "object",
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "URL of the document"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "description": "Media ID from upload"
+                                },
+                                "filename": {
+                                    "type": "string",
+                                    "description": "Document filename"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "description": "Document caption"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "visible": [
+                                "link",
+                                "id",
+                                "filename",
+                                "caption"
+                            ],
+                            "required": []
+                        },
+                        "audio": {
+                            "type": "object",
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "URL of the audio file"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "description": "Media ID from upload"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "visible": [
+                                "link",
+                                "id"
+                            ],
+                            "required": []
+                        },
+                        "video": {
+                            "type": "object",
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "URL of the video"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "description": "Media ID from upload"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "description": "Video caption"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "visible": [
+                                "link",
+                                "id",
+                                "caption"
+                            ],
+                            "required": []
+                        },
+                        "location": {
+                            "type": "object",
+                            "properties": {
+                                "latitude": {
+                                    "type": "number",
+                                    "description": "Location latitude"
+                                },
+                                "longitude": {
+                                    "type": "number",
+                                    "description": "Location longitude"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Location name"
+                                },
+                                "address": {
+                                    "type": "string",
+                                    "description": "Location address"
+                                }
+                            },
+                            "required": [
+                                "latitude",
+                                "longitude"
+                            ],
+                            "visible": [
+                                "latitude",
+                                "longitude",
+                                "name",
+                                "address"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "contacts": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {},
+                                "required": [],
+                                "visible": []
+                            },
+                            "description": "Contact cards to send"
                         }
-                      },
-                      "additionalProperties": false,
-                      "required": [],
-                      "visible": []
-                    }
-                  }
+                    },
+                    "required": [
+                        "to",
+                        "type"
+                    ],
+                    "visible": [
+                        "to",
+                        "type",
+                        "text",
+                        "template",
+                        "image",
+                        "document",
+                        "audio",
+                        "video",
+                        "location",
+                        "contacts"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__UPLOAD_MEDIA",
+        "description": "Upload media files (images, documents, audio, video) to WhatsApp Cloud API for later use in messages.",
+        "tags": [
+            "media",
+            "upload"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/media",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
                 },
-                "additionalProperties": false,
-                "required": [],
-                "visible": []
-              },
-              "description": "Template components (header, body, footer, buttons)"
-            }
-          },
-          "required": [
-            "name",
-            "category",
-            "language",
-            "components"
-          ],
-          "visible": [
-            "name",
-            "category",
-            "language",
-            "components"
-          ],
-          "additionalProperties": false
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp"
+                        },
+                        "file": {
+                            "type": "string",
+                            "format": "binary",
+                            "description": "The media file to upload"
+                        }
+                    },
+                    "required": [
+                        "file"
+                    ],
+                    "visible": [
+                        "file"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__DELETE_MESSAGE_TEMPLATE",
-    "description": "Delete a message template permanently.",
-    "tags": [
-      "templates",
-      "delete"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "DELETE",
-      "path": "/{business_account_id}/message_templates",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "business_account_id": {
-              "type": "string",
-              "description": "WhatsApp Business Account ID (WABA ID)"
-            }
-          },
-          "required": [
-            "business_account_id"
-          ],
-          "visible": [
-            "business_account_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__GET_MEDIA",
+        "description": "Retrieve media file URL and metadata by media ID. from Whatsapp.",
+        "tags": [
+            "media",
+            "get"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{media_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Template name to delete"
-            }
-          },
-          "required": [
-            "name"
-          ],
-          "visible": [
-            "name"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Media ID returned from upload"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "Phone number ID to verify ownership"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "query"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__GET_PHONE_NUMBER",
-    "description": "Retrieve information about a specific WhatsApp Business phone number.",
-    "tags": [
-      "phone_numbers",
-      "get"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{phone_number_id}",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__LIST_PHONE_NUMBERS",
-    "description": "List all phone numbers associated with a WhatsApp Business Account.",
-    "tags": [
-      "phone_numbers",
-      "list"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{business_account_id}/phone_numbers",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "business_account_id": {
-              "type": "string",
-              "description": "WhatsApp Business Account ID (WABA ID)"
-            }
-          },
-          "required": [
-            "business_account_id"
-          ],
-          "visible": [
-            "business_account_id"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__REGISTER_PHONE_NUMBER",
-    "description": "Register a phone number with WhatsApp Business API.",
-    "tags": [
-      "phone_numbers",
-      "register"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/register",
-      "server_url": "https://graph.facebook.com/v20.0"
-    },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__DELETE_MEDIA",
+        "description": "Delete a previously uploaded media file. from Whatsapp.",
+        "tags": [
+            "media",
+            "delete"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/{media_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "media_id": {
+                            "type": "string",
+                            "description": "Media ID to delete"
+                        }
+                    },
+                    "required": [
+                        "media_id"
+                    ],
+                    "visible": [
+                        "media_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "pin": {
-              "type": "string",
-              "description": "6-digit PIN for two-step verification"
-            }
-          },
-          "required": [
-            "pin"
-          ],
-          "visible": [
-            "pin"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__DEREGISTER_PHONE_NUMBER",
-    "description": "Deregister a phone number from WhatsApp Business API.",
-    "tags": [
-      "phone_numbers",
-      "deregister"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/deregister",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__LIST_MESSAGE_TEMPLATES",
+        "description": "List all message templates for the WhatsApp Business Account with optional filtering by status and category.",
+        "tags": [
+            "templates",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{business_account_id}/message_templates",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp"
-            }
-          },
-          "additionalProperties": false,
-          "required": [],
-          "visible": []
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "business_account_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Account ID (WABA ID)"
+                        }
+                    },
+                    "required": [
+                        "business_account_id"
+                    ],
+                    "visible": [
+                        "business_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "APPROVED",
+                                "PENDING",
+                                "REJECTED",
+                                "PAUSED",
+                                "DISABLED"
+                            ],
+                            "description": "Filter by approval status"
+                        },
+                        "category": {
+                            "type": "string",
+                            "enum": [
+                                "AUTHENTICATION",
+                                "MARKETING",
+                                "UTILITY"
+                            ],
+                            "description": "Filter by template category"
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "default": 100,
+                            "description": "Number of templates to return"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "status",
+                        "category",
+                        "limit"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__GET_BUSINESS_PROFILE",
-    "description": "Retrieve the business profile information for a phone number.",
-    "tags": [
-      "business_profile",
-      "get"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "GET",
-      "path": "/{phone_number_id}/whatsapp_business_profile",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__CREATE_MESSAGE_TEMPLATE",
+        "description": "Create a new message template for sending pre-approved messages to customers. Templates must be approved before use.",
+        "tags": [
+            "templates",
+            "create"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{business_account_id}/message_templates",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "query": {
-          "type": "object",
-          "properties": {
-            "fields": {
-              "type": "string",
-              "description": "Comma-separated list of fields to return (e.g., about,address,description,email,profile_picture_url,websites,vertical)"
-            }
-          },
-          "required": [],
-          "visible": [
-            "fields"
-          ],
-          "additionalProperties": false
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "business_account_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Account ID (WABA ID)"
+                        }
+                    },
+                    "required": [
+                        "business_account_id"
+                    ],
+                    "visible": [
+                        "business_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Template name (lowercase, alphanumeric, underscores only)"
+                        },
+                        "category": {
+                            "type": "string",
+                            "enum": [
+                                "AUTHENTICATION",
+                                "MARKETING",
+                                "UTILITY"
+                            ],
+                            "description": "Template category"
+                        },
+                        "language": {
+                            "type": "string",
+                            "description": "Language code (e.g., en_US)"
+                        },
+                        "components": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "HEADER",
+                                            "BODY",
+                                            "FOOTER",
+                                            "BUTTONS"
+                                        ]
+                                    },
+                                    "format": {
+                                        "type": "string",
+                                        "enum": [
+                                            "TEXT",
+                                            "IMAGE",
+                                            "VIDEO",
+                                            "DOCUMENT",
+                                            "LOCATION"
+                                        ],
+                                        "description": "Format for HEADER component"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Text content with optional {{1}}, {{2}} placeholders"
+                                    },
+                                    "example": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "description": "Example values for placeholders",
+                                        "properties": {},
+                                        "required": [],
+                                        "visible": []
+                                    },
+                                    "buttons": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "QUICK_REPLY",
+                                                        "PHONE_NUMBER",
+                                                        "URL"
+                                                    ]
+                                                },
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "url": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "additionalProperties": false,
+                                            "required": [],
+                                            "visible": []
+                                        }
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [],
+                                "visible": []
+                            },
+                            "description": "Template components (header, body, footer, buttons)"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "category",
+                        "language",
+                        "components"
+                    ],
+                    "visible": [
+                        "name",
+                        "category",
+                        "language",
+                        "components"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path"
-      ],
-      "visible": [
-        "path",
-        "query"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__UPDATE_BUSINESS_PROFILE",
-    "description": "Update the business profile information for a phone number.",
-    "tags": [
-      "business_profile",
-      "update"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/whatsapp_business_profile",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__DELETE_MESSAGE_TEMPLATE",
+        "description": "Delete a WhatsApp Business message template permanently.",
+        "tags": [
+            "templates",
+            "delete"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "DELETE",
+            "path": "/{business_account_id}/message_templates",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "business_account_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Account ID (WABA ID)"
+                        }
+                    },
+                    "required": [
+                        "business_account_id"
+                    ],
+                    "visible": [
+                        "business_account_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Template name to delete"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "visible": [
+                        "name"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "about": {
-              "type": "string",
-              "description": "Business description (max 256 characters)"
-            },
-            "address": {
-              "type": "string",
-              "description": "Business address"
-            },
-            "description": {
-              "type": "string",
-              "description": "Business profile description (max 512 characters)"
-            },
-            "email": {
-              "type": "string",
-              "format": "email",
-              "description": "Business email address"
-            },
-            "profile_picture_handle": {
-              "type": "string",
-              "description": "Handle for profile picture (from media upload)"
-            },
-            "vertical": {
-              "type": "string",
-              "enum": [
-                "AUTOMOTIVE",
-                "BEAUTY",
-                "APPAREL",
-                "EDU",
-                "ENTERTAIN",
-                "EVENT_PLAN",
-                "FINANCE",
-                "GROCERY",
-                "GOVT",
-                "HOTEL",
-                "HEALTH",
-                "NONPROFIT",
-                "PROF_SERVICES",
-                "RETAIL",
-                "TRAVEL",
-                "RESTAURANT",
-                "NOT_A_BIZ"
-              ],
-              "description": "Business industry/vertical"
-            },
-            "websites": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uri"
-              },
-              "description": "Business website URLs (max 2)"
-            }
-          },
-          "required": [],
-          "visible": [
-            "about",
-            "address",
-            "description",
-            "email",
-            "profile_picture_handle",
-            "vertical",
-            "websites"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path",
+                "query"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
-    }
-  },
-  {
-    "name": "WHATSAPP__MARK_MESSAGE_AS_READ",
-    "description": "Mark a received message as read.",
-    "tags": [
-      "messages",
-      "read"
-    ],
-    "visibility": "public",
-    "active": true,
-    "protocol": "rest",
-    "protocol_data": {
-      "method": "POST",
-      "path": "/{phone_number_id}/messages",
-      "server_url": "https://graph.facebook.com/v20.0"
     },
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "object",
-          "properties": {
-            "phone_number_id": {
-              "type": "string",
-              "description": "WhatsApp Business Phone Number ID"
-            }
-          },
-          "required": [
-            "phone_number_id"
-          ],
-          "visible": [
-            "phone_number_id"
-          ],
-          "additionalProperties": false
+    {
+        "name": "WHATSAPP__GET_PHONE_NUMBER",
+        "description": "Retrieve information about a specific WhatsApp Business phone number.",
+        "tags": [
+            "phone_numbers",
+            "get"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{phone_number_id}",
+            "server_url": "https://graph.facebook.com/v20.0"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "messaging_product": {
-              "type": "string",
-              "enum": [
-                "whatsapp"
-              ],
-              "default": "whatsapp"
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                }
             },
-            "status": {
-              "type": "string",
-              "enum": [
-                "read"
-              ],
-              "default": "read"
-            },
-            "message_id": {
-              "type": "string",
-              "description": "WhatsApp message ID to mark as read"
-            }
-          },
-          "required": [
-            "status",
-            "message_id"
-          ],
-          "visible": [
-            "message_id"
-          ],
-          "additionalProperties": false
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "path",
-        "body"
-      ],
-      "visible": [
-        "path",
-        "body"
-      ],
-      "additionalProperties": false
+    },
+    {
+        "name": "WHATSAPP__LIST_PHONE_NUMBERS",
+        "description": "List all phone numbers associated with a WhatsApp Business Account.",
+        "tags": [
+            "phone_numbers",
+            "list"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{business_account_id}/phone_numbers",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "business_account_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Account ID (WABA ID)"
+                        }
+                    },
+                    "required": [
+                        "business_account_id"
+                    ],
+                    "visible": [
+                        "business_account_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__REGISTER_PHONE_NUMBER",
+        "description": "Register a phone number with WhatsApp Business API.",
+        "tags": [
+            "phone_numbers",
+            "register"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/register",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp"
+                        },
+                        "pin": {
+                            "type": "string",
+                            "description": "6-digit PIN for two-step verification"
+                        }
+                    },
+                    "required": [
+                        "pin"
+                    ],
+                    "visible": [
+                        "pin"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__DEREGISTER_PHONE_NUMBER",
+        "description": "Deregister a phone number from WhatsApp Business API.",
+        "tags": [
+            "phone_numbers",
+            "deregister"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/deregister",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [],
+                    "visible": []
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__GET_BUSINESS_PROFILE",
+        "description": "Retrieve the business profile information for a phone number. from Whatsapp.",
+        "tags": [
+            "business_profile",
+            "get"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/{phone_number_id}/whatsapp_business_profile",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "query": {
+                    "type": "object",
+                    "properties": {
+                        "fields": {
+                            "type": "string",
+                            "description": "Comma-separated list of fields to return (e.g., about,address,description,email,profile_picture_url,websites,vertical)"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "fields"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "visible": [
+                "path",
+                "query"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__UPDATE_BUSINESS_PROFILE",
+        "description": "Update the business profile information for a phone number. in Whatsapp.",
+        "tags": [
+            "business_profile",
+            "update"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/whatsapp_business_profile",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp"
+                        },
+                        "about": {
+                            "type": "string",
+                            "description": "Business description (max 256 characters)"
+                        },
+                        "address": {
+                            "type": "string",
+                            "description": "Business address"
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Business profile description (max 512 characters)"
+                        },
+                        "email": {
+                            "type": "string",
+                            "format": "email",
+                            "description": "Business email address"
+                        },
+                        "profile_picture_handle": {
+                            "type": "string",
+                            "description": "Handle for profile picture (from media upload)"
+                        },
+                        "vertical": {
+                            "type": "string",
+                            "enum": [
+                                "AUTOMOTIVE",
+                                "BEAUTY",
+                                "APPAREL",
+                                "EDU",
+                                "ENTERTAIN",
+                                "EVENT_PLAN",
+                                "FINANCE",
+                                "GROCERY",
+                                "GOVT",
+                                "HOTEL",
+                                "HEALTH",
+                                "NONPROFIT",
+                                "PROF_SERVICES",
+                                "RETAIL",
+                                "TRAVEL",
+                                "RESTAURANT",
+                                "NOT_A_BIZ"
+                            ],
+                            "description": "Business industry/vertical"
+                        },
+                        "websites": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "description": "Business website URLs (max 2)"
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "about",
+                        "address",
+                        "description",
+                        "email",
+                        "profile_picture_handle",
+                        "vertical",
+                        "websites"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "WHATSAPP__MARK_MESSAGE_AS_READ",
+        "description": "Mark a received message as read. via Whatsapp.",
+        "tags": [
+            "messages",
+            "read"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/{phone_number_id}/messages",
+            "server_url": "https://graph.facebook.com/v20.0"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "properties": {
+                        "phone_number_id": {
+                            "type": "string",
+                            "description": "WhatsApp Business Phone Number ID"
+                        }
+                    },
+                    "required": [
+                        "phone_number_id"
+                    ],
+                    "visible": [
+                        "phone_number_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "messaging_product": {
+                            "type": "string",
+                            "enum": [
+                                "whatsapp"
+                            ],
+                            "default": "whatsapp"
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "read"
+                            ],
+                            "default": "read"
+                        },
+                        "message_id": {
+                            "type": "string",
+                            "description": "WhatsApp message ID to mark as read"
+                        }
+                    },
+                    "required": [
+                        "status",
+                        "message_id"
+                    ],
+                    "visible": [
+                        "message_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "body"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
     }
-  }
 ]
