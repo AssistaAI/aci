@@ -1,0 +1,21 @@
+{
+  "name": "TEXTRAZOR",
+  "display_name": "TextRazor",
+  "logo": "https://unavatar.io/textrazor.com",
+  "provider": "TextRazor Ltd.",
+  "version": "1.0.0",
+  "description": "\"TextRazor is a natural language processing API that extracts entities, relationships, topics, and sentiment from text with industry-leading accuracy.\"",
+  "security_schemes": {
+    "api_key": {
+      "location": "header",
+      "name": "X-TextRazor-Key",
+      "prefix": null
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "AI & Machine Learning"
+  ],
+  "visibility": "public",
+  "active": true
+}

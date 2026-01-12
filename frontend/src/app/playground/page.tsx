@@ -76,10 +76,35 @@ const Page = () => {
   });
 
   useEffect(() => {
-    sessionStorage.setItem(
-      chatHistoryLocalStorageKey,
-      JSON.stringify(messages),
-    );
+    try {
+      const messagesJson = JSON.stringify(messages);
+      // Skip saving if data is too large (>4MB to leave buffer for quota ~5-10MB)
+      if (messagesJson.length > 4 * 1024 * 1024) {
+        console.warn('Chat history too large to save to sessionStorage, skipping save');
+        return;
+      }
+      sessionStorage.setItem(
+        chatHistoryLocalStorageKey,
+        messagesJson,
+      );
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'QuotaExceededError') {
+        console.error('Storage quota exceeded. Clearing old history...');
+        sessionStorage.removeItem(chatHistoryLocalStorageKey);
+        // Try saving just the last few messages
+        try {
+          const recentMessages = messages.slice(-5);
+          sessionStorage.setItem(
+            chatHistoryLocalStorageKey,
+            JSON.stringify(recentMessages),
+          );
+        } catch {
+          console.error('Failed to save even recent messages');
+        }
+      } else {
+        console.error('Failed to save chat history:', error);
+      }
+    }
   }, [messages]);
   const handleAddToolResult = ({
     toolCallId,

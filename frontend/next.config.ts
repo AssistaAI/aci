@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       "raw.githubusercontent.com",
       "logo.clearbit.com",
       "cdn.brandfetch.io",
+      "unavatar.io",
     ],
   },
 

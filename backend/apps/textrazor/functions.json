@@ -1,0 +1,949 @@
+[
+  {
+    "name": "TEXTRAZOR__ANALYZE",
+    "description": "Analyzes text to extract entities, topics, relationships, sentiment, and other linguistic information",
+    "tags": [
+      "nlp",
+      "analysis",
+      "entities"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze (UTF-8 encoded, max 200KB)"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "List of extractors to use (e.g., entities, topics, words, phrases, dependency-trees, relations, entailments, sentiment)",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "entities",
+                  "topics",
+                  "words",
+                  "phrases",
+                  "dependency-trees",
+                  "relations",
+                  "entailments",
+                  "sentiment",
+                  "spelling"
+                ]
+              },
+              "default": [
+                "entities",
+                "topics"
+              ]
+            },
+            "languageOverride": {
+              "type": "string",
+              "description": "ISO-639-2 (3-letter) language code to override auto-detection. Examples: 'eng' (English), 'spa' (Spanish), 'fra' (French), 'deu' (German), 'chi' (Chinese), 'jpn' (Japanese). Note: Use 3-letter codes, NOT 2-letter codes like 'en'."
+            },
+            "cleanupMode": {
+              "type": "string",
+              "description": "Controls preprocessing of HTML/markup",
+              "enum": [
+                "raw",
+                "cleanHTML",
+                "stripTags"
+              ]
+            },
+            "downloadUserAgent": {
+              "type": "string",
+              "description": "User agent string for URL downloads"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors",
+            "languageOverride",
+            "cleanupMode"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__ANALYZE_URL",
+    "description": "Analyzes content from a URL to extract entities, topics, relationships, and other linguistic information",
+    "tags": [
+      "nlp",
+      "analysis",
+      "url",
+      "entities"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to download and analyze"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "List of extractors to use. Note: Using multiple extractors returns larger responses. Start with 'entities' only to avoid localStorage quota issues.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "entities",
+                  "topics",
+                  "words",
+                  "phrases",
+                  "dependency-trees",
+                  "relations",
+                  "entailments",
+                  "sentiment",
+                  "spelling"
+                ]
+              },
+              "default": [
+                "entities"
+              ]
+            },
+            "languageOverride": {
+              "type": "string",
+              "description": "ISO-639-2 (3-letter) language code to override auto-detection. Examples: 'eng' (English), 'spa' (Spanish), 'fra' (French), 'deu' (German), 'chi' (Chinese), 'jpn' (Japanese). Note: Use 3-letter codes, NOT 2-letter codes like 'en'."
+            },
+            "cleanupMode": {
+              "type": "string",
+              "description": "Controls preprocessing of HTML/markup",
+              "enum": [
+                "raw",
+                "cleanHTML",
+                "stripTags"
+              ],
+              "default": "cleanHTML"
+            },
+            "downloadUserAgent": {
+              "type": "string",
+              "description": "User agent string for URL downloads"
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "visible": [
+            "url",
+            "extractors",
+            "languageOverride",
+            "cleanupMode"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__ENTITY_EXTRACTION",
+    "description": "Extracts named entities from text with disambiguation to knowledge bases like Wikipedia and DBpedia",
+    "tags": [
+      "nlp",
+      "entities",
+      "extraction"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for entity extraction"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "entities"
+              ]
+            },
+            "entityDictionary": {
+              "type": "array",
+              "description": "Custom entity dictionary IDs to use",
+              "items": {
+                "type": "string"
+              }
+            },
+            "dbpediaTypeFilters": {
+              "type": "array",
+              "description": "Filter entities by DBpedia types",
+              "items": {
+                "type": "string"
+              }
+            },
+            "freebaseTypeFilters": {
+              "type": "array",
+              "description": "Filter entities by Freebase types",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors",
+            "entityDictionary",
+            "dbpediaTypeFilters",
+            "freebaseTypeFilters"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__TOPIC_CLASSIFICATION",
+    "description": "Classifies text into topics and categories using machine learning",
+    "tags": [
+      "nlp",
+      "topics",
+      "classification"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to classify into topics"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "topics"
+              ]
+            },
+            "classifiers": {
+              "type": "array",
+              "description": "Custom classifier IDs to use",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors",
+            "classifiers"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__SENTIMENT_ANALYSIS",
+    "description": "Analyzes the sentiment of text at document and entity level",
+    "tags": [
+      "nlp",
+      "sentiment",
+      "analysis"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for sentiment"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "entities",
+                "sentiment"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__RELATION_EXTRACTION",
+    "description": "Extracts relationships between entities in text",
+    "tags": [
+      "nlp",
+      "relations",
+      "extraction"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for relationships"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "entities",
+                "relations"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__EXTRACT_PHRASES",
+    "description": "Extracts noun phrases from text, identifying multi-word expressions and their grammatical structure",
+    "tags": [
+      "nlp",
+      "phrases",
+      "extraction"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for phrase extraction"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "phrases"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__EXTRACT_WORD_SENSES",
+    "description": "Performs word sense disambiguation to identify the specific meaning of words in context",
+    "tags": [
+      "nlp",
+      "word-sense",
+      "disambiguation"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for word sense disambiguation"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "words"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__DEPENDENCY_TREES",
+    "description": "Extracts grammatical dependency trees showing the syntactic structure and relationships between words",
+    "tags": [
+      "nlp",
+      "syntax",
+      "parsing"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for dependency parsing"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "dependency-trees"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__EXTRACT_ENTAILMENTS",
+    "description": "Extracts logical entailments and inferences from text to identify implicit relationships",
+    "tags": [
+      "nlp",
+      "entailments",
+      "logic"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to analyze for entailments"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "entailments"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__SPELLING_CORRECTION",
+    "description": "Checks spelling and provides corrections for misspelled words in text",
+    "tags": [
+      "nlp",
+      "spelling",
+      "correction"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to check for spelling errors"
+            },
+            "extractors": {
+              "type": "array",
+              "description": "Extractors to use",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "spelling"
+              ]
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "visible": [
+            "text",
+            "extractors"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "body"
+      ],
+      "visible": [
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "TEXTRAZOR__ACCOUNT_INFO",
+    "description": "Retrieves account information including API usage statistics and limits",
+    "tags": [
+      "account",
+      "usage",
+      "limits"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/account/",
+      "server_url": "https://api.textrazor.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header"
+      ],
+      "visible": [],
+      "additionalProperties": false
+    }
+  }
+]
+
