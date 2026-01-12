@@ -1,0 +1,27 @@
+{
+  "name": "CHATWORK",
+  "display_name": "Chatwork",
+  "logo": "https://raw.githubusercontent.com/aipotheosis-labs/aipolabs-icons/refs/heads/main/apps/chatwork.svg",
+  "provider": "Chatwork Inc.",
+  "version": "1.0.0",
+  "description": "\"Chatwork is a team communication and collaboration platform. Send messages, manage conversations, create tasks, and collaborate with your team seamlessly.\"",
+  "security_schemes": {
+    "oauth2": {
+      "location": "header",
+      "name": "Authorization",
+      "prefix": "Bearer",
+      "client_id": "{{ AIPOLABS_CHATWORK_APP_CLIENT_ID }}",
+      "client_secret": "{{ AIPOLABS_CHATWORK_APP_CLIENT_SECRET }}",
+      "scope": "users:read messages:read messages:write tasks:read tasks:write files:read files:write rooms:read",
+      "authorize_url": "https://accounts.chatwork.com/oauth2/authorize",
+      "access_token_url": "https://accounts.chatwork.com/oauth2/token",
+      "refresh_token_url": "https://accounts.chatwork.com/oauth2/token"
+    }
+  },
+  "default_security_credentials_by_scheme": {},
+  "categories": [
+    "Communication"
+  ],
+  "visibility": "public",
+  "active": true
+}

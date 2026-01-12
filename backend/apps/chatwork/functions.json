@@ -1,0 +1,783 @@
+[
+  {
+    "name": "CHATWORK__ME",
+    "description": "Retrieves information about the currently authenticated user",
+    "tags": [
+      "users",
+      "profile"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/me",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "required": [],
+      "visible": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_ROOMS",
+    "description": "Retrieves the list of rooms for the authenticated user",
+    "tags": [
+      "rooms",
+      "list"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "visible": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_ROOM",
+    "description": "Retrieves information about a specific room",
+    "tags": [
+      "rooms",
+      "info"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms/{room_id}",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to retrieve information for"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_MESSAGES",
+    "description": "Retrieves messages from a specific room",
+    "tags": [
+      "messages",
+      "list",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms/{room_id}/messages",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to retrieve messages from"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters for the HTTP request",
+          "properties": {
+            "force": {
+              "type": "integer",
+              "description": "If set to 1, returns even unread messages. Default: 0",
+              "default": 0
+            },
+            "limit": {
+              "type": "integer",
+              "description": "The maximum number of messages to return (max 100)",
+              "default": 100
+            },
+            "offset": {
+              "type": "integer",
+              "description": "The offset for pagination",
+              "default": 0
+            }
+          },
+          "required": [],
+          "visible": [
+            "force",
+            "limit",
+            "offset"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__POST_MESSAGE",
+    "description": "Sends a message to a room",
+    "tags": [
+      "messages",
+      "send",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v2/rooms/{room_id}/messages",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to send the message to"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "body": {
+              "type": "string",
+              "description": "The message text to send (supports Chatwork markup)"
+            }
+          },
+          "required": [
+            "body"
+          ],
+          "visible": [
+            "body"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__UPDATE_MESSAGE",
+    "description": "Updates a message in a room",
+    "tags": [
+      "messages",
+      "edit",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "PUT",
+      "path": "/v2/rooms/{room_id}/messages/{message_id}",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room containing the message"
+            },
+            "message_id": {
+              "type": "string",
+              "description": "The ID of the message to update"
+            }
+          },
+          "required": [
+            "room_id",
+            "message_id"
+          ],
+          "visible": [
+            "room_id",
+            "message_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "body": {
+              "type": "string",
+              "description": "The updated message text"
+            }
+          },
+          "required": [
+            "body"
+          ],
+          "visible": [
+            "body"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__DELETE_MESSAGE",
+    "description": "Deletes a message from a room",
+    "tags": [
+      "messages",
+      "delete",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "DELETE",
+      "path": "/v2/rooms/{room_id}/messages/{message_id}",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room containing the message"
+            },
+            "message_id": {
+              "type": "string",
+              "description": "The ID of the message to delete"
+            }
+          },
+          "required": [
+            "room_id",
+            "message_id"
+          ],
+          "visible": [
+            "room_id",
+            "message_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_CONTACTS",
+    "description": "Retrieves the list of contacts for the authenticated user",
+    "tags": [
+      "contacts",
+      "users",
+      "list"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/contacts",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "required": [],
+      "visible": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_TASKS",
+    "description": "Retrieves tasks from a room",
+    "tags": [
+      "tasks",
+      "list",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms/{room_id}/tasks",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to retrieve tasks from"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters for the HTTP request",
+          "properties": {
+            "assigned_by_account_id": {
+              "type": "string",
+              "description": "Filter tasks by the account ID that assigned them"
+            },
+            "status": {
+              "type": "string",
+              "description": "Filter tasks by status (open, done)",
+              "enum": [
+                "open",
+                "done"
+              ]
+            }
+          },
+          "required": [],
+          "visible": [
+            "assigned_by_account_id",
+            "status"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__CREATE_TASK",
+    "description": "Creates a new task in a room",
+    "tags": [
+      "tasks",
+      "create",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "POST",
+      "path": "/v2/rooms/{room_id}/tasks",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {
+            "Content-Type": {
+              "type": "string",
+              "description": "Content type of the request",
+              "default": "application/x-www-form-urlencoded"
+            }
+          },
+          "required": [
+            "Content-Type"
+          ],
+          "visible": [],
+          "additionalProperties": false
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to create the task in"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body parameters",
+          "properties": {
+            "body": {
+              "type": "string",
+              "description": "The task description/title"
+            },
+            "to_account_id": {
+              "type": "string",
+              "description": "The account ID to assign the task to"
+            },
+            "due_date": {
+              "type": "string",
+              "description": "Due date in UNIX timestamp format"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Limit date in UNIX timestamp format"
+            }
+          },
+          "required": [
+            "body",
+            "to_account_id"
+          ],
+          "visible": [
+            "body",
+            "to_account_id",
+            "due_date",
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "header",
+        "path",
+        "body"
+      ],
+      "visible": [
+        "path",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_ROOM_MEMBERS",
+    "description": "Retrieves members of a room",
+    "tags": [
+      "rooms",
+      "members",
+      "users"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms/{room_id}/members",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to retrieve members from"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "CHATWORK__GET_FILES",
+    "description": "Retrieves files from a room",
+    "tags": [
+      "files",
+      "list",
+      "rooms"
+    ],
+    "visibility": "public",
+    "active": true,
+    "protocol": "rest",
+    "protocol_data": {
+      "method": "GET",
+      "path": "/v2/rooms/{room_id}/files",
+      "server_url": "https://api.chatwork.com"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Headers for the HTTP request",
+          "properties": {},
+          "required": [],
+          "visible": [],
+          "additionalProperties": false,
+          "default": {}
+        },
+        "path": {
+          "type": "object",
+          "description": "Path parameters for the HTTP request",
+          "properties": {
+            "room_id": {
+              "type": "string",
+              "description": "The ID of the room to retrieve files from"
+            }
+          },
+          "required": [
+            "room_id"
+          ],
+          "visible": [
+            "room_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters for the HTTP request",
+          "properties": {
+            "account_id": {
+              "type": "string",
+              "description": "Filter files by the account ID that uploaded them"
+            }
+          },
+          "required": [],
+          "visible": [
+            "account_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "visible": [
+        "path",
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  }
+]
