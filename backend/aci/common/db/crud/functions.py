@@ -168,6 +168,12 @@ def get_function(
     return db_session.execute(statement).scalar_one_or_none()
 
 
+def get_function_by_id(db_session: Session, function_id: UUID) -> Function | None:
+    """Get a function by its ID."""
+    statement = select(Function).filter(Function.id == function_id)
+    return db_session.execute(statement).scalar_one_or_none()
+
+
 def set_function_active_status(db_session: Session, function_name: str, active: bool) -> None:
     statement = update(Function).filter_by(name=function_name).values(active=active)
     db_session.execute(statement)

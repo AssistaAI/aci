@@ -136,3 +136,26 @@ services:
         condition: service_healthy
       aws:
         condition: service_healthy
+
+  # Scheduler for automated background tasks (e.g., schema fix processing)
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    env_file:
+      - .env.local
+    environment:
+      # Scheduler configuration (can override in production)
+      - SCHEDULER_SCHEMA_FIX_CRON=0 * * * *
+      - SCHEDULER_SCHEMA_FIX_AUTO_APPLY=true
+      - SCHEDULER_SCHEMA_FIX_BATCH_SIZE=50
+      - SCHEDULER_SCHEMA_FIX_MIN_OCCURRENCES=1
+    volumes:
+      - ./aci:/workdir/aci
+    command: python -m aci.scheduler.schema_fix_scheduler
+    depends_on:
+      db:
+        condition: service_healthy
+      server:
+        condition: service_healthy
+    restart: unless-stopped

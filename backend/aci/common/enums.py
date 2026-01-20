@@ -116,3 +116,27 @@ class WebsiteEvaluationStatus(StrEnum):
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     FAILED = "failed"
+
+
+class SchemaFixStatus(StrEnum):
+    """
+    Status of a schema fix candidate.
+    """
+
+    PENDING = "pending"  # Detected but not yet validated by LLM
+    APPROVED = "approved"  # LLM approved, ready to apply
+    REJECTED = "rejected"  # LLM rejected (not a valid parameter)
+    MANUAL_REVIEW = "manual_review"  # Needs human review (low confidence)
+    APPLIED = "applied"  # Successfully applied to function schema
+
+
+class SchemaFixErrorType(StrEnum):
+    """
+    Type of schema validation error that triggered the fix.
+    """
+
+    ADDITIONAL_PROPERTY = "additional_property"  # additionalProperties violation
+    WRONG_TYPE = "wrong_type"  # Type mismatch
+    MISSING_REQUIRED = "missing_required"  # Missing required field
+    AUTH_ERROR = "auth_error"  # 401/403 - skip, user credential problem
+    API_ERROR = "api_error"  # External API error - skip

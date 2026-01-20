@@ -9,6 +9,7 @@ from aci.cli.commands import (
     fuzzy_test_function_execution,
     get_app,
     rename_app,
+    schema_fixes,
     test_app_functions,
     update_agent,
     upsert_app,
@@ -39,6 +40,14 @@ cli.add_command(test_app_functions.test_app_functions)
 cli.add_command(billing.populate_subscription_plans)
 cli.add_command(billing.create_test_subscription)
 cli.add_command(validate_descriptions.validate_descriptions)
+
+# Schema fix commands
+cli.add_command(schema_fixes.list_schema_fixes)
+cli.add_command(schema_fixes.process_pending_fixes)
+cli.add_command(schema_fixes.review_schema_fix)
+cli.add_command(schema_fixes.apply_approved_fixes)
+cli.add_command(schema_fixes.rollback_schema_fix)
+cli.add_command(schema_fixes.schema_fix_stats)
 
 if __name__ == "__main__":
     cli()
