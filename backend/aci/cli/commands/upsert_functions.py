@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from aci.cli import config
 from aci.common import embeddings, utils
 from aci.common.db import crud
+from aci.common.schema_fix_applier import SchemaFixApplier, get_fixes_to_merge
 from aci.common.schemas.function import FunctionEmbeddingFields, FunctionUpsert
 
 console = Console()
@@ -140,6 +141,19 @@ def update_functions_helper(
         )
         if existing_function is None:
             raise click.ClickException(f"Function '{function_upsert.name}' not found.")
+
+        # Merge approved schema fixes into the new parameters
+        # This preserves fixes that might not be in the seed data
+        fixes_to_merge = get_fixes_to_merge(db_session, function_upsert.name)
+        if fixes_to_merge:
+            merged_parameters = SchemaFixApplier.merge_fixes_into_parameters(
+                function_upsert.parameters, fixes_to_merge
+            )
+            function_upsert = function_upsert.model_copy(update={"parameters": merged_parameters})
+            console.print(
+                f"[yellow]Merged {len(fixes_to_merge)} schema fix(es) into '{function_upsert.name}'[/yellow]"
+            )
+
         existing_function_upsert = FunctionUpsert.model_validate(
             existing_function, from_attributes=True
         )

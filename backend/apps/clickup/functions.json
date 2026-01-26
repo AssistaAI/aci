@@ -1,7 +1,7 @@
 [
     {
         "name": "CLICKUP__AUTHORIZED_WORKSPACES",
-        "description": "View the Workspaces available to the authenticated user. Call this first to get team_id for other operations.",
+        "description": "View the Workspaces available to the authenticated user. Call this first to get team_id (workspace ID) for other v2 API operations. Note: In ClickUp API v2, 'team' refers to a Workspace.",
         "tags": [
             "Authorization",
             "setup"
@@ -48,7 +48,7 @@
     },
     {
         "name": "CLICKUP__DOCS_SEARCH",
-        "description": "View the Docs in your Workspace. You can only view information of Docs you can access.",
+        "description": "View the Docs in your Workspace. You can only view information of Docs you can access. Note: This uses API v3 with workspaceId (same as team_id from CLICKUP__AUTHORIZED_WORKSPACES).",
         "tags": [
             "docs"
         ],
@@ -1610,7 +1610,7 @@
     },
     {
         "name": "CLICKUP__TEAM_MEMBERS",
-        "description": "Retrieve all team members in a workspace to get user IDs for task assignment, goal ownership, and time tracking. Call this before assigning tasks or creating goals. The workspace is determined by your authentication token.",
+        "description": "Retrieve all team members in a workspace to get user IDs for task assignment, goal ownership, and time tracking. Call this before assigning tasks or creating goals. Returns workspace members. Note: In ClickUp API v2, 'team' refers to a Workspace.",
         "tags": [
             "team",
             "members",

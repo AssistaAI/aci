@@ -7,6 +7,7 @@ from . import (
     plans,
     processed_stripe_event,
     projects,
+    schema_fixes,
     secret,
     subscriptions,
 )
@@ -20,6 +21,7 @@ __all__ = [
     "plans",
     "processed_stripe_event",
     "projects",
+    "schema_fixes",
     "secret",
     "subscriptions",
 ]

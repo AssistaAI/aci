@@ -1,0 +1,26 @@
+# Scheduler overlay for production
+# Usage: docker compose -f compose.yml -f compose.scheduler.yml up -d scheduler
+#
+# This runs the schema fix scheduler as a separate service.
+# Configure via environment variables:
+#   - SCHEDULER_SCHEMA_FIX_CRON: Cron expression (default: "0 * * * *" = every hour)
+#   - SCHEDULER_SCHEMA_FIX_AUTO_APPLY: Auto-apply high-confidence fixes (default: true)
+#   - SCHEDULER_SCHEMA_FIX_BATCH_SIZE: Max fixes per run (default: 50)
+#   - SCHEDULER_SCHEMA_FIX_MIN_OCCURRENCES: Min occurrences before processing (default: 1)
+
+services:
+  scheduler:
+    # Uses the same image as runner
+    image: ${SCHEDULER_IMAGE:-aci-runner}
+    env_file:
+      - .env.local
+    environment:
+      - SCHEDULER_SCHEMA_FIX_CRON=${SCHEDULER_SCHEMA_FIX_CRON:-0 * * * *}
+      - SCHEDULER_SCHEMA_FIX_AUTO_APPLY=${SCHEDULER_SCHEMA_FIX_AUTO_APPLY:-true}
+      - SCHEDULER_SCHEMA_FIX_BATCH_SIZE=${SCHEDULER_SCHEMA_FIX_BATCH_SIZE:-50}
+      - SCHEDULER_SCHEMA_FIX_MIN_OCCURRENCES=${SCHEDULER_SCHEMA_FIX_MIN_OCCURRENCES:-1}
+    command: python -m aci.scheduler.schema_fix_scheduler
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped

@@ -46,6 +46,8 @@ from aci.common.db.custom_sql_types import (
 from aci.common.enums import (
     APIKeyStatus,
     Protocol,
+    SchemaFixErrorType,
+    SchemaFixStatus,
     SecurityScheme,
     StripeSubscriptionInterval,
     StripeSubscriptionStatus,
@@ -606,6 +608,82 @@ class ProcessedStripeEvent(Base):
     )
 
 
+class SchemaFix(Base):
+    """
+    Tracks schema fix candidates detected from function execution validation errors.
+    When AI agents send valid API parameters that are missing from our function schemas,
+    this table stores the detected fixes for LLM validation and eventual application.
+    """
+
+    __tablename__ = "schema_fixes"
+
+    id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), primary_key=True, default_factory=uuid4, init=False
+    )
+    function_id: Mapped[UUID] = mapped_column(
+        PGUUID(as_uuid=True), ForeignKey("functions.id"), nullable=False
+    )
+    # JSON path to the property location, e.g., "properties.body.properties.variables.properties.filter"
+    property_path: Mapped[str] = mapped_column(Text, nullable=False)
+    # The property name that was missing, e.g., "stateId"
+    property_name: Mapped[str] = mapped_column(String(MAX_STRING_LENGTH), nullable=False)
+    # Inferred JSON schema for the property based on the value that was passed
+    property_schema: Mapped[dict] = mapped_column(MutableDict.as_mutable(JSONB), nullable=False)
+    # The type of error that triggered this fix
+    error_type: Mapped[SchemaFixErrorType] = mapped_column(
+        SqlEnum(SchemaFixErrorType, native_enum=False, length=MAX_ENUM_LENGTH),
+        nullable=False,
+    )
+    # Status of the fix (pending, approved, rejected, manual_review, applied)
+    status: Mapped[SchemaFixStatus] = mapped_column(
+        SqlEnum(SchemaFixStatus, native_enum=False, length=MAX_ENUM_LENGTH),
+        nullable=False,
+    )
+    # LLM validation results
+    llm_reasoning: Mapped[str | None] = mapped_column(Text, nullable=True, default=None)
+    llm_confidence: Mapped[float | None] = mapped_column(nullable=True, default=None)
+    # Track occurrences of the same error
+    occurrence_count: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
+    first_seen_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now(), nullable=False, init=False
+    )
+    last_seen_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now(), nullable=False, init=False
+    )
+    # When the fix was applied to the function schema
+    applied_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=False), nullable=True, default=None, init=False
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now(), nullable=False, init=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False,
+        init=False,
+    )
+
+    # Relationship to the function
+    function: Mapped[Function] = relationship("Function", lazy="select", init=False)
+
+    @property
+    def function_name(self) -> str:
+        return str(self.function.name)
+
+    __table_args__ = (
+        # Each (function, property_path, property_name) combination should be unique
+        UniqueConstraint(
+            "function_id",
+            "property_path",
+            "property_name",
+            name="uc_function_property_path_name",
+        ),
+    )
+
+
 __all__ = [
     "APIKey",
     "Agent",
@@ -615,5 +693,6 @@ __all__ = [
     "Function",
     "LinkedAccount",
     "Project",
+    "SchemaFix",
     "Secret",
 ]
