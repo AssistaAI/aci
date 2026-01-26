@@ -808,7 +808,10 @@
                         "user-agent"
                     ],
                     "additionalProperties": false,
-                    "default": {}
+                    "default": {
+                        "accept": "application/vnd.github+json",
+                        "user-agent": "ACI::GITHUB"
+                    }
                 },
                 "path": {
                     "type": "object",
@@ -837,6 +840,10 @@
                     "type": "object",
                     "description": "Optional query parameters for the http request",
                     "properties": {
+                        "milestone": {
+                            "type": "string",
+                            "description": "Filter by milestone number, or '*' for issues with any milestone, or 'none' for issues without milestone"
+                        },
                         "state": {
                             "type": "string",
                             "description": "Indicates the state of the issues to return",
@@ -846,6 +853,22 @@
                                 "all"
                             ],
                             "default": "open"
+                        },
+                        "assignee": {
+                            "type": "string",
+                            "description": "Filter by assignee username, or '*' for issues with any assignee, or 'none' for issues without assignee"
+                        },
+                        "creator": {
+                            "type": "string",
+                            "description": "Filter by the username of the user who created the issue"
+                        },
+                        "mentioned": {
+                            "type": "string",
+                            "description": "Filter by a username that was mentioned in the issue"
+                        },
+                        "labels": {
+                            "type": "string",
+                            "description": "A comma-separated list of label names to filter by (e.g., 'bug,enhancement')"
                         },
                         "sort": {
                             "type": "string",
@@ -883,7 +906,12 @@
                     },
                     "required": [],
                     "visible": [
+                        "milestone",
                         "state",
+                        "assignee",
+                        "creator",
+                        "mentioned",
+                        "labels",
                         "sort",
                         "direction",
                         "since",
@@ -894,7 +922,6 @@
                 }
             },
             "required": [
-                "header",
                 "path"
             ],
             "visible": [
