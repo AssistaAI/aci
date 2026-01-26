@@ -979,7 +979,7 @@
     },
     {
         "name": "NOTION__GET_DATABASE",
-        "description": "Retrieve a Database object using the ID specified.",
+        "description": "Retrieve a Database object using the ID specified. With API version 2025-09-03, this returns a data_sources array containing all data source IDs for multi-source databases.",
         "tags": [
             "notion",
             "databases"
@@ -1044,7 +1044,7 @@
     },
     {
         "name": "NOTION__QUERY_DATABASE",
-        "description": "Get a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided.",
+        "description": "Get a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided. For multi-source databases, use NOTION__QUERY_DATA_SOURCE instead.",
         "tags": [
             "notion",
             "databases",
@@ -2014,6 +2014,450 @@
                     "visible": [
                         "parent",
                         "rich_text"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "header",
+                "body"
+            ],
+            "visible": [
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "NOTION__GET_DATA_SOURCE",
+        "description": "Retrieve a data source object using the data_source_id. Returns information about the structure and columns of a data source. Use this for multi-source databases (API version 2025-09-03+). For single-source databases, you can still use NOTION__GET_DATABASE.",
+        "tags": [
+            "notion",
+            "data_sources",
+            "databases"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "GET",
+            "path": "/data_sources/{data_source_id}",
+            "server_url": "https://api.notion.com/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "data_source_id": {
+                            "type": "string",
+                            "description": "The ID of the data source to retrieve. Get this from the database object's data_sources array."
+                        }
+                    },
+                    "required": [
+                        "data_source_id"
+                    ],
+                    "visible": [
+                        "data_source_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "description": "Header parameters",
+                    "properties": {
+                        "Notion-Version": {
+                            "type": "string",
+                            "description": "The version of the Notion API to use.",
+                            "default": "2025-09-03"
+                        }
+                    },
+                    "required": [
+                        "Notion-Version"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {
+                        "Notion-Version": "2025-09-03"
+                    }
+                }
+            },
+            "required": [
+                "path",
+                "header"
+            ],
+            "visible": [
+                "path"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "NOTION__QUERY_DATA_SOURCE",
+        "description": "Query a data source to get pages contained in it, with optional filters and sorting. Use this for multi-source databases (API version 2025-09-03+). For single-source databases, you can still use NOTION__QUERY_DATABASE.",
+        "tags": [
+            "notion",
+            "data_sources",
+            "databases",
+            "query"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/data_sources/{data_source_id}/query",
+            "server_url": "https://api.notion.com/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "data_source_id": {
+                            "type": "string",
+                            "description": "The ID of the data source to query. Get this from the database object's data_sources array."
+                        }
+                    },
+                    "required": [
+                        "data_source_id"
+                    ],
+                    "visible": [
+                        "data_source_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "description": "Header parameters",
+                    "properties": {
+                        "Notion-Version": {
+                            "type": "string",
+                            "description": "The version of the Notion API to use.",
+                            "default": "2025-09-03"
+                        }
+                    },
+                    "required": [
+                        "Notion-Version"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {
+                        "Notion-Version": "2025-09-03"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Query parameters",
+                    "properties": {
+                        "filter": {
+                            "type": "object",
+                            "description": "Filter conditions for data source entries",
+                            "properties": {},
+                            "required": [],
+                            "visible": [],
+                            "additionalProperties": true
+                        },
+                        "sorts": {
+                            "type": "array",
+                            "description": "Sort criteria for the results",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {},
+                                "required": [],
+                                "visible": []
+                            }
+                        },
+                        "start_cursor": {
+                            "type": "string",
+                            "description": "Cursor for pagination"
+                        },
+                        "page_size": {
+                            "type": "integer",
+                            "description": "Number of results to return. Maximum: 100",
+                            "default": 100,
+                            "minimum": 1,
+                            "maximum": 100
+                        },
+                        "filter_properties": {
+                            "type": "array",
+                            "description": "List of property IDs to include in the response. Can significantly improve API speed.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "filter",
+                        "sorts",
+                        "start_cursor",
+                        "page_size",
+                        "filter_properties"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "NOTION__UPDATE_DATA_SOURCE",
+        "description": "Update a data source's properties. Use this for multi-source databases (API version 2025-09-03+). For single-source databases, you can still use NOTION__UPDATE_DATABASE.",
+        "tags": [
+            "notion",
+            "data_sources",
+            "databases"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "PATCH",
+            "path": "/data_sources/{data_source_id}",
+            "server_url": "https://api.notion.com/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Path parameters",
+                    "properties": {
+                        "data_source_id": {
+                            "type": "string",
+                            "description": "The ID of the data source to update. Get this from the database object's data_sources array."
+                        }
+                    },
+                    "required": [
+                        "data_source_id"
+                    ],
+                    "visible": [
+                        "data_source_id"
+                    ],
+                    "additionalProperties": false
+                },
+                "header": {
+                    "type": "object",
+                    "description": "Header parameters",
+                    "properties": {
+                        "Notion-Version": {
+                            "type": "string",
+                            "description": "The version of the Notion API to use.",
+                            "default": "2025-09-03"
+                        }
+                    },
+                    "required": [
+                        "Notion-Version"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {
+                        "Notion-Version": "2025-09-03"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Data source update parameters",
+                    "properties": {
+                        "name": {
+                            "type": "array",
+                            "description": "Data source name as rich text array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "text"
+                                        ],
+                                        "default": "text"
+                                    },
+                                    "text": {
+                                        "type": "object",
+                                        "properties": {
+                                            "content": {
+                                                "type": "string",
+                                                "description": "The name text content"
+                                            }
+                                        },
+                                        "required": [
+                                            "content"
+                                        ],
+                                        "visible": [
+                                            "content"
+                                        ],
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "text"
+                                ],
+                                "visible": [
+                                    "type",
+                                    "text"
+                                ],
+                                "additionalProperties": false
+                            }
+                        },
+                        "properties": {
+                            "type": "object",
+                            "description": "Property schema updates for the data source",
+                            "properties": {},
+                            "required": [],
+                            "visible": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "required": [],
+                    "visible": [
+                        "name",
+                        "properties"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "path",
+                "header"
+            ],
+            "visible": [
+                "path",
+                "body"
+            ],
+            "additionalProperties": false
+        }
+    },
+    {
+        "name": "NOTION__CREATE_DATA_SOURCE",
+        "description": "Create an additional data source for an existing database. Use this for multi-source databases (API version 2025-09-03+).",
+        "tags": [
+            "notion",
+            "data_sources",
+            "databases"
+        ],
+        "visibility": "public",
+        "active": true,
+        "protocol": "rest",
+        "protocol_data": {
+            "method": "POST",
+            "path": "/data_sources",
+            "server_url": "https://api.notion.com/v1"
+        },
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "type": "object",
+                    "description": "Header parameters",
+                    "properties": {
+                        "Notion-Version": {
+                            "type": "string",
+                            "description": "The version of the Notion API to use.",
+                            "default": "2025-09-03"
+                        }
+                    },
+                    "required": [
+                        "Notion-Version"
+                    ],
+                    "visible": [],
+                    "additionalProperties": false,
+                    "default": {
+                        "Notion-Version": "2025-09-03"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Data source creation parameters",
+                    "properties": {
+                        "parent": {
+                            "type": "object",
+                            "description": "Parent database for the new data source",
+                            "properties": {
+                                "database_id": {
+                                    "type": "string",
+                                    "description": "ID of the parent database"
+                                }
+                            },
+                            "required": [
+                                "database_id"
+                            ],
+                            "visible": [
+                                "database_id"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "name": {
+                            "type": "array",
+                            "description": "Data source name as rich text array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "text"
+                                        ],
+                                        "default": "text"
+                                    },
+                                    "text": {
+                                        "type": "object",
+                                        "properties": {
+                                            "content": {
+                                                "type": "string",
+                                                "description": "The name text content"
+                                            }
+                                        },
+                                        "required": [
+                                            "content"
+                                        ],
+                                        "visible": [
+                                            "content"
+                                        ],
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "text"
+                                ],
+                                "visible": [
+                                    "type",
+                                    "text"
+                                ],
+                                "additionalProperties": false
+                            }
+                        },
+                        "properties": {
+                            "type": "object",
+                            "description": "Property schema for the new data source. Keys are property names.",
+                            "properties": {},
+                            "required": [],
+                            "visible": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "required": [
+                        "parent"
+                    ],
+                    "visible": [
+                        "parent",
+                        "name",
+                        "properties"
                     ],
                     "additionalProperties": false
                 }

@@ -2329,7 +2329,7 @@
   },
   {
     "name": "LINEAR__SEARCH_ISSUES",
-    "description": "Search for issues in Linear workspace using text queries across titles, descriptions, and comments.",
+    "description": "Search for issues in Linear workspace using the official searchIssues query. Searches across titles, descriptions, and comments with optional filters.",
     "tags": [
       "search",
       "issues",
@@ -2366,29 +2366,46 @@
           "properties": {
             "query": {
               "type": "string",
-              "default": "query SearchIssues($searchText: String!, $first: Int) { issues(filter: { or: [{ title: { contains: $searchText } }, { description: { contains: $searchText } }] }, first: $first) { nodes { id title description identifier state { name } assignee { name } team { name } labels { nodes { name } } createdAt updatedAt } } }",
-              "description": "GraphQL query for searching issues"
+              "default": "query SearchIssues($term: String!, $first: Int, $teamId: String, $includeArchived: Boolean, $includeComments: Boolean) { searchIssues(term: $term, first: $first, teamId: $teamId, includeArchived: $includeArchived, includeComments: $includeComments) { nodes { id title description identifier state { name } assignee { name } team { name } labels { nodes { name } } createdAt updatedAt } } }",
+              "description": "GraphQL query for searching issues using the official searchIssues endpoint"
             },
             "variables": {
               "type": "object",
               "properties": {
-                "searchText": {
+                "term": {
                   "type": "string",
-                  "description": "Text to search for in issue titles and descriptions"
+                  "description": "Search term to find in issue titles, descriptions, and comments"
                 },
                 "first": {
                   "type": "integer",
                   "default": 10,
                   "maximum": 50,
                   "description": "Number of issues to return"
+                },
+                "teamId": {
+                  "type": "string",
+                  "description": "Optional team ID to filter search results"
+                },
+                "includeArchived": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Whether to include archived issues in results"
+                },
+                "includeComments": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Whether to search in comments as well"
                 }
               },
               "required": [
-                "searchText"
+                "term"
               ],
               "visible": [
-                "searchText",
-                "first"
+                "term",
+                "first",
+                "teamId",
+                "includeArchived",
+                "includeComments"
               ],
               "additionalProperties": false
             }
